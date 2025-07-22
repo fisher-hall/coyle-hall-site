@@ -8,7 +8,7 @@
             <h1 class="mb-4 text-h3 lg:text-h1">
               {{ .title | markdownify }}
             </h1>
-            <p class="mb-8">
+            <p class="mb-4 text-2xl md:text-3xl">
               {{ .content | markdownify }}
             </p>
             {{ with .button }}
@@ -20,7 +20,7 @@
                     target="_blank" rel="noopener"
                   {{ end }}>
                   {{ .label }}
-                  <i class="fa fa-arrow-right pl-2"></i>
+                  <i class="fa fa-arrow-up-right-from-square pl-2"></i>
                 </a>
               {{ end }}
             {{ end }}
@@ -52,9 +52,9 @@
               </div>
             </div>
             <div class="body">
-              <h1 class="mb-4 text-h3 sm:text-h1">
-              Until Welcome Weekend!
-            </h1>
+              <h2 class="mb-4 text-3xl">
+                Until Welcome Weekend
+              </h2>
           </div>
           {{/*  Tri Image  */}}
           <div class="col-12">

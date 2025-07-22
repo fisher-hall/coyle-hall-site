@@ -2,7 +2,7 @@
 # Banner
 banner:
   title: "Welcome To Coyle Hall!"
-  # content: "The Cadillac of Dorms"
+  content: "The Cadillac of Dorms"
   image: "/images/CoyleTriphoto.png"
   button:
     enable: true

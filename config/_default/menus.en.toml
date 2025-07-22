@@ -11,6 +11,22 @@ name = "About"
 url = "/about"
 weight = 2
 
+# About Subpages - History, Location, Building
+[[main]]
+parent = "About"
+name = "History"
+url = "/history"
+
+[[main]]
+parent = "About"
+name = "Location"
+url = "/location"
+
+[[main]]
+parent = "About"
+name = "Building"
+url = "/building"
+
 [[main]]
 name = "Elements"
 url = "/elements"
