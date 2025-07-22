@@ -118,3 +118,7 @@ footer {
     max-width: 25%;
   }
 }
+.nav-link {
+  height: auto !important;
+  line-height: normal !important;
+}
