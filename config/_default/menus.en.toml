@@ -7,17 +7,31 @@ url = "/"
 weight = 1
 
 [[main]]
+name = "Leadership"
+weight = 2
+
+[[main]]
+parent = "Leadership"
+name = "Hall Staff"
+url = "/hall-staff"
+
+[[main]]
+parent = "Leadership"
+name = "Hall Government"
+url = "/"
+
+[[main]]
 name = "About"
 url = "/about"
-weight = 2
+weight = 3
 
 [[main]]
 name = "Elements"
 url = "/elements"
-weight = 3
+weight = 4
 
 [[main]]
-weight = 4
+weight = 5
 name = "Pages"
 
 [[main]]
