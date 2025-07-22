@@ -1,0 +1,19 @@
+{
+  "main": [
+    {
+      "name": "twitter",
+      "icon": "fab fa-instagram",
+      "link": "https://www.instagram.com/real_coylehall/"
+    },
+    {
+      "name": "github",
+      "icon": "fab fa-github",
+      "link": "https://github.com/fisher-hall/coyle-hall-site?tab=readme-ov-file"
+    },
+    {
+      "name": "linkedin",
+      "icon": "fab fa-linkedin",
+      "link": "https://www.linkedin.com/groups/13894222/"
+    }
+  ]
+}

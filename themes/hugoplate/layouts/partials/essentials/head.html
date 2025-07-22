@@ -8,6 +8,20 @@
 <!-- theme meta -->
 <meta name="theme-name" content="hugoplate" />
 
+<!-- Roboto and Roboto Condensed Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  body, .header, .navbar, .nav-link, .navbar-brand {
+    font-family: 'Roboto', Arial, 'Liberation Sans', 'Nimbus Sans Narrow', sans-serif;
+  }
+
+  .condensed,
+  .condensed * {
+    font-family: 'Roboto Condensed', Arial, 'Liberation Sans', 'Nimbus Sans Narrow', sans-serif !important;
+  }
+</style>
+
+
 <!-- favicon -->
 {{ partialCached "favicon" . }}
 

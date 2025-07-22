@@ -1,7 +1,7 @@
 <footer class="bg-light dark:bg-darkmode-light">
   <div class="container">
-    <div class="row items-center py-10">
-      <div class="lg:col-3 mb-8 text-center lg:mb-0 lg:text-left">
+    <div class="row items-center py-10 flex flex-wrap">
+      <div class="flex-1 min-w-0 mb-8 text-center lg:mb-0 lg:text-left">
         <!-- navbar brand/logo -->
         <a
           class="navbar-brand inline-block"
@@ -9,7 +9,7 @@
           {{ partial "logo" }}
         </a>
       </div>
-      <div class="lg:col-6 mb-8 text-center lg:mb-0">
+      {{/*  <div class="lg:col-6 mb-8 text-center lg:mb-0">
         <ul>
           {{ range site.Menus.footer }}
             <li class="m-3 inline-block">
@@ -29,9 +29,10 @@
             </li>
           {{ end }}
         </ul>
-      </div>
-      <div class="lg:col-3 mb-8 text-center lg:mb-0 lg:mt-0 lg:text-right">
-        <ul class="social-icons">
+      </div>  */}}
+      {{/*  SOCIAL ICONS  */}}
+      <div class="flex-1 min-w-0 mb-8 flex items-center justify-center lg:mb-0 ">
+        <ul class="social-icons flex justify-center w-full">
           {{ range site.Data.social.main }}
             <li>
               <a
@@ -45,14 +46,19 @@
           {{ end }}
         </ul>
       </div>
+      {{/*  UND WORDMARK  */}}
+      <div class="flex-1 min-w-0 mb-8 flex items-center justify-end lg:mb-0">
+        <a href="https://nd.edu" target="_blank" rel="noopener" class="footer-image-link">
+        <img src="/images/und-wordmark.png" alt="University of Notre Dame" style="max-width:180px; width:100%;" />
+        </a>
+      </div>
     </div>
   </div>
-  <div class="border-border dark:border-darkmode-border border-t py-7">
-    <div
-      class="text-text-light dark:text-darkmode-text-light container text-center">
-      <p>
-        {{ site.Params.copyright | markdownify }}
-      </p>
+
+  <!-- New row with centered text below the three columns -->
+  <div class="row">
+    <div class="col-12 text-center py-4">
+      <p class="footer-extra-text">© 2025 | Coyle Hall - University of Notre Dame</p>
     </div>
   </div>
 </footer>

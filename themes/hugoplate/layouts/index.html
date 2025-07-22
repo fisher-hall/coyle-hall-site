@@ -1,7 +1,7 @@
 {{ define "main" }}
   <!-- Banner -->
   {{ with .Params.banner }}
-    <section class="section pt-14">
+    <section class="section pt-8">
       <div class="container">
         <div class="row justify-center">
           <div class="lg:col-7 md:col-9 mb-8 text-center">
@@ -25,15 +25,47 @@
               {{ end }}
             {{ end }}
           </div>
+          <!-- Countdown Section -->
+          <div class="row text-center my-8">
+            <div class="col-6 col-md-3 text-center">
+              <div class="countdown-block">
+                <span id="countdown-days" class="stats-number">00</span>
+                <div class="stats-description">Days</div>
+              </div>
+            </div>
+            <div class="col-6 col-md-3 text-center">
+              <div class="countdown-block">
+                <span id="countdown-hours" class="stats-number">00</span>
+                <div class="stats-description">Hours</div>
+              </div>
+            </div>
+            <div class="col-6 col-md-3 text-center">
+              <div class="countdown-block">
+                <span id="countdown-mins" class="stats-number">00</span>
+                <div class="stats-description">Minutes</div>
+              </div>
+            </div>
+            <div class="col-6 col-md-3 text-center">
+              <div class="countdown-block">
+                <span id="countdown-secs" class="stats-number">00</span>
+                <div class="stats-description">Seconds</div>
+              </div>
+            </div>
+            <div class="body">
+              <h1 class="mb-4 text-h3 sm:text-h1">
+              Until Welcome Weekend!
+            </h1>
+          </div>
+          {{/*  Tri Image  */}}
           <div class="col-12">
-            {{ partial "image" (dict "Src" .image "Alt" "Banner image" "Loading" "eager" "Class" "mx-auto lg:!max-w-[800px]" "DisplayXL" "800x" ) }}
+            {{ partial "image" (dict "Src" .image "Alt" "Banner image" "Loading" "eager" "Class" "mx-auto xl:!max-w-[1200px]" "DisplayXL" "1600x" ) }}
           </div>
         </div>
       </div>
     </section>
   {{ end }}
   <!-- /Banner -->
-
+{{/*  
   <!-- Features -->
   {{ range $i, $e:= .Params.features }}
     <section class="section-sm {{ if (modBool $i 2) }}bg-gradient{{ end }}">
@@ -141,4 +173,6 @@
     {{ end }}
   {{ end }}
   <!-- /Testimonials -->
+  */}}
+<script src="/Countdown.js"></script>
 {{ end }}
