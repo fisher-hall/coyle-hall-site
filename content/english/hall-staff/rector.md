@@ -4,6 +4,12 @@ email: jquinon3@nd.edu
 image: "/images/headshots/joeyquinones.jpg"
 description: Rector of Coyle
 weight: 1
+params:
+    hometown: "San Dimas, CA"
+    hobbies: "Running, Boxing, Ice Cream"
+    favoritepart: ""
+    section: 1st Floor
+
 social:
   - name: email
     icon: fa-regular fa-envelope
