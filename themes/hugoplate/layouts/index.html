@@ -1,30 +1,52 @@
 {{ define "main" }}
-  <!-- Banner -->
   {{ with .Params.banner }}
+    <!-- Banner -->
+    <div id="banner-parallax" class="relative w-full min-h-[200px] md:min-h-0 mb-8 overflow-hidden" style="margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw);">
+      <img
+        src="/images/CoyleBannerImages.png"
+        alt="Green Graphic with images of students in Coyle Hall throughout the years"
+        class="absolute left-1/2 top-0 h-full min-w-[100vw] object-cover -translate-x-1/2 md:relative md:left-0 md:top-0 md:w-full md:h-auto md:object-contain md:translate-x-0 block"
+        style="max-width:none;"
+        id="banner-bg"
+      >
+      <img
+        src="/images/WelcomeCoyle.png"
+        alt="Welcome to Coyle Hall"
+        class="absolute left-1/2 top-1/2 min-w-[1vw] object-cover pointer-events-none transform -translate-x-1/2 -translate-y-1/2"
+        id="banner-overlay"
+      />
+    </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const banner = document.getElementById('banner-parallax');
+    const bg = document.getElementById('banner-bg');
+    if (!banner || !bg) return;
+
+    const speed = 0.1;
+
+    function updateParallax() {
+      const rect = banner.getBoundingClientRect();
+      const scrollY = window.scrollY || window.pageYOffset;
+      const bannerTop = rect.top + scrollY;
+
+      if (scrollY + window.innerHeight > bannerTop && scrollY < bannerTop + banner.offsetHeight) {
+        const offset = (scrollY - bannerTop) * speed;
+        bg.style.transform = `translate(0%, ${offset}px)`;
+      } else {
+        bg.style.transform = 'translate(0%, 0)';
+      }
+    }
+
+    // Apply parallax immediately and on scroll
+    updateParallax();
+    window.addEventListener('scroll', updateParallax);
+  });
+</script>
     <section class="section pt-8">
+      
       <div class="container">
         <div class="row justify-center">
-          <div class="lg:col-7 md:col-9 mb-8 text-center">
-            <h1 class="mb-4 text-h3 lg:text-h1">
-              {{ .title | markdownify }}
-            </h1>
-            <p class="mb-4 text-2xl md:text-3xl">
-              {{ .content | markdownify }}
-            </p>
-            {{ with .button }}
-              {{ if .enable }}
-                <a
-                  class="btn btn-primary"
-                  href="{{ .link | absURL }}"
-                  {{ if strings.HasPrefix .link `http` }}
-                    target="_blank" rel="noopener"
-                  {{ end }}>
-                  {{ .label }}
-                  <i class="fa fa-arrow-up-right-from-square pl-2"></i>
-                </a>
-              {{ end }}
-            {{ end }}
-          </div>
           <!-- Countdown Section -->
           <div class="row text-center my-8">
             <div class="col-6 col-md-3 text-center">
@@ -55,6 +77,27 @@
               <h2 class="mb-4 text-3xl">
                 Until Welcome Weekend
               </h2>
+          </div>
+          <div class="col-12 mb-8 text-center">
+            {{/*  <h1 class="mb-4 text-h3 lg:text-h1">
+              {{ .title | markdownify }}
+            </h1>
+            <p class="mb-4 text-2xl md:text-3xl">
+              {{ .content | markdownify }}
+            </p>  */}}
+            {{ with .button }}
+              {{ if .enable }}
+                <a
+                  class="btn btn-primary"
+                  href="{{ .link | absURL }}"
+                  {{ if strings.HasPrefix .link `http` }}
+                    target="_blank" rel="noopener"
+                  {{ end }}>
+                  {{ .label }}
+                  <i class="fa fa-arrow-up-right-from-square pl-2"></i>
+                </a>
+              {{ end }}
+            {{ end }}
           </div>
           {{/*  Tri Image  */}}
           <div class="col-12">

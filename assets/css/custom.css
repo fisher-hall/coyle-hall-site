@@ -1,4 +1,10 @@
-/* Add your own custom styles here */
+/* ROOT COLORS */
+:root {
+  --nd-green: #0a843d;
+  --nd-blue: #0c2340;
+  --nd-gold: #ae9142;
+}
+
 .social-icons a {
   border-radius: 10px; 
 }
@@ -19,7 +25,7 @@
     padding-top: 15px;
     padding-bottom: 0px;
     position: sticky;
-    background-color: #0a843d;
+    background-color: var(--nd-green);
     z-index: 1;
 }
 

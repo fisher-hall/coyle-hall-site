@@ -1,27 +1,36 @@
 {{ define "main" }}
-  <section class="section-sm text-center">
+  <section class="section-sm">
     <div class="container">
-      <div class="row justify-center">
-        <div class="sm:col-10 md:col-8 lg:col-6">
+      <div class="flex flex-col md:flex-row md:items-center justify-center gap-4">
+        <div class="w-full md:w-1/2 flex justify-center mb-4 md:mb-0">
+          <img
+            src="/images/404Fisher.png"
+            alt="A sketch style image of the old Fisher Hall building, with a big green question mark instead of the F"
+            class="w-full h-auto max-w-2xl md:max-w-md lg:max-w-lg xl:max-w-xl">
+        </div>
+        <div class="w-full md:w-1/2 text-center md:text-left">
           <span
-            class="text-[8rem] block font-bold text-text-dark dark:text-darkmode-text-dark">
+            class="text-[8rem] block font-bold text-text-dark dark:text-darkmode-text-dark"
+            style="font-size:9.5rem; color: var(--nd-green)">
             404
           </span>
           <h1 class="h2 mb-4">Gone Fishing</h1>
           <div class="content">
             <p>
-              Much like our old building, it looks like that page doesn't exist. 
-            <br>
+              Much like our old building, that page doesn't exist. 
+              <br>
               Cheer up though, there's plenty of fish in the sea!
             </p>
           </div>
-          <a
-            href="{{ site.BaseURL | relLangURL }}"
-            class="btn btn-primary mt-8">
-            Back to home
-            <i class="fa fa-house pl-2"></i>
-          </a>
         </div>
+      </div>
+      <div class="flex justify-center mt-8">
+        <a
+          href="{{ site.BaseURL | relLangURL }}"
+          class="btn btn-primary">
+          Go Home
+          <i class="fa fa-house pl-2"></i>
+        </a>
       </div>
     </div>
   </section>
