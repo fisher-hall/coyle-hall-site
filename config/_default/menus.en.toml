@@ -45,6 +45,11 @@ url = "/building"
 weight = 2
 
 [[main]]
+name = "New Crew"
+url = "/incoming-students"
+weight = 4
+
+[[main]]
 name = "Elements"
 url = "/elements"
 weight = 4
@@ -77,20 +82,3 @@ url = "/categories"
 parent = "Pages"
 name = "404 Page"
 url = "/404"
-
-
-# footer menu
-[[footer]]
-name = "About"
-url = "/about"
-weight = 1
-
-[[footer]]
-name = "Elements"
-url = "/elements"
-weight = 2
-
-[[footer]]
-name = "Privacy Policy"
-url = "/privacy-policy"
-weight = 3
