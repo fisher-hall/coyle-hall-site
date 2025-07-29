@@ -32,13 +32,18 @@
 .header .navbar-brand,
 .header .navbar .nav-link,
 .social-icons a,
-.header .navbar [aria-label="search"] {
+.header .navbar [aria-label="search"],
+label[for="nav-toggle"]{
   color: #fff !important;
   /* fill: #fff !important; */
 }
 
+.header .navbar [aria-label="search"] {
+  border-right: 1.5px solid #fff !important;
+}
+
 .header .navbar {
-  margin-bottom: .6rem; /* Adjust value as needed */
+  margin-bottom: .6rem; 
 }
 
 
@@ -64,6 +69,7 @@
   z-index: 101 ; 
   position: absolute; 
   border-radius: 0.75rem; 
+  min-width: 230px;
 }
 
 footer {
@@ -76,7 +82,7 @@ footer {
 }
 
 .btn:hover, .social-icons a:hover {
-  transform: scale(1.05);
+  transform: scale(1.15);
 }
 
 .banner img {
@@ -115,7 +121,7 @@ footer {
 }
 
 .footer-extra-text {
-  color: #717171 !important;
+  color: #AAAAAA !important;
 }
 
 @media (min-width: 768px) {
@@ -127,4 +133,8 @@ footer {
 .nav-link {
   height: auto !important;
   line-height: normal !important;
+}
+
+html, body {
+  overflow-x: hidden;
 }

@@ -6,7 +6,7 @@ banner:
   image: "/images/CoyleTriphoto.png"
   button:
     enable: true
-    label: "Visit the Old Fisher Site"
+    label: "View the old Fisher site here"
     link: "https://fisher.nd.edu"
 
 # # Features

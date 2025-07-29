@@ -3,46 +3,46 @@
     <!-- Banner -->
     <div id="banner-parallax" class="relative w-full min-h-[200px] md:min-h-0 mb-8 overflow-hidden" style="margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw);">
       <img
-        src="/images/CoyleBannerImages.png"
+        src="/images/Banners/CoyleBannerImages.png"
         alt="Green Graphic with images of students in Coyle Hall throughout the years"
         class="absolute left-1/2 top-0 h-full min-w-[100vw] object-cover -translate-x-1/2 md:relative md:left-0 md:top-0 md:w-full md:h-auto md:object-contain md:translate-x-0 block"
         style="max-width:none;"
-        id="banner-bg"
+        id="home-banner-img"
       >
       <img
-        src="/images/WelcomeCoyle.png"
+        src="/images/Banners/WelcomeCoyle.png"
         alt="Welcome to Coyle Hall"
         class="absolute left-1/2 top-1/2 min-w-[1vw] object-cover pointer-events-none transform -translate-x-1/2 -translate-y-1/2"
-        id="banner-overlay"
+        id="home-banner-text"
       />
     </div>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const banner = document.getElementById('banner-parallax');
-    const bg = document.getElementById('banner-bg');
-    if (!banner || !bg) return;
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const banner = document.getElementById('banner-parallax');
+        const bg = document.getElementById('home-banner-img');
+        if (!banner || !bg) return;
 
-    const speed = 0.1;
+        const speed = 0.1;
 
-    function updateParallax() {
-      const rect = banner.getBoundingClientRect();
-      const scrollY = window.scrollY || window.pageYOffset;
-      const bannerTop = rect.top + scrollY;
+        function updateParallax() {
+          const rect = banner.getBoundingClientRect();
+          const scrollY = window.scrollY || window.pageYOffset;
+          const bannerTop = rect.top + scrollY;
 
-      if (scrollY + window.innerHeight > bannerTop && scrollY < bannerTop + banner.offsetHeight) {
-        const offset = (scrollY - bannerTop) * speed;
-        bg.style.transform = `translate(0%, ${offset}px)`;
-      } else {
-        bg.style.transform = 'translate(0%, 0)';
-      }
-    }
+          if (scrollY + window.innerHeight > bannerTop && scrollY < bannerTop + banner.offsetHeight) {
+            const offset = (scrollY - bannerTop) * speed;
+            bg.style.transform = `translate(0%, ${offset}px)`;
+          } else {
+            bg.style.transform = 'translate(0%, 0)';
+          }
+        }
 
-    // Apply parallax immediately and on scroll
-    updateParallax();
-    window.addEventListener('scroll', updateParallax);
-  });
-</script>
+        // Apply parallax immediately and on scroll
+        updateParallax();
+        window.addEventListener('scroll', updateParallax);
+      });
+    </script>
     <section class="section pt-8">
       
       <div class="container">

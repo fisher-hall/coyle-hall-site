@@ -1,5 +1,69 @@
 ---
 title: "History"
 ---
-<h1>History of Coyle Hall</h1>
+<style>
+  #banner-parallax {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  .section-sm:first-of-type {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+  /* Remove top margin from the first element after the header if needed */
+  #history-banner-img, #history-banner-text {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    display: block;
+  }
+</style>
+
+<div id="banner-parallax" class="relative left-1/2 right-1/2 w-screen -translate-x-1/2 min-h-[200px] md:min-h-0 mb-8 overflow-hidden">      
+    <img
+    src="/images/Banners/OldFisherBanner.png"
+    alt="Green Graphic with images of students in Coyle Hall throughout the years"
+    class="absolute left-1/2 top-0 h-full min-w-[100vw] object-cover -translate-x-1/2 md:relative md:left-0 md:top-0 md:w-full md:h-auto md:object-contain md:translate-x-0 block"
+    style="max-width:none;"
+    id="history-banner-img"
+    >
+    <img
+    src="/images/Banners/HistoryBannerText.png"
+    alt="Welcome to Coyle Hall"
+    class="absolute left-1/2 top-1/2 min-w-[1vw] object-cover pointer-events-none transform -translate-x-1/2 -translate-y-1/2"
+    id="history-banner-text"
+    />
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const banner = document.getElementById('banner-parallax');
+    const bg = document.getElementById('history-banner-img');
+    if (!banner || !bg) return;
+
+    const speed = 0.1;
+
+    function updateParallax() {
+        const rect = banner.getBoundingClientRect();
+        const scrollY = window.scrollY || window.pageYOffset;
+        const bannerTop = rect.top + scrollY;
+
+        if (scrollY + window.innerHeight > bannerTop && scrollY < bannerTop + banner.offsetHeight) {
+        const offset = (scrollY - bannerTop) * speed;
+        bg.style.transform = `translate(0%, ${offset}px)`;
+        } else {
+        bg.style.transform = 'translate(0%, 0)';
+        }
+    }
+
+    // Apply parallax immediately and on scroll
+    updateParallax();
+    window.addEventListener('scroll', updateParallax);
+    });
+</script>
+
+<h1 class="text-center text-4xl font-bold mt-8 mb-4" style="color: var(--nd-green);">
+  All Are Welcome In This Place
+</h1>
 
