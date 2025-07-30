@@ -5,6 +5,32 @@
   --nd-gold: #ae9142;
 }
 
+/* Fonts & weighting */
+h1{
+  font-family: 'Rubik', sans-serif;
+  font-weight: 800;
+}
+
+h2{
+  font-family: 'Rubik', sans-serif;
+  font-weight: 700;
+}
+
+h3, h4, h5, h6 {
+  font-family: 'Rubik', sans-serif;
+  font-weight: 600;
+}
+
+body, p {
+  font-family: 'Rubik', sans-serif;
+  font-weight: 500; 
+}
+
+.header .navbar *:not(i) {
+  font-family: 'Rubik', sans-serif !important;
+  font-weight: 600 !important; /* Extra Bold */
+}
+
 .social-icons a {
   border-radius: 10px; 
 }
@@ -164,4 +190,14 @@ html, body {
 .fade-in-section.visible {
   opacity: 1;
   transform: none;
+}
+
+/* Image scaling */
+.fade-in-section img {
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s;
+}
+
+.fade-in-section img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
 }

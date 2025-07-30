@@ -43,33 +43,276 @@
         window.addEventListener('scroll', updateParallax);
       });
     </script>
+
+    <!-- Fade-in effect -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const faders = document.querySelectorAll('.fade-in-section');
+        const appearOptions = {
+          threshold: 0.2,
+          rootMargin: "0px 0px -40px 0px"
+        };
+
+        const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, appearOptions);
+
+        faders.forEach(fader => {
+          appearOnScroll.observe(fader);
+        });
+      });
+    </script>
+
+    <!-- Draw Effect -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const line = document.querySelector('#drawn-line path');
+        const svgContainer = document.getElementById('drawn-line');
+        function animateLine() {
+          const rect = svgContainer.getBoundingClientRect();
+          if (rect.top < window.innerHeight * 0.85) {
+            line.style.strokeDashoffset = 0;
+            window.removeEventListener('scroll', animateLine);
+          }
+        }
+        window.addEventListener('scroll', animateLine);
+        // Animate if already in view
+        animateLine();
+      });
+    </script>
+
+    <h1 class="text-5xl text-center font-extrabold mb-6 fade-in-section" style="color: var(--nd-green);">
+      I Will Make You Fishers of Men
+    </h1>
+
+    <!-- Animated hand-drawn line graphic -->
+    <div class="flex justify-center my-1 fade-in-section" style="position: relative; z-index: 2; margin-bottom: 1rem; margin-top: -1.5rem;">
+      <svg id="drawn-line" width="420" height="40" viewBox="0 0 420 25" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;">
+        <path
+          d="M10 18 Q 40 2, 70 18 Q 100 34, 130 18 Q 160 2, 190 18 Q 220 34, 250 18 Q 280 2, 310 18 Q 340 34, 370 18 Q 400 2, 430 18"
+          class="stroke-black dark:stroke-white"
+          stroke-width="5"
+          stroke-linecap="round"
+          fill="none"
+          style="stroke-dasharray: 420; stroke-dashoffset: 420; transition: stroke-dashoffset 1.2s cubic-bezier(.77,0,.18,1);"
+        />
+      </svg>
+    </div>
+
+    <h1 class="text-2xl text-center font-extrabold mb-6 fade-in-section" style="color: var(--nd-gold);">
+      Matthew 4:19
+    </h1>
+
+    <div class="flex items-center justify-start my-1 fade-in-section pl-16" style="position: relative; z-index: 3; margin-bottom: 1rem; margin-top: 5rem;">
+      <h2 class="text-2xl md:text-4xl text-left font-extrabold mb-6 fade-in-section flex items-center text-black dark:text-white"
+          style="position: relative; z-index: 4; margin-top: 0;">
+        <span style="position: relative; display: inline-block;">
+          <i class="text-7xl fa fa-quote-left" style="position: absolute; left: -2rem; top: 50%; transform: translateY(-50%); color: var(--nd-green); z-index: 1;"></i>
+          <i class="text-7xl fa fa-quote-right" style="position: absolute; right: -2rem; top: 50%; transform: translateY(-50%); color: var(--nd-green); z-index: 1;"></i>
+          <span style="position: relative; z-index: 2;">
+            All Are Welcome in This Place
+          </span>
+        </span>
+      </h2>
+    </div>
+    <div class="w-full flex flex-col justify-center fade-in-section px-4 pl-16 text-left;">
+      <i class="fa fa-anchor absolute top-1/2 right-1 text-9xl fade-in-section"
+        style="transform: translateY(0%) scale(1.85) rotate(30deg); color: var(--nd-green); z-index: 2;">
+      </i>
+    </div>
+    <!-- Text -->
+    <div class="w-5/6 flex flex-col justify-center fade-in-section px-4 pl-16 text-left;">
+      <body class="mb-2 text-lg">
+        <span style="position: relative; z-index: 2;">
+          Welcome to Coyle Hall, where truer words have never been spoken.
+          Formerly known as Fisher Hall, our community now begins its new chapter under a new name, but make no mistake: the spirit remains the same. 
+          Home to generations of proud residents affectionately known as the Crew, this brotherhood has long been one of the most tight-knit, spirited, and iconic on campus.
+          From legendary events to unmatched camaraderie, from unforgettable haircuts to unwavering support, the Coyle community is more than just a dorm—it’s a legacy. 
+          As we step into a new building and embrace a new name, the heartbeat of our community continues strong, carrying forward the energy, traditions, and bonds that have defined us for decades. 
+          The name may be different, but the soul of Fisher lives on in Coyle. 
+        </span>
+      </body>
+    </div>
+
+    {{/*  Fast Facts  */}}
+    <div class="flex items-center justify-center my-1 fade-in-section" style="position: relative; z-index: 3; margin-bottom: 1rem; margin-top: 5rem;">
+      <h2 class="text-5xl md:text-7xl text-left font-extrabold mb-6 fade-in-section flex items-center text-black dark:text-white"
+          style="position: relative; z-index: 4; margin-top: 0;">
+        <span style="position: relative; display: inline-block;">
+          <span style="position: relative; z-index: 2;">
+            Fast Facts
+          </span>
+        </span>
+      </h2>
+      <i class="fa fa-water absolute text-center top-1/2 text-9xl fade-in-section"
+        style="transform: translateX(-110%) translateY(-60%) scale(1); color: var(--nd-green); z-index: 2;">
+      </i>
+    </div>
+
+    <div class="mx-auto relative grid md:grid-cols-3 sm:grid-cols-2 gap-4 gap-y-15 w-5/6 my-8 fade-in-section z-index: 3">
+      <div>
+        <h1 class="relative flex items-center justify-center h-32">
+            <i class="fa fa-location-dot text-9xl -translate-x-1/2" style="color: var(--nd-green);"></i>
+            <span class="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/4 text-5xl font-bold z-10 pointer-events-none" style="white-space:nowrap;">
+              North<br>Quad
+            </span>
+        </h1>
+        <div class="relative flex items-center justify-center text-2xl pt-5 text-center">
+          Location
+        </div>
+      </div>
+      <div>
+        <h1 class="relative flex items-center justify-center h-32">
+            <i class="fa fa-people-roof text-9xl -translate-x-1/2" style="color: var(--nd-green);"></i>
+            <span class="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/4 text-5xl font-bold z-10 pointer-events-none" style="white-space:nowrap;">
+              176<br>Students
+            </span>
+        </h1>
+        <div class="relative flex items-center justify-center text-2xl pt-5 text-center">
+          Capacity
+        </div>
+      </div>
+      <div>
+        <h1 class="relative flex items-center justify-center h-32">
+            <i class="fa fa-sailboat text-9xl -translate-x-1/2" style="color: var(--nd-green);"></i>
+            <span class="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/4 text-5xl font-bold z-10 pointer-events-none" style="white-space:nowrap;">
+              The<br>Crew
+            </span>
+        </h1>
+        <div class="relative flex items-center justify-center text-2xl pt-5 text-center">
+          Dorm Mascot
+        </div>
+      </div>
+      <div>
+        <h1 class="relative flex items-center justify-center h-32">
+            <i class="fa fa-church text-9xl -translate-x-1/2" style="color: var(--nd-green);"></i>
+            <span class="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/4 text-5xl font-bold z-10 pointer-events-none" style="white-space:nowrap;">
+              St. Albert<br>the Great
+            </span>
+        </h1>
+        <div class="relative flex items-center justify-center text-2xl pt-5 text-center">
+          Chapel
+        </div>
+      </div>
+      <div>
+        <h1 class="relative flex items-center justify-center h-32">
+            <i class="fa fa-fan text-9xl -translate-x-1/2" style="color: var(--nd-green);"></i>
+            <span class="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/4 text-5xl font-bold z-10 pointer-events-none" style="white-space:nowrap;">
+              No <br>A/C Yet
+            </span>
+        </h1>
+        <div class="relative flex items-center justify-center text-2xl pt-5 text-center">
+          But Coming Soon
+        </div>
+      </div>      
+      <div>
+        <h1 class="relative flex items-center justify-center h-32">
+            <i class="fa fa-building text-9xl -translate-x-1/2" style="color: var(--nd-green);"></i>
+            <span class="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/4 text-5xl font-bold z-10 pointer-events-none" style="white-space:nowrap;">
+              Four<br>Floors
+            </span>
+        </h1>
+        <div class="relative flex items-center justify-center text-2xl pt-5 text-center">
+          + Basement
+        </div>
+      </div>
+      <!-- MAKE SURE LINKS ARE UPDATED -->
+      <a href="https://cavanaughhallnd.weebly.com/" class="block w-full h-full" target="_blank">
+        <h1 class="relative flex items-center justify-center h-32">
+          <i class="fa fa-venus text-9xl -translate-x-3/4" style="color: var(--nd-green);"></i>
+          <span class="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/4 text-5xl font-bold z-10 pointer-events-none" style="white-space:nowrap;">
+            Cavenaugh<br>Hall
+          </span>
+        </h1>
+        <div class="relative flex items-center justify-center text-2xl pt-5 text-center">
+          '25-'26 Sister Dorm
+          <i class="fa fa-arrow-up-right-from-square ml-2"></i>
+        </div>
+      </a>
+      <div>
+        <h1 class="relative flex items-center justify-center h-32">
+            <i class="fa fa-palette text-9xl -translate-x-1/2" style="color: var(--nd-green);"></i>
+            <span class="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/4 text-5xl font-bold z-10 pointer-events-none" style="white-space:nowrap;">
+              Green<br>White
+            </span>
+        </h1>
+        <div class="relative flex items-center justify-center text-2xl pt-5 text-center">
+          Dorm Colors
+        </div>
+      </div>
+      <a href="https://stanfordhall.nd.edu" class="block w-full h-full" target="_blank">
+        <h1 class="relative flex items-center justify-center h-32">
+            <i class="fa fa-mars text-9xl -translate-x-3/4" style="color: var(--nd-green);"></i>
+            <span class="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/4 text-5xl font-bold z-10 pointer-events-none" style="white-space:nowrap;">
+              Stanford<br>Hall
+            </span>
+        </h1>
+        <div class="relative flex items-center justify-center text-2xl pt-5 text-center">
+          '25-'26 Brother Dorm
+          <i class="fa fa-arrow-up-right-from-square ml-2"></i>
+        </div>
+      </a>
+    </div>
+
+    {{/*  Mass Schedule  */}}
+    <div class="flex items-center justify-center my-1 mt-20 fade-in-section" style="position: relative; z-index: 3; margin-bottom: 1rem; margin-top: 5rem;">
+      <h2 class="text-4xl md:text-6xl text-left font-extrabold mb-6 fade-in-section flex items-center text-black dark:text-white"
+          style="position: relative; z-index: 4; margin-top: 0;">
+        <span style="position: relative; display: inline-block;">
+          <span style="position: relative; z-index: 2; color: var(--nd-gold);">
+            Mass & Sacraments
+          </span>
+        </span>
+      </h2>
+    </div>
+
+    <div class="mx-auto relative grid md:grid-cols-3 sm:grid-cols-1 gap-4 gap-y-15 w-5/6 my-8 fade-in-section z-index: 3">
+      <div>
+        <h1 class="relative flex items-center justify-center h-32">
+            <i class="fa fa-cross text-9xl -translate-x-20" style="color: var(--nd-gold);"></i>
+            <span class="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/6 text-3xl font-bold z-10 pointer-events-none" style="white-space:nowrap;">
+              Sun, Mon,<br>Wed, Thurs<br>@ 10 PM
+            </span>
+        </h1>
+        <div class="relative flex items-center justify-center text-2xl pt-5 text-center">
+          Chapel Mass
+        </div>
+      </div>
+      <div>
+        <h1 class="relative flex items-center justify-center h-32">
+            <i class="fa fa-ice-cream text-9xl -translate-x-20" style="color: var(--nd-gold);"></i>
+            <span class="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/6 text-3xl font-bold z-10 pointer-events-none" style="white-space:nowrap;">
+              Wednesday<br>@ 10 PM
+            </span>
+        </h1>
+        <div class="relative flex items-center justify-center text-2xl pt-5 text-center">
+          Ice Cream Mass
+        </div>
+      </div>
+      <div>
+        <h1 class="relative flex items-center justify-center h-32">
+            <i class="fa fa-hands-praying text-9xl -translate-x-20" style="color: var(--nd-gold); transform: scaleX(.6)"></i>
+            <span class="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/6 text-3xl font-bold z-10 pointer-events-none" style="white-space:nowrap;">
+              Wednesday<br>9 - 10 PM
+            </span>
+        </h1>
+        <div class="relative flex items-center justify-center text-2xl pt-5 text-center">
+          Confession & Adoration
+        </div>
+      </div>
+      <div>
+
     <section class="section pt-8">
       
       <div class="container">
         <div class="row justify-center">
-          <div class="col-12 mb-8 text-center">
-            {{/*  <h1 class="mb-4 text-h3 lg:text-h1">
-              {{ .title | markdownify }}
-            </h1>
-            <p class="mb-4 text-2xl md:text-3xl">
-              {{ .content | markdownify }}
-            </p>  */}}
-            {{ with .button }}
-              {{ if .enable }}
-                <a
-                  class="btn btn-primary"
-                  href="{{ .link | absURL }}"
-                  {{ if strings.HasPrefix .link `http` }}
-                    target="_blank" rel="noopener"
-                  {{ end }}>
-                  {{ .label }}
-                  <i class="fa fa-arrow-up-right-from-square pl-2"></i>
-                </a>
-              {{ end }}
-            {{ end }}
-          </div>
           {{/*  Tri Image  */}}
-          <div class="col-12">
+          <div class="col-12 fade-in-section">
             {{ partial "image" (dict "Src" .image "Alt" "Banner image" "Loading" "eager" "Class" "mx-auto xl:!max-w-[1200px]" "DisplayXL" "1600x" ) }}
           </div>
         </div>
