@@ -1,0 +1,143 @@
+---
+title: "Location"
+---
+<style>
+  #banner-parallax {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  .section-sm:first-of-type {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+  /* Remove top margin from the first element after the header if needed */
+  #history-banner-img, #history-banner-text {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    display: block;
+  }
+</style>
+
+
+<div id="banner-parallax" class="relative left-1/2 right-1/2 w-screen -translate-x-1/2 min-h-[200px] md:min-h-0 mb-8 overflow-hidden">      
+    <img
+        src="/images/Banners/CoyleRenderBanner.png"
+        alt="A rendering of the new Coyle Hall building, with a green tint"
+        class="absolute left-1/2 top-0 w-auto h-full max-w-none object-cover sm:object-cover -translate-x-1/2 md:relative md:left-0 md:top-0 md:w-full md:h-auto md:object-contain md:translate-x-0 block"
+        style="max-width:none;"
+        id="history-banner-img"
+    />
+    <img
+        src="/images/Banners/LocationBannerText.png"
+        alt="LOCATION"
+        class="absolute left-1/2 top-1/2 min-w-[1vw] object-cover pointer-events-none transform -translate-x-1/2 -translate-y-1/2"
+        id="history-banner-text"
+    />
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const banner = document.getElementById('banner-parallax');
+    const bg = document.getElementById('history-banner-img');
+    if (!banner || !bg) return;
+
+    const speed = 0.1;
+
+    function updateParallax() {
+        const rect = banner.getBoundingClientRect();
+        const scrollY = window.scrollY || window.pageYOffset;
+        const bannerTop = rect.top + scrollY;
+
+        if (scrollY + window.innerHeight > bannerTop && scrollY < bannerTop + banner.offsetHeight) {
+        const offset = (scrollY - bannerTop) * speed;
+        bg.style.transform = `translate(0%, ${offset}px)`;
+        } else {
+        bg.style.transform = 'translate(0%, 0)';
+        }
+    }
+
+    // Apply parallax immediately and on scroll
+    updateParallax();
+    window.addEventListener('scroll', updateParallax);
+    });
+</script>
+
+<h1 class="text-5xl text-center font-extrabold mb-6 fade-in-section" style="color: var(--nd-green);">
+  A Legacy That Echoes <span style="color: var(--nd-gold);">From Quad To Quad.</span>
+</h2>
+
+<!--Section 1  */}}-->
+<div class="flex flex-col md:flex-row items-center justify-center w-full my-12 max-w-6xl mx-auto fade-in-section">
+  <!-- Text -->
+    <p class="mb-2 text-base">
+      The current home of the Coyle Community is nestled in the heart of campus, on the west side of North Quad.
+      Only steps from the dome, LaFortune Student Center, North Dining Hall, and Hesburgh Library, Zahm's location is one of the best on campus.
+      Whether its playing spikeball in front of Stonehenge on the quad, running around the nearby lakes, or stopping by The Huddle for a late night snack, Zahm Hall is close to nearly everything.
+      <br>
+      <br>
+      With the completion of the new Coyle Hall in Fall 2026, the dorm community will be moving back to its original home on South Quad, in the footprint of the old Fisher Hall.
+    </p>
+</div>
+
+
+<div class="grid grid-cols-1 md:grid-cols-2 items-center justify-center w-full my-12 max-w-6xl mx-auto fade-in-section">  <!-- Map Embed -->
+    <div class="w-full md:w-11/12 lg:w-full aspect-video md:aspect-[4/3] lg:aspect-video flex flex-col justify-center md:justify-end px-4">        <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1489.396921884906!2d-86.23831775208025!3d41.703385947784284!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8816d2a192d6db83%3A0xf71acedf3f937333!2sZahm%20Hall%2C%20Notre%20Dame%2C%20IN%2046556!5e0!3m2!1sen!2sus!4v1753930248559!5m2!1sen!2sus"
+        style="border:0;" allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        class="rounded-2xl shadow-md w-full h-full">
+        </iframe>
+    </div>
+    <!-- Text -->
+    <div class="w-full flex flex-col justify-center px-4 text-center md:text-left">        
+        <div class="px-4 md:px-12 text-center md:text-left">
+            <p class="text-2xl font-semibold mb-1">Mailing Address</p>
+            <h2 class="md:text-4xl sm:text-3xl font-bold leading-tight">
+            Room ###<br>
+            100 Zahm Hall<br>
+            Notre Dame, IN<br>
+            46556-5628
+            </h2>
+        </div>                      
+    </div>
+</div>
+
+<div class="flex flex-col md:flex-row gap-4 md:gap-10 px-4 mt-4 items-center justify-center fade-in-section">
+        <a href="https://maps.apple.com/place?address=54380%20Zahm%20Dr,%20Notre%20Dame,%20IN%20%2046637,%20United%20States&coordinate=41.703371,-86.237453&name=Zahm%20Hall&map=explore" class="btn btn-primary text-center" target="_blank" rel="noopener">
+            View on Apple Maps
+            <i class="fa fa-arrow-up-right-from-square pl-2"></i>
+        </a>
+        <a href="https://maps.app.goo.gl/WVwWqrMyaL3Vr5QQA" class="btn btn-primary text-center" target="_blank" rel="noopener">
+            View On Google Maps
+            <i class="fa fa-arrow-up-right-from-square pl-2"></i>
+        </a>
+        <a href="https://campusmail.nd.edu/campus-zip-4-directory/" class="btn btn-primary text-center" target="_blank" rel="noopener">
+            Notre Dame Mail System
+            <i class="fa fa-arrow-up-right-from-square pl-2"></i>
+        </a>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const faders = document.querySelectorAll('.fade-in-section');
+  const appearOptions = {
+    threshold: 0.2,
+    rootMargin: "0px 0px -40px 0px"
+  };
+
+  const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, appearOptions);
+
+  faders.forEach(fader => {
+    appearOnScroll.observe(fader);
+  });
+});
+</script>
