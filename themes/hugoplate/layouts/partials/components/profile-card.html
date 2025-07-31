@@ -1,10 +1,10 @@
-<div class="bg-light dark:bg-darkmode-light rounded p-8 text-center">
+<div class="bg-light dark:bg-darkmode-light rounded-2xl p-8 text-center">
   {{ $image:= .Params.image }}
   {{ if $image }}
-  <img src="{{ $image }}" class="mx-auto mb-6 rounded w-[230px] h-[230px]" loading="lazy" />
+  <img src="{{ $image }}" class="mx-auto mb-6 rounded-2xl w-[230px] h-[230px]" loading="lazy" />
   {{ else if .Params.Email }}
     <img
-      class="mx-auto mb-6 rounded"
+      class="mx-auto mb-6 rounded-2xl"
       alt="{{ .Title }}"
       height="120"
       width="120"
