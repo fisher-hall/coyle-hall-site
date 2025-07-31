@@ -18,9 +18,15 @@
             <h1 class="h3 mt-10">{{ .Title }}</h1>
 	    <div class="profile">
 	      <p><strong>Hometown: </strong>{{ .Params.Hometown }}</p>
-	      <p>{{ .Params.Major }}</p>
+	      {{ if .Params.Studying }}
+	      <p>{{ .Params.Studying }}</p>
+	      {{ else if .Params.Major }}
+	      <p><strong>Major: </strong>{{ .Params.Major }}</p>
+	      {{ end }}
 	      <p><strong>Hobbies/Interests: </strong>{{ .Params.Hobbies }}</p>
+	      {{ if .Params.Favoritepart }}
 	      <p><strong>Favorite Part of Coyle: </strong>{{ .Params.Favoritepart }}</p>
+	      {{ end }}
 	      <p><strong>Section: </strong>{{ .Params.Section }}</p>
 	    </div>
           <div class="content mt-6">
