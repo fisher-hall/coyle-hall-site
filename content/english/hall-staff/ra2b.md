@@ -1,7 +1,7 @@
 ---
 title: 2B
 email: 2b@nd.edu
-image: "/images/headshots/joeyquinones.jpg"
+image: "/images/headshots/unknown.jpg"
 description: Resident Assistant
 weight: 7
 params:

@@ -1,7 +1,7 @@
 ---
 title: 3B
 email: 3b@nd.edu
-image: "/images/headshots/joeyquinones.jpg"
+image: "/images/headshots/unknown.jpg"
 description: Resident Assistant
 weight: 9
 params:

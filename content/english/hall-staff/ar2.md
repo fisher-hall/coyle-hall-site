@@ -1,7 +1,7 @@
 ---
 title: James Wyatt
 email: jwyatt3@nd.edu
-image: "/images/avatar.png"
+image: "/images/headshots/unknown.jpg"
 description: Assistant Rector
 weight: 3
 social:
