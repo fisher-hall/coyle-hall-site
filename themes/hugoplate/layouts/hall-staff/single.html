@@ -17,13 +17,17 @@
           {{ end }}
             <h1 class="h3 mt-10">{{ .Title }}</h1>
 	    <div class="profile">
+	      {{ if .Params.Hometown }}
 	      <p><strong>Hometown: </strong>{{ .Params.Hometown }}</p>
+	      {{ end }}
 	      {{ if .Params.Studying }}
 	      <p>{{ .Params.Studying }}</p>
 	      {{ else if .Params.Major }}
 	      <p><strong>Major: </strong>{{ .Params.Major }}</p>
 	      {{ end }}
+	      {{ if .Params.Hobbies }}
 	      <p><strong>Hobbies/Interests: </strong>{{ .Params.Hobbies }}</p>
+	      {{ end }}
 	      {{ if .Params.Favoritepart }}
 	      <p><strong>Favorite Part of Coyle: </strong>{{ .Params.Favoritepart }}</p>
 	      {{ end }}
