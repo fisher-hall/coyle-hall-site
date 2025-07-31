@@ -40,7 +40,7 @@
             <li class="nav-item nav-dropdown group relative">
               <span
                 class="nav-link rounded-xl hover:[background-color:#0c2340] transition inline-flex px-4 items-center align-middle">
-                {{ .Name }}
+                {{ .Name | safeHTML}}
                 <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20">
                   <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                 </svg>
@@ -64,7 +64,7 @@
                       {{- else -}}
                         {{- .URL | relLangURL -}}
                       {{- end -}}">
-                      {{ .Name }}
+                      {{ .Name | safeHTML }}
                     </a>
                   </li>
                 {{ end }}
@@ -75,7 +75,7 @@
               <a
                 href="{{ .URL | relLangURL }}"
                 class="nav-link rounded-xl hover:[background-color:#0c2340] transition inline-block align-middle px-4 {{ if $active }}active{{- end -}}">
-                {{ .Name }}
+                {{ .Name | safeHTML }}
               </a>
             </li>
           {{ end }}

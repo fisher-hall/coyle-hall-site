@@ -1,5 +1,188 @@
 ---
 title: "History"
 ---
-<h1>History of Coyle Hall</h1>
+<style>
+  #banner-parallax {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  .section-sm:first-of-type {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+  /* Remove top margin from the first element after the header if needed */
+  #history-banner-img, #history-banner-text {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    display: block;
+  }
+</style>
+
+<div id="banner-parallax" class="relative left-1/2 right-1/2 w-screen -translate-x-1/2 min-h-[200px] md:min-h-0 mb-8 overflow-hidden">      
+    <img
+    src="/images/Banners/OldFisherBanner.png"
+    alt="Green Graphic with images of students in Coyle Hall throughout the years"
+    class="absolute left-1/2 top-0 h-full min-w-[100vw] object-cover -translate-x-1/2 md:relative md:left-0 md:top-0 md:w-full md:h-auto md:object-contain md:translate-x-0 block"
+    style="max-width:none;"
+    id="history-banner-img"
+    >
+    <img
+    src="/images/Banners/HistoryBannerText.png"
+    alt="Welcome to Coyle Hall"
+    class="absolute left-1/2 top-1/2 min-w-[1vw] object-cover pointer-events-none transform -translate-x-1/2 -translate-y-1/2"
+    id="history-banner-text"
+    />
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const banner = document.getElementById('banner-parallax');
+    const bg = document.getElementById('history-banner-img');
+    if (!banner || !bg) return;
+
+    const speed = 0.1;
+
+    function updateParallax() {
+        const rect = banner.getBoundingClientRect();
+        const scrollY = window.scrollY || window.pageYOffset;
+        const bannerTop = rect.top + scrollY;
+
+        if (scrollY + window.innerHeight > bannerTop && scrollY < bannerTop + banner.offsetHeight) {
+        const offset = (scrollY - bannerTop) * speed;
+        bg.style.transform = `translate(0%, ${offset}px)`;
+        } else {
+        bg.style.transform = 'translate(0%, 0)';
+        }
+    }
+
+    // Apply parallax immediately and on scroll
+    updateParallax();
+    window.addEventListener('scroll', updateParallax);
+    });
+</script>
+
+<h1 class="text-5xl text-center font-extrabold mb-6 fade-in-section" style="color: var(--nd-green);">
+  Founded in 1952. <span style="color: var(--nd-gold);">Transformed in 2025.</span>
+</h2>
+
+<!--Section 1  */}}-->
+<div class="flex flex-col md:flex-row items-center justify-center w-full my-12 max-w-6xl mx-auto fade-in-section">
+  <!-- Text -->
+  <div class="md:w-1/2 w-full flex flex-col justify-center px-4 md:pl-12 text-left">
+    <h2 class="text-3xl font-bold mb-4" style="color: var(--nd-green);">Building a Legacy</h2>
+    <p class="mb-2 text-base">
+      The story of Coyle began back in 1952, when Sally Fisher donated the money to build Fisher Hall in memory of her late husband, Fred Fisher, a former member of the Board of Trustees. 
+      The dorm was originally constructed to house 156 seniors, and had a large number of single rooms. 
+      At the time, it was one of the first dorms at Notre Dame to host newer ammenities like shared common lounges.
+    </p>
+  </div>
+  <!-- Image -->
+  <div class="md:w-1/2 w-full flex flex-col justify-center md:justify-end px-4">
+    <a href="/images/FisherImg.jpg" target="_blank" rel="noopener">
+      <img
+        src="/images/FisherImg.jpg"
+        alt="Fisher Hall, a gothic style dormitory, circa 2018"
+        class="rounded-2xl w-full max-w-xl shadow-lg"
+        style="object-fit: cover;"
+      />
+    </a>
+    <span class="mt-2 text-center font-bold text-md" style="color: var(--nd-gold);">
+      The original home of the Coyle Community, Fisher Hall, before its demolition in 2024
+    </span>
+  </div>
+</div>
+
+<!--Section 2  */}}-->
+<div class="flex flex-col md:flex-row items-center justify-center w-full my-12 max-w-6xl mx-auto fade-in-section">
+  <!-- Image -->
+  <div class="md:w-1/2 w-full flex flex-col justify-center md:justify-end px-4">
+      <a href="/images/ZahmImg.jpg" target="_blank" rel="noopener">
+        <img
+          src="/images/ZahmImg.jpg"
+          alt="Zahm Hall, another gothic style dormitory"
+          class="rounded-2xl w-full max-w-xl shadow-lg"
+          style="object-fit: cover;"
+        />
+      </a>
+    <span class="mt-2 text-center font-bold text-md" style="color: var(--nd-gold);">
+      The temporary home of the Coyle Community, Zahm Hall, during the 2024-2025 and 2025-2026 school years
+    </span>
+  </div>
+  <!-- Text -->
+  <div class="md:w-1/2 w-full flex flex-col justify-center px-4 md:pl-12 text-left">
+    <h2 class="text-3xl font-bold mb-4" style="color: var(--nd-green);">Keeping it Alive</h2>
+    <p class="mb-2 text-base">
+        In the Summer of 2001, Fisher Hall was renovated. Throughout its glorious existence, the Fisher/Coyle Community has been home to some of Notre Dame's most legendary alumni.
+        NBA stars LaPhonso Ellis ’92 and Orlando Woolridge ’81 once walked these halls, as well as the one and only Regis Philbin ’53. 
+        In addition to the legend among legends, Joe Montana ’79, hundreds of students, athletes, businessmen, engineers, scientists, artists, and leaders have called Fisher Hall home.
+    </p>
+  </div>
+</div>
+
+<!--Section 3  */}}-->
+<div class="flex flex-col md:flex-row items-center justify-center w-full my-12 max-w-6xl mx-auto fade-in-section">
+  <!-- Text -->
+  <div class="md:w-1/2 w-full flex flex-col justify-center px-4 md:pl-12 text-left">
+    <h2 class="text-3xl font-bold mb-4" style="color: var(--nd-green);">Moving Forward</h2>
+    <p class="mb-2 text-base">
+      In 2024, the University announced that the old Fisher Hall would be demolished to make way for a new residence hall, Coyle Hall, named in honor of John and Jill Coyle.
+      Set to open in Fall 2026, the new hall will house 258 students, and will feature a large chapel, common spaces, study rooms, kitchens, laundry facilities and a gym, as well as air conditioning. 
+      As the dorm is being built, the Coyle Community is residing in Zahm Hall for the 2024-2025 and 2025-2026 school years. 
+    </p>
+    <p class="mb-2 text-base">
+      While the dorm may be experiencing new changes, the spirit and sense of community in Coyle is stronger than ever. 
+      Despite a new name and building, the classic traditions and events of the Fisher Community will transition to Coyle, and as new mottos, mascots, and traditions are made, new students will have an opportunity to shape the legacy of the dorm for years to come.
+    </p>
+  </div>
+  <!-- Image -->
+  <div class="md:w-1/2 w-full flex flex-col justify-center md:justify-end px-4">
+        <a href="/images/FisherImg.jpg" target="_blank" rel="noopener">
+          <img
+            src="/images/FisherImg.jpg"
+            alt="Fisher Hall, a gothic style dormitory, circa 2018"
+            class="rounded-2xl w-full max-w-xl shadow-lg"
+            style="object-fit: cover;"
+          />
+        </a>
+    <span class="mt-2 text-center font-bold text-md" style="color: var(--nd-gold);">
+      A rendering of the front of the new Coyle Hall, viewed from across South Quad, set to open in Fall 2026
+    </span>
+    <div class="flex flex-row gap-10 justify-center mt-4">
+        <a href="https://news.nd.edu/news/new-mens-residence-hall-to-be-named-for-alumni-john-and-jill-coyle/" class="btn btn-primary" target="_blank" rel="noopener">
+            Project Info
+            <i class="fa fa-arrow-up-right-from-square pl-2"></i>
+
+        </a>
+        <a href="https://facilities.nd.edu/projects/major-construction-project-webcams#content" class="btn btn-primary" target="_blank" rel="noopener">
+            View Webcams
+            <i class="fa fa-arrow-up-right-from-square pl-2"></i>
+        </a>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const faders = document.querySelectorAll('.fade-in-section');
+  const appearOptions = {
+    threshold: 0.2,
+    rootMargin: "0px 0px -40px 0px"
+  };
+
+  const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, appearOptions);
+
+  faders.forEach(fader => {
+    appearOnScroll.observe(fader);
+  });
+});
+</script>
 
