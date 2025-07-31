@@ -1,0 +1,17 @@
+---
+title: 4
+email: 4b@nd.edu
+image: "/images/headshots/unknown.jpg"
+description: Resident Assistant
+weight: 10
+params:
+    hometown: ""
+    major: ""
+    hobbies: ""
+    section: ""
+
+social:
+  - name: email
+    icon: fa-regular fa-envelope
+    link: mailto:@nd.edu
+---
