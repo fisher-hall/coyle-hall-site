@@ -132,7 +132,7 @@ footer {
 .stats-number {
   font-size: 6rem !important;
   font-weight: bold !important;
-  color: var(--nd-gold) !important; /* Gold color */
+  color: var(--nd-green) !important; /* Gold color */
   line-height: 1.1 !important;
   margin-bottom: 0.15em !important;
 }
@@ -140,7 +140,7 @@ footer {
 .stats-description {
   font-size: 1.3rem !important;
   margin-bottom: 0.2em !important;
-    color: var(--nd-green) !important;
+    color: var(--nd-gold) !important;
 }
 
 

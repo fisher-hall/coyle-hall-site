@@ -1,6 +1,93 @@
 ---
 title: "Incoming Students"
 ---
+<!-- Banner -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  #banner-parallax {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  .section-sm:first-of-type {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+  /* Remove top margin from the first element after the header if needed */
+  #incoming-banner-img, #incoming-banner-text {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    display: block;
+  }
+</style>
+
+<div id="banner-parallax" class="relative left-1/2 right-1/2 w-screen -translate-x-1/2 min-h-[200px] md:min-h-0 mb-8 overflow-hidden">      
+    <img
+    src="/images/Banners/CoyleBannerImages.png"
+    alt="A collage of images of students in Coyle Hall throughout the years, tinted green"
+    class="absolute left-1/2 top-0 h-full min-w-[100vw] object-cover -translate-x-1/2 md:relative md:left-0 md:top-0 md:w-full md:h-auto md:object-contain md:translate-x-0 block"
+    style="max-width:none;"
+    id="incoming-banner-img"
+    >
+    <img
+    src="/images/Banners/WelcomeBanner.png"
+    alt="Welcome Incoming Students"
+    class="absolute left-1/2 top-1/2 min-w-[1vw] object-cover pointer-events-none transform -translate-x-1/2 -translate-y-1/2"
+    id="incoming-banner-text"
+    />
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const banner = document.getElementById('banner-parallax');
+    const bg = document.getElementById('incoming-banner-img');
+    if (!banner || !bg) return;
+
+    const speed = 0.1;
+
+    function updateParallax() {
+        const rect = banner.getBoundingClientRect();
+        const scrollY = window.scrollY || window.pageYOffset;
+        const bannerTop = rect.top + scrollY;
+
+        if (scrollY + window.innerHeight > bannerTop && scrollY < bannerTop + banner.offsetHeight) {
+        const offset = (scrollY - bannerTop) * speed;
+        bg.style.transform = `translate(0%, ${offset}px)`;
+        } else {
+        bg.style.transform = 'translate(0%, 0)';
+        }
+    }
+
+    // Apply parallax immediately and on scroll
+    updateParallax();
+    window.addEventListener('scroll', updateParallax);
+    });
+</script>
+
+<!-- Fade-in effect -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const faders = document.querySelectorAll('.fade-in-section');
+    const appearOptions = {
+        threshold: 0.2,
+        rootMargin: "0px 0px -40px 0px"
+    };
+
+    const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+        entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+        }
+        });
+    }, appearOptions);
+
+    faders.forEach(fader => {
+        appearOnScroll.observe(fader);
+    });
+    });
+</script>
 
 <!-- Countdown Section -->
 <div class="row text-center my-8">
@@ -32,6 +119,149 @@ title: "Incoming Students"
         <h1 class="mb-4 text-3xl">
         Until Welcome Weekend
         </h1>
+</div>
+
+<!--Title-->
+<div class="flex items-center justify-start my-1 fade-in-section pl-16" style="position: relative; z-index: 3; margin-bottom: 1rem; margin-top: 5rem;">
+    <h1 class="text-2xl md:text-4xl text-left font-extrabold mb-6 fade-in-section flex items-center text-black dark:text-white"
+        style="position: relative; z-index: 4; margin-top: 0;">
+    <span style="position: relative; display: inline-block;">
+        <span style="position: relative; z-index: 2;">
+            Welcome Incoming Students!
+        </span>
+    </span>
+    </h1>
+</div>
+
+<!-- Text -->
+<div class="w-5/6 flex flex-col justify-center fade-in-section px-4 pl-16 text-left;">
+    <body class="mb-2 text-lg">
+    <span style="position: relative; z-index: 2;">
+        Congrats! You've been chosen to become part of the best dorm on campus. 
+        We coulnd't be more excited to welcome you to your new home, and we hope you're looking forward to it as much as we are.
+        
+    </span>
+    </body>
+</div>
+
+<!--  What's in a room  -->
+<div class="flex items-center justify-center my-1 fade-in-section" style="position: relative; z-index: 3; margin-bottom: 1rem; margin-top: 5rem;">
+    <h2 class="text-5xl md:text-7xl text-left font-extrabold mb-6 fade-in-section flex items-center text-black dark:text-white"
+        style="position: relative; z-index: 4; margin-top: 0;">
+    <span style="position: relative; display: inline-block;">
+        <span style="position: relative; z-index: 2;">
+        Fast Facts
+        </span>
+    </span>
+    </h2>
+    <i class="fa fa-water absolute text-center top-1/2 text-9xl fade-in-section text-[var(--nd-light)] dark:text-[var(--nd-green)]"
+    style="transform: translateX(-110%) translateY(-60%) scale(1); z-index: 2;">
+    </i>
+</div>
+
+<div class="mx-auto relative grid md:grid-cols-3 sm:grid-cols-2 gap-4 gap-y-15 w-5/6 my-8 fade-in-section z-index: 3">
+    <div>
+    <h1 class="relative flex items-center justify-center h-32">
+        <i class="fa fa-location-dot text-9xl -translate-x-1/2 text-[var(--nd-light)] dark:text-[var(--nd-green)]"></i>
+        <span class="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/4 text-5xl font-bold z-10 pointer-events-none" style="white-space:nowrap;">
+        North<br>Quad
+        </span>
+    </h1>
+    <div class="relative flex items-center justify-center text-2xl pt-5 text-center">
+        Location
+    </div>
+    </div>
+    <div>
+    <h1 class="relative flex items-center justify-center h-32">
+        <i class="fa fa-people-roof text-9xl -translate-x-1/2 text-[var(--nd-light)] dark:text-[var(--nd-green)]"></i>
+        <span class="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/4 text-5xl font-bold z-10 pointer-events-none" style="white-space:nowrap;">
+            176<br>Students
+        </span>
+    </h1>
+    <div class="relative flex items-center justify-center text-2xl pt-5 text-center">
+        Capacity
+    </div>
+    </div>
+    <div>
+    <h1 class="relative flex items-center justify-center h-32">
+        <i class="fa fa-sailboat text-9xl -translate-x-1/2 text-[var(--nd-light)] dark:text-[var(--nd-green)]"></i>
+        <span class="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/4 text-5xl font-bold z-10 pointer-events-none" style="white-space:nowrap;">
+            The<br>Crew
+        </span>
+    </h1>
+    <div class="relative flex items-center justify-center text-2xl pt-5 text-center">
+        Dorm Mascot
+    </div>
+    </div>
+    <div>
+    <h1 class="relative flex items-center justify-center h-32">
+        <i class="fa fa-church text-9xl -translate-x-1/2 text-[var(--nd-light)] dark:text-[var(--nd-green)]"></i>
+        <span class="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/4 text-5xl font-bold z-10 pointer-events-none" style="white-space:nowrap;">
+            St. Albert<br>the Great
+        </span>
+    </h1>
+    <div class="relative flex items-center justify-center text-2xl pt-5 text-center">
+        Chapel
+    </div>
+    </div>
+    <div>
+    <h1 class="relative flex items-center justify-center h-32">
+        <i class="fa fa-fan text-9xl -translate-x-1/2 text-[var(--nd-light)] dark:text-[var(--nd-green)]"></i>
+        <span class="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/4 text-5xl font-bold z-10 pointer-events-none" style="white-space:nowrap;">
+            No <br>A/C Yet
+        </span>
+    </h1>
+    <div class="relative flex items-center justify-center text-2xl pt-5 text-center">
+        But Coming Soon
+    </div>
+    </div>      
+    <div>
+    <h1 class="relative flex items-center justify-center h-32">
+        <i class="fa fa-building text-9xl -translate-x-1/2 text-[var(--nd-light)] dark:text-[var(--nd-green)]"></i>
+        <span class="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/4 text-5xl font-bold z-10 pointer-events-none" style="white-space:nowrap;">
+            Four<br>Floors
+        </span>
+    </h1>
+    <div class="relative flex items-center justify-center text-2xl pt-5 text-center">
+        + Basement
+    </div>
+    </div>
+    <!-- MAKE SURE LINKS ARE UPDATED -->
+    <a href="https://cavanaughhallnd.weebly.com/" class="block w-full h-full" target="_blank">
+    <h1 class="relative flex items-center justify-center h-32">
+        <i class="fa fa-venus text-9xl -translate-x-3/4 text-[var(--nd-light)] dark:text-[var(--nd-green)]"></i>
+        <span class="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/4 text-5xl font-bold z-10 pointer-events-none" style="white-space:nowrap;">
+        Cavenaugh<br>Hall
+        </span>
+    </h1>
+    <div class="relative flex items-center justify-center text-2xl pt-5 text-center">
+        '25-'26 Sister Dorm
+        <i class="fa fa-arrow-up-right-from-square ml-2"></i>
+    </div>
+    </a>
+    <div>
+    <h1 class="relative flex items-center justify-center h-32">
+        <i class="fa fa-palette text-9xl -translate-x-1/2 text-[var(--nd-light)] dark:text-[var(--nd-green)]"></i>
+        <span class="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/4 text-5xl font-bold z-10 pointer-events-none" style="white-space:nowrap;">
+            Green<br>White
+        </span>
+    </h1>
+    <div class="relative flex items-center justify-center text-2xl pt-5 text-center">
+        Dorm Colors
+    </div>
+    </div>
+    <a href="https://stanfordhall.nd.edu" class="block w-full h-full" target="_blank">
+    <h1 class="relative flex items-center justify-center h-32">
+        <i class="fa fa-mars text-9xl -translate-x-3/4 text-[var(--nd-light)] dark:text-[var(--nd-green)]"></i>
+        <span class="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/4 text-5xl font-bold z-10 pointer-events-none" style="white-space:nowrap;">
+            Stanford<br>Hall
+        </span>
+    </h1>
+    <div class="relative flex items-center justify-center text-2xl pt-5 text-center">
+        '25-'26 Brother Dorm
+        <i class="fa fa-arrow-up-right-from-square ml-2"></i>
+    </div>
+    </a>
 </div>
 
 <script src="/Countdown.js"></script>
