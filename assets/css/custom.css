@@ -53,7 +53,7 @@ body, p {
 }
 
 .social-icons i {
-  font-size: 1.8rem !important; /* Increase icon size */
+  font-size: 1.5rem !important;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -85,15 +85,39 @@ label[for="nav-toggle"] i {
     transition: none !important;
 }
 
-/* Incoming Students Button*/
-.header .navbar a[href="/incoming-students"] {
-  background: var(--nd-gold);
-  border-radius: 12px;
+.header .navbar .nav-link:hover {
+  background: rgba(174, 145, 66, 0.85);
+  color: #fff !important;
+}
+
+/* Dropdown item hover effects */
+.nav-dropdown-list .nav-dropdown-item a:hover,
+.nav-dropdown-list .nav-dropdown-item:hover a {
+  background: rgba(174, 145, 66, 0.85) !important;
+  color: #fff !important;
 }
 
 .header .navbar a[href="/incoming-students"]:hover {
-  background: var(--nd-blue) !important;
-  color: var(--nd-gold) !important;
+  background: rgba(174, 145, 66, 0.85);
+}
+
+/* Active page styling for all navbar links */
+.header .navbar .nav-link.active,
+.header .navbar .nav-link[aria-current="page"],
+.header .navbar a.active,
+.header .navbar a[aria-current="page"] {
+  background: var(--nd-gold) !important;
+  color: #fff !important;
+}
+
+
+
+
+/* Incoming Students Button - Hover state */
+.header .navbar a[href="/incoming-students"]:hover {
+  background: rgba(174, 145, 66, 0.85) !important;
+  color: #fff !important;
+  border-radius: 12px !important;
 }
 
 /* Navbar Styles */
@@ -148,7 +172,7 @@ label[for="nav-toggle"]{
   z-index: 101 ; 
   position: absolute; 
   border-radius: 0.75rem; 
-  min-width: 230px;
+  min-width: 240px;
 }
 
 /* Fix mobile menu positioning */
@@ -278,4 +302,36 @@ main, .main {
 .fade-in-section img:hover {
   transform: scale(1.05);
   box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+}
+
+
+/* Incoming Students Button - Active state */
+.header .navbar a[href="/incoming-students"].active,
+.header .navbar a[href="/incoming-students"][aria-current="page"] {
+  background: var(--nd-gold) !important;
+  color: #fff !important;
+  border-radius: 12px !important;
+}
+
+/* Incoming Students Button - Inactive state */
+.header .navbar a[href="/incoming-students"]:not(.active):not([aria-current="page"]) {
+  background: #FFFFFF !important;
+  color: var(--nd-green) !important;
+  border-radius: 12px !important;
+}
+
+/* Dropdown Title Active State */
+.nav-dropdown-toggle.active,
+.nav-dropdown-toggle[aria-current="page"] {
+  background: var(--nd-gold) !important;
+  color: #fff !important;
+  border-radius: 12px !important;
+}
+
+/* Dropdown Submenu Item Active State */
+.nav-dropdown-list .nav-dropdown-item a.active,
+.nav-dropdown-list .nav-dropdown-item a[aria-current="page"] {
+  background: var(--nd-gold) !important;
+  color: #fff !important;
+  border-radius: 12px !important;
 }
