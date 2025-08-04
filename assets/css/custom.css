@@ -4,6 +4,21 @@
   --nd-blue: #0c2340;
   --nd-gold: #ae9142;
   --nd-light: #5faf81;
+  --color-custom-light: #CCCCCC;
+  --color-darkmode-gray: #B4AFB5;
+  --color-lightmode-gray: #444;
+}
+
+.bg-custom-light {
+  background-color: var(--color-custom-light) !important;
+}
+
+.border-custom-gray {
+  border-color: var(--color-lightmode-gray) !important;
+}
+
+.dark .border-custom-gray {
+  border-color: var(--color-darkmode-gray) !important;
 }
 
 /* Fonts & weighting */
