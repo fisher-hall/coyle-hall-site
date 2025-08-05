@@ -1,4 +1,4 @@
-<h1 align="center">Hugo + Tailwind CSS Starter and Boilerplate</h1>
+<h1 align="center">Hugo + Tailwind CSS Starter and Boilerplatee</h1>
 
 <p align="center">Hugoplate is a free starter template built with Hugo and Tailwind CSS v4.0, providing everything you need to jumpstart your Hugo project and save valuable time.</p>
 
