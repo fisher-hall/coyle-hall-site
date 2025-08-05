@@ -59,7 +59,7 @@ target = 'assets/notwatching/hugo_stats.json'
 
 ############################# Outputs ############################
 [outputs]
-home = ["HTML", "RSS", "WebAppManifest", "SearchIndex", "JSON"]
+home = ["HTML", "RSS", "WebAppManifest", "SearchIndex"]
 
 ############################# Imaging ############################
 [imaging]
@@ -116,6 +116,9 @@ notAlternative = true
 ############################# Plugins ##############################
 
 # CSS Plugins
+[[params.plugins.css]]
+link = "css/search.css"
+lazy = false
 [[params.plugins.css]]
 link = "plugins/swiper/swiper-bundle.css"
 lazy = true

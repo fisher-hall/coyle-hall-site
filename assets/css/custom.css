@@ -70,6 +70,11 @@ label[for="nav-toggle"] i {
   font-size: 1.2rem !important;
 }
 
+/* Hide the search button */
+.header .navbar [aria-label="search"] {
+  display: none !important;
+}
+
 .header {
     display: flex;
     flex-direction: column;
