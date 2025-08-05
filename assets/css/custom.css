@@ -4,6 +4,21 @@
   --nd-blue: #0c2340;
   --nd-gold: #ae9142;
   --nd-light: #5faf81;
+  --color-custom-light: #CCCCCC;
+  --color-darkmode-gray: #B4AFB5;
+  --color-lightmode-gray: #444;
+}
+
+.bg-custom-light {
+  background-color: var(--color-custom-light) !important;
+}
+
+.border-custom-gray {
+  border-color: var(--color-lightmode-gray) !important;
+}
+
+.dark .border-custom-gray {
+  border-color: var(--color-darkmode-gray) !important;
 }
 
 /* Fonts & weighting */
@@ -30,6 +45,7 @@ body, p {
 .header .navbar *:not(i) {
   font-family: 'Rubik', sans-serif !important;
   font-weight: 600 !important; /* Extra Bold */
+  font-size: 1.1rem !important; /* Increase text size */
 }
 
 .social-icons a {
@@ -37,32 +53,76 @@ body, p {
 }
 
 .social-icons i {
-  font-size: 1.5rem; 
+  font-size: 1.5rem !important;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* Make navbar brand (logo) bigger too */
+.header .navbar-brand {
+  font-size: 1.3rem !important;
+}
+
+/* Make search and toggle icons bigger */
+.header .navbar [aria-label="search"] i,
+label[for="nav-toggle"] i {
+  font-size: 1.2rem !important;
+}
+
+/* Hide the search button */
+.header .navbar [aria-label="search"] {
+  display: none !important;
 }
 
 .header {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    padding-top: 15px;
+    padding-top: 10px;
     padding-bottom: 0px;
-    position: sticky;
-    background-color: var(--nd-green);
-    z-index: 1;
+    position: fixed !important;
+    top: 0 !important;
+    background-color: var(--nd-green) !important;
+    width: 100% !important;
+    z-index: 30 !important;
+    transform: translateY(0) !important;
+    transition: none !important;
 }
 
-/* Incoming Students Button*/
-.header .navbar a[href="/incoming-students"] {
-  background: var(--nd-gold);
-  border-radius: 12px;
+.header .navbar .nav-link:hover {
+  background: rgba(174, 145, 66, 0.85);
+  color: #fff !important;
+}
+
+/* Dropdown item hover effects */
+.nav-dropdown-list .nav-dropdown-item a:hover,
+.nav-dropdown-list .nav-dropdown-item:hover a {
+  background: rgba(174, 145, 66, 0.85) !important;
+  color: #fff !important;
 }
 
 .header .navbar a[href="/incoming-students"]:hover {
-  background: var(--nd-blue) !important;
-  color: var(--nd-gold) !important;
+  background: rgba(174, 145, 66, 0.85);
+}
+
+/* Active page styling for all navbar links */
+.header .navbar .nav-link.active,
+.header .navbar .nav-link[aria-current="page"],
+.header .navbar a.active,
+.header .navbar a[aria-current="page"] {
+  background: var(--nd-gold) !important;
+  color: #fff !important;
+}
+
+
+
+
+/* Incoming Students Button - Hover state */
+.header .navbar a[href="/incoming-students"]:hover {
+  background: rgba(174, 145, 66, 0.85) !important;
+  color: #fff !important;
+  border-radius: 12px !important;
 }
 
 /* Navbar Styles */
@@ -83,30 +143,66 @@ label[for="nav-toggle"]{
   margin-bottom: .6rem; 
 }
 
-
-.gold-bar {
-  position: sticky;
-  top: 60px; /* header height */
-  height: 10px;
-  background-color: #ae9142;
+/* Move bars into header structure */
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 0;
   width: 100%;
+  height: 20px;
+  background: linear-gradient(to bottom, 
+    #ae9142 0%, #ae9142 50%, 
+    #0c2340 50%, #0c2340 100%);
   z-index: 29;
 }
 
+.gold-bar {
+  display: none; /* Hide the old fixed bars */
+}
+
 .blue-bar {
-  position: sticky;
-  top: 70px; /* header height + gold bar height */
-  height: 10px;
-  background-color: #0c2340;
-  width: 100%;
-  z-index: 28;
+  display: none; /* Hide the old fixed bars */
+}
+
+/* Hide bars on mobile when menu is open, or lower their z-index */
+@media (max-width: 767px) {
+  .gold-bar,
+  .blue-bar {
+    z-index: 25 !important; /* Lower than mobile menu (150) */
+  }
 }
 
 .nav-dropdown-list {
   z-index: 101 ; 
   position: absolute; 
   border-radius: 0.75rem; 
-  min-width: 230px;
+  min-width: 240px;
+}
+
+/* Fix mobile menu positioning */
+.navbar-nav,
+.navbar-collapse,
+#nav-menu {
+  z-index: 102 !important;
+  position: relative;
+}
+
+/* Mobile menu dropdown positioning */
+@media (max-width: 767px) {
+  .navbar-collapse,
+  #nav-menu {
+    position: fixed !important;
+    top: 70px !important; /* Start higher to cover the bars */
+    left: 0;
+    right: 0;
+    background-color: var(--nd-green) !important;
+    z-index: 150 !important; /* Higher than everything else */
+    margin: 0;
+    padding: 2rem 1rem 1rem 1rem; /* Extra top padding to account for starting higher */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    min-height: 200px; /* Ensure it covers enough area */
+  }
 }
 
 footer {
@@ -178,6 +274,16 @@ html, body {
   overflow-x: hidden;
 }
 
+/* Add padding to account for fixed header */
+body {
+  padding-top: 100px; /* Adjust this value based on your header height */
+}
+
+/* Ensure main content starts below the fixed header */
+main, .main {
+  margin-top: 0;
+}
+
 
 /* History Fade */
 
@@ -201,4 +307,36 @@ html, body {
 .fade-in-section img:hover {
   transform: scale(1.05);
   box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+}
+
+
+/* Incoming Students Button - Active state */
+.header .navbar a[href="/incoming-students"].active,
+.header .navbar a[href="/incoming-students"][aria-current="page"] {
+  background: var(--nd-gold) !important;
+  color: #fff !important;
+  border-radius: 12px !important;
+}
+
+/* Incoming Students Button - Inactive state */
+.header .navbar a[href="/incoming-students"]:not(.active):not([aria-current="page"]) {
+  background: #FFFFFF !important;
+  color: var(--nd-green) !important;
+  border-radius: 12px !important;
+}
+
+/* Dropdown Title Active State */
+.nav-dropdown-toggle.active,
+.nav-dropdown-toggle[aria-current="page"] {
+  background: var(--nd-gold) !important;
+  color: #fff !important;
+  border-radius: 12px !important;
+}
+
+/* Dropdown Submenu Item Active State */
+.nav-dropdown-list .nav-dropdown-item a.active,
+.nav-dropdown-list .nav-dropdown-item a[aria-current="page"] {
+  background: var(--nd-gold) !important;
+  color: #fff !important;
+  border-radius: 12px !important;
 }

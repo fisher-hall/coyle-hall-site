@@ -37,9 +37,16 @@
           {{ $pageURL:= $currentPage.Permalink | absLangURL }}
           {{ $active := eq $menuURL $pageURL }}
           {{ if .HasChildren }}
+            {{ $hasActiveChild := false }}
+            {{ range .Children }}
+              {{ if eq ($currentPage.Permalink | absLangURL) (.URL | absLangURL) }}
+                {{ $hasActiveChild = true }}
+              {{ end }}
+            {{ end }}
+
             <li class="nav-item nav-dropdown group relative">
               <span
-                class="nav-link rounded-xl hover:[background-color:#0c2340] transition inline-flex px-4 items-center align-middle">
+                class="nav-link rounded-xl transition inline-flex px-4 items-center align-middle {{ if $hasActiveChild }}active{{ end }}">
                 {{ .Name | safeHTML}}
                 <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20">
                   <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
@@ -52,7 +59,7 @@
                   {{ $active := eq $childURL $pageURL }}
                   <li class="nav-dropdown-item">
                     <a
-                      class="nav-dropdown-link rounded-xl hover:[background-color:#0c2340] transition inline-block align-middle px-4 {{ if $active }}active{{- end -}}"
+                      class="nav-dropdown-link rounded-xl transition inline-block align-middle px-4 {{ if $active }}active{{- end -}}"
                       {{ if findRE `^http` .URL }}
                         target="_blank" rel="noopener"
                       {{ end }}
@@ -74,7 +81,7 @@
             <li class="nav-item">
               <a
                 href="{{ .URL | relLangURL }}"
-                class="nav-link rounded-xl hover:[background-color:#0c2340] transition inline-block align-middle px-4 {{ if $active }}active{{- end -}}">
+                class="nav-link rounded-xl hover:[background-color:#0c2340] transition inline-block align-middle px-4 {{ if eq .URL "/incoming-students/" }}incoming-students{{ end }} {{ if $active }}active{{- end -}}">
                 {{ .Name | safeHTML }}
               </a>
             </li>
@@ -126,4 +133,3 @@
     <div class="blue-bar"></div>
   </header>
 <div>
-

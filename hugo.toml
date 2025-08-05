@@ -117,6 +117,9 @@ notAlternative = true
 
 # CSS Plugins
 [[params.plugins.css]]
+link = "css/search.css"
+lazy = false
+[[params.plugins.css]]
 link = "plugins/swiper/swiper-bundle.css"
 lazy = true
 [[params.plugins.css]]
