@@ -21,6 +21,11 @@ name = "Hall Government"
 url = "/hall-gov"
 
 [[main]]
+parent = "Leadership"
+name = "Hall Commissioners"
+url = "/hall-commissioners"
+
+[[main]]
 name = "About"
 url = "/about"
 weight = 3
