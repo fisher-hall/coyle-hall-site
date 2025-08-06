@@ -1,0 +1,16 @@
+{{ define "main" }}
+  <h1 class="text-center pt-14">{{ T (printf "%s" (lower .Title)) | default .Title | title }}</h1>
+
+
+  <section class="section">
+    <div class="container">
+      <div class="row">
+        {{ range .RegularPages }}
+          <div class="md:col-6 lg:col-4 mb-14">
+            {{ partial "components/profile-card" . }}
+          </div>
+        {{ end }}
+      </div>
+    </div>
+  </section>
+{{ end }}
