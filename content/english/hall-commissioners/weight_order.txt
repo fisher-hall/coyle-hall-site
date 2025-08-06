@@ -1,0 +1,14 @@
+### Weight order for ordering commissioner positions
+
+- 1-9: Sports
+- 10-19: Clubs
+- 20-29: Service
+- 30-39: Social
+- 40-49: Social Media
+- 50-59: Trivia
+- 60-69: Website
+- 70-79: Gains
+- 80-89: Merch
+- 90-99: Regatta
+- 100-109: Car Smash
+- 110-119: Opportunities
