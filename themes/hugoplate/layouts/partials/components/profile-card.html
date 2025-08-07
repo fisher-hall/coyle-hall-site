@@ -1,5 +1,7 @@
 <div class="bg-light dark:bg-darkmode-light rounded-2xl p-8 text-center">
   {{ $image:= .Params.image }}
+
+  <a href="{{ .RelPermalink }}">
   {{ if $image }}
   <img src="{{ $image }}" class="mx-auto mb-6 rounded-2xl w-[230px] h-[230px]" loading="lazy" />
   {{ else if .Params.Email }}
@@ -10,6 +12,7 @@
       width="120"
       src="https://www.gravatar.com/avatar/{{ md5 .Params.email }}?s=128&pg&d=identicon" />
   {{ end }}
+  </a>
   <h4 class="mb-3">
     <a href="{{ .RelPermalink }}">{{ .Title }}</a>
   </h4>

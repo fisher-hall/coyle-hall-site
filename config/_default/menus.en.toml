@@ -14,11 +14,19 @@ weight = 2
 parent = "Leadership"
 name = "Hall Staff"
 url = "/hall-staff"
+weight = 1
 
 [[main]]
 parent = "Leadership"
 name = "Hall Government"
 url = "/hall-gov"
+weight = 2
+
+[[main]]
+parent = "Leadership"
+name = "Hall Commissioners"
+url = "/hall-commissioners"
+weight = 3
 
 [[main]]
 name = "About"
