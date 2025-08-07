@@ -2,7 +2,7 @@
 :root {
   --nd-green: #0a843d;
   --nd-blue: #0c2340;
-  --nd-gold: #ae9142;
+  --nd-gold: rgb(174, 145, 66);
   --nd-light: #5faf81;
   --color-custom-light: #CCCCCC;
   --color-darkmode-gray: #B4AFB5;
