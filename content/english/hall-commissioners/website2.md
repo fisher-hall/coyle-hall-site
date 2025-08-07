@@ -1,14 +1,14 @@
 ---
 title: Daniel Burke
 email: dburke6@nd.edu
-image: "/images/headshots/unknown.jpg"
+image: "/images/headshots/danielburke.jpg"
 description: Website Commissioner
 weight: 61
 params:
-    hometown: ""
-    major: ""
-    hobbies: ""
-    favoritepart: ""
+    hometown: "Beverly Hills, MI"
+    major: "Computer Science (Minor in Engineering Corporate Practice)"
+    hobbies: "Running, Skiing, Graphic Design"
+    favoritepart: "Fisher/Coyle DH table"
 
 social:
   - name: email
