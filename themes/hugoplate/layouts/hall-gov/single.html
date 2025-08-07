@@ -16,6 +16,7 @@
               src="https://www.gravatar.com/avatar/{{ md5 .Params.email }}?s=128&pg&d=identicon" />
           {{ end }}
             <h1 class="h3 mt-10">{{ .Title }}</h1>
+	    <h1 class="h5">{{ .Description }}</h1>
 	    <div class="profile">
 	      <p><strong>Hometown: </strong>{{ .Params.Hometown }}</p>
 	      {{ if .Params.Studying }}
