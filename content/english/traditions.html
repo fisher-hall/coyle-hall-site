@@ -1,0 +1,416 @@
+---
+title: "Traditions"
+---
+<style>
+#banner-parallax {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+.section-sm:first-of-type {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+/* Remove top margin from the first element after the header if needed */
+#history-banner-img, #history-banner-text {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  display: block;
+}
+
+/* Fix traditions banner text positioning */
+#traditions-banner-text {
+  top: 42% !important; /* Adjust this percentage to move the text up or down */
+}
+</style>
+
+<div id="banner-parallax" class="relative left-1/2 right-1/2 w-screen -translate-x-1/2 min-h-[200px] md:min-h-0 mb-8 overflow-hidden">      
+    <img
+    src="/images/Banners/TraditionsBannerImage.png"
+    alt="An image of various Coyle events, with a green tint"
+    class="absolute left-1/2 top-0 h-full min-w-[100vw] sm:object-contain object-cover -translate-x-1/2 md:relative md:left-0 md:top-0 md:w-full md:h-auto md:object-contain md:translate-x-0 block"
+    style="max-width:none;"
+    id="history-banner-img"
+    >
+    <img
+    src="/images/Banners/TraditionsBannerText.png"
+    alt="EVENTS"
+    class="absolute left-1/2 top-1/2 min-w-[1vw] object-cover pointer-events-none transform -translate-x-1/2 -translate-y-1/2"
+    id="traditions-banner-text"
+    />
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const banner = document.getElementById('banner-parallax');
+    const bg = document.getElementById('history-banner-img');
+    if (!banner || !bg) return;
+
+    const speed = 0.1;
+
+    function updateParallax() {
+        const rect = banner.getBoundingClientRect();
+        const scrollY = window.scrollY || window.pageYOffset;
+        const bannerTop = rect.top + scrollY;
+
+        if (scrollY + window.innerHeight > bannerTop && scrollY < bannerTop + banner.offsetHeight) {
+        const offset = (scrollY - bannerTop) * speed;
+        bg.style.transform = `translate(0%, ${offset}px)`;
+        } else {
+        bg.style.transform = 'translate(0%, 0)';
+        }
+    }
+
+    // Apply parallax immediately and on scroll
+    updateParallax();
+    window.addEventListener('scroll', updateParallax);
+    });
+</script>
+
+<script>
+let slideIndex = 0;
+
+function changeSlide(n) {
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.dot');
+  const wrapper = document.querySelector('.slider-wrapper');
+  
+  slideIndex += n;
+  
+  if (slideIndex >= slides.length) {
+    slideIndex = 0;
+  }
+  if (slideIndex < 0) {
+    slideIndex = slides.length - 1;
+  }
+  
+  wrapper.style.transform = `translateX(-${slideIndex * 100}%)`;
+  
+  // Update dots
+  dots.forEach(dot => dot.classList.remove('active'));
+  dots[slideIndex].classList.add('active');
+}
+
+function currentSlide(n) {
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.dot');
+  const wrapper = document.querySelector('.slider-wrapper');
+  
+  slideIndex = n - 1;
+  wrapper.style.transform = `translateX(-${slideIndex * 100}%)`;
+  
+  // Update dots
+  dots.forEach(dot => dot.classList.remove('active'));
+  dots[slideIndex].classList.add('active');
+}
+
+// Auto-slide every 5 seconds (optional)
+setInterval(() => {
+  changeSlide(1);
+}, 5000);
+</script>
+
+<h1 class="text-5xl text-center font-extrabold mb-12 fade-in-section" style="color: var(--nd-green);">
+  YGR - <span style="color: var(--nd-gold);">Ya Gotta Regatta</span>
+</h1>
+
+<!--Section 1  */}}-->
+<div class="flex flex-col md:flex-row items-center justify-center w-full mt-12 max-w-6xl mx-auto fade-in-section">
+  <!-- Text -->
+  <div class="md:w-1/2 w-full flex flex-col justify-center px-4 md:pl-12 text-left">
+    <h2 class="text-3xl font-bold mb-4" style="color: var(--nd-green);">St. Adalbert's</h2>
+    <p class="mb-14 mr-4 text-base">
+      Coyle hall has been blessed with the opportunity to give back to the South Bend community by supporting St. Adalbert's Catholic School. 
+      Each year, the dorm donates to St. Adalbert's with funds raised from the Regatta, Car Smash, and other events.
+      The Crew also volunteers at St. Adalbert's, helping with various events and activities, including tutoring, mentoring, and playing sports with the kids.
+    </p>
+  </div>
+  <div class="slider max-w-[600px] ml-0 shadow">
+    <div class="slider-container">
+      <div class="slider-wrapper">
+        <div class="slide active">
+          <a href="/images/st_adalberts/st_a_1.jpg" data-fancybox="slider">
+            <img src="/images/st_adalberts/st_a_1.jpg" alt="Slider Image 1" style=" object-fit: fit;" loading="lazy">
+          </a>
+        </div>
+        <div class="slide">
+          <a href="/images/st_adalberts/st_a_2.jpg" data-fancybox="slider">
+            <img src="/images/st_adalberts/st_a_2.jpg" alt="Slider Image 2" style="object-fit: fit;" loading="lazy">
+          </a>
+        </div>
+        <div class="slide">
+          <a href="/images/st_adalberts/st_a_3.jpg" data-fancybox="slider">
+            <img src="/images/st_adalberts/st_a_3.jpg" alt="Slider Image 3" style="object-fit: fit;" loading="lazy">
+          </a>
+        </div>
+        <div class="slide">
+          <a href="/images/st_adalberts/st_a_4.jpg" data-fancybox="slider">
+            <img src="/images/st_adalberts/st_a_4.jpg" alt="Slider Image 4" style="object-fit: fit;" loading="lazy">
+          </a>
+        </div>
+        <div class="slide">
+          <a href="/images/st_adalberts/st_a_5.jpg" data-fancybox="slider">
+            <img src="/images/st_adalberts/st_a_5.jpg" alt="Slider Image 5" style="object-fit: fit;" loading="lazy">
+          </a>
+        </div>
+        <div class="slide">
+          <a href="/images/st_adalberts/st_a_6.jpg" data-fancybox="slider">
+            <img src="/images/st_adalberts/st_a_6.jpg" alt="Slider Image 6" style="object-fit: fit;" loading="lazy">
+          </a>
+        </div>
+      </div>
+      
+      <!-- Navigation arrows -->
+      <button class="slider-prev" onclick="changeSlide(-1)">❮</button>
+      <button class="slider-next" onclick="changeSlide(1)">❯</button>
+      
+      <!-- Dots indicator -->
+      <div class="slider-dots">
+        <span class="dot active" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+        <span class="dot" onclick="currentSlide(4)"></span>
+        <span class="dot" onclick="currentSlide(5)"></span>
+        <span class="dot" onclick="currentSlide(6)"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.slider {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  margin-bottom: 40px;
+}
+
+.slider-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+}
+
+.slider-wrapper {
+  display: flex;
+  transition: transform 0.5s ease;
+  height: 100%;
+}
+
+.slide {
+  min-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slide img {
+  max-height: 100%;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain; 
+  transition: transform 0.3s ease;
+}
+
+.slide:hover img {
+  transform: scale(1.02);
+}
+
+.slider-prev, .slider-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgb(0, 0, 0, 0);
+  color: var(--nd-green);
+  border: none;
+  padding: 6px;
+  cursor: pointer;
+  font-size: 26px;
+  border-radius: 16px;
+  z-index: 10;
+  transition: background 0.3s ease;
+}
+
+.slider-prev:hover, .slider-next:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.slider-prev {
+  left: 5px;
+}
+
+.slider-next {
+  right: 5px;
+}
+
+.slider-dots {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.slider-dots {
+  position: absolute;
+  bottom: -35px; /* Position dots below the slider */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 15;
+}
+
+.dot {
+  height: 12px;
+  width: 12px;
+  background-color: #ccc;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.dot.active {
+  background-color: var(--nd-green);
+  border-color: var(--nd-gold);
+  transform: scale(1.3);
+}
+
+.dot:hover {
+  background-color: var(--nd-gold);
+  transform: scale(1.1);
+}
+
+</style>
+</div>
+
+<hr class="my-6 fade-in-section border-custom-gray" style="height: 1px; border: none; background: linear-gradient(to right, transparent, var(--color-lightmode-gray) 20%, var(--color-lightmode-gray) 80%, transparent);">
+
+<div class="rounded-2xl w-full mt-12 max-w-6xl mx-auto fade-in-section" style="background-color: var(--nd-green); padding: 2rem;">
+  <!--Section 2a  */}}-->
+  <div class="flex flex-col md:flex-row items-center justify-center w-full mt-4 mb-8 max-w-6xl mx-auto fade-in-section">
+    <!-- Image -->
+    <div class="md:w-1/2 w-full flex flex-col justify-center md:justify-end px-4">
+          <a href="/images/Formal.jpg" target="_blank" rel="noopener">
+            <img
+              src="/images/Formal.jpg"
+              alt="A group of first-year students dressed in formal attire, posing together at the Coyle Formal"
+              class="rounded-2xl w-full max-w-xl shadow-lg"
+              style="object-fit: cover;"
+            />
+          </a>
+    </div>
+    <!-- Text -->
+    <div class="md:w-1/2 w-full flex flex-col justify-center mt-4 px-4 md:pl-12 text-left">
+      <h2 class="text-3xl font-bold mb-4" style="margin-top: 1rem; color: white;">Coyle Formal - Spring</h2>
+      <p class="mb-2 mr-4 text-base" style="color: white;">
+        In the spring comes a classic Notre Dame dorm tradition, our formal.
+        Usually co-hosted with a women's dorm, the Coyle Formal is a chance for the dorm to dress up and enjoy our own fancy night.
+        The formal is held on campus and gives guys the opportunity to wear their best suits and ties and have a great time.
+      </p>
+    </div>
+  </div>
+  
+  <hr class="my-6 fade-in-section border-custom-white" style="margin-top: 3rem; margin-bottom: 1rem; height: 1px; border: none; background: linear-gradient(to right, transparent, var(--color-lightmode-gray) 20%, var(--color-lightmode-gray) 80%, transparent);">
+  
+  <!--Section 2b  */}}-->
+  <div class="flex flex-col md:flex-row items-center justify-center w-full mt-4 max-w-6xl mx-auto fade-in-section">
+    <!-- Text -->
+    <div class="md:w-1/2 w-full flex flex-col justify-center px-4 md:pl-12 text-left">
+      <h2 class="text-3xl font-bold mb-4 mt-4" style="margin-top: 2rem; color: white;">Coyle Funk - Fall</h2>
+      <p class="mb-4 mr-4 text-base" style="color: white;">
+        An iconic tradition that has been passed down from Fisher, Coyle Funk is our annual '70s themed SYR.
+        Different from many other dorm SYRs (Screw Your Roommate), The Funk is a chance for everyone in Coyle, and their dates, to embrace their inner '70s spirit with groovy fashion, flare pants, disco shirts, and (for those particularly brave) handlebar mustaches and long sideburns.
+        Each year, the dorm gathers in Stepan Center for a night of roller skating, dancing, and good old '70s fun.
+      </p>
+    </div>
+    <!-- Image -->
+    <div class="md:w-1/2 w-full flex flex-col justify-center md:justify-end px-4 my-8">
+          <a href="/images/Funk.jpg" target="_blank" rel="noopener">
+            <img
+              src="/images/Funk.jpg"
+              alt="A group of first-year students dressed in 1970s attire, posing together at the Coyle Funk"
+              class="rounded-2xl w-full max-w-xl shadow-lg"
+              style="object-fit: cover;"
+            />
+          </a>
+    </div>
+  </div>
+</div>
+
+<div class="rounded-2xl w-full mt-12 max-w-6xl mx-auto fade-in-section" style="margin-top: 6rem; background-color: var(--nd-green); padding: 2rem;">
+  <!--Section 2a  */}}-->
+  <div class="flex flex-col md:flex-row items-center justify-center w-full mt-4 mb-8 max-w-6xl mx-auto fade-in-section">
+    <!-- Image -->
+    <div class="md:w-1/2 w-full flex flex-col justify-center md:justify-end px-4">
+          <a href="/images/Formal.jpg" target="_blank" rel="noopener">
+            <img
+              src="/images/Formal.jpg"
+              alt="A group of first-year students dressed in formal attire, posing together at the Coyle Formal"
+              class="rounded-2xl w-full max-w-xl shadow-lg"
+              style="object-fit: cover;"
+            />
+          </a>
+    </div>
+    <!-- Text -->
+    <div class="md:w-1/2 w-full flex flex-col justify-center mt-4 px-4 md:pl-12 text-left">
+      <h2 class="text-3xl font-bold mb-4" style="margin-top: 1rem; color: white;">Coyle Formal - Spring</h2>
+      <p class="mb-2 mr-4 text-base" style="color: white;">
+        In the spring comes a classic Notre Dame dorm tradition, our formal.
+        Usually co-hosted with a women's dorm, the Coyle Formal is a chance for the dorm to dress up and enjoy our own fancy night.
+        The formal is held on campus and gives guys the opportunity to wear their best suits and ties and have a great time.
+      </p>
+    </div>
+  </div>
+  
+  <hr class="my-6 fade-in-section border-custom-white" style="margin-top: 3rem; margin-bottom: 1rem; height: 1px; border: none; background: linear-gradient(to right, transparent, var(--color-lightmode-gray) 20%, var(--color-lightmode-gray) 80%, transparent);">
+  
+  <!--Section 2b  */}}-->
+  <div class="flex flex-col md:flex-row items-center justify-center w-full mt-4 max-w-6xl mx-auto fade-in-section">
+    <!-- Text -->
+    <div class="md:w-1/2 w-full flex flex-col justify-center px-4 md:pl-12 text-left">
+      <h2 class="text-3xl font-bold mb-4 mt-4" style="margin-top: 2rem; color: white;">Coyle Funk - Fall</h2>
+      <p class="mb-4 mr-4 text-base" style="color: white;">
+        An iconic tradition that has been passed down from Fisher, Coyle Funk is our annual '70s themed SYR.
+        Different from many other dorm SYRs (Screw Your Roommate), The Funk is a chance for everyone in Coyle, and their dates, to embrace their inner '70s spirit with groovy fashion, flare pants, disco shirts, and (for those particularly brave) handlebar mustaches and long sideburns.
+        Each year, the dorm gathers in Stepan Center for a night of roller skating, dancing, and good old '70s fun.
+      </p>
+    </div>
+    <!-- Image -->
+    <div class="md:w-1/2 w-full flex flex-col justify-center md:justify-end px-4 my-8">
+          <a href="/images/Funk.jpg" target="_blank" rel="noopener">
+            <img
+              src="/images/Funk.jpg"
+              alt="A group of first-year students dressed in 1970s attire, posing together at the Coyle Funk"
+              class="rounded-2xl w-full max-w-xl shadow-lg"
+              style="object-fit: cover;"
+            />
+          </a>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const faders = document.querySelectorAll('.fade-in-section');
+  const appearOptions = {
+    threshold: 0.2,
+    rootMargin: "0px 0px -40px 0px"
+  };
+
+  const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, appearOptions);
+
+  faders.forEach(fader => {
+    appearOnScroll.observe(fader);
+  });
+});
+</script>
+
