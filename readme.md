@@ -1,3 +1,4 @@
+<img src="assets/images/favicon.png" align="center"></img>
 <h1 align="center">Coyle Hall's Website</h1>
 
 <h3 align="center"><a href="https://www.coylehallnd.com">www.coylehallnd.com</a></h3>
