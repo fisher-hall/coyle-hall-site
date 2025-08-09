@@ -1,4 +1,4 @@
-<img src="assets/images/favicon.png" align="center"></img>
+<p align="center"><img src="assets/images/favicon.png"></img></p>
 <h1 align="center">Coyle Hall's Website</h1>
 
 <h3 align="center"><a href="https://www.coylehallnd.com">www.coylehallnd.com</a></h3>
@@ -115,8 +115,8 @@ git pull
 ### Editing Specific Page Content
 
 For specific page editing, use these guides:
-- [Hall Staff]()
-- [Hall Government]()
-- [Hall Commissioners]()
-- [Incoming Students]()
+- [Hall Staff](https://github.com/fisher-hall/coyle-hall-site/blob/main/docs/hall_staff.md)
+- [Hall Government](https://github.com/fisher-hall/coyle-hall-site/blob/main/docs/hall_gov.md)
+- [Hall Commissioners](https://github.com/fisher-hall/coyle-hall-site/blob/main/docs/hall_commissioners.md)
+- [Incoming Students](https://github.com/fisher-hall/coyle-hall-site/blob/main/docs/incoming_students.md)
 
