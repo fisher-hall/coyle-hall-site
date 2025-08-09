@@ -1,10 +1,3 @@
-<p align="center"><img src="assets/images/favicon.png"></img></p>
-<h1 align="center">Coyle Hall's Website</h1>
-
-<h3 align="center"><a href="https://www.coylehallnd.com">www.coylehallnd.com</a></h3>
-
-<hr>
-
 ## Editing Hall Staff information
 
 ### Editing a person's biography
