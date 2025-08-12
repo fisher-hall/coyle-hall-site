@@ -38,7 +38,7 @@ The website is actively maintained by Coyle Hall residents and staff. Content up
 For technical issues with the website or suggestions for improvements, please contact Web Commissioners Dan Burke and Will Griffin, or file an issue on Github.
 
 <div style="display: flex; gap: 2rem; margin: 1.5rem 0; flex-wrap: wrap;">
-  <a href="mailto:dburke6@nd.edu?cc=wgriffi3@nd.edu&subject=Coyle%20Hall%20Website%20Feedback" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background-color: var(--nd-green); color: white; text-decoration: none; border-radius: 16px; transition: all 0.3s ease; font-size: 1.25rem; font-weight: 500;" onmouseover="this.style.transform='scale(1.15)'" onmouseout="this.style.transform='scale(1)'">
+  <a href="mailto:dburke6@nd.edu,wgriffi3@nd.edu?subject=Coyle%20Hall%20Website%20Feedback" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background-color: var(--nd-green); color: white; text-decoration: none; border-radius: 16px; transition: all 0.3s ease; font-size: 1.25rem; font-weight: 500;" onmouseover="this.style.transform='scale(1.15)'" onmouseout="this.style.transform='scale(1)'">
     Send an Email
     <i class="fas fa-envelope"></i>
   </a>
