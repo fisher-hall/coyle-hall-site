@@ -4,7 +4,10 @@
 <h3 align="center"><a href="https://www.coylehallnd.com">www.coylehallnd.com</a></h3>
 <h4 align="center">Current Maintainers: <a href="mailto:wgriffi3@nd.edu">Will Griffin</a> and <a href="mailto:dburke6@nd.edu">Daniel Burke</a></h4>
 
+<p align="center">Domain serviced by <a href="https://www.namecheap.com/">Namecheap. </a>For login access and information, contact the <a href="mailto:dburke6@nd.edu,wgriffi3@nd.edu?subject=Coyle%20Site%20Access%20Request">web commissioners.</a></p>
+
 <hr>
+
 
 ## Current Information on the Website
 

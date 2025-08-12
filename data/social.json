@@ -14,6 +14,11 @@
       "name": "linkedin",
       "icon": "fab fa-linkedin",
       "link": "https://www.linkedin.com/groups/13894222/"
+    },
+    {
+      "name": "info",
+      "icon": "fas fa-info-circle",
+      "link": "/info/"
     }
   ]
 }
