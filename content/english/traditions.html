@@ -118,7 +118,7 @@ setInterval(() => {
 <!--Section 1  */}}-->
 <div class="flex flex-col md:flex-row items-center justify-center w-full mt-12 max-w-6xl mx-auto fade-in-section">
   <!-- Text -->
-  <div class="md:w-1/2 w-full flex flex-col justify-center px-4 md:pl-12 text-left">
+  <div class="md:w-1/2 w-full flex flex-col justify-center px-4 md:pl-6 text-left">
     <h2 class="text-3xl font-bold mb-4" style="color: var(--nd-green);">St. Adalbert's</h2>
     <p class="mb-14 mr-4 text-base">
       Coyle Hall has been blessed with the opportunity to give back to the South Bend community by supporting St. Adalbert's Catholic School. 
@@ -126,7 +126,8 @@ setInterval(() => {
       The Crew also volunteers at St. Adalbert's, helping with various events and activities, including tutoring, mentoring, and playing sports with the kids.
     </p>
   </div>
-  <div class="slider max-w-[600px] ml-0 shadow">
+  <div class="slider-wrapper-container w-full max-w-[600px] sm:max-w-[500px] md:max-w-[600px] ml-0">
+    <div class="slider shadow rounded-2xl">
     <div class="slider-container">
       <div class="slider-wrapper">
         <div class="slide active">
@@ -164,16 +165,17 @@ setInterval(() => {
       <!-- Navigation arrows -->
       <button class="slider-prev" onclick="changeSlide(-1)">❮</button>
       <button class="slider-next" onclick="changeSlide(1)">❯</button>
-      
-      <!-- Dots indicator -->
-      <div class="slider-dots">
-        <span class="dot active" onclick="currentSlide(1)"></span>
-        <span class="dot" onclick="currentSlide(2)"></span>
-        <span class="dot" onclick="currentSlide(3)"></span>
-        <span class="dot" onclick="currentSlide(4)"></span>
-        <span class="dot" onclick="currentSlide(5)"></span>
-        <span class="dot" onclick="currentSlide(6)"></span>
-      </div>
+    </div>
+    </div>
+    
+    <!-- Dots indicator - completely outside styled slider -->
+    <div class="slider-dots">
+      <span class="dot active" onclick="currentSlide(1)"></span>
+      <span class="dot" onclick="currentSlide(2)"></span>
+      <span class="dot" onclick="currentSlide(3)"></span>
+      <span class="dot" onclick="currentSlide(4)"></span>
+      <span class="dot" onclick="currentSlide(5)"></span>
+      <span class="dot" onclick="currentSlide(6)"></span>
     </div>
   </div>
 </div>
@@ -181,15 +183,29 @@ setInterval(() => {
 <style>
 .slider {
   position: relative;
-  overflow: hidden;
   border-radius: 16px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 .slider-container {
   position: relative;
   width: 100%;
-  height: 300px;
+  height: 250px; /* Smaller base height */
+  overflow: hidden; /* Moved overflow hidden to container level */
+  border-radius: 16px;
+}
+
+/* Responsive height adjustments */
+@media (min-width: 640px) {
+  .slider-container {
+    height: 280px;
+  }
+}
+
+@media (min-width: 768px) {
+  .slider-container {
+    height: 300px;
+  }
 }
 
 .slider-wrapper {
@@ -225,12 +241,27 @@ setInterval(() => {
   background: rgb(0, 0, 0, 0);
   color: var(--nd-green);
   border: none;
-  padding: 6px;
+  padding: 4px;
   cursor: pointer;
-  font-size: 26px;
+  font-size: 20px;
   border-radius: 16px;
   z-index: 10;
   transition: background 0.3s ease;
+}
+
+/* Responsive arrow sizes */
+@media (min-width: 640px) {
+  .slider-prev, .slider-next {
+    padding: 5px;
+    font-size: 22px;
+  }
+}
+
+@media (min-width: 768px) {
+  .slider-prev, .slider-next {
+    padding: 6px;
+    font-size: 26px;
+  }
 }
 
 .slider-prev:hover, .slider-next:hover {
@@ -246,35 +277,55 @@ setInterval(() => {
 }
 
 .slider-dots {
-  text-align: center;
-  margin-top: 15px;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  transform: none;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  z-index: 15;
+  margin-top: -2px;
+  padding: 0;
 }
 
-.slider-dots {
-  position: absolute;
-  bottom: -35px; /* Position dots below the slider */
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 8px;
-  z-index: 15;
+/* Responsive dot positioning */
+@media (max-width: 639px) {
+  .slider-dots {
+    margin-top: -2px;
+    gap: 5px;
+  }
 }
 
 .dot {
-  height: 12px;
-  width: 12px;
-  background-color: #ccc;
-  border: 2px solid #fff;
-  border-radius: 50%;
+  height: 6px;
+  width: 20px;
+  background-color: rgba(200, 200, 200, 0.8);
+  border: none;
+  border-radius: 4px;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive dot sizes */
+@media (min-width: 640px) {
+  .dot {
+    height: 7px;
+    width: 24px;
+    border-radius: 5px;
+  }
+}
+
+@media (min-width: 768px) {
+  .dot {
+    height: 8px;
+    width: 28px;
+    border-radius: 6px;
+  }
 }
 
 .dot.active {
   background-color: var(--nd-green);
-  border-color: var(--nd-gold);
-  transform: scale(1.3);
 }
 
 .dot:hover {
@@ -302,7 +353,7 @@ setInterval(() => {
           </a>
     </div>
     <!-- Text -->
-    <div class="md:w-1/2 w-full flex flex-col justify-center mt-4 px-4 md:pl-12 text-left">
+    <div class="md:w-1/2 w-full flex flex-col justify-center mt-4 px-4 md:pl-6 text-left">
       <h2 class="text-3xl font-bold mb-4" style="margin-top: 1rem; color: white;">Coyle Formal - Spring</h2>
       <p class="mb-2 mr-4 text-base" style="color: white;">
         In the spring comes a classic Notre Dame dorm tradition, our formal.
@@ -317,7 +368,7 @@ setInterval(() => {
   <!--Section 2b  */}}-->
   <div class="flex flex-col md:flex-row items-center justify-center w-full mt-4 max-w-6xl mx-auto fade-in-section">
     <!-- Text -->
-    <div class="md:w-1/2 w-full flex flex-col justify-center px-4 md:pl-12 text-left">
+    <div class="md:w-1/2 w-full flex flex-col justify-center px-4 md:pl-6 text-left">
       <h2 class="text-3xl font-bold mb-4 mt-4" style="margin-top: 2rem; color: white;">Coyle Funk - Fall</h2>
       <p class="mb-4 mr-4 text-base" style="color: white;">
         An iconic tradition that has been passed down from Fisher, Coyle Funk is our annual '70s themed SYR.
@@ -354,7 +405,7 @@ setInterval(() => {
           </a>
     </div>
     <!-- Text -->
-    <div class="md:w-1/2 w-full flex flex-col justify-center mt-4 px-4 md:pl-12 text-left">
+    <div class="md:w-1/2 w-full flex flex-col justify-center mt-4 px-4 md:pl-6 text-left">
       <h2 class="text-3xl font-bold mb-4" style="margin-top: 1rem; color: white;">Car Smash - Fall</h2>
       <p class="mb-2 mr-4 text-base" style="color: white;">
         Each fall, Coyle Hall hosts the annual Car Smash as a fundraiser for St. Adalbert's Catholic School.
@@ -370,7 +421,7 @@ setInterval(() => {
   <!--Section 2b  */}}-->
   <div class="flex flex-col md:flex-row items-center justify-center w-full mt-4 max-w-6xl mx-auto fade-in-section">
     <!-- Text -->
-    <div class="md:w-1/2 w-full flex flex-col justify-center px-4 md:pl-12 text-left">
+    <div class="md:w-1/2 w-full flex flex-col justify-center md:pl-6 text-left">
       <h2 class="text-3xl font-bold mb-4 mt-4" style="margin-top: 2rem; color: white;">The Regatta - Spring</h2>
       <p class="mb-4 mr-4 text-base" style="color: white;">
         The Regatta is known as one of the largest, most successful, and most outrageous signature event on campus. 
@@ -384,68 +435,53 @@ setInterval(() => {
         <br><br>
         Of course, we forgot to mention the infamous Regatta Hawk, a legendary tradition known across campus, where Crew all shave their hair into mohawks to promote dorm unity and the spirit of the Regatta.
       </p>
-    </div>
-    <!-- Image -->
-    <div class="md:w-1/2 w-full flex flex-col justify-center md:justify-end px-4 mt-4">
-          <a href="/images/regatta/Regatta1.jpg" target="_blank" rel="noopener">
+      <!-- Left Image -->
+        <a href="/images/regatta/hawks.jpg" target="_blank" rel="noopener">
+          <img
+            src="/images/regatta/hawks.jpg"
+            alt="First years with mohawks"
+            class="rounded-2xl w-full max-w-xl shadow-lg md:mt-6"
+            style="object-fit: cover;"
+          />
+        </a>
+        <a href="/images/regatta/regatta4.jpg" target="_blank" rel="noopener" style="margin-top: 1rem;">
             <img
-              src="/images/regatta/Regatta1.jpg"
-              alt="A photo of students in an inflatable pool on the lake"
-              class="rounded-2xl w-full max-w-xl shadow-lg"
-              style="object-fit: cover;"
-            />
-          </a>
-          <a href="/images/regatta/Regatta2.jpg" target="_blank" rel="noopener" style="margin-top: 1rem;">
-            <img
-              src="/images/regatta/Regatta2.jpg"
-              alt="A photo of students in homemade boats on the lake"
-              class="rounded-2xl w-full max-w-xl shadow-lg"
-              style="object-fit: cover;"
-            />
-          </a>
-    </div>
-  </div>
-  <div class="flex flex-col md:flex-row items-center justify-center w-full max-w-6xl mx-auto fade-in-section" style="margin-top: 1rem;">
-    <!-- Left Image -->
-    <div class="md:w-1/2 w-full flex flex-col justify-center md:justify-end px-4">
-          <a href="/images/regatta/Hawks.jpg" target="_blank" rel="noopener">
-            <img
-              src="/images/regatta/Hawks.jpg"
-              alt="First years with mohawks"
-              class="rounded-2xl w-full max-w-xl shadow-lg"
-              style="object-fit: cover;"
-            />
-          </a>
-    </div>
-    <!-- Right Image -->
-    <div class="md:w-1/2 w-full flex flex-col justify-center md:justify-end px-4">
-          <a href="/images/regatta/Regatta3.jpg" target="_blank" rel="noopener">
-            <img
-              src="/images/regatta/Regatta3.jpg"
-              alt="A photo of students in a raft on the lake"
-              class="rounded-2xl w-full max-w-xl shadow-lg"
-              style="object-fit: cover;"
-            />
-          </a>
-    </div>
-  </div>
-  <div class="flex flex-col md:flex-row items-center justify-center w-full max-w-6xl mx-auto fade-in-section" style="margin-top: 1rem;">
-    <!-- Left Image -->
-    <div class="md:w-1/2 w-full flex flex-col justify-center md:justify-end px-4">
-          <a href="/images/regatta/Regatta4.jpg" target="_blank" rel="noopener">
-            <img
-              src="/images/regatta/Regatta4.jpg"
+              src="/images/regatta/regatta4.jpg"
               alt="Regatta on the lake"
               class="rounded-2xl w-full max-w-xl shadow-lg"
               style="object-fit: cover;"
             />
           </a>
     </div>
-    <!-- Right Image -->
-    <div class="md:w-1/2 w-full flex flex-col justify-center md:justify-end px-4">
-          <a href="/images/regatta/Regatta5.jpg" target="_blank" rel="noopener">
+    <!-- Image -->
+    <div class="md:w-1/2 w-full flex flex-col justify-center md:justify-end md:mr-4 lg:mr-6 md:ml-4 mt-4">
+          <a href="/images/regatta/regatta1.jpg" target="_blank" rel="noopener">
             <img
-              src="/images/regatta/Regatta5.jpg"
+              src="/images/regatta/regatta1.jpg"
+              alt="A photo of students in an inflatable pool on the lake"
+              class="rounded-2xl w-full max-w-xl shadow-lg"
+              style="object-fit: cover;"
+            />
+          </a>
+          <a href="/images/regatta/regatta2.jpg" target="_blank" rel="noopener" style="margin-top: 1rem;">
+            <img
+              src="/images/regatta/regatta2.jpg"
+              alt="A photo of students in homemade boats on the lake"
+              class="rounded-2xl w-full max-w-xl shadow-lg"
+              style="object-fit: cover;"
+            />
+          </a>
+          <a href="/images/regatta/regatta3.jpg" target="_blank" rel="noopener" style="margin-top: 1rem;">
+            <img
+              src="/images/regatta/regatta3.jpg"
+              alt="A photo of students in a raft on the lake"
+              class="rounded-2xl w-full max-w-xl shadow-lg"
+              style="object-fit: cover;"
+            />
+          </a>
+          <a href="/images/regatta/regatta5.jpg" target="_blank" rel="noopener" style="margin-top: 1rem;">
+            <img
+              src="/images/regatta/regatta5.jpg"
               alt="A photo of students  on the lake"
               class="rounded-2xl w-full max-w-xl shadow-lg"
               style="object-fit: cover;"
