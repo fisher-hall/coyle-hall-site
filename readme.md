@@ -2,12 +2,12 @@
 <h1 align="center">Coyle Hall's Website</h1>
 
 <h3 align="center"><a href="https://www.coylehallnd.com">www.coylehallnd.com</a></h3>
-<h4 align="center">## Web Commissioners
+
+## Web Commissioners
 - [Daniel Burke](mailto:dburke6@nd.edu) 
 - [Will Griffin](mailto:wgriffi3@nd.edu)
-</h4>
 
-<h5 align="center">Domain serviced by <a href="https://www.namecheap.com/">Namecheap. </a>For login access and information, contact the <a href="mailto:dburke6@nd.edu,wgriffi3@nd.edu?subject=Coyle%20Site%20Access%20Request">web commissioners.</a></h5>
+<p align="center">Domain serviced by <a href="https://www.namecheap.com/">Namecheap. </a>For login access and information, contact the <a href="mailto:dburke6@nd.edu,wgriffi3@nd.edu?subject=Coyle%20Site%20Access%20Request">web commissioners.</a></p>
 
 <hr>
 
