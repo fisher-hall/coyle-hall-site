@@ -35,11 +35,12 @@
         {{ range site.Menus.main }}
           {{ $menuURL := .URL | absLangURL }}
           {{ $pageURL:= $currentPage.Permalink | absLangURL }}
-          {{ $active := eq $menuURL $pageURL }}
+          {{ $active := or (eq $menuURL $pageURL) (eq (strings.TrimSuffix "/" $menuURL) (strings.TrimSuffix "/" $pageURL)) (eq $menuURL (strings.TrimSuffix "/" $pageURL)) (eq (strings.TrimSuffix "/" $menuURL) $pageURL) }}
           {{ if .HasChildren }}
             {{ $hasActiveChild := false }}
             {{ range .Children }}
-              {{ if eq ($currentPage.Permalink | absLangURL) (.URL | absLangURL) }}
+              {{ $childURL := .URL | absLangURL }}
+              {{ if or (eq $childURL ($currentPage.Permalink | absLangURL)) (eq (strings.TrimSuffix "/" $childURL) (strings.TrimSuffix "/" ($currentPage.Permalink | absLangURL))) (eq $childURL (strings.TrimSuffix "/" ($currentPage.Permalink | absLangURL))) (eq (strings.TrimSuffix "/" $childURL) ($currentPage.Permalink | absLangURL)) }}
                 {{ $hasActiveChild = true }}
               {{ end }}
             {{ end }}
@@ -56,7 +57,7 @@
                 class="nav-dropdown-list lg:group-hover:visible lg:group-hover:opacity-100">
                 {{ range .Children }}
                   {{ $childURL := .URL | absLangURL }}
-                  {{ $active := eq $childURL $pageURL }}
+                  {{ $active := or (eq $childURL $pageURL) (eq (strings.TrimSuffix "/" $childURL) (strings.TrimSuffix "/" $pageURL)) (eq $childURL (strings.TrimSuffix "/" $pageURL)) (eq (strings.TrimSuffix "/" $childURL) $pageURL) }}
                   <li class="nav-dropdown-item">
                     <a
                       class="nav-dropdown-link rounded-xl transition inline-block align-middle px-4 {{ if $active }}active{{- end -}}"
