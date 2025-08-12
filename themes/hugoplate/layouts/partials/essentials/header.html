@@ -82,7 +82,7 @@
             <li class="nav-item">
               <a
                 href="{{ .URL | relLangURL }}"
-                class="nav-link rounded-xl hover:[background-color:#0c2340] transition inline-block align-middle px-4 {{ if eq .URL "/incoming-students/" }}incoming-students{{ end }} {{ if $active }}active{{- end -}}">
+                class="nav-link rounded-xl transition inline-block align-middle px-4 {{ if eq .URL "/incoming-students/" }}incoming-students{{ end }} {{ if $active }}active{{- end -}}">
                 {{ .Name | safeHTML }}
               </a>
             </li>

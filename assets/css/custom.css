@@ -102,10 +102,6 @@ label[for="nav-toggle"] i {
   color: #fff !important;
 }
 
-.header .navbar a[href="/incoming-students"]:hover {
-  background: rgba(174, 145, 66, 0.85);
-}
-
 /* Active page styling for all navbar links */
 .header .navbar .nav-link.active,
 .header .navbar .nav-link[aria-current="page"],
@@ -120,7 +116,7 @@ label[for="nav-toggle"] i {
 
 /* Incoming Students Button - Hover state */
 .header .navbar a[href="/incoming-students"]:hover {
-  background: rgba(174, 145, 66, 0.85) !important;
+  background: var(--nd-gold) !important;
   color: #fff !important;
   border-radius: 12px !important;
 }
@@ -319,9 +315,16 @@ main, .main {
 }
 
 /* Incoming Students Button - Inactive state */
-.header .navbar a[href="/incoming-students"]:not(.active):not([aria-current="page"]) {
+.header .navbar a[href="/incoming-students"]:not(.active):not([aria-current="page"]):not(:hover) {
   background: #FFFFFF !important;
   color: var(--nd-green) !important;
+  border-radius: 12px !important;
+}
+
+/* Incoming Students Button - Hover state (override Tailwind inline styles) */
+.header .navbar a[href="/incoming-students"]:hover {
+  background: var(--nd-gold) !important;
+  color: #fff !important;
   border-radius: 12px !important;
 }
 
