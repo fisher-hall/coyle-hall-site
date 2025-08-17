@@ -1,64 +1,43 @@
 <footer class="bg-light dark:bg-darkmode-light">
   <div class="container">
-    <div class="row items-center py-10 flex flex-wrap">
-      <div class="flex-1 min-w-0 mb-8 text-center lg:mb-0 lg:text-left">
-        <!-- navbar brand/logo -->
+    <div class="flex flex-col md:grid md:grid-cols-3 md:items-center py-2 gap-6 md:gap-4">
+      {{/*  COYLE LOGO  */}}
+      <div class="flex items-center text-center md:text-left md:justify-self-start">
         <a
-          class="navbar-brand inline-block"
+          class="navbar-brand inline-block w-full md:w-auto py-0"
           href="{{ site.Home.RelPermalink }}">
           {{ partial "logo" }}
         </a>
       </div>
-      {{/*  <div class="lg:col-6 mb-8 text-center lg:mb-0">
-        <ul>
-          {{ range site.Menus.footer }}
-            <li class="m-3 inline-block">
-              <a
-                {{ if findRE `^http` .URL }}
-                  target="_blank" rel="noopener"
-                {{ end }}
-                href="{{ if findRE `^#` .URL }}
-                  {{ if not $.IsHome }}
-                    {{ site.Home.RelPermalink }}
-                  {{ end }}{{ .URL }}
-                {{ else }}
-                  {{ .URL | relLangURL }}
-                {{ end }}"
-                >{{ .Name }}</a
-              >
-            </li>
-          {{ end }}
-        </ul>
-      </div>  */}}
       {{/*  SOCIAL ICONS  */}}
-      <div class="flex-1 min-w-0 mb-8 flex items-center justify-center lg:mb-0 ">
-        <ul class="social-icons flex justify-center w-full">
+      <div class="flex items-center justify-center md:col-start-2 md:justify-self-center md:w-full">
+        <ul class="social-icons flex items-center justify-center space-x-3 lg:space-x-4">
           {{ range site.Data.social.main }}
-            <li>
-              <a
-                target="_blank"
-                aria-label="{{ .name }}"
-                rel="nofollow noopener"
-                href="{{ .link | safeURL }}">
-                <i class="{{ .icon }}"></i>
-              </a>
-            </li>
+          <li>
+            <a
+              class="flex items-center justify-center gap-2 px-4 py-3 text-dark hover:text-primary dark:text-white dark:hover:text-primary whitespace-nowrap rounded-2xl transition-colors duration-200 lg:min-w-[140px]"
+              href="{{ .link | safeURL }}"
+              {{ if hasPrefix .link `http` }}target="_blank" rel="noopener noreferrer nofollow"{{ end }}
+              aria-label="{{ .name }}"
+            >
+              <i class="{{ .icon }}"></i>
+              <span class="lg:inline hidden">{{ .text }}</span>
+            </a>
+          </li>
           {{ end }}
         </ul>
       </div>
       {{/*  UND WORDMARK  */}}
-      <div class="flex-1 min-w-0 mb-8 flex items-center justify-end lg:mb-0">
+      <div class="flex items-center justify-center md:justify-self-end">
         <a href="https://nd.edu" target="_blank" rel="noopener" class="footer-image-link">
-        <img src="/images/und-wordmark.png" alt="University of Notre Dame" style="max-width:180px; width:100%;" />
+          <img src="https://static.nd.edu/images/marks/white/ndmark.svg" alt="University of Notre Dame" style="max-width:180px; width:100%;" />
         </a>
-      </div>
+      </div>  <!-- New row with centered text below the three columns -->
     </div>
   </div>
-
-  <!-- New row with centered text below the three columns -->
   <div class="row">
-    <div class="col-12 text-center py-4">
-      <p class="footer-extra-text">© 2025 | Coyle Hall - University of Notre Dame</p>
+    <div class="col-12 text-center mb-2">
+      <p class="footer-extra-text">© 2025 | <a href="https://residentiallife.nd.edu/undergraduate/halls/coyle-community-in-zahm-hall/" target="_blank" rel="noopener">Coyle Hall - University of Notre Dame </a></p>
     </div>
   </div>
 </footer>

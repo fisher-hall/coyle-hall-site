@@ -1,24 +1,28 @@
 {
   "main": [
     {
-      "name": "twitter",
+      "name": "instagram",
       "icon": "fab fa-instagram",
-      "link": "https://www.instagram.com/real_coylehall/"
+      "link": "https://www.instagram.com/real_coylehall/",
+      "text": "Instagram"
     },
     {
       "name": "github",
       "icon": "fab fa-github",
-      "link": "https://github.com/fisher-hall/coyle-hall-site?tab=readme-ov-file"
+      "link": "https://github.com/fisher-hall/coyle-hall-site?tab=readme-ov-file",
+      "text": "Site Repo"
     },
     {
       "name": "linkedin",
-      "icon": "fab fa-linkedin",
-      "link": "https://www.linkedin.com/groups/13894222/"
+      "icon": "fab fa-square-linkedin",
+      "link": "https://www.linkedin.com/groups/13894222/",
+      "text": "LinkedIn"
     },
     {
       "name": "info",
       "icon": "fas fa-info-circle",
-      "link": "/info/"
+      "link": "/info/",
+      "text": "Site Info"
     }
   ]
 }
