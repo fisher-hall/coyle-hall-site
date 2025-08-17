@@ -126,13 +126,16 @@ lazy = true
 link = "plugins/glightbox/glightbox.css"
 lazy = true
 [[params.plugins.css]]
-link = "plugins/font-awesome/v6/brands.css"
+link = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
 lazy = true
 [[params.plugins.css]]
-link = "plugins/font-awesome/v6/solid.css"
+link = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/brands.min.css"
 lazy = true
 [[params.plugins.css]]
-link = "plugins/font-awesome/v6/icons.css"
+link = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/solid.min.css"
+lazy = true
+[[params.plugins.css]]
+link = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/regular.min.css"
 lazy = true
 
 # JS Plugins
