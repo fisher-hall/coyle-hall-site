@@ -9,7 +9,7 @@
   const navLabel = document.querySelector("label[for='nav-toggle']");
 
   // Function to check if we're on mobile
-  const isMobile = () => window.innerWidth <= 991;
+  const isMobile = () => window.innerWidth < 1024;
 
   // Close all submenus
   const closeAllSubmenus = () => {
