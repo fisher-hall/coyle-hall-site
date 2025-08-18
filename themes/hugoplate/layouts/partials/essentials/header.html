@@ -13,7 +13,8 @@
       <input id="nav-toggle" type="checkbox" class="hidden" />
       <label
         for="nav-toggle"
-        class="order-3 cursor-pointer flex items-center flex lg:hidden text-text-dark dark:text-white lg:order-1 hamburger-btn">
+        class="order-3 cursor-pointer flex items-center block lg:hidden text-text-dark dark:text-white lg:order-1 hamburger-btn"
+      >
         <span class="hb-line"></span>
         <span class="hb-line"></span>
         <span class="hb-line"></span>
@@ -23,7 +24,8 @@
       <!-- main navbar -->
       <ul
         id="nav-menu"
-        class="navbar-nav order-3 hidden lg:flex w-full pb-6 lg:order-1 lg:w-auto lg:space-x-1 lg:pb-0 xl:space-x-4">
+        class="navbar-nav order-3 hidden lg:flex w-full pb-6 lg:order-1 lg:w-auto lg:space-x-1 lg:pb-0 xl:space-x-4"
+      >
         {{ $currentPage := . }}
         {{ range site.Menus.main }}
           {{ $menuURL := .URL | absLangURL }}

@@ -1,5 +1,5 @@
 /* FINAL OVERRIDE: Desktop dropdown item padding specificity */
-@media (min-width: 992px) {
+@media (min-width: 1024px) {
   .header .navbar .nav-dropdown-list .nav-dropdown-item a {
     padding: 4px 16px !important;
   }
@@ -51,7 +51,7 @@ body, p {
 /* Dropdown arrow visibility control */
 .mobile-arrow { display:inline-block; }
 .desktop-arrow { display:none; }
-@media (min-width: 992px) {
+@media (min-width: 1024px) {
   .mobile-arrow { display:none; }
   .desktop-arrow { display:inline-block; margin-left:1px !important; }
   /* Desktop Font Awesome down arrow spacing */
@@ -64,7 +64,7 @@ body, p {
 }
 
 /* Desktop baseline typography for navbar (moved behind min-width to avoid overriding mobile custom sizes) */
-@media (min-width: 992px) {
+@media (min-width: 1024px) {
   .header .navbar *:not(i) {
     font-family: 'Rubik', sans-serif !important;
     font-weight: 600 !important; /* Extra Bold */
@@ -73,7 +73,7 @@ body, p {
 }
 
 /* Final enforce: active state gold on mobile */
-@media (max-width: 991px) {
+@media (max-width: 1023px) {
   #nav-menu .nav-item .nav-link.active,
   #nav-menu .nav-item .nav-link.incoming-students.active,
   #nav-menu .nav-dropdown-list .nav-dropdown-item a.active {
@@ -226,7 +226,7 @@ label[for="nav-toggle"]{
 }
 
 /* Hide bars on mobile when menu is open, or lower their z-index */
-@media (max-width: 991px) {
+@media (max-width: 1023px) {
   .gold-bar,
   .blue-bar {
     z-index: 25 !important; /* Lower than mobile menu (150) */
@@ -234,7 +234,7 @@ label[for="nav-toggle"]{
 }
 
 /* Tighten spacing between text and chevron on mobile */
-@media (max-width: 991px) {
+@media (max-width: 1023px) {
   #nav-menu .nav-item .nav-link .mobile-arrow { margin-left:0 !important; }
 }
 
@@ -262,7 +262,7 @@ label[for="nav-toggle"]{
 }
 
 /* Mobile menu dropdown positioning */
-@media (max-width: 991px) {
+@media (max-width: 1023px) {
   .navbar-collapse,
   #nav-menu {
     position: fixed !important;
@@ -436,7 +436,7 @@ label[for="nav-toggle"]{
   }
 
   /* Hide back button on desktop */
-  @media (min-width: 992px) {
+  @media (min-width: 1024px) {
     .mobile-back-button { display: none !important; }
     #nav-menu .nav-dropdown .nav-link .fa-angle-right { display:none !important; }
     #nav-menu .nav-dropdown .nav-link .fa-angle-down { display:inline-block !important; }
@@ -449,7 +449,7 @@ label[for="nav-toggle"]{
   }
   
   /* Mobile dropdown item and submenu formatting */
-  @media (max-width: 991px) {
+  @media (max-width: 1023px) {
     .nav-dropdown-list {
       display: flex !important;
       flex-direction: column !important;
@@ -514,6 +514,64 @@ label[for="nav-toggle"]{
   #nav-toggle:checked + label.hamburger-btn .hb-line:nth-child(1){ top:23px; transform:rotate(45deg); }
   #nav-toggle:checked + label.hamburger-btn .hb-line:nth-child(2){ opacity:0; }
   #nav-toggle:checked + label.hamburger-btn .hb-line:nth-child(3){ top:23px; transform:rotate(-45deg); }
+}
+
+/* --- ALIGN ALL NAVBAR BREAKPOINTS TO TAILWIND LG (1024px) --- */
+@media (min-width: 1024px) {
+  .header .navbar .nav-dropdown-list .nav-dropdown-item a {
+    padding: 4px 16px !important;
+  }
+  .mobile-arrow { display:none !important; }
+  .desktop-arrow { display:inline-block !important; margin-left:1px !important; }
+  #nav-menu .nav-dropdown .nav-link .fa-angle-down { display:inline-block !important; margin-left:1px !important; }
+  #nav-menu .nav-dropdown .nav-link .fa-angle-right { display:none !important; }
+  .nav-dropdown-list .nav-dropdown-item a {
+    padding: 4px 16px !important;
+    transition: background 0.25s, color 0.25s;
+  }
+  .nav-dropdown-list .nav-dropdown-item a:hover,
+  .nav-dropdown-list .nav-dropdown-item:hover a {
+    background: rgba(174, 145, 66, 0.85) !important;
+    color: #fff !important;
+  }
+  .header .navbar *:not(i) {
+    font-family: 'Rubik', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 1.1rem !important;
+  }
+}
+
+@media (max-width: 1023px) {
+  #nav-menu .nav-item .nav-link.active,
+  #nav-menu .nav-item .nav-link.incoming-students.active,
+  #nav-menu .nav-dropdown-list .nav-dropdown-item a.active {
+    background: var(--nd-gold) !important;
+    color:#ffffff !important;
+    -webkit-text-fill-color:#ffffff !important;
+  }
+  .mobile-arrow { display:inline-block !important; }
+  .desktop-arrow { display:none !important; }
+  #nav-menu .nav-dropdown .nav-link .fa-angle-right { display:inline-block !important; }
+  #nav-menu .nav-dropdown .nav-link .fa-angle-down { display:none !important; }
+  .nav-dropdown-list .nav-dropdown-item a,
+  .nav-dropdown-list .nav-dropdown-item:hover a {
+    background: none !important;
+    color: inherit !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    transition: none !important;
+    cursor: pointer !important;
+  }
+  .nav-dropdown-list {
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    position: static !important;
+    box-shadow: none !important;
+    min-width: 0 !important;
+    background: none !important;
+    transition: none !important;
+  }
 }
 
 footer {
@@ -660,7 +718,7 @@ main, .main {
 }
 
 /* FINAL OVERRIDE: Ensure NEW CREW (incoming-students) link shows green text on white in mobile menu */
-@media (max-width: 991px) {
+@media (max-width: 1023px) {
   #nav-menu a.nav-link.incoming-students:not(.active),
   #nav-menu .nav-item a.nav-link.incoming-students:not(.active),
   #nav-menu li.nav-item a.nav-link.incoming-students:not(.active)[href*="incoming-students"] {
@@ -672,7 +730,7 @@ main, .main {
 }
 
 /* Disable hover effects on mobile (keep tap/active only) */
-@media (max-width: 991px) {
+@media (max-width: 1023px) {
   /* Top-level links */
   #nav-menu .nav-item .nav-link:not(.active):hover { background: transparent !important; color: inherit !important; }
   /* NEW CREW retains green text */
@@ -687,7 +745,7 @@ main, .main {
 }
 
   /* Absolute final mobile hover neutralization (place at end for max specificity) */
-  @media (max-width: 991px) {
+  @media (max-width: 1023px) {
     #nav-menu .nav-item .nav-link:not(.active):hover,
     #nav-menu .nav-item .nav-link.incoming-students:not(.active):hover,
     #nav-menu .nav-dropdown-list .nav-dropdown-item a:not(.active):hover {
@@ -697,7 +755,7 @@ main, .main {
   }
 
   /* Hard lock all mobile nav link states to prevent gray shift */
-  @media (max-width: 991px) {
+  @media (max-width: 1023px) {
     #nav-menu .nav-item .nav-link:not(.incoming-students):not(.active),
     #nav-menu .nav-item .nav-link:not(.incoming-students):not(.active):link,
     #nav-menu .nav-item .nav-link:not(.incoming-students):not(.active):visited,
@@ -720,7 +778,7 @@ main, .main {
     }
 
     /* Re-enable active state highlight on mobile */
-    @media (max-width: 991px) {
+    @media (max-width: 1023px) {
       #nav-menu .nav-item .nav-link.active,
       #nav-menu .nav-item .nav-link.incoming-students.active,
       .nav-dropdown-list .nav-dropdown-item a.active {
@@ -743,7 +801,7 @@ main, .main {
 
   /* Extra safeguard: devices that report no hover capability */
   @media (hover: none) {
-    @media (max-width: 991px) {
+    @media (max-width: 1023px) {
       #nav-menu .nav-item .nav-link:not(.active),
       #nav-menu .nav-dropdown-list .nav-dropdown-item a:not(.active) {
         background: transparent !important;
