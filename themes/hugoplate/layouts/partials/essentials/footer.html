@@ -15,7 +15,7 @@
           {{ range site.Data.social.main }}
           <li>
             <a
-              class="flex items-center justify-center gap-2 px-4 py-3 text-dark hover:text-primary dark:text-white dark:hover:text-primary whitespace-nowrap rounded-2xl transition-colors duration-200 lg:min-w-[140px]"
+              class="flex items-center justify-center gap-2 px-1 py-3 text-dark hover:text-primary dark:text-white dark:hover:text-primary whitespace-nowrap rounded-2xl transition-colors duration-200 lg:min-w-[130px]"
               href="{{ .link | safeURL }}"
               {{ if hasPrefix .link `http` }}target="_blank" rel="noopener noreferrer nofollow"{{ end }}
               aria-label="{{ .name }}"
