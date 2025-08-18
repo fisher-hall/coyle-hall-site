@@ -46,6 +46,12 @@
   @apply text-text-dark hover:text-primary dark:text-darkmode-text dark:hover:text-darkmode-primary block py-1 font-semibold transition;
 }
 
+/* Consistent rounded corners (16px) to avoid radius flicker on hover */
+.nav-link,
+.nav-dropdown-link {
+  border-radius:16px !important;
+}
+
 /* theme-switcher */
 .theme-switcher {
   @apply inline-flex;
