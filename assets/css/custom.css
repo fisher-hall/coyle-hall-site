@@ -1,3 +1,39 @@
+/* Mobile menu animation: slide in from right and fade in */
+@media (max-width: 1023px) {
+  #nav-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: auto;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(10, 132, 61, 0.98);
+    backdrop-filter: blur(10px);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 1.5rem 1.2rem 1.2rem 1.2rem;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+    min-height: 200px;
+    overflow-y: auto !important;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(100vw);
+    transition: transform 0.5s cubic-bezier(.68,-0.55,.27,1.55), opacity 0.4s cubic-bezier(.68,-0.55,.27,1.55), visibility 0.4s cubic-bezier(.68,-0.55,.27,1.55);
+  }
+  #nav-menu.navbar-active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+  }
+  #nav-menu.submenu-open {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(100vw);
+  }
+}
 /* FINAL OVERRIDE: Desktop dropdown item padding specificity */
 @media (min-width: 1024px) {
   .header .navbar .nav-dropdown-list .nav-dropdown-item a {
@@ -294,8 +330,10 @@ label[for="nav-toggle"]{
     transform: translateX(100vw);
     opacity: 0;
     visibility: hidden;
-    will-change: transform, opacity, visibility;
-    transition: transform 0.5s cubic-bezier(0.4,0,0.2,1), opacity 0.4s cubic-bezier(0.4,0,0.2,1), visibility 0.4s cubic-bezier(0.4,0,0.2,1);
+    transition: transform 0.4s cubic-bezier(0.4,0,0.2,1),
+                opacity 0.4s cubic-bezier(0.4,0,0.2,1),
+                visibility 0s linear 0.4s; /* delay hiding until after animation */
+    will-change: transform, opacity;
   }
   
   #nav-menu.navbar-active {
@@ -303,12 +341,16 @@ label[for="nav-toggle"]{
     opacity: 1;
     visibility: visible;
     display: flex !important;
+    transition: transform 0.4s cubic-bezier(0.4,0,0.2,1),
+                opacity 0.4s cubic-bezier(0.4,0,0.2,1),
+                visibility 0s linear 0s; /* visible immediately on open */
   }
   
   /* Slide out to left when submenu is open */
   #nav-menu.submenu-open {
     transform: translateX(-100vw);
     opacity: 0;
+    pointer-events: none;
     visibility: hidden;
   }
   
@@ -435,8 +477,38 @@ label[for="nav-toggle"]{
   }
   
   /* Back button styling */
-  .mobile-back-button { position:absolute !important; top:24px !important; left:24px !important; background:rgba(255,255,255,0.12) !important; border:none !important; color:#fff !important; font-size:1.5rem !important; font-weight:600 !important; display:flex !important; align-items:center !important; gap:12px !important; padding:14px 18px !important; cursor:pointer !important; z-index:10001 !important; border-radius:16px !important; transition:none !important; width:auto !important; text-align:left !important; margin-bottom:0 !important; }
-  .mobile-back-button:hover { background:rgba(255,255,255,0.12) !important; }
+  .mobile-back-button {
+    position: absolute !important;
+    top: 24px !important;
+    left: 24px !important;
+    background: rgba(255,255,255,0.12) !important;
+    color: #fff !important;
+  font-size: 2rem !important;
+    font-weight: 600 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+  gap: 2px !important;
+  padding: 6px 3px !important;
+    cursor: pointer !important;
+    z-index: 10001 !important;
+  border-radius: 12px !important;
+    transition: background-color .25s ease, color .25s ease !important;
+  width: 250px !important;
+  max-width: 250px !important;
+  height: 60px !important;
+  align-self: flex-start !important;
+  flex-shrink: 1 !important;
+  min-width: 0 !important;
+    text-align: left !important;
+    margin-bottom: 0 !important;
+    border: none !important;
+    box-sizing: border-box !important;
+    /* removed conflicting min-width and max-width unset rules */
+    box-shadow: none !important;
+  }
+  .mobile-back-button:hover {
+    background: rgba(255,255,255,0.12) !important;
+  }
   
   .mobile-back-button svg {
     width: 24px !important;
@@ -615,15 +687,16 @@ label[for="nav-toggle"]{
     background: var(--nd-green) !important;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     display: block !important;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-30px);
-    transition: opacity 0.4s cubic-bezier(0.4,0,0.2,1), transform 0.5s cubic-bezier(0.4,0,0.2,1), visibility 0.4s cubic-bezier(0.4,0,0.2,1);
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    transition: none !important;
   }
   .nav-dropdown.mobile-submenu-active .nav-dropdown-list {
     opacity: 1 !important;
     visibility: visible !important;
-    transform: translateY(0);
+    transform: none !important;
+    transition: none !important;
   }
 }
 
