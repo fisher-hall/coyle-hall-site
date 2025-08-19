@@ -46,12 +46,20 @@
   @apply text-text-dark hover:text-primary dark:text-darkmode-text dark:hover:text-darkmode-primary block py-1 font-semibold transition;
 }
 
+/* Consistent rounded corners (16px) to avoid radius flicker on hover */
+.nav-link,
+.nav-dropdown-link {
+  border-radius:16px !important;
+}
+
 /* theme-switcher */
 .theme-switcher {
   @apply inline-flex;
 
   label {
-    @apply bg-border relative inline-block h-4 w-6 cursor-pointer rounded-2xl lg:w-10;
+    @apply bg-border relative inline-block cursor-pointer rounded-2xl;
+    height: 16px;
+    width: 40px;
   }
 
   input {
@@ -59,12 +67,16 @@
   }
 
   span {
-    @apply bg-dark absolute -top-1 left-0 flex h-6 w-6 items-center justify-center rounded-full transition-all duration-300 dark:bg-white;
+    @apply bg-white absolute flex items-center justify-center rounded-full transition-all duration-300 dark:bg-white;
+    height: 24px;
+    width: 24px;
+    top: -4px;
+    left: 0;
   }
 
   input:checked + label {
     span {
-      @apply lg:left-4;
+      left: 16px;
     }
   }
 }
