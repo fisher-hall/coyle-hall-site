@@ -1,3 +1,6 @@
+  .navbar-nav {
+    padding-right: 30px !important;
+  }
 /* Mobile menu animation: slide in from right and fade in */
 @media (max-width: 1023px) {
   #nav-menu {
