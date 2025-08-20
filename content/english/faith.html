@@ -1,0 +1,271 @@
+---
+title: "Faith"
+---
+<!-- Banner -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  #banner-parallax {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  .section-sm:first-of-type {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+  /* Remove top margin from the first element after the header if needed */
+  #banner-img, #banner-text {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    display: block;
+  }
+</style>
+
+<div id="banner-parallax" class="relative left-1/2 right-1/2 w-screen -translate-x-1/2 min-h-[200px] md:min-h-0 mb-8 overflow-hidden">      
+    <img
+    src="/images/Banners/FaithBannerImg.png"
+    alt="An image of the Zahm Hall chapel altar, tinted green"
+    class="absolute left-1/2 top-0 h-full min-w-[100vw] object-cover -translate-x-1/2 md:relative md:left-0 md:top-0 md:w-full md:h-auto md:object-contain md:translate-x-0 block"
+    style="max-width:none;"
+    id="banner-img"
+    >
+    <img
+    src="/images/Banners/FaithBannerText.png"
+    alt="Welcome Incoming Students"
+    class="absolute left-1/2 top-1/2 min-w-[1vw] object-cover pointer-events-none transform -translate-x-1/2 -translate-y-1/2"
+    id="banner-text"
+    />
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const banner = document.getElementById('banner-parallax');
+    const bg = document.getElementById('banner-img');
+    if (!banner || !bg) return;
+
+    const speed = 0.1;
+
+    function updateParallax() {
+        const rect = banner.getBoundingClientRect();
+        const scrollY = window.scrollY || window.pageYOffset;
+        const bannerTop = rect.top + scrollY;
+
+        if (scrollY + window.innerHeight > bannerTop && scrollY < bannerTop + banner.offsetHeight) {
+        const offset = (scrollY - bannerTop) * speed;
+        bg.style.transform = `translate(0%, ${offset}px)`;
+        } else {
+        bg.style.transform = 'translate(0%, 0)';
+        }
+    }
+
+    // Apply parallax immediately and on scroll
+    updateParallax();
+    window.addEventListener('scroll', updateParallax);
+    });
+</script>
+
+<!-- Fade-in effect -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const faders = document.querySelectorAll('.fade-in-section');
+    const appearOptions = {
+        threshold: 0.2,
+        rootMargin: "0px 0px -40px 0px"
+    };
+
+    const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+        entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+        }
+        });
+    }, appearOptions);
+
+    faders.forEach(fader => {
+        appearOnScroll.observe(fader);
+    });
+    });
+</script>
+
+<h1 class="text-7xl text-center font-extrabold mb-6 fade-in-section" style="color: var(--nd-green);">
+  Fishers <span style="color: var(--nd-gold);">of Men</span>
+</h1>
+
+</div>
+    <div class="flex items-center justify-start my-1 fade-in-section" style="position: relative; z-index: 3; margin-top: 3rem;">
+    <!-- Text -->
+    <div class="w-full flex flex-col justify-center fade-in-section text-left;">
+      <p class="mb-2 ml-4 mr-4 text-lg">
+        As a Catholic University, faith is the cornerstone of everything at Notre Dame. Nowhere is that more apparent than in the residence halls, especially Coyle Hall.
+        Here, you'll find a faith-filled community of students that support each other in their spiritual journeys through sacraments, prayer, and comraderie.
+        <br><br>
+        Whether its through daily mass in the chapel, weekly bible study, singing in the choir, special events during Lent and Advent, a quiet conversation, or even homemade ice cream, here, you'll opportunities to not only grow in your faith, but build bonds with others as well.
+        <br><br>
+        We say all are welcome in this place, and we mean it. Even if you aren't Catholic, you'll find a place here. Our choir, masses, events, chapel, and, of course, ice cream, are open to every student.
+        <br>
+      </p>
+    </div>
+</div>
+
+<!-- Mass & Sacraments -->
+
+<hr id="sacrament" class="my-6 fade-in-section border-custom-gray" style="height: 1px; border: none; background: linear-gradient(to right, transparent, var(--color-lightmode-gray) 20%, var(--color-lightmode-gray) 80%, transparent);">
+
+<div class="flex items-center justify-center my-1 fade-in-section" style="position: relative; z-index: 3; margin-bottom: 0rem; margin-top: 3rem;">
+    <h2 class="text-5xl md:text-6xl text-left font-extrabold mb-6 fade-in-section flex items-center text-black dark:text-white"
+        style="position: relative; z-index: 4; margin-top: 0;">
+    <span style="position: relative; display: inline-block;">
+        <span style="position: relative; z-index: 2; color: var(--nd-green)">
+        Mass & Sacraments
+        </span>
+    </span>
+    </h2>
+</div>
+
+<div class="mx-auto relative grid md:grid-cols-2 sm:grid-cols-1 gap-15 gap-y-20 w-full mt-10 fade-in-section z-index: 3" style="margin-top: 4rem;">
+    <div class="mt-10">
+        <h1 class="relative flex items-center text-center justify-center">
+            <span style="display: flex; align-items: center; justify-content: center; width: 120px; height: 120px;">
+                <i class="fa fa-church" style="width: 100%; height: 100%; font-size: 120px; transform: translateY(-60%); color: var(--nd-green); display: block;"></i>
+            </span>
+        </h1>
+        <div class="relative flex items-center justify-center text-5xl font-bold pt-0 text-center" style="color: white;">
+            <div class="text-black dark:text-white" style="margin-top: -4rem;">Chapel Mass</div>
+        </div>
+        <div class="relative flex items-center justify-center text-2xl font-bold pt-1 text-center" style="color: var(--nd-gold);">
+            Sun, Mon, Wed, Thurs | 10 PM
+        </div>
+        <div class="relative flex items-center justify-center text-xl pt-2 text-center">
+            <span style="max-width: 300px; display: inline-block; word-break: break-word;">Worship with evening mass in the Chapel of St. Albert</span>
+        </div>
+    </div>
+
+    <div class="mt-10">
+        <h1 class="relative flex items-center text-center justify-center">
+            <span style="display: flex; align-items: center; justify-content: center; width: 120px; height: 120px;">
+                <span style="position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                    <i class="fa fa-crosshairs" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -110%) scale(1.1); font-size: 120px; color: var(--nd-green); display: block;"></i>
+                    <i class="fa fa-sun" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -110%) scale(1.1); font-size: 120px; color: var(--nd-green); display: block;"></i>
+                    <i class="fa fa-circle text-white dark:text-black" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -110%) scale(0.8); font-size: 120px; display: block;"></i>
+                    <i class="fa fa-circle-xmark" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -110%) rotate(45deg) scale(0.6); font-size: 120px; color: var(--nd-green); display: block;"></i>
+                </span>
+            </span>
+        </h1>
+        <div class="relative flex items-center justify-center text-5xl font-bold pt-0 text-center" style="color: white;">
+            <div class="text-black dark:text-white" style="margin-top: -4rem;">Adoration</div>
+        </div>
+        <div class="relative flex items-center justify-center text-2xl font-bold pt-1 text-center" style="color: var(--nd-gold);">
+            Wednesday | 9-9:50 PM
+        </div>
+        <div class="relative flex items-center justify-center text-xl pt-2 text-center">
+            <span style="max-width: 300px; display: inline-block; word-break: break-word;">Eucharistic Exposition followed by Benediction</span>
+        </div>
+    </div>
+
+    <div class="mt-10">
+        <h1 class="relative flex items-center text-center justify-center">
+            <i class="fa fa-hands-praying text-7xl text-[var(--nd-green)]"
+                style="transform: translateY(-80%) scale(1.5);
+            "></i>
+            <span class="absolute top-1/2 text-5xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
+            <span class"text-black dark:text-white">Confession</span>
+            </span>
+        </h1>
+        <div class="relative flex items-center justify-center text-2xl font-bold pt-7 text-center" style="color: var(--nd-gold);">
+            Wednesday | 9-9:50 PM
+        </div>
+        <div class="relative flex items-center justify-center text-xl pt-2 text-center">
+            <span style="max-width: 300px; display: inline-block; word-break: break-word;">Receive the sacrament of Reconciliation</span>
+        </div>
+    </div>
+
+    <div class="mt-10">
+        <h1 class="relative flex items-center text-center justify-center">
+            <i class="fa fa-ice-cream text-7xl text-[var(--nd-green)]"
+                style="transform: translateY(-80%) scale(1.5);
+            "></i>
+            <span class="absolute top-1/2 text-5xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
+            <span class"text-black dark:text-white">Ice Cream Mass</span>
+            </span>
+        </h1>
+        <div class="relative flex items-center justify-center text-2xl font-bold pt-7 text-center" style="color: var(--nd-gold);">
+            Wednesday | 10 PM
+        </div>
+        <div class="relative flex items-center justify-center text-xl pt-2 text-center">
+            <span style="max-width: 300px; display: inline-block; word-break: break-word;">Enjoy our rector's homemade ice cream after Mass</span>
+        </div>
+    </div>
+</div>
+
+<!-- Involvement -->
+
+<hr class="my-6 mt-12 fade-in-section border-custom-gray" style="height: 1px; border: none; background: linear-gradient(to right, transparent, var(--color-lightmode-gray) 20%, var(--color-lightmode-gray) 80%, transparent);">
+
+<div class="flex items-center justify-center my-1 fade-in-section" style="position: relative; z-index: 3; margin-bottom: 0rem; margin-top: 3rem;">
+    <h2 class="text-5xl md:text-6xl text-left font-extrabold mb-6 fade-in-section flex items-center text-black dark:text-white"
+        style="position: relative; z-index: 4; margin-top: 0;">
+    <span style="position: relative; display: inline-block;">
+        <span style="position: relative; z-index: 2; color: var(--nd-green)">
+        Get Involved
+        </span>
+    </span>
+    </h2>
+</div>
+
+<div class="mx-auto relative grid md:grid-cols-3 sm:grid-cols-1 gap-15 gap-y-25 w-full my-8 fade-in-section z-index: 3" style="margin-top: 4rem;">
+
+    <div class="mt-10">
+        <h1 class="relative flex items-center text-center justify-center">
+            <span style="display: flex; align-items: center; justify-content: center; width: 120px; height: 120px;">
+                <i class="fa fa-music" style="width: 100%; height: 100%; font-size: 120px; transform: translateY(-60%); color: var(--nd-green); display: block;"></i>
+            </span>
+        </h1>
+        <div class="relative flex items-center justify-center text-5xl font-bold pt-0 text-center" style="color: white;">
+            <div class="text-black dark:text-white" style="margin-top: -4rem;">Chapel Band</div>
+        </div>
+        <div class="relative flex items-center justify-center text-2xl font-bold pt-1 text-center" style="color: var(--nd-gold);">
+            Before & During Sun Mass
+        </div>
+        <div class="relative flex items-center justify-center text-xl pt-2 text-center">
+            <span style="max-width: 300px; display: inline-block; word-break: break-word;">Join our chapel band and sing or play an instrument. All talents, skills, and faiths are welcome!</span>
+        </div>
+    </div>
+
+    <div class="mt-10">
+        <h1 class="relative flex items-center text-center justify-center">
+            <span style="display: flex; align-items: center; justify-content: center; width: 120px; height: 120px;">
+                <i class="fa fa-bible" style="width: 100%; height: 100%; font-size: 120px; transform: translateY(-60%); color: var(--nd-green); display: block;"></i>
+            </span>
+        </h1>
+        <div class="relative flex items-center justify-center text-5xl font-bold pt-0 text-center" style="color: white;">
+            <div class="text-black dark:text-white" style="margin-top: -4rem;">Bible Study</div>
+        </div>
+        <div class="relative flex items-center justify-center text-2xl font-bold pt-1 text-center" style="color: var(--nd-gold);">
+            Weekly Meetings
+        </div>
+        <div class="relative flex items-center justify-center text-xl pt-2 text-center">
+            <span style="max-width: 300px; display: inline-block; word-break: break-word;">Join our Bible study group to deepen your understanding of Scripture and discuss relevant and meaningful topics.</span>
+        </div>
+    </div>
+
+    <div class="mt-10">
+        <h1 class="relative flex items-center text-center justify-center">
+            <span style="display: flex; align-items: center; justify-content: center; width: 120px; height: 120px;">
+                <i class="fa fa-hand-holding-medical" style="width: 100%; height: 100%; font-size: 120px; transform: translateY(-60%); color: var(--nd-green); display: block;"></i>
+            </span>
+        </h1>
+        <div class="relative flex items-center justify-center text-5xl font-bold pt-0 text-center" style="color: white;">
+            <div class="text-black dark:text-white" style="margin-top: -4rem;">Volunteer</div>
+        </div>
+        <div class="relative flex items-center justify-center text-2xl font-bold pt-1 text-center" style="color: var(--nd-gold);">
+            During Any Mass
+        </div>
+        <div class="relative flex items-center justify-center text-xl pt-2 text-center">
+            <span style="max-width: 300px; display: inline-block; word-break: break-word;">Help with pastoral care and support by reading at Mass, altar serving, or being a Eucharistic minister.</span>
+        </div>
+    </div>
+</div> 
+
+<script src="/Countdown.js"></script>

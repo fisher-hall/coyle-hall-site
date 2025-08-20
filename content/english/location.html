@@ -128,8 +128,21 @@ title: "Location"
       </span>
     </span>
   </h2>
-  <i class="fa fa-signs-post absolute text-center top-1/2 text-9xl fade-in-section text-[var(--nd-light)] dark:text-[var(--nd-green)]"
-    style="transform: translateX(-200%) translateY(-60%) scale(1); z-index: 2;">
+    <i class="fa fa-signs-post absolute text-center top-1/2 text-9xl fade-in-section text-[var(--nd-light)] dark:text-[var(--nd-green)]"
+      style="transform: translateY(-60%) scale(1); z-index: 2;">
+    </i>
+    <style>
+    @media (max-width: 767px) {
+      .fa-signs-post {
+        transform: translateX(-110%) translateY(-60%) scale(1) !important;
+      }
+    }
+    @media (min-width: 768px) {
+      .fa-signs-post {
+        transform: translateX(-160%) translateY(-60%) scale(1) !important;
+      }
+    }
+    </style>
   </i>
 </div>
 
