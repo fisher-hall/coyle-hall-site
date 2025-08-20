@@ -58,6 +58,11 @@ url = "/traditions"
 weight = 4
 
 [[main]]
+name = "Faith"
+url = "/faith"
+weight = 5
+
+[[main]]
 name = "New Crew"
 url = "/incoming-students"
 weight = 5
