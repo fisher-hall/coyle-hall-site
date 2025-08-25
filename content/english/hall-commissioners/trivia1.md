@@ -1,7 +1,7 @@
 ---
 title: Riley Carlin
 email: rcarlin2@nd.edu
-image: "/images/headshots/unknown.jpg"
+image: "/images/headshots/rileycarlin.jpg"
 description: Trivia Commissioner
 weight: 50
 params:
