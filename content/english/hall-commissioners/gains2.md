@@ -1,7 +1,7 @@
 ---
 title: Nick Mahoney
 email: nmahone2@nd.edu
-image: "/images/headshots/unknown.jpg"
+image: "/images/headshots/nickmahoney.jpg"
 description: Gains Commissioner
 weight: 71
 params:

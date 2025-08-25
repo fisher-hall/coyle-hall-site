@@ -1,7 +1,7 @@
 ---
 title: Nick DeMarco
 email: ndemarc2@nd.edu
-image: "/images/headshots/unknown.jpg"
+image: "/images/headshots/nickdemarco.jpg"
 description: Social Media Commissioner
 weight: 40
 params:

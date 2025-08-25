@@ -1,7 +1,7 @@
 ---
 title: Cash Deibert
 email: cdeibert@nd.edu
-image: "/images/headshots/unknown.jpg"
+image: "/images/headshots/cashdeibert.jpg"
 description: Opportunities Commissioner
 weight: 111
 params:

@@ -1,7 +1,7 @@
 ---
 title: Brendan Bernath
 email: bbernath@nd.edu
-image: "/images/headshots/unknown.jpg"
+image: "/images/headshots/brendanbernath.jpg"
 description: Clubs Commissioner
 weight: 10
 params:
