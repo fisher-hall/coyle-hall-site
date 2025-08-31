@@ -2,16 +2,16 @@
 # favicon module: https://github.com/gethugothemes/hugo-modules/tree/master/images#favicon-implementation
 favicon = "images/favicon.png"
 # logo module: https://github.com/gethugothemes/hugo-modules/tree/master/images#logo-implementation
-logo = "images/COYLEVarsityText.png"
-logo_darkmode = "images/COYLEVarsityText.png"
+logo = "images/CoyleHookLogo.png"
+logo_darkmode = "images/CoyleHookLogo.png"
 # use `px` or `x` with logo_width, example: "100px".
 # Note: logo_width is not work with .svg file
-logo_width = "160px"
-logo_height = "32px"
+logo_width = "150px"
+logo_height = "30px"
 # if logo_webp set false, will not generate WEBP version of logo | default is true
 logo_webp = true
 # logo text will only show when logo is missing.
-logo_text = "COYLE"
+logo_text = "Coyle Hall"
 # navbar fixed to top
 navbar_fixed = true
 # theme-mode
