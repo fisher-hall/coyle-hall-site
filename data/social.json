@@ -16,7 +16,13 @@
       "name": "linkedin",
       "icon": "fab fa-square-linkedin",
       "link": "https://www.linkedin.com/groups/13894222/",
-      "text": "LinkedIn"
+      "text": "LinkedIn Group"
+    },
+    {
+      "name": "info",
+      "icon": "fab fa-facebook",
+      "link": "https://www.facebook.com/groups/2853007481380398/",
+      "text": "Parent Group"
     },
     {
       "name": "info",
