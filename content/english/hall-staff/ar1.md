@@ -14,6 +14,6 @@ params:
 social:
   - name: email
     icon: fa-regular fa-envelope
-    link: mailto:ctholst@nd.edu
+    link: mailto:cholst2@nd.edu
 ---
 
