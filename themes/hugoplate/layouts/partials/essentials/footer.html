@@ -15,13 +15,13 @@
           {{ range site.Data.social.main }}
           <li>
             <a
-              class="flex items-center justify-center gap-2 px-1 py-3 text-dark hover:text-primary dark:text-white dark:hover:text-primary whitespace-nowrap rounded-2xl transition-colors duration-200 lg:min-w-[130px]"
+              class="flex items-center justify-center gap-2 px-1 py-3 text-dark hover:text-primary dark:text-white dark:hover:text-primary whitespace-nowrap rounded-2xl transition-colors duration-200"
               href="{{ .link | safeURL }}"
               {{ if hasPrefix .link `http` }}target="_blank" rel="noopener noreferrer nofollow"{{ end }}
               aria-label="{{ .name }}"
             >
               <i class="{{ .icon }}"></i>
-              <span class="lg:inline hidden">{{ .text }}</span>
+              <span class="hidden">{{ .text }}</span>
             </a>
           </li>
           {{ end }}

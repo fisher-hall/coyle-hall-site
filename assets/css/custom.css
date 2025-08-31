@@ -1,3 +1,11 @@
+footer {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+body {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
   .navbar-nav {
     padding-right: 30px !important;
   }
@@ -124,6 +132,7 @@ body, p {
 
 .social-icons a {
   border-radius: 16px; 
+  color: var(--nd-blue); 
 }
 
 .social-icons i {
@@ -211,15 +220,30 @@ label[for="nav-toggle"] i {
 
 /* Navbar Styles */
 .header .navbar-brand,
-.header .navbar .nav-link,
-.social-icons a,
-.header .navbar [aria-label="search"],
+.header .navbar .nav-link,.header .navbar [aria-label="search"],
 label[for="nav-toggle"]{
   color: #fff !important;
   /* fill: #fff !important; */
 }
 
-/* Revert color for NEW CREW (incoming-students) after global white rule */
+footer .social-icons a {
+  border-radius: 16px;
+  background: #fff !important;
+  color: var(--nd-green) !important;
+  transition: transform 0.15s ease-in-out;
+}
+
+footer .social-icons a:hover {
+  transform: scale(1.15);
+}
+
+footer .social-icons i {
+  font-size: 1.5rem !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--nd-green) !important;
+}
 .header .navbar a.nav-link.incoming-students:not(.active):not([aria-current="page"]) {
   color: var(--nd-green) !important;
 }
@@ -704,7 +728,7 @@ label[for="nav-toggle"]{
 }
 
 footer {
-    background-color: #0c2340;
+    background-color: var(--nd-green);
     color: #fff;
 }
 
