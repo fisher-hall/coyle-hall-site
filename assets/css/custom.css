@@ -792,6 +792,28 @@ footer {
   line-height: normal !important;
 }
 
+/* Fast Facts Responsive Layout Fixes */
+/* Ensure icons and text don't overlap in responsive transitions */
+@media (min-width: 640px) and (max-width: 767px) {
+  /* Small screens with 2 columns - reduce icon size slightly */
+  .fast-facts-icon {
+    font-size: 5rem !important; /* Between text-6xl and text-7xl */
+  }
+  .fast-facts-text {
+    font-size: 2.5rem !important; /* Between text-2xl and text-3xl */
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Medium screens transitioning to 3 columns - ensure adequate spacing */
+  .fast-facts-icon {
+    font-size: 6rem !important; /* text-7xl equivalent */
+  }
+  .fast-facts-text {
+    font-size: 2.25rem !important; /* Between text-3xl and text-4xl */
+  }
+}
+
 html, body {
   overflow-x: hidden;
 }
