@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Coyle Hall",
+    "description": "Welcome to Coyle Hall, home of the Crew",
+    "url": "/",
+    "content": "Welcome to Coyle Hall, where truer words have never been spoken. Formerly known as Fisher Hall, our community now begins its new chapter under a new name, but make no mistake: the spirit remains the same. Home to generations of proud residents affectionately known as the Crew, this brotherhood has long been one of the most tight-knit, spirited, and iconic on campus."
+  },
+  {
+    "title": "History",
+    "description": "The history of Coyle Hall and Fisher Hall",
+    "url": "/history/",
+    "content": "Fisher Hall history and transition to Coyle Hall. The legacy continues with the same spirit and traditions."
+  },
+  {
+    "title": "Faith",
+    "description": "Faith and spiritual life at Coyle Hall",
+    "url": "/faith/",
+    "content": "Faith community and spiritual activities at Coyle Hall including Mass schedule and sacraments."
+  },
+  {
+    "title": "Building",
+    "description": "About the Coyle Hall building",
+    "url": "/building/",
+    "content": "Information about the Coyle Hall building, facilities, and amenities."
+  },
+  {
+    "title": "Incoming Students",
+    "description": "Information for new students",
+    "url": "/incoming-students/",
+    "content": "Welcome information and resources for incoming students to Coyle Hall."
+  }
+]

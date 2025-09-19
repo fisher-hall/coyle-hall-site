@@ -36,7 +36,9 @@
 
     <!-- header (don't cache it) -->
     {{ partial "essentials/header.html" . }}
-    {{ partial "search-modal.html" (dict "Context" . ) }}
+    
+    <!-- custom search modal -->
+    {{ partial "custom-search-modal.html" . }}
 
 
     <main>

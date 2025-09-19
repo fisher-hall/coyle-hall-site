@@ -60,6 +60,8 @@ target = 'assets/notwatching/hugo_stats.json'
 ############################# Outputs ############################
 [outputs]
 home = ["HTML", "RSS", "WebAppManifest", "SearchIndex"]
+section = ["HTML", "RSS"]
+page = ["HTML"]
 
 ############################# Imaging ############################
 [imaging]
@@ -139,9 +141,6 @@ link = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/regular.mi
 lazy = true
 
 # JS Plugins
-[[params.plugins.js]]
-link = "js/search.js"
-lazy = false
 [[params.plugins.js]]
 link = "plugins/swiper/swiper-bundle.js"
 lazy = false

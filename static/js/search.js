@@ -1,103 +1,151 @@
-const body = document.body;
-const searchWrapper = document.querySelector(".search-wrapper");
-const searchModal = document.querySelector(".search-modal");
-const searchFooter = document.querySelector(".search-wrapper-footer");
-const searchResult = document.querySelectorAll("[data-search-result]");
-const searchResultItemTemplate = document.getElementById(
-  "search-result-item-template"
-);
-const hasSearchWrapper = searchWrapper != null;
-const hasSearchModal = searchModal != null;
-const searchInput = document.querySelectorAll("[data-search-input]");
-const emptySearchResult = document.querySelectorAll(".search-result-empty");
-const openSearchModal = document.querySelectorAll(
-  '[data-target="search-modal"]'
-);
-const closeSearchModal = document.querySelectorAll(
-  '[data-target="close-search-modal"]'
-);
-const searchIcon = document.querySelector(
-  ".search-wrapper-header label svg[data-type='search']"
-);
-const searchIconReset = document.querySelector(
-  ".search-wrapper-header label svg[data-type='reset']"
-);
-const searchResultInfo = document.querySelector(".search-result-info");
-let searchModalVisible =
-  hasSearchModal && searchModal.classList.contains("show") ? true : false;
-let jsonData = [];
+// Search functionality using Lunr.js
+(function() {
+  let searchIndex;
+  let searchData;
+  let lunrIndex;
 
-const loadJsonData = async () => {
-  try {
-    const res = await fetch(indexURL);
-    return (jsonData = await res.json());
-  } catch (err) {
-    console.error(err);
-  }
-};
-
-// escape HTML entities
-function escapeHTML(input) {
-  return input
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
-}
-
-if (hasSearchWrapper) {
-  // disable enter key on searchInput
-  searchInput.forEach((el) => {
-    el.addEventListener("keypress", (e) => {
-      if (e.keyCode == 13) {
-        e.preventDefault();
-      }
-    });
+  // Initialize search when DOM is loaded
+  document.addEventListener('DOMContentLoaded', function() {
+    initializeSearch();
+    setupSearchModal();
   });
 
-  // Capitalize First Letter
-  const capitalizeFirstLetter = (string) => {
-    return string
-      .replace(/^[\s_]+|[\s_]+$/g, "")
-      .replace(/[_\s]+/g, " ")
-      .replace(/^[a-z]/, function (m) {
-        return m.toUpperCase();
+  async function initializeSearch() {
+    try {
+      // Load search data
+      const response = await fetch('/searchindex.json');
+      searchData = await response.json();
+      
+      // Build Lunr index
+      lunrIndex = lunr(function() {
+        this.ref('url');
+        this.field('title', { boost: 10 });
+        this.field('description', { boost: 5 });
+        this.field('content');
+        
+        searchData.forEach(function(doc, idx) {
+          this.add({
+            url: doc.url,
+            title: doc.title,
+            description: doc.description,
+            content: doc.content,
+            id: idx
+          });
+        }, this);
       });
-  };
-
-  // String to URL
-  const slugify = (string) => {
-    let lowercaseText = string
-      .trim()
-      .replace(/[\s_]+/g, "-")
-      .toLowerCase();
-    return encodeURIComponent(lowercaseText);
-  };
-
-  // options
-  const image = searchWrapper.getAttribute("data-image");
-  const description = searchWrapper.getAttribute("data-description");
-  const tags = searchWrapper.getAttribute("data-tags");
-  const categories = searchWrapper.getAttribute("data-categories");
-
-  let searchString = "";
-
-  // get search string from url
-  const urlParams = new URLSearchParams(window.location.search);
-  const urlSearchString = urlParams.get("s")
-    ? encodeURIComponent(urlParams.get("s"))
-    : null;
-
-  if (urlSearchString !== null) {
-    searchString = urlSearchString.replace(/\+/g, " ");
-    searchInput.forEach((el) => {
-      el.value = searchString;
-    });
-    searchIcon && (searchIcon.style.display = "none");
-    searchIconReset && (searchIconReset.style.display = "initial");
+    } catch (error) {
+      console.error('Error initializing search:', error);
+    }
   }
 
-  searchInput.forEach((el) => {
-    el.addEventListener("input", (e) => {
+  function setupSearchModal() {
+    const searchButton = document.querySelector('[data-target="search-modal"]');
+    const searchModal = document.getElementById('search-modal');
+    const closeButton = document.getElementById('close-search');
+    const searchInput = document.getElementById('search-input');
+    const searchResults = document.getElementById('search-results');
+
+    if (!searchButton || !searchModal) return;
+
+    // Open search modal
+    searchButton.addEventListener('click', function() {
+      searchModal.classList.remove('hidden');
+      searchInput.focus();
+    });
+
+    // Close search modal
+    closeButton.addEventListener('click', closeModal);
+    searchModal.addEventListener('click', function(e) {
+      if (e.target === searchModal) {
+        closeModal();
+      }
+    });
+
+    // Handle escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && !searchModal.classList.contains('hidden')) {
+        closeModal();
+      }
+    });
+
+    // Perform search on input
+    searchInput.addEventListener('input', function() {
+      const query = this.value.trim();
+      if (query.length >= 2) {
+        performSearch(query);
+      } else {
+        searchResults.innerHTML = '';
+      }
+    });
+
+    function closeModal() {
+      searchModal.classList.add('hidden');
+      searchInput.value = '';
+      searchResults.innerHTML = '';
+    }
+  }
+
+  function performSearch(query) {
+    if (!lunrIndex || !searchData) {
+      document.getElementById('search-results').innerHTML = '<p class="p-4 text-gray-500">Search not ready yet...</p>';
+      return;
+    }
+
+    try {
+      const results = lunrIndex.search(query);
+      displayResults(results, query);
+    } catch (error) {
+      console.error('Search error:', error);
+      document.getElementById('search-results').innerHTML = '<p class="p-4 text-red-500">Search error occurred</p>';
+    }
+  }
+
+  function displayResults(results, query) {
+    const searchResults = document.getElementById('search-results');
+    
+    if (results.length === 0) {
+      searchResults.innerHTML = '<p class="p-4 text-gray-500">No results found</p>';
+      return;
+    }
+
+    const html = results.slice(0, 10).map(result => {
+      const page = searchData.find(p => p.url === result.ref);
+      if (!page) return '';
+
+      const title = highlightText(page.title, query);
+      const description = highlightText(page.description || '', query);
+      
+      return `
+        <div class="border-b border-gray-200 dark:border-gray-600 p-4 hover:bg-gray-50 dark:hover:bg-darkmode-light">
+          <a href="${page.url}" class="block" onclick="closeSearchModal()">
+            <h4 class="font-semibold text-lg mb-2 text-blue-600 dark:text-blue-400">${title}</h4>
+            ${description ? `<p class="text-gray-600 dark:text-gray-300 text-sm">${description}</p>` : ''}
+          </a>
+        </div>
+      `;
+    }).join('');
+
+    searchResults.innerHTML = html;
+  }
+
+  function highlightText(text, query) {
+    if (!text || !query) return text;
+    
+    const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+    return text.replace(regex, '<mark class="bg-yellow-200 dark:bg-yellow-600">$1</mark>');
+  }
+
+  // Make closeSearchModal available globally
+  window.closeSearchModal = function() {
+    const searchModal = document.getElementById('search-modal');
+    const searchInput = document.getElementById('search-input');
+    const searchResults = document.getElementById('search-results');
+    
+    if (searchModal) searchModal.classList.add('hidden');
+    if (searchInput) searchInput.value = '';
+    if (searchResults) searchResults.innerHTML = '';
+  };
+})();
       searchString = e.target.value.toLowerCase();
       window.history.replaceState(
         {},
