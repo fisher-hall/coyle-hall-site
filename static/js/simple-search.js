@@ -81,6 +81,13 @@ document.addEventListener('DOMContentLoaded', function() {
         const results = searchData.filter(item => {
           const searchText = (item.title + ' ' + item.description + ' ' + item.content).toLowerCase();
           return searchText.includes(query);
+        }).map(item => {
+          // Create a snippet around the matched keyword
+          const snippet = createSnippet(item.content, query);
+          return {
+            ...item,
+            snippet: snippet
+          };
         });
         
         console.log('Search results:', results.length);
@@ -89,6 +96,33 @@ document.addEventListener('DOMContentLoaded', function() {
         if (searchResults) searchResults.innerHTML = '';
       }
     });
+  }
+  
+  function createSnippet(content, query, snippetLength = 150) {
+    const lowerContent = content.toLowerCase();
+    const lowerQuery = query.toLowerCase();
+    const queryIndex = lowerContent.indexOf(lowerQuery);
+    
+    if (queryIndex === -1) {
+      // If query not found in content, return beginning of content
+      return content.substring(0, snippetLength) + (content.length > snippetLength ? '...' : '');
+    }
+    
+    // Calculate start position for snippet
+    const start = Math.max(0, queryIndex - Math.floor(snippetLength / 2));
+    const end = Math.min(content.length, start + snippetLength);
+    
+    let snippet = content.substring(start, end);
+    
+    // Add ellipsis if we're not at the beginning or end
+    if (start > 0) snippet = '...' + snippet;
+    if (end < content.length) snippet = snippet + '...';
+    
+    // Highlight the matched keyword
+    const regex = new RegExp(`(${query})`, 'gi');
+    snippet = snippet.replace(regex, '<mark>$1</mark>');
+    
+    return snippet;
   }
   
   function displayResults(results, query) {
@@ -103,7 +137,8 @@ document.addEventListener('DOMContentLoaded', function() {
       <div class="border-b border-gray-200 p-4 hover:bg-gray-50">
         <a href="${item.url}" class="block" onclick="closeSearchModal()">
           <h4 class="font-semibold text-lg mb-2 text-blue-600">${item.title}</h4>
-          <p class="text-gray-600 text-sm">${item.description}</p>
+          <p class="text-gray-600 text-sm mb-2">${item.description}</p>
+          <p class="text-gray-700 text-sm">${item.snippet}</p>
         </a>
       </div>
     `).join('');

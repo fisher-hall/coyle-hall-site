@@ -6,6 +6,15 @@ body {
   margin-bottom: 0 !important;
   padding-bottom: 0 !important;
 }
+
+/* Green highlighting for search results */
+mark {
+  background-color: #22c55e;
+  color: white;
+  padding: 1px 3px;
+  border-radius: 2px;
+}
+
   .navbar-nav {
     padding-right: 30px !important;
   }
