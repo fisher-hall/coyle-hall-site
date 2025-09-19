@@ -7,6 +7,17 @@ body {
   padding-bottom: 0 !important;
 }
 
+/* Profile cards - make them distinguishable in light mode only */
+:not(.dark) .bg-light.rounded-2xl.p-8.text-center {
+  background-color: #EFEEEE !important;
+}
+
+/* Ensure dark mode profile cards use the original dark background */
+.dark .bg-light.rounded-2xl.p-8.text-center {
+  background-color: #222222 !important;
+}
+
+
 /* Green highlighting for search results */
 mark {
   background-color: #22c55e;
