@@ -104,11 +104,11 @@ document.addEventListener('DOMContentLoaded', function() {
       
       if (query.length >= 2) {
         const results = searchData.filter(item => {
-          const searchText = (item.title + ' ' + item.description + ' ' + (item.content || '')).toLowerCase();
+          const searchText = (item.title + ' ' + (item.summary || '') + ' ' + (item.content || '')).toLowerCase();
           return searchText.includes(query);
         }).map(item => {
           // Create a snippet around the matched keyword, using available content
-          const contentForSnippet = item.content || item.description || item.title || '';
+          const contentForSnippet = item.content || item.summary || item.title || '';
           const snippet = createSnippet(contentForSnippet, query);
           return {
             ...item,

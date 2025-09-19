@@ -15,6 +15,18 @@ mark {
   border-radius: 2px;
 }
 
+/* Force search modal background to be green */
+.search-modal,
+.search-modal-overlay,
+#search-modal {
+  background-color: rgba(10, 132, 61, 0.8) !important;
+}
+
+.search-modal.show,
+.search-modal.show .search-modal-overlay {
+  background-color: rgba(10, 132, 61, 0.8) !important;
+}
+
   .navbar-nav {
     padding-right: 30px !important;
   }

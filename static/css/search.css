@@ -16,7 +16,7 @@
 .search-wrapper-header input {
   border: 1px solid #ddd;
   width: 100%;
-  border-radius: 4px;
+  border-radius: 16px;
   height: 52px;
   padding: 0 15px 0 40px;
   transition: 0.25s;
@@ -54,7 +54,7 @@
 
 .search-result mark {
   padding: 0;
-  border-radius: 2px;
+  border-radius: 16px;
 }
 
 .search-result:not(:empty) + .search-result-empty {
@@ -77,7 +77,7 @@
   position: relative;
   display: block;
   padding: 16px;
-  border-radius: 4px;
+  border-radius: 16px;
   border: 1px solid #eee;
   background-color: #fff;
   transition: 0s;
@@ -104,7 +104,7 @@
 }
 
 .search-result-item > div > img {
-  border-radius: 4px;
+  border-radius: 16px;
   max-height: 400px;
   width: 100%;
   object-fit: cover;
@@ -217,7 +217,7 @@
   color: #777;
   background-color: #eee;
   font-size: 12px;
-  border-radius: 3px;
+  border-radius: 16px;
   margin-right: 3px;
   padding: 2px 4px;
   line-height: 1;
@@ -268,6 +268,7 @@
   z-index: 9999;
   opacity: 0;
   visibility: hidden;
+  background-color: rgba(10, 132, 61, 0.8) !important;
 }
 
 .search-modal.show {
@@ -281,14 +282,14 @@
   width: 100%;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(10, 132, 61, 1) !important;
 }
 
 .search-modal .search-wrapper {
   width: 660px;
   max-width: 96%;
   margin: 100px auto;
-  border-radius: 4px;
+  border-radius: 16px;
   background-color: white;
 }
 
@@ -298,7 +299,7 @@
   overflow-y: auto;
   background-color: #f5f6f7;
   box-shadow: inset 0 2px 18px #ddd;
-  border-radius: 4px;
+  border-radius: 16px;
 }
 
 .search-modal
