@@ -1,4 +1,29 @@
-// Simple search functionality
+// Simple search functionali  // Load search data
+  fetch('/searchindex.json')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Dynamic search index not found');
+      }
+      return response.json();
+    })
+    .then(data => {
+      searchData = data;
+      console.log('Dynamic search index loaded:', searchData.length, 'items');
+    })
+    .catch(error => {
+      console.error('Error loading dynamic search index:', error);
+      // Fallback to static search index if dynamic one fails
+      fetch('/static-searchindex.json')
+        .then(response => response.json())
+        .then(data => {
+          searchData = data;
+          console.log('Fallback static search index loaded:', searchData.length, 'items');
+        })
+        .catch(fallbackError => {
+          console.error('Error loading fallback search index:', fallbackError);
+        });
+    });
+
 console.log('Simple search script loaded');
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -79,11 +104,12 @@ document.addEventListener('DOMContentLoaded', function() {
       
       if (query.length >= 2) {
         const results = searchData.filter(item => {
-          const searchText = (item.title + ' ' + item.description + ' ' + item.content).toLowerCase();
+          const searchText = (item.title + ' ' + item.description + ' ' + (item.content || '')).toLowerCase();
           return searchText.includes(query);
         }).map(item => {
-          // Create a snippet around the matched keyword
-          const snippet = createSnippet(item.content, query);
+          // Create a snippet around the matched keyword, using available content
+          const contentForSnippet = item.content || item.description || item.title || '';
+          const snippet = createSnippet(contentForSnippet, query);
           return {
             ...item,
             snippet: snippet
@@ -99,6 +125,11 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   function createSnippet(content, query, snippetLength = 150) {
+    // Handle undefined or empty content
+    if (!content || typeof content !== 'string') {
+      return '';
+    }
+    
     const lowerContent = content.toLowerCase();
     const lowerQuery = query.toLowerCase();
     const queryIndex = lowerContent.indexOf(lowerQuery);
@@ -134,11 +165,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     const html = results.slice(0, 10).map(item => `
-      <div class="border-b border-gray-200 p-4 hover:bg-gray-50">
+      <div class="border border-gray-200 rounded-2xl p-4 mb-3 hover:bg-gray-50 hover:shadow-md transition-all duration-200">
         <a href="${item.url}" class="block" onclick="closeSearchModal()">
           <h4 class="font-semibold text-lg mb-2 text-blue-600">${item.title}</h4>
-          <p class="text-gray-600 text-sm mb-2">${item.description}</p>
-          <p class="text-gray-700 text-sm">${item.snippet}</p>
+          <p class="text-gray-600 text-sm mb-2">${item.description || ''}</p>
+          ${item.snippet ? `<p class="text-gray-700 text-sm">${item.snippet}</p>` : ''}
         </a>
       </div>
     `).join('');
