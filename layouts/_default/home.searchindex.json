@@ -7,7 +7,16 @@
     
     {{- $title := .Title -}}
     {{- $description := .Description | default .Summary -}}
-    {{- $content := .Plain -}}
+    
+    {{- /* Get content - handle both markdown and HTML files */ -}}
+    {{- $content := "" -}}
+    {{- if .RawContent -}}
+      {{- $content = .RawContent | htmlUnescape | plainify -}}
+    {{- else if .Content -}}
+      {{- $content = .Content | plainify -}}
+    {{- else if .Plain -}}
+      {{- $content = .Plain -}}
+    {{- end -}}
     
     {{- if or (eq .Section "hall-staff") (eq .Section "hall-gov") (eq .Section "hall-commissioners") -}}
       {{- $hometown := .Params.params.hometown | default "" -}}
@@ -26,7 +35,7 @@
       {{- if $hobbies -}}{{- $contentParts = $contentParts | append (printf "Hobbies: %s" $hobbies) -}}{{- end -}}
       {{- if $favoritepart -}}{{- $contentParts = $contentParts | append (printf "Favorite part: %s" $favoritepart) -}}{{- end -}}
       {{- if $section -}}{{- $contentParts = $contentParts | append (printf "Section: %s" $section) -}}{{- end -}}
-      {{- if .Plain -}}{{- $contentParts = $contentParts | append .Plain -}}{{- end -}}
+      {{- if $content -}}{{- $contentParts = $contentParts | append $content -}}{{- end -}}
       
       {{- $content = delimit $contentParts ". " -}}
     {{- end -}}
@@ -35,7 +44,7 @@
       "title": {{ $title | jsonify }},
       "description": {{ ($description | truncate 200) | jsonify }},
       "url": {{ .RelPermalink | jsonify }},
-      "content": {{ ($content | truncate 500) | jsonify }}
+      "content": {{ $content | jsonify }}
     }
   {{- end -}}
 {{- end -}}
