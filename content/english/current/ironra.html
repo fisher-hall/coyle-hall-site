@@ -1,0 +1,41 @@
+---
+title: "ironRA"
+---
+
+<h1 class="text-5xl text-center font-extrabold mb-6 fade-in-section" style="color: var(--nd-green);">
+  ironRA - More details to come soon!
+</h1>
+
+<div class="h-screen">
+  <img
+    src="/images/current/ironra/ironra_ad.png"
+    alt="IronRA Advertisement"
+    class="rounded-2xl w-full max-w-xl shadow-lg"
+    style="object-fit: cover;"
+    />
+</div>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const faders = document.querySelectorAll('.fade-in-section');
+  const appearOptions = {
+    threshold: 0.2,
+    rootMargin: "0px 0px -40px 0px"
+  };
+
+  const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, appearOptions);
+
+  faders.forEach(fader => {
+    appearOnScroll.observe(fader);
+  });
+});
+</script>
+
