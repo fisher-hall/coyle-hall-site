@@ -2,18 +2,244 @@
 title: "ironRA"
 ---
 
-<h1 class="text-5xl text-center font-extrabold mb-6 fade-in-section" style="color: var(--nd-green);">
-  ironRA - More details to come soon!
-</h1>
+<style>
+  #banner-parallax {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  .section-sm:first-of-type {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+  /* Remove top margin from the first element after the header if needed */
+  #ironra-banner-img, #ironra-banner-text {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    display: block;
+  }
+</style>
 
-<div class="h-screen">
-  <img
-    src="/images/current/ironra/ironra_ad.png"
-    alt="IronRA Advertisement"
-    class="rounded-2xl w-full max-w-xl shadow-lg"
-    style="object-fit: cover;"
+<div id="banner-parallax" class="relative left-1/2 right-1/2 w-screen -translate-x-1/2 min-h-[200px] md:min-h-0 mb-8 overflow-hidden">      
+    <img
+    src="/images/Banners/IronRABanner.png"
+    alt="An image of a track with a green tint"
+    class="absolute left-1/2 top-0 h-full min-w-[100vw] sm:object-contain object-cover -translate-x-1/2 md:relative md:left-0 md:top-0 md:w-full md:h-auto md:object-contain md:translate-x-0 block"
+    style="max-width:none;"
+    id="ironra-banner-img"
+    >
+    <img
+    src="/images/Banners/IronRABannerText.png"
+    alt="ironRA"
+    class="absolute left-1/2 top-1/2 min-w-[1vw] object-cover pointer-events-none transform -translate-x-1/2 -translate-y-1/2"
+    id="ironra-banner-text"
     />
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const banner = document.getElementById('banner-parallax');
+    const bg = document.getElementById('ironra-banner-img');
+    if (!banner || !bg) return;
+
+    const speed = 0.1;
+
+    function updateParallax() {
+        const rect = banner.getBoundingClientRect();
+        const scrollY = window.scrollY || window.pageYOffset;
+        const bannerTop = rect.top + scrollY;
+
+        if (scrollY + window.innerHeight > bannerTop && scrollY < bannerTop + banner.offsetHeight) {
+        const offset = (scrollY - bannerTop) * speed;
+        bg.style.transform = `translate(0%, ${offset}px)`;
+        } else {
+        bg.style.transform = 'translate(0%, 0)';
+        }
+    }
+
+    // Apply parallax immediately and on scroll
+    updateParallax();
+    window.addEventListener('scroll', updateParallax);
+    });
+</script>
+
+
+<div class="flex flex-col md:flex-row items-center justify-center w-full my-12 max-w-6xl mx-auto fade-in-section" style="margin-top: 2rem;">
+  <!-- Image -->
+  <div class="md:w-1/2 w-full flex flex-col justify-center md:justify-end px-4">
+      <a href="/images/current/ironra/ironra_logo.png" target="_blank" rel="noopener">
+        <img
+          src="/images/current/ironra/ironra_logo.png"
+          alt="ironRA logo"
+          class="rounded-2xl w-full max-w-xl shadow-lg"
+          style="object-fit: cover;"
+        />
+      </a>
+  </div>
+  <!-- Text -->
+  <div class="md:w-1/2 w-full flex flex-col justify-center px-4 md:pl-12 text-left">
+    <h2 class="text-4xl font-bold mb-4 text-center" style="color: var(--nd-green);">What is it?</h2>
+    <p class="mb-2 text-xl">
+      An Olympic triathlon designed to bring together the community of Coyle Hall. Beat your RA and lead your section to victory.
+    </p>
+  </div>
+</div>
+
+<!-- Countdown Section -->
+<div class="row text-center my-8" style="margin-top: 2rem;">
+  <h1 class="text-5xl text-center font-extrabold mb-6 fade-in-section" style="color: var(--nd-green);">Training Time Left</h1>
+    <div class="col-6 col-md-3 text-center fade-in-section">
+        <div class="countdown-block">
+        <span id="ironra-countdown-days" class="stats-number">00</span>
+        <div class="stats-description">Days</div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3 text-center fade-in-section">
+        <div class="countdown-block">
+        <span id="ironra-countdown-hours" class="stats-number">00</span>
+        <div class="stats-description">Hours</div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3 text-center fade-in-section">
+        <div class="countdown-block">
+        <span id="ironra-countdown-mins" class="stats-number">00</span>
+        <div class="stats-description">Minutes</div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3 text-center fade-in-section">
+        <div class="countdown-block">
+        <span id="ironra-countdown-secs" class="stats-number">00</span>
+        <div class="stats-description">Seconds</div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="flex items-center justify-center my-1 fade-in-section" style="position: relative; z-index: 3; margin-bottom: 5rem; margin-top: 3rem;">
+  <h1 class="text-5xl text-center font-extrabold mb-8 fade-in-section" style="color: var(--nd-green);">Distances</h1>
+</div>
+
+<div class="mx-auto relative grid md:grid-cols-3 sm:grid-cols-2 gap-2 gap-y-25 w-full my-8 mb-20 fade-in-section z-index: 3">
+    
+    <div>
+        <h1 class="relative flex flex-col items-center text-center justify-center h-10 mb-3">
+            <i class="fa-solid fa-person-swimming text-9xl text-[var(--nd-green)]"
+                style="transform: translateY(-60%) scale(1);
+            "></i>
+            <span class="absolute top-1/2 text-6xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
+	      1650
+            </span>
+	    <div class="relative flex items-center justify-center text-2xl mt-6 text-center">
+	      yard swim
+            </div>
+        </h1>
+
+    </div>
+
+    <div>
+        <h1 class="relative flex flex-col items-center text-center justify-center h-10 mb-3">
+            <i class="fa-solid fa-bicycle text-9xl text-[var(--nd-green)]"
+                style="transform: translateY(-60%) scale(1);
+            "></i>
+            <span class="absolute top-1/2 text-6xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
+	      25
+            </span>
+	    <div class="relative flex items-center justify-center text-2xl mt-6 text-center">
+	      mile bike
+            </div>
+        </h1>
+
+    </div>
+
+    <div>
+        <h1 class="relative flex flex-col items-center text-center justify-center h-10 mb-3">
+            <i class="fa-solid fa-person-running text-9xl text-[var(--nd-green)]"
+                style="transform: translateY(-60%) scale(1);
+            "></i>
+            <span class="absolute top-1/2 text-6xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
+	      6.2
+            </span>
+            <div class="relative flex items-center justify-center text-2xl mt-6 text-center">
+	      mile run
+            </div>
+        </h1>
+
+    </div>
+</div>
+
+<br>
+<br><br><br>
+
+<h1 class="h-20 text-center text-7xl text-[var(--nd-green)] fade-in-section">Points System</h1>
+
+<div class="mx-auto relative grid md:grid-cols-2 sm:grid-cols-2 gap-2 gap-y-10 w-full my-4 fade-in-section z-index: 3">
+    <div>
+        <h1 class="relative flex items-center text-center justify-center h-10 mb-3">Participation</h1>
+        <div class="relative flex items-center justify-center text-2xl text-center">Up to 12 points per person</div>
+	<div class="relative flex items-center justify-center text-2xl text-center">4 points per leg</div>
+	<div class="relative flex items-center justify-center text-2xl text-center">2 points per half leg</div>
+    </div>
+
+    <div>
+        <h1 class="relative flex items-center text-center justify-center h-10 mb-3">Volunteering</h1>
+        <div class="relative flex items-center justify-center text-2xl text-center">1 point per person</div>
+    </div>
+
+    <div>
+        <h1 class="relative flex items-center text-center justify-center h-2">Top 3 RAs</h1>
+        <div class="relative flex items-center justify-center text-l text-center">(by time)</div>
+        <div class="relative flex items-center justify-center text-2xl text-center">1st place: 60 points</div>
+        <div class="relative flex items-center justify-center text-2xl text-center">2nd place: 40 points</div>
+	<div class="relative flex items-center justify-center text-2xl text-center">3rd place: 20 points</div>
+    </div>
+
+    <div>
+        <h1 class="relative flex items-center text-center justify-center h-2">Top 3 Sections</h1>
+        <div class="relative flex items-center justify-center text-l text-center">(by average time)</div>
+        <div class="relative flex items-center justify-center text-2xl text-center">1st place: 60 points</div>
+        <div class="relative flex items-center justify-center text-2xl text-center">2nd place: 40 points</div>
+	<div class="relative flex items-center justify-center text-2xl text-center">3rd place: 20 points</div>
+    </div>
+
+</div>
+
+<div class="flex flex-col items-center text-center fade-in-section">
+  <h1 class="relative flex items-center text-center justify-center h-10 mb-3" style="color: rgb(174, 145, 66);">The Golden Oar</h1>
+  <div class="relative flex items-center justify-center text-2xl text-center" style="color: rgb(174, 145, 66);">Beating your RA: 20 points</div>
+</div>
+
+<br><br><br><br>
+
+<div class="flex flex-col md:flex-row items-center justify-center w-full my-12 max-w-6xl mx-auto fade-in-section" style="margin-top: 2rem;">
+  <!-- Text -->
+  <div class="md:w-1/2 w-full flex flex-col items-center justify-center px-4 md:pl-12 text-center">
+    <h2 class="text-4xl font-bold mb-4 text-center" style="color: var(--nd-green);">Meet the RAs</h2>
+    <p class="mb-2 text-xl">
+      Get to know the leading competitors
+    </p>
+    <a style="text-decoration: none;"
+      class="flex items-center justify-center gap-2 bg-[var(--nd-green)] py-2 px-4 text-dark hover:bg-[var(--nd-gold)] dark:text-white dark:hover:text-primary whitespace-nowrap rounded-2xl transition-colors duration-200"
+      href="/hall-staff/">
+      <span class="text-white hover:text-white">Meet RAs</span>
+    </a>
+  </div>
+  <!-- Image -->
+  <div class="md:w-1/2 w-full flex flex-col justify-center md:justify-end px-4">
+      <a href="/images/current/ironra/ironra_ras_smaller.png" target="_blank" rel="noopener">
+        <img
+          src="/images/current/ironra/ironra_ras_smaller.png"
+          alt="ironRA logo"
+          class="rounded-2xl w-full max-w-xl shadow-lg"
+          style="object-fit: cover;"
+        />
+      </a>
+  </div>
+
+</div>
+
+
 
 
 <script>
@@ -39,3 +265,4 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
+<script src="/ironRA-Countdown.js"></script>
