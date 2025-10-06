@@ -19,6 +19,13 @@ title: "ironRA"
     padding-top: 0 !important;
     display: block;
   }
+  /* Points system text that switches with light/dark mode */
+  .points-text {
+    color: var(--color-lightmode-gray);
+  }
+  .dark .points-text {
+    color: var(--color-darkmode-gray);
+  }
 </style>
 
 <div id="banner-parallax" class="relative left-1/2 right-1/2 w-screen -translate-x-1/2 min-h-[200px] md:min-h-0 mb-8 overflow-hidden">      
@@ -121,10 +128,10 @@ title: "ironRA"
   <h1 class="text-5xl text-center font-extrabold mb-8 fade-in-section" style="color: var(--nd-green);">Distances</h1>
 </div>
 
-<div class="mx-auto relative grid md:grid-cols-3 sm:grid-cols-2 gap-2 gap-y-25 w-full my-8 mb-20 fade-in-section z-index: 3">
+<div class="mx-auto relative grid md:grid-cols-3 sm:grid-cols-2 gap-2 gap-y-25 w-full my-8 mt-20 mb-20 fade-in-section" style="z-index: 3">
     
     <div>
-        <h1 class="relative flex flex-col items-center text-center justify-center h-10 mb-3">
+        <h1 class="relative flex flex-col items-center text-center justify-center h-10 mb-3 mt-10">
             <i class="fa-solid fa-person-swimming text-9xl text-[var(--nd-green)]"
                 style="transform: translateY(-60%) scale(1);
             "></i>
@@ -139,7 +146,7 @@ title: "ironRA"
     </div>
 
     <div>
-        <h1 class="relative flex flex-col items-center text-center justify-center h-10 mb-3">
+        <h1 class="relative flex flex-col items-center text-center justify-center h-10 mb-3 mt-10">
             <i class="fa-solid fa-bicycle text-9xl text-[var(--nd-green)]"
                 style="transform: translateY(-60%) scale(1);
             "></i>
@@ -154,7 +161,7 @@ title: "ironRA"
     </div>
 
     <div>
-        <h1 class="relative flex flex-col items-center text-center justify-center h-10 mb-3">
+        <h1 class="relative flex flex-col items-center text-center justify-center h-10 mb-3 mt-10">
             <i class="fa-solid fa-person-running text-9xl text-[var(--nd-green)]"
                 style="transform: translateY(-60%) scale(1);
             "></i>
@@ -174,33 +181,34 @@ title: "ironRA"
 
 <h1 class="h-20 text-center text-7xl text-[var(--nd-green)] fade-in-section">Points System</h1>
 
-<div class="mx-auto relative grid md:grid-cols-2 sm:grid-cols-2 gap-2 gap-y-10 w-full my-4 fade-in-section z-index: 3">
+<div class="mx-auto relative grid md:grid-cols-2 sm:grid-cols-2 gap-2 gap-y-10 w-full my-4 fade-in-section" style="z-index: 3">
     <div>
         <h1 class="relative flex items-center text-center justify-center h-10 mb-3">Participation</h1>
-        <div class="relative flex items-center justify-center text-2xl text-center">Up to 12 points per person</div>
-	<div class="relative flex items-center justify-center text-2xl text-center">4 points per leg</div>
-	<div class="relative flex items-center justify-center text-2xl text-center">2 points per half leg</div>
+        
+        <div class="relative flex items-center justify-center text-2xl text-center points-text">Up to 12 points per person</div>
+	      <div class="relative flex items-center justify-center text-2xl text-center points-text">4 points per leg</div>
+	      <div class="relative flex items-center justify-center text-2xl text-center points-text">2 points per half leg</div>
     </div>
 
     <div>
         <h1 class="relative flex items-center text-center justify-center h-10 mb-3">Volunteering</h1>
-        <div class="relative flex items-center justify-center text-2xl text-center">1 point per person</div>
+        <div class="relative flex items-center justify-center text-2xl text-center points-text">1 point per person</div>
     </div>
 
     <div>
         <h1 class="relative flex items-center text-center justify-center h-2">Top 3 RAs</h1>
-        <div class="relative flex items-center justify-center text-l text-center">(by time)</div>
-        <div class="relative flex items-center justify-center text-2xl text-center">1st place: 60 points</div>
-        <div class="relative flex items-center justify-center text-2xl text-center">2nd place: 40 points</div>
-	<div class="relative flex items-center justify-center text-2xl text-center">3rd place: 20 points</div>
+        <div class="relative flex items-center justify-center text-l text-center points-text">(by time)</div>
+        <div class="relative flex items-center justify-center text-2xl text-center points-text">1st place: 60 points</div>
+        <div class="relative flex items-center justify-center text-2xl text-center points-text">2nd place: 40 points</div>
+	<div class="relative flex items-center justify-center text-2xl text-center points-text">3rd place: 20 points</div>
     </div>
 
     <div>
         <h1 class="relative flex items-center text-center justify-center h-2">Top 3 Sections</h1>
-        <div class="relative flex items-center justify-center text-l text-center">(by average time)</div>
-        <div class="relative flex items-center justify-center text-2xl text-center">1st place: 60 points</div>
-        <div class="relative flex items-center justify-center text-2xl text-center">2nd place: 40 points</div>
-	<div class="relative flex items-center justify-center text-2xl text-center">3rd place: 20 points</div>
+        <div class="relative flex items-center justify-center text-l text-center points-text">(by average time)</div>
+        <div class="relative flex items-center justify-center text-2xl text-center points-text">1st place: 60 points</div>
+        <div class="relative flex items-center justify-center text-2xl text-center points-text">2nd place: 40 points</div>
+	<div class="relative flex items-center justify-center text-2xl text-center points-text">3rd place: 20 points</div>
     </div>
 
 </div>
