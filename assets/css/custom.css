@@ -204,13 +204,15 @@ label[for="nav-toggle"] i {
   background: rgba(174, 145, 66, 0.85);
   color: #fff !important;
   border-radius: 16px !important;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1) !important;
 }
 
 /* Dropdown item hover effects */
 .nav-dropdown-list .nav-dropdown-item a:hover,
 .nav-dropdown-list .nav-dropdown-item:hover a {
-  background: rgba(174, 145, 66, 0.85) !important;
+  background: var(--nd-gold) !important;
   color: #fff !important;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1) !important;
 }
 
 /* Active page styling for all navbar links */
@@ -220,6 +222,7 @@ label[for="nav-toggle"] i {
 .header .navbar a[aria-current="page"] {
   background: var(--nd-gold) !important;
   color: #fff !important;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1) !important;
 }
 
 /* Uniform padding for all nav links & buttons (12px vertical, 16px horizontal) */
@@ -262,6 +265,7 @@ footer .social-icons a {
 
 footer .social-icons a:hover {
   transform: scale(1.15);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1) !important;
 }
 
 footer .social-icons i {
@@ -283,10 +287,61 @@ footer .social-icons i {
 .header .navbar a[href*="incoming-students"]:not(.active):hover {
   background: var(--nd-gold) !important;
   color:#ffffff !important;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1) !important;
 }
 
 .header .navbar [aria-label="search"] {
-  border-right: 1.5px solid #fff !important;
+  padding: 8px !important;
+  border-radius: 16px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 45px !important;
+  height: 45px !important;
+  transition: background-color 0.2s ease !important;
+  border: none !important;
+  position: relative !important;
+}
+
+/* Vertical divider after search button */
+.header .navbar [aria-label="search"]::after {
+  content: '';
+  position: absolute;
+  right: -4px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2px;
+  height: 32px;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 4px;
+}
+
+.header .navbar [aria-label="search"]:hover {
+  background-color: var(--nd-gold) !important;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1) !important;
+}
+
+/* Search modal close button styling */
+#close-search {
+  padding: 8px !important;
+  border-radius: 16px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 45px !important;
+  height: 45px !important;
+  transition: background-color 0.2s ease !important;
+}
+
+#close-search:hover {
+  background-color: var(--nd-gold) !important;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1) !important;
+}
+
+/* Shift search modal up by 25% */
+#search-modal .flex.items-center.justify-center.min-h-screen {
+  align-items: flex-start !important;
+  padding-top: 25vh !important;
 }
 
 .header .navbar {
@@ -761,10 +816,12 @@ footer {
 
 .btn, .social-icons a{
   transition: transform 0.15s ease-in-out;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1) !important;
 }
 
 .btn:hover, .social-icons a:hover {
-  transform: scale(1.15);
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1) !important;
 }
 
 .banner img {
