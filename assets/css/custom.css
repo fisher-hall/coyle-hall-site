@@ -872,7 +872,7 @@ footer {
 .banner,
 [class*="banner"],
 [id*="banner"] {
-  border-radius: 16px !important;
+  border-radius: 24px !important;
   overflow: hidden !important;
   width: 100% !important; /* Use width instead of max-width */
   margin: 0 auto !important; /* Center the banner */
@@ -896,7 +896,7 @@ footer {
   width: 100% !important;
   height: auto !important;
   object-fit: cover !important;
-  border-radius: 16px !important;
+  border-radius: 24px !important;
   left: 0 !important;
   transform: none !important;
 }
@@ -918,6 +918,7 @@ footer {
   z-index: 2 !important;
   pointer-events: none !important;
   text-shadow: 0 6px 20px rgba(0, 0, 0, 0.45) !important;
+  border-radius: 0 !important;
 }
 
 .home-banner-subheading {
@@ -941,14 +942,16 @@ footer {
 /* Make sure banner containers don't have conflicting overflow settings */
 #banner-parallax,
 [id*="banner-parallax"] {
-  border-radius: 16px !important;
+  border-radius: 24px !important;
   overflow: hidden !important;
-  width: 95% !important; /* Use width instead of max-width */
+  width: calc(100% - 8px) !important; /* Full width minus 6px padding on each side */
   margin: 0 auto 2rem auto !important; /* Center and add bottom margin */
+  padding: 0 4px !important; /* Adjusted padding to match floating header better */
   position: relative !important;
   left: auto !important; /* Override any positioning */
   right: auto !important;
   transform: none !important; /* Remove transforms that might offset */
+  box-sizing: border-box !important;
 }
 
 /* Mobile banner alignment fixes */

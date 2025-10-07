@@ -1,68 +1,86 @@
 ---
 title: "Faith"
 ---
-<!-- Banner -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Spacer for floating header -->
+<div class="banner-spacer-mobile" style="height: 8rem;"></div>
+<div class="banner-spacer-desktop" style="height: 7rem;"></div>
 <style>
-  #banner-parallax {
+  @media (min-width: 769px) {
+    .banner-spacer-mobile { display: none !important; }
+  }
+  @media (max-width: 768px) {
+    .banner-spacer-desktop { display: none !important; }
+  }
+  
+  /* Remove all top spacing for faith page */
+  body .section:first-of-type,
+  body .section-sm:first-of-type {
     margin-top: 0 !important;
     padding-top: 0 !important;
-    margin-bottom: 0 !important;
-    padding-bottom: 0 !important;
   }
-  .section-sm:first-of-type {
-    margin-top: 0 !important;
-    padding-top: 0 !important;
+  
+  /* Make faith banner full width at all screen sizes */
+  #faith-banner-wrapper {
+    width: 100vw !important;
+    position: relative !important;
+    left: 50% !important;
+    right: 50% !important;
+    margin-left: -50vw !important;
+    margin-right: -50vw !important;
+    padding: 0 0px !important;
+    box-sizing: border-box !important;
   }
-  /* Remove top margin from the first element after the header if needed */
-  #banner-img, #banner-text {
-    margin-top: 0 !important;
-    padding-top: 0 !important;
-    display: block;
+  
+  /* Mobile padding for banner */
+  @media (max-width: 768px) {
+    #faith-banner-wrapper {
+      padding: 0 2px !important;
+    }
   }
+  
 </style>
 
-<div id="banner-parallax" class="relative left-1/2 right-1/2 w-screen -translate-x-1/2 min-h-[200px] md:min-h-0 mb-8 overflow-hidden">      
-    <img
-        src="/images/Banners/FaithBannerImg.png"
-        alt="An image of the Zahm Hall chapel altar, tinted green"
-    class="absolute left-1/2 top-0 h-full min-w-[100vw] object-cover -translate-x-1/2 md:relative md:left-0 md:top-0 md:w-full md:h-auto md:object-contain md:translate-x-0 block"
-        style="max-width:none;"
-        id="banner-img"
-    >
-    <img
-    src="/images/Banners/FaithBannerText.png"
-    alt="Welcome Incoming Students"
-    class="absolute left-1/2 top-1/2 min-w-[1vw] object-cover pointer-events-none transform -translate-x-1/2 -translate-y-1/2"
-    id="banner-text"
-    />
+<!-- Banner -->
+<div id="faith-banner-wrapper">
+  <div id="banner-parallax" class="relative min-h-[200px] md:min-h-0 mb-8 overflow-hidden">
+  <img
+    src="/images/Banners/FaithBannerImg.png"
+    alt="An image of the Zahm Hall chapel altar, tinted green"
+    class="relative w-full h-auto object-cover block"
+    style="max-width:none;"
+    id="faith-banner-img"
+  />
+  <div class="home-banner-text-overlay" id="faith-banner-text">
+    <span class="home-banner-heading">FAITH LIFE</span>
+  </div>
+  </div>
 </div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-    const banner = document.getElementById('banner-parallax');
-    const bg = document.getElementById('banner-img');
+  document.addEventListener("DOMContentLoaded", function () {
+    const banner = document.getElementById('faith-page-banner');
+    const bg = document.getElementById('faith-banner-img');
     if (!banner || !bg) return;
 
     const speed = 0.1;
 
     function updateParallax() {
-        const rect = banner.getBoundingClientRect();
-        const scrollY = window.scrollY || window.pageYOffset;
-        const bannerTop = rect.top + scrollY;
+      const rect = banner.getBoundingClientRect();
+      const scrollY = window.scrollY || window.pageYOffset;
+      const bannerTop = rect.top + scrollY;
 
-        if (scrollY + window.innerHeight > bannerTop && scrollY < bannerTop + banner.offsetHeight) {
+      if (scrollY + window.innerHeight > bannerTop && scrollY < bannerTop + banner.offsetHeight) {
         const offset = (scrollY - bannerTop) * speed;
         bg.style.transform = `translate(0%, ${offset}px)`;
-        } else {
+      } else {
         bg.style.transform = 'translate(0%, 0)';
-        }
+      }
     }
 
     // Apply parallax immediately and on scroll
     updateParallax();
     window.addEventListener('scroll', updateParallax);
-    });
+  });
 </script>
 
 <!-- Fade-in effect -->
