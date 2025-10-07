@@ -1,20 +1,31 @@
 {{ define "main" }}
+  
+  
   {{ with .Params.banner }}
+    <!-- Spacer for floating header -->
+    <div class="banner-spacer-mobile" style="height: 8rem;"></div>
+    <div class="banner-spacer-desktop" style="height: 7rem;"></div>
+    <style>
+      @media (min-width: 769px) {
+        .banner-spacer-mobile { display: none !important; }
+      }
+      @media (max-width: 768px) {
+        .banner-spacer-desktop { display: none !important; }
+      }
+    </style>
     <!-- Banner -->
-    <div id="banner-parallax" class="relative w-full min-h-[200px] md:min-h-0 mb-8 overflow-hidden" style="margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw);">
+    <div id="banner-parallax" class="relative min-h-[200px] md:min-h-0 mb-8 overflow-hidden">
       <img
         src="/images/Banners/CoyleBannerImages.png"
         alt="Green Graphic with images of students in Coyle Hall throughout the years"
-        class="absolute left-1/2 top-0 h-full min-w-[100vw] object-cover -translate-x-1/2 md:relative md:left-0 md:top-0 md:w-full md:h-auto md:object-contain md:translate-x-0 block"
+        class="relative w-full h-auto object-cover block"
         style="max-width:none;"
         id="home-banner-img"
-      >
-      <img
-        src="/images/Banners/WelcomeCoyle.png"
-        alt="Welcome to Coyle Hall"
-        class="absolute left-1/2 top-1/2 min-w-[1vw] object-cover pointer-events-none transform -translate-x-1/2 -translate-y-1/2"
-        id="home-banner-text"
       />
+  <div class="home-banner-text-overlay" id="home-banner-text">
+        <span class="home-banner-subheading">WELCOME TO</span>
+        <span class="home-banner-heading">COYLE HALL</span>
+      </div>
     </div>
 
     <script>
