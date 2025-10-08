@@ -183,4 +183,75 @@
       },
     },
   });
+
+  // Floating Navbar and Banner Scroll Effect
+  // ----------------------------------------
+  const floatingHeader = document.querySelector('.floating-header');
+  const bannerElements = document.querySelectorAll('#banner-parallax, [id*="banner-parallax"]');
+  const scrollDistance = 150; // Distance in pixels over which transition occurs
+  
+  console.log('Scroll effect initialized');
+  console.log('Found header:', floatingHeader);
+  console.log('Found banners:', bannerElements.length);
+
+  const handleScroll = () => {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const isMobileScreen = window.innerWidth <= 768;
+    
+    // Calculate progress from 0 to 1 based on scroll position
+    const progress = Math.min(scrollTop / scrollDistance, 1);
+    
+    // Header transitions
+    if (floatingHeader) {
+      const headerOffset = isMobileScreen ? 6 : 8;
+      const currentOffset = progress * headerOffset;
+      
+      floatingHeader.style.setProperty('top', `${currentOffset}px`, 'important');
+      floatingHeader.style.setProperty('left', `${currentOffset}px`, 'important');
+      floatingHeader.style.setProperty('right', `${currentOffset}px`, 'important');
+    }
+    
+    // Navbar border radius
+    const navbar = document.querySelector('.floating-navbar');
+    if (navbar) {
+      const maxRadius = 24;
+      const currentRadius = progress * maxRadius;
+      navbar.style.setProperty('border-radius', `${currentRadius}px`, 'important');
+      
+      // Shadow intensity
+      const shadowIntensity = 0.1 + (progress * 0.3); // 0.1 to 0.4
+      const shadowBlur = 2 + (progress * 38); // 2px to 40px
+      navbar.style.setProperty('box-shadow', `0 ${shadowBlur}px ${shadowBlur}px rgba(0, 0, 0, ${shadowIntensity})`, 'important');
+    }
+    
+    // Banner transitions
+    bannerElements.forEach(banner => {
+      const bannerOffset = isMobileScreen ? 6 : 8;
+      const maxMargin = bannerOffset;
+      const currentMargin = progress * maxMargin;
+      
+      const maxRadius = 24;
+      const currentRadius = progress * maxRadius;
+      
+      banner.style.setProperty('border-radius', `${currentRadius}px`, 'important');
+      banner.style.setProperty('margin-left', `${currentMargin}px`, 'important');
+      banner.style.setProperty('margin-right', `${currentMargin}px`, 'important');
+      banner.style.setProperty('width', `calc(100% - ${currentMargin * 2}px)`, 'important');
+    });
+  };
+
+  // Throttle scroll events for better performance
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        handleScroll();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+
+  // Initial check on page load
+  handleScroll();
 })();
