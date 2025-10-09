@@ -1,47 +1,104 @@
 {{ define "main" }}
+  
+  
   {{ with .Params.banner }}
+    <style>
+      /* Remove all top spacing for home page */
+      body .section:first-of-type,
+      body .section-sm:first-of-type {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+      }
+      
+      /* Make home banner full width at all screen sizes */
+      #home-banner-wrapper {
+        width: 100vw !important;
+        position: relative !important;
+        left: 50% !important;
+        right: 50% !important;
+        margin-left: -50vw !important;
+        margin-right: -50vw !important;
+        padding: 0 0px !important;
+        box-sizing: border-box !important;
+      }
+      
+      /* Mobile padding for banner */
+      @media (max-width: 768px) {
+        #home-banner-wrapper {
+          padding: 0 2px !important;
+        }
+      }
+      
+      #banner-parallax {
+          position: relative;
+          overflow: hidden;
+          background-image: url('/images/Banners/CoyleBannerImages.png');
+          background-attachment: fixed;
+          background-position: center 90%;
+          background-repeat: no-repeat;
+          background-size: auto 60%;
+          height: 50vh;
+          min-height: 400px;
+      }
+
+      #home-banner-img {
+        position: absolute !important;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60%;
+        height: auto;
+        object-fit: cover;
+        will-change: transform;
+      }
+
+      @media (max-width: 1200px) {
+          #banner-parallax {
+              background-size: auto 60%;
+              background-position: center 85%;
+          }
+      }
+
+      @media (max-width: 1024px) {
+          #banner-parallax {
+              background-size: auto 60%;
+              background-position: center 80%;
+              height: 45vh !important;
+          }
+      }
+
+      @media (max-width: 768px) {
+          #banner-parallax {
+              background-size: auto 60%;
+              background-position: center 75%;
+              height: 40vh !important;
+              min-height: 350px !important;
+          }
+      }
+    </style>
+
     <!-- Banner -->
-    <div id="banner-parallax" class="relative w-full min-h-[200px] md:min-h-0 mb-8 overflow-hidden" style="margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw);">
-      <img
-        src="/images/Banners/CoyleBannerImages.png"
-        alt="Green Graphic with images of students in Coyle Hall throughout the years"
-        class="absolute left-1/2 top-0 h-full min-w-[100vw] object-cover -translate-x-1/2 md:relative md:left-0 md:top-0 md:w-full md:h-auto md:object-contain md:translate-x-0 block"
-        style="max-width:none;"
-        id="home-banner-img"
+    <div id="home-banner-wrapper">
+      <div id="banner-parallax" 
+           class="relative mb-8 overflow-hidden"
       >
-      <img
-        src="/images/Banners/WelcomeCoyle.png"
-        alt="Welcome to Coyle Hall"
-        class="absolute left-1/2 top-1/2 min-w-[1vw] object-cover pointer-events-none transform -translate-x-1/2 -translate-y-1/2"
-        id="home-banner-text"
-      />
+        <div class="home-banner-text-overlay" id="home-banner-text">
+          <span class="home-banner-subheading">WELCOME TO</span>
+          <span class="home-banner-heading">COYLE HALL</span>
+        </div>
+      </div>
     </div>
 
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const banner = document.getElementById('banner-parallax');
-        const bg = document.getElementById('home-banner-img');
-        if (!banner || !bg) return;
+      function updateParallax() {
+        const banner = document.getElementById("banner-parallax");
+        if (!banner) return;
+        const scrollY = window.scrollY || window.pageYOffset;
+        banner.style.backgroundPositionY = `${scrollY * -0.15}px`;
+      }
 
-        const speed = 0.1;
-
-        function updateParallax() {
-          const rect = banner.getBoundingClientRect();
-          const scrollY = window.scrollY || window.pageYOffset;
-          const bannerTop = rect.top + scrollY;
-
-          if (scrollY + window.innerHeight > bannerTop && scrollY < bannerTop + banner.offsetHeight) {
-            const offset = (scrollY - bannerTop) * speed;
-            bg.style.transform = `translate(0%, ${offset}px)`;
-          } else {
-            bg.style.transform = 'translate(0%, 0)';
-          }
-        }
-
-        // Apply parallax immediately and on scroll
-        updateParallax();
-        window.addEventListener('scroll', updateParallax);
-      });
+      document.addEventListener("DOMContentLoaded", updateParallax);
+      window.addEventListener("scroll", updateParallax, { passive: true });
     </script>
 
     <!-- Fade-in effect -->

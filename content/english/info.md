@@ -50,4 +50,8 @@ For technical issues with the website or suggestions for improvements, please co
 
 ---
 
-*Last updated: August 2025*
+##### © 2025 <a href="https://residentiallife.nd.edu/undergraduate/halls/coyle-community-in-zahm-hall/" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">Coyle Hall - University of Notre Dame</a>
+
+*Updated: August 2025*
+
+*Changelog available on [GitHub](https://github.com/fisher-hall/coyle-hall-site?tab=readme-ov-file)*

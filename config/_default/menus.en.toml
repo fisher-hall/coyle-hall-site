@@ -53,28 +53,29 @@ url = "/building"
 weight = 2
 
 [[main]]
+parent = "Events"
 name = "Traditions"
 url = "/traditions"
-weight = 4
+weight = 1
 
 [[main]]
 name = "Faith"
 url = "/faith"
-weight = 5
-
-[[main]]
-name = "Current Semester"
-url = "/current"
 weight = 6
 
 [[main]]
-parent = "Current Semester"
+name = "Events"
+url = "/current"
+weight = 5
+
+[[main]]
+parent = "Events"
 name = "IronRA"
 url = "/current/ironra"
-weight = 1
+weight = 2
 
 
 [[main]]
 name = "New Crew"
 url = "/incoming-students"
-weight = 6
+weight = 7

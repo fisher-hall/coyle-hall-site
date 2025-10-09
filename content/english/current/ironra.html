@@ -1,24 +1,80 @@
 ---
 title: "ironRA"
 ---
-
 <style>
+  /* Remove all top spacing for ironra page */
+  body .section:first-of-type,
+  body .section-sm:first-of-type {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+  
+  /* Make ironra banner full width at all screen sizes */
+  #ironra-banner-wrapper {
+    width: 100vw !important;
+    position: relative !important;
+    left: 50% !important;
+    right: 50% !important;
+    margin-left: -50vw !important;
+    margin-right: -50vw !important;
+    padding: 0 0px !important;
+    box-sizing: border-box !important;
+  }
+  
+  /* Mobile padding for banner */
+  @media (max-width: 768px) {
+    #ironra-banner-wrapper {
+      padding: 0 2px !important;
+    }
+  }
+  
   #banner-parallax {
-    margin-top: 0 !important;
-    padding-top: 0 !important;
-    margin-bottom: 0 !important;
-    padding-bottom: 0 !important;
+      position: relative;
+      overflow: hidden;
+      background-image: url('/images/Banners/IronRABanner.png');
+      background-attachment: fixed;
+      background-position: center 90%;
+      background-repeat: no-repeat;
+      background-size: auto 60%;
+      height: 30vh;
+      min-height: 300px;
   }
-  .section-sm:first-of-type {
-    margin-top: 0 !important;
-    padding-top: 0 !important;
-  }
-  /* Remove top margin from the first element after the header if needed */
-  #ironra-banner-img, #ironra-banner-text {
-    margin-top: 0 !important;
-    padding-top: 0 !important;
-    display: block;
-  }
+
+#ironra-banner-img {
+  position: absolute !important;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: auto;
+  object-fit: cover;
+  will-change: transform;
+}
+
+@media (max-width: 1200px) {
+    #banner-parallax {
+        background-size: auto 60%;
+        background-position: center 85%;
+    }
+}
+
+@media (max-width: 1024px) {
+    #banner-parallax {
+        background-size: auto 60%;
+        background-position: center 80%;
+        height: 28vh !important;
+    }
+}
+
+@media (max-width: 768px) {
+    #banner-parallax {
+        background-size: auto 60%;
+        background-position: center 75%;
+        height: 30vh !important;
+        min-height: 250px !important;
+    }
+}
+
   /* Points system text that switches with light/dark mode */
   .points-text {
     color: var(--color-lightmode-gray);
@@ -28,47 +84,28 @@ title: "ironRA"
   }
 </style>
 
-<div id="banner-parallax" class="relative left-1/2 right-1/2 w-screen -translate-x-1/2 min-h-[200px] md:min-h-0 mb-8 overflow-hidden">      
-    <img
-    src="/images/Banners/IronRABanner.png"
-    alt="An image of a track with a green tint"
-    class="absolute left-1/2 top-0 h-full min-w-[100vw] sm:object-contain object-cover -translate-x-1/2 md:relative md:left-0 md:top-0 md:w-full md:h-auto md:object-contain md:translate-x-0 block"
-    style="max-width:none;"
-    id="ironra-banner-img"
-    >
-    <img
-    src="/images/Banners/IronRABannerText.png"
-    alt="ironRA"
-    class="absolute left-1/2 top-1/2 min-w-[1vw] object-cover pointer-events-none transform -translate-x-1/2 -translate-y-1/2"
-    id="ironra-banner-text"
-    />
+<!-- Banner -->
+<div id="ironra-banner-wrapper">
+  <div id="banner-parallax" 
+       class="relative mb-8 overflow-hidden"
+  >
+    <div class="home-banner-text-overlay" id="ironra-banner-text">
+      <span class="home-banner-heading">IRONRA</span>
+    </div>
+  </div>
 </div>
 
+
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-    const banner = document.getElementById('banner-parallax');
-    const bg = document.getElementById('ironra-banner-img');
-    if (!banner || !bg) return;
+function updateParallax() {
+  const banner = document.getElementById("banner-parallax");
+  if (!banner) return;
+  const scrollY = window.scrollY || window.pageYOffset;
+  banner.style.backgroundPositionY = `${scrollY * -0.15}px`;
+}
 
-    const speed = 0.1;
-
-    function updateParallax() {
-        const rect = banner.getBoundingClientRect();
-        const scrollY = window.scrollY || window.pageYOffset;
-        const bannerTop = rect.top + scrollY;
-
-        if (scrollY + window.innerHeight > bannerTop && scrollY < bannerTop + banner.offsetHeight) {
-        const offset = (scrollY - bannerTop) * speed;
-        bg.style.transform = `translate(0%, ${offset}px)`;
-        } else {
-        bg.style.transform = 'translate(0%, 0)';
-        }
-    }
-
-    // Apply parallax immediately and on scroll
-    updateParallax();
-    window.addEventListener('scroll', updateParallax);
-    });
+document.addEventListener("DOMContentLoaded", updateParallax);
+window.addEventListener("scroll", updateParallax, { passive: true });
 </script>
 
 
