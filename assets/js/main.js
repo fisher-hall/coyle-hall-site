@@ -203,7 +203,7 @@
     
     // Header transitions
     if (floatingHeader) {
-      const headerOffset = isMobileScreen ? 3 : 4;
+      const headerOffset = isMobileScreen ? 6 : 8;
       const currentOffset = progress * headerOffset;
       
       floatingHeader.style.setProperty('top', `${currentOffset}px`, 'important');
