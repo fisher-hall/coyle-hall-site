@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Graduate&display=swap');
 
-footer {
-  margin-bottom: 0 !important;
-  padding-bottom: 0 !important;
-}
 body {
   margin-bottom: 0 !important;
   padding-bottom: 0 !important;
@@ -845,6 +841,7 @@ footer .social-icons i {
 footer {
     background-color: var(--nd-green);
     color: #fff;
+    border-radius: 24px !important;
 }
 
 .btn, .social-icons a{

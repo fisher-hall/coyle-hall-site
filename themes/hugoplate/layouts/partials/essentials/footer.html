@@ -1,6 +1,7 @@
-<footer class="bg-light dark:bg-darkmode-light">
-  <div class="container">
-    <div class="flex flex-col md:grid md:grid-cols-3 md:items-center py-2 gap-6 md:gap-4">
+<div class="footer-wrapper mb-2" style="margin-left: 8px; margin-right: 8px;">
+  <footer class="footer bg-light dark:bg-darkmode-light shadow-lg rounded-2xl px-6 py-4">
+    <div class="container w-full">
+      <div class="flex flex-col md:grid md:grid-cols-3 md:items-center gap-6 md:gap-4">
       {{/*  COYLE LOGO  */}}
       <div class="flex items-center text-center md:text-left md:justify-self-start">
         <a
@@ -15,7 +16,7 @@
           {{ range site.Data.social.main }}
           <li>
             <a
-              class="flex items-center justify-center gap-2 px-1 py-3 text-dark hover:text-primary dark:text-white dark:hover:text-primary whitespace-nowrap rounded-2xl transition-colors duration-200"
+              class="flex items-center justify-center gap-2 px-1 text-dark hover:text-primary dark:text-white dark:hover:text-primary whitespace-nowrap rounded-2xl transition-colors duration-200"
               href="{{ .link | safeURL }}"
               {{ if hasPrefix .link `http` }}target="_blank" rel="noopener noreferrer nofollow"{{ end }}
               aria-label="{{ .name }}"
@@ -35,9 +36,5 @@
       </div>  <!-- New row with centered text below the three columns -->
     </div>
   </div>
-  <div class="row">
-    <div class="col-12 text-center mb-2">
-      <p class="footer-extra-text">© 2025 | <a href="https://residentiallife.nd.edu/undergraduate/halls/coyle-community-in-zahm-hall/" target="_blank" rel="noopener">Coyle Hall - University of Notre Dame </a></p>
-    </div>
-  </div>
-</footer>
+  </footer>
+</div>
