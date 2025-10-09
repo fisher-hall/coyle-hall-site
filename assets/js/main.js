@@ -203,7 +203,7 @@
     
     // Header transitions
     if (floatingHeader) {
-      const headerOffset = isMobileScreen ? 6 : 8;
+      const headerOffset = isMobileScreen ? 3 : 4;
       const currentOffset = progress * headerOffset;
       
       floatingHeader.style.setProperty('top', `${currentOffset}px`, 'important');
@@ -219,8 +219,8 @@
       navbar.style.setProperty('border-radius', `${currentRadius}px`, 'important');
       
       // Shadow intensity
-      const shadowIntensity = 0.1 + (progress * 0.3); // 0.1 to 0.4
-      const shadowBlur = 2 + (progress * 38); // 2px to 40px
+      const shadowIntensity = 0.05 + (progress * 0.15); // 0.05 to 0.2
+      const shadowBlur = 2 + (progress * 18); // 2px to 20px
       navbar.style.setProperty('box-shadow', `0 ${shadowBlur}px ${shadowBlur}px rgba(0, 0, 0, ${shadowIntensity})`, 'important');
     }
     
