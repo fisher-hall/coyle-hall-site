@@ -254,4 +254,264 @@
 
   // Initial check on page load
   handleScroll();
+
+  // Inline Search Bar Toggle
+  // ----------------------------------------
+  const searchButton = document.querySelector('[data-target="search-modal"]');
+  const searchNavMenu = document.querySelector('#nav-menu');
+  const navbarRightSide = document.querySelector('.header .navbar > div.order-1');
+  let isSearchActive = false;
+  let searchContainer = null;
+
+  const createSearchBar = () => {
+    const container = document.createElement('div');
+    container.className = 'inline-search-container';
+    container.innerHTML = `
+      <i class="fa-solid fa-search search-icon-inside"></i>
+      <input 
+        type="text" 
+        id="inline-search-input"
+        class="inline-search-input" 
+        placeholder="Search..."
+        autocomplete="off"
+      />
+    `;
+    
+    // Make clicking anywhere in the container focus the input
+    container.addEventListener('click', (e) => {
+      const input = document.getElementById('inline-search-input');
+      if (input) {
+        input.focus();
+      }
+    });
+    
+    return container;
+  };
+
+  const createInlineResultsContainer = () => {
+    const resultsDiv = document.createElement('div');
+    resultsDiv.id = 'inline-search-results';
+    resultsDiv.className = 'inline-search-results';
+    return resultsDiv;
+  };
+
+  const displayInlineResults = (results, query, resultsDiv) => {
+    if (results.length === 0) {
+      resultsDiv.innerHTML = '<div class="p-4 text-white">No results found</div>';
+      resultsDiv.style.display = 'block';
+      return;
+    }
+
+    const highlightText = (text, query) => {
+      if (!text || !query) return text;
+      const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+      return text.replace(regex, '<mark class="bg-yellow-300 text-gray-900 px-1 rounded">$1</mark>');
+    };
+
+    const html = results.slice(0, 10).map(page => {
+      if (!page) return '';
+      const title = highlightText(page.title, query);
+      const description = highlightText(page.description || '', query);
+      
+      return `
+        <a href="${page.url}" class="search-result-item">
+          <div class="search-result-title">${title}</div>
+          ${description ? `<div class="search-result-description">${description}</div>` : ''}
+        </a>
+      `;
+    }).join('');
+
+    resultsDiv.innerHTML = html;
+    resultsDiv.style.display = 'block';
+  };
+
+  const showInlineSearch = () => {
+    if (isSearchActive) return;
+    isSearchActive = true;
+
+    // Morph search icon to X
+    const searchIcon = searchButton.querySelector('i');
+    searchIcon.style.transform = 'rotate(90deg) scale(0)';
+    searchIcon.style.transition = 'transform 0.3s ease';
+    
+    setTimeout(() => {
+      searchIcon.classList.remove('fa-search');
+      searchIcon.classList.add('fa-times');
+      searchIcon.style.transform = 'rotate(0deg) scale(1)';
+    }, 150);
+
+    // Create and insert search bar
+    searchContainer = createSearchBar();
+    
+    // Create results container
+    const resultsContainer = createInlineResultsContainer();
+    document.body.appendChild(resultsContainer);
+    
+    // Get the logo container and right side container to calculate proper width
+    const logoContainer = document.querySelector('.header .navbar > div.order-0');
+    const rightSideContainer = document.querySelector('.header .navbar > div.order-1');
+    
+    // Insert before nav-menu
+    searchNavMenu.parentElement.insertBefore(searchContainer, searchNavMenu);
+    
+    // On large screens, use fixed width and center with absolute positioning
+    if (window.innerWidth >= 1024) {
+      // Use 60% of screen width with a reasonable max
+      const searchWidth = Math.min(900, window.innerWidth * 0.6);
+      searchContainer.style.width = `${searchWidth}px`;
+      searchContainer.style.maxWidth = 'none'; // Allow it to scale freely
+    }
+
+    // Animate nav menu out
+    searchNavMenu.style.opacity = '0';
+    searchNavMenu.style.transform = 'translateX(-20px)';
+    searchNavMenu.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+    
+    setTimeout(() => {
+      searchNavMenu.style.display = 'none';
+      // Animate search bar in - start from scaled down and slightly left
+      searchContainer.style.opacity = '0';
+      // On large screens, maintain the translateX(-50%) for centering, slide in from left
+      if (window.innerWidth >= 1024) {
+        searchContainer.style.transform = 'translateX(calc(-50% - 20px)) scale(0.95)';
+      } else {
+        searchContainer.style.transform = 'translateX(-20px) scale(0.95)';
+      }
+      searchContainer.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+      
+      setTimeout(() => {
+        searchContainer.style.opacity = '1';
+        // Slide to center position
+        if (window.innerWidth >= 1024) {
+          searchContainer.style.transform = 'translateX(-50%) scale(1)';
+        } else {
+          searchContainer.style.transform = 'translateX(0) scale(1)';
+        }
+        // Focus the input
+        const input = document.getElementById('inline-search-input');
+        const resultsDiv = document.getElementById('inline-search-results');
+        
+        if (input) {
+          input.focus();
+          
+          // Trigger search on input
+          input.addEventListener('input', async function(e) {
+            const query = e.target.value.trim();
+            
+            if (query.length < 2) {
+              resultsDiv.innerHTML = '';
+              resultsDiv.style.display = 'none';
+              return;
+            }
+            
+            // Load and search
+            try {
+              const response = await fetch('/searchindex.json');
+              const searchData = await response.json();
+              
+              // Simple search
+              const results = searchData.filter(page => {
+                const searchText = (page.title + ' ' + (page.description || '') + ' ' + (page.content || '')).toLowerCase();
+                return searchText.includes(query.toLowerCase());
+              });
+              
+              displayInlineResults(results, query, resultsDiv);
+            } catch (error) {
+              console.error('Search error:', error);
+              resultsDiv.innerHTML = '<div class="p-4 text-white">Search error occurred</div>';
+              resultsDiv.style.display = 'block';
+            }
+          });
+          
+          // Add blur handler to refocus on container click
+          searchContainer.addEventListener('click', () => {
+            input.focus();
+          });
+          
+          // Prevent input blur when clicking inside container
+          input.addEventListener('blur', (e) => {
+            // Small delay to allow click to register first
+            setTimeout(() => {
+              if (isSearchActive && document.activeElement !== input) {
+                input.focus();
+              }
+            }, 100);
+          });
+        }
+      }, 10);
+    }, 300);
+  };
+
+  const hideInlineSearch = () => {
+    if (!isSearchActive) return;
+    isSearchActive = false;
+
+    // Hide and remove inline search results
+    const resultsDiv = document.getElementById('inline-search-results');
+    if (resultsDiv) {
+      resultsDiv.style.display = 'none';
+      resultsDiv.innerHTML = '';
+      resultsDiv.remove();
+    }
+
+    // Morph X back to search icon
+    const searchIcon = searchButton.querySelector('i');
+    searchIcon.style.transform = 'rotate(90deg) scale(0)';
+    searchIcon.style.transition = 'transform 0.3s ease';
+    
+    setTimeout(() => {
+      searchIcon.classList.remove('fa-times');
+      searchIcon.classList.add('fa-search');
+      searchIcon.style.transform = 'rotate(0deg) scale(1)';
+    }, 150);
+
+    // Animate search bar out
+    searchContainer.style.opacity = '0';
+    searchContainer.style.transform = 'scale(0.95)';
+
+    setTimeout(() => {
+      searchContainer.remove();
+      searchContainer = null;
+
+      // Animate nav menu back in
+      searchNavMenu.style.display = '';
+      searchNavMenu.style.opacity = '0';
+      searchNavMenu.style.transform = 'translateX(-20px)';
+
+      setTimeout(() => {
+        searchNavMenu.style.opacity = '1';
+        searchNavMenu.style.transform = 'translateX(0)';
+      }, 10);
+    }, 300);
+  };
+
+  // Hide the old search modal permanently
+  const searchModal = document.getElementById('search-modal');
+  if (searchModal) {
+    searchModal.style.display = 'none !important';
+    searchModal.remove();
+  }
+
+  // Intercept search button click
+  if (searchButton) {
+    searchButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+      
+      if (isSearchActive) {
+        hideInlineSearch();
+      } else {
+        showInlineSearch();
+      }
+      return false;
+    }, true);
+  }
+
+  // Close search on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isSearchActive) {
+      hideInlineSearch();
+    }
+  });
 })();
