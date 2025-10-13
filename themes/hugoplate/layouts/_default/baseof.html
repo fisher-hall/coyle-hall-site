@@ -41,10 +41,11 @@
     {{ partial "custom-search-modal.html" . }}
 
     <!-- Spacer for floating header -->
-    <div class="banner-spacer-mobile" style="height: 6rem;"></div>
+    <div class="banner-spacer-mobile" style="height: 5.5rem;"></div>
     <div class="banner-spacer-desktop" style="height: 5rem;"></div>
     <style>
-      @media (min-width: 769px) {
+      /*  hide on desktop  */
+      @media (min-width: 769px) { 
         .banner-spacer-mobile { display: none !important; }
       }
       @media (max-width: 768px) {
