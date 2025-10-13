@@ -1,0 +1,48 @@
+
+---
+title: "Car Smash"
+
+---
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Fade-in effect -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const faders = document.querySelectorAll('.fade-in-section');
+    const appearOptions = {
+        threshold: 0.2,
+        rootMargin: "0px 0px -40px 0px"
+    };
+
+    const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+        entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+        }
+        });
+    }, appearOptions);
+
+    faders.forEach(fader => {
+        appearOnScroll.observe(fader);
+    });
+    });
+</script>
+
+
+<div style="text-align:center; margin-bottom:2rem;">
+    <a href="/traditions" class="btn btn-primary">
+        Learn More About This Tradition
+        <i class="fa fa-arrow-right pl-2"></i>
+    </a>
+</div>
+
+<a href="/images/CarSmash.jpg" target="_blank" rel="noopener">
+          <img
+            src="/images/CarSmash.jpg"
+            alt="Various students smashing a car with a hammer"
+            class="rounded-2xl w-full max-w-xl shadow-lg md:mt-6"
+            style="object-fit: cover;"
+          />
+        </a>

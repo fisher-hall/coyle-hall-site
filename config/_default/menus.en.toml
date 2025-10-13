@@ -74,6 +74,12 @@ name = "IronRA"
 url = "/current/ironra"
 weight = 2
 
+[[main]]
+parent = "Events"
+name = "Car Smash"
+url = "/car-smash"
+weight = 3
+
 
 [[main]]
 name = "New Crew"
