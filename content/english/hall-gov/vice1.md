@@ -2,8 +2,8 @@
 title: Zach Taylor
 email: ztaylor3@nd.edu
 image: "/images/headshots/zachtaylor.jpg"
-description: Hall Vice President
-weight: 2
+description: Hall Vice President (Spring)
+weight: 3
 params:
     hometown: "Sterling, VA"
     major: "Political Science"

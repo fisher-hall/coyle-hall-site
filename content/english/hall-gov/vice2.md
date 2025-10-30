@@ -2,8 +2,8 @@
 title: Tommie Phillips
 email: tphilli8@nd.edu
 image: "/images/headshots/tommiephillips.jpg"
-description: Hall Vice President
-weight: 3
+description: Hall Vice President (Fall)
+weight: 2
 params:
     hometown: "Palos Verdes, CA"
     major: "International Economics and ACMS"

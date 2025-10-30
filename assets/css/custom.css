@@ -86,14 +86,26 @@ mark {
   --coyle-dark-green: #064121;
   --coyle-dark-fade: rgb(6, 65, 33, 1);
   --coyle-light-green: #0a843d; /* same as nd-green */
-  --coyle-accent-green: rgba(70, 199, 102, 0.9);
+  --coyle-accent-green: rgba(87, 187, 72, 1);
   --nd-blue: #0c2340;
   --nd-gold: rgb(174, 145, 66);
   --nd-light: #5faf81;
   --color-custom-light: #CCCCCC;
   --color-darkmode-gray: #B4AFB5;
   --color-lightmode-gray: #444;
+
+  --primary-color: var(--coyle-dark-green);
+  --secondary-color: var(--coyle-light-green);
+  --light-color: var(--nd-light); 
 }
+
+.dark {
+  --primary-color: var(--coyle-light-green);
+  --secondary-color: var(--coyle-accent-green);
+  --light-color: var(--coyle-light-green);
+}
+
+
 
 .bg-custom-light {
   background-color: var(--color-custom-light) !important;
@@ -164,10 +176,10 @@ body, p {
 
 .social-icons a {
   border-radius: 16px; 
-  color: var(--nd-blue); 
 }
 
 .social-icons i {
+  color: white !important;
   font-size: 1.5rem !important;
   display: flex;
   align-items: center;
@@ -243,11 +255,8 @@ body {
 }
 
 /* Hamburger menu styling for floating navbar */
+.dark .floating-navbar .hamburger-btn,
 .floating-navbar .hamburger-btn {
-    color: rgba(255, 255, 255, 0.9) !important;
-}
-
-.dark .floating-navbar .hamburger-btn {
     color: rgba(255, 255, 255, 0.9) !important;
 }
 
@@ -472,7 +481,7 @@ footer .social-icons i {
   position: absolute; 
   border-radius: 16px; 
   min-width: 240px;
-  background-color: var(--nd-green) !important;
+  background-color: var(--coyle-dark-green) !important;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 4px 10px rgba(0, 0, 0, 0.2) !important;
 }
 
@@ -498,7 +507,7 @@ footer .social-icons i {
     top: 70px !important; /* Start higher to cover the bars */
     left: 0;
     right: 0;
-    background-color: var(--nd-green) !important;
+    background-color: var(--coyle-dark-green) !important;
     z-index: 150 !important; /* Higher than everything else */
     margin: 0;
     padding: 2rem 1rem 1rem 1rem; /* Extra top padding to account for starting higher */
@@ -613,12 +622,12 @@ footer .social-icons i {
   /* NEW CREW (incoming-students) default style: white bg + green text (override generic white nav-link color) */
   #nav-menu .nav-item .nav-link.incoming-students:not(.active) {
     background:#ffffff !important;
-    color: var(--nd-green) !important;
+    color: var(--coyle-dark-green) !important;
     box-shadow:0 0 0 4px rgba(255,255,255,0.15) inset;
   }
 
   #nav-menu .nav-item .nav-link.incoming-students:not(.active):hover {
-    background: rgba(174,145,66,0.85) !important;
+    background: var(--coyle-light-green)!important;
     color:#ffffff !important;
   }
   
@@ -626,7 +635,7 @@ footer .social-icons i {
   #nav-menu .btn,
   #nav-menu .btn-outline-primary,
   #nav-menu .nav-item .btn {
-    color: var(--nd-green) !important;
+    color: var(--coyle-dark-green) !important;
     background: #ffffff !important;
     border: none !important;
   padding: 12px 16px !important; /* standardized padding */
@@ -644,15 +653,15 @@ footer .social-icons i {
   /* Force override for btn-sm utility */
   #nav-menu .btn.btn-sm, #nav-menu .btn-outline-primary.btn-sm { font-size: 3rem !important; padding: 12px 16px !important; }
   #nav-menu .btn:hover,
-  #nav-menu .btn-outline-primary:hover { background:#ffffff !important; color: var(--nd-green) !important; }
+  #nav-menu .btn-outline-primary:hover { background:#ffffff !important; color: var(--primary-color) !important; }
   #nav-menu .btn.active,
-  #nav-menu .btn-outline-primary.active { background:#ffffff !important; color: var(--nd-green) !important; }
-  #nav-menu .btn-outline-primary.active:hover { background:#ffffff !important; color: var(--nd-green) !important; }
-  
+  #nav-menu .btn-outline-primary.active { background:#ffffff !important; color: var(--primary-color) !important; }
+  #nav-menu .btn-outline-primary.active:hover { background:#ffffff !important; color: var(--primary-color) !important; }
+
   /* Force green text for NEW CREW button - more specific selector */
   #nav-menu li .btn-outline-primary,
   #nav-menu .nav-item .btn-outline-primary {
-    color: var(--nd-green) !important;
+    color: var(--coyle-dark-green) !important;
     background-color: white !important;
   }
   
@@ -666,7 +675,6 @@ footer .social-icons i {
     position: fixed !important;
     top: 140px !important; left:0 !important;
     width: 100vw !important; height: 100vh !important;
-    background: rgba(10,132,61,0.98) !important;
     backdrop-filter: blur(10px) !important;
     z-index: 10000 !important;
     padding: 120px 34px 34px !important;
@@ -773,7 +781,7 @@ footer .social-icons i {
       outline: none !important;
     }
     .nav-dropdown-list .nav-dropdown-item a:hover {
-      background: rgba(174,145,66,0.85) !important;
+      background:  var(--coyle-light-green) !important;
       color: #fff !important;
     }
     .mobile-back-button {
@@ -831,7 +839,7 @@ footer .social-icons i {
   }
   .nav-dropdown-list .nav-dropdown-item a:hover,
   .nav-dropdown-list .nav-dropdown-item:hover a {
-    background: rgba(174, 145, 66, 0.85) !important;
+    background: var(--coyle-light-green) !important;
     color: #fff !important;
   }
   .header .navbar *:not(i) {
@@ -1224,7 +1232,7 @@ main, .main {
 /* Incoming Students Button - Inactive state */
 .header .navbar a[href="/incoming-students"]:not(.active):not([aria-current="page"]):not(:hover) {
   background: #FFFFFF !important;
-  color: var(--nd-green) !important;
+  color: var(--coyle-dark-green) !important;
   border-radius: 16px !important;
 }
 
@@ -1257,7 +1265,7 @@ main, .main {
   #nav-menu .nav-item a.nav-link.incoming-students:not(.active),
   #nav-menu li.nav-item a.nav-link.incoming-students:not(.active)[href*="incoming-students"] {
     background:#ffffff !important;
-    color: var(--nd-green) !important;
+    color: var(--coyle-dark-green) !important;
     box-shadow:0 0 0 4px rgba(255,255,255,0.15) inset;
   }
   #nav-menu a.nav-link.incoming-students:not(.active):hover { background: rgba(174,145,66,0.85) !important; color:#ffffff !important; }
@@ -1268,7 +1276,7 @@ main, .main {
   /* Top-level links */
   #nav-menu .nav-item .nav-link:not(.active):hover { background: transparent !important; color: inherit !important; }
   /* NEW CREW retains green text */
-  #nav-menu .nav-item .nav-link.incoming-students:not(.active):hover { background: #ffffff !important; color: var(--nd-green) !important; }
+  #nav-menu .nav-item .nav-link.incoming-students:not(.active):hover { background: #ffffff !important; color: var(--coyle-dark-green) !important; }
   /* Submenu items */
   .nav-dropdown-list .nav-dropdown-item a:not(.active):hover { background: transparent !important; color: inherit !important; }
   /* Remove any subtle opacity/gray highlight on mobile hover/tap */
@@ -1306,9 +1314,9 @@ main, .main {
   #nav-menu .nav-item .nav-link.incoming-students:not(.active):hover,
   #nav-menu .nav-item .nav-link.incoming-students:not(.active):focus,
   #nav-menu .nav-item .nav-link.incoming-students:not(.active):active {
-      color: var(--nd-green) !important;
+      color: var(--coyle-dark-green) !important;
       background:#ffffff !important;
-      -webkit-text-fill-color: var(--nd-green) !important;
+      -webkit-text-fill-color: var(--coyle-dark-green) !important;
     }
 
     /* Re-enable active state highlight on mobile */
