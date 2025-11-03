@@ -1139,7 +1139,7 @@ mark.bg-yellow-300 {
 .stats-number {
   font-size: 6rem !important;
   font-weight: bold !important;
-  color: var(--coyle-light-green) !important; 
+  color: var(--primary-color) !important; 
   line-height: 1.1 !important;
   margin-bottom: 0.15em !important;
 }
@@ -1147,7 +1147,7 @@ mark.bg-yellow-300 {
 .stats-description {
   font-size: 1.3rem !important;
   margin-bottom: 0.2em !important;
-  color: var(--coyle-accent-green) !important;
+  color: var(--secondary-color) !important;
 }
 
 

@@ -126,7 +126,8 @@ window.addEventListener("scroll", updateParallax, { passive: true });
 </script>
 
 <!-- Countdown Section -->
-<div class="row text-center my-8" style="margin-top: 2rem;">
+<div id="countdown-section">
+  <div class="row text-center my-8" style="margin-top: 2rem;">
     <div class="col-6 col-md-3 text-center">
         <div class="countdown-block">
         <span id="countdown-days" class="stats-number">00</span>
@@ -151,17 +152,17 @@ window.addEventListener("scroll", updateParallax, { passive: true });
         <div class="stats-description">Seconds</div>
         </div>
     </div>
-    <h1 class="text-5xl text-center font-extrabold mb-6 fade-in-section" style="color: var(--nd-green);">
+    <h1 class="text-5xl text-center font-extrabold mb-6 fade-in-section" style="color: var(--primary-color);">
         Until Welcome Weekend
     </h1>
+  </div>
+  <hr id="countdown-divider" class="my-6 fade-in-section border-custom-gray" style="height: 1px; border: none; background: linear-gradient(to right, transparent, var(--color-lightmode-gray) 20%, var(--color-lightmode-gray) 80%, transparent);">
+</div>
 </div>
 
-<hr class="my-6 fade-in-section border-custom-gray" style="height: 1px; border: none; background: linear-gradient(to right, transparent, var(--color-lightmode-gray) 20%, var(--color-lightmode-gray) 80%, transparent);">
-
-
 <div class="flex items-center justify-start my-1 fade-in-section" style="position: relative; z-index: 3; margin-top: 3rem;">
-    <h1 class="text-4xl ml-4 mr-4 md:text-5xl text-left font-extrabold mb-6 fade-in-section flex items-center text-black dark:text-white"
-        style="position: relative; z-index: 4; margin-top: 0;">
+    <h1 class="text-4xl ml-4 mr-4 md:text-5xl text-left font-extrabold mb-6 fade-in-section flex items-center"
+        style="position: relative; z-index: 4; margin-top: 0; color: var(--primary-color);">
         <span style="position: relative; display: inline-block;">
           <span style="position: relative; z-index: 2;">
             Welcome Incoming Students!
@@ -188,7 +189,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
 </div>
 
 <div class="flex flex-col md:flex-row gap-4 md:gap-6 mt-4 items-center justify-center fade-in-section" style="margin-top: 4rem; margin-bottom: 3rem;">
-        <a href="/building#first-year-double" class="btn btn-primary text-center" style="background-color: var(--nd-gold); border-color: var(--nd-gold);">
+        <a href="/building#first-year-double" class="btn btn-primary text-center" style="background-color: var(--secondary-color); border-color: var(--secondary-color);">
             Freshman Room Guide
             <i class="fa fa-arrow-right pl-2"></i>
         </a>
@@ -225,7 +226,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
 <div class="mx-auto relative grid md:grid-cols-4 sm:grid-cols-2 gap-15 gap-y-20 w-full my-8 fade-in-section z-index: 3">
     <div>
         <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-bed text-7xl text-[var(--nd-green)]"
+            <i class="fa fa-bed text-7xl text-[var(--primary-color)]"
                 style="transform: translateY(-60%) scale(1);
             "></i>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
@@ -239,7 +240,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
 
     <div>
         <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-shirt text-7xl text-[var(--nd-green)]"
+            <i class="fa fa-shirt text-7xl text-[var(--primary-color)]"
                 style="transform: translateY(-60%) scale(1);
             "></i>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
@@ -253,7 +254,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
 
      <div>
         <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-chair text-7xl text-[var(--nd-green)]"
+            <i class="fa fa-chair text-7xl text-[var(--primary-color)]"
                 style="transform: translateY(-60%) scale(1);
             "></i>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
@@ -267,7 +268,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
 
     <div>
         <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-align-justify text-7xl text-[var(--nd-green)]"
+            <i class="fa fa-align-justify text-7xl text-[var(--primary-color)]"
                 style="transform: translateY(-60%) scale(1);
             "></i>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
@@ -281,7 +282,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
     
     <div>
         <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-faucet-drip text-7xl text-[var(--nd-green)]"
+            <i class="fa fa-faucet-drip text-7xl text-[var(--primary-color)]"
                 style="transform: translateY(-60%) scale(1);
             "></i>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
@@ -295,7 +296,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
 
     <div>
         <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-image-portrait text-7xl text-[var(--nd-green)]"
+            <i class="fa fa-image-portrait text-7xl text-[var(--primary-color)]"
                 style="transform: translateY(-60%) scale(1);
             "></i>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
@@ -309,7 +310,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
 
     <div>
         <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-trash-can text-7xl text-[var(--nd-green)]"
+            <i class="fa fa-trash-can text-7xl text-[var(--primary-color)]"
                 style="transform: translateY(-60%) scale(1);
             "></i>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
@@ -323,7 +324,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
 
     <div>
         <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-recycle text-7xl text-[var(--nd-green)]"
+            <i class="fa fa-recycle text-7xl text-[var(--primary-color)]"
                 style="transform: translateY(-60%) scale(1);
             "></i>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
@@ -349,7 +350,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
     <h2 class="text-4xl md:text-5xl text-left font-extrabold mb-6 fade-in-section flex items-center text-black dark:text-white"
         style="position: relative; z-index: 4; margin-top: 0;">
     <span style="position: relative; display: inline-block;">
-        <span style="position: relative; z-index: 2;">
+        <span style="position: relative; z-index: 2; color: var(--primary-color);">
         Things to Bring, Pack, or Buy
         </span>
     </span>
@@ -365,11 +366,11 @@ window.addEventListener("scroll", updateParallax, { passive: true });
 </div>
 
 <div class="flex items-center justify-center my-1 fade-in-section" style="position: relative; z-index: 3; margin-bottom: 5rem; margin-top: 3rem;">
-    <h2 class="text-2xl md:text-3xl text-left font-extrabold mb-6 fade-in-section flex items-center" style="color: var(--nd-green);"
+    <h2 class="text-2xl md:text-3xl text-left font-extrabold mb-6 fade-in-section flex items-center text-black dark:text-white"
         style="position: relative; z-index: 4; margin-top: 0;">
     <span style="position: relative; display: inline-block;">
         <span style="position: relative; z-index: 2;">
-        Items You'll Need
+        What You'll Need
         </span>
     </span>
     </h2>
@@ -379,7 +380,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
     
     <div>
         <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-bed text-7xl text-[var(--nd-green)]"
+            <i class="fa fa-bed text-7xl text-[var(--primary-color)]"
                 style="transform: translateY(-60%) scale(1);
             "></i>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
@@ -393,7 +394,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
 
         <div>
         <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-fan text-7xl text-[var(--nd-green)]"
+            <i class="fa fa-fan text-7xl text-[var(--primary-color)]"
                 style="transform: translateY(-60%) scale(1);
             "></i>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
@@ -407,7 +408,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
 
     <div>
         <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-pump-soap text-7xl text-[var(--nd-green)]"
+            <i class="fa fa-pump-soap text-7xl text-[var(--primary-color)]"
                 style="transform: translateY(-60%) scale(1);
             "></i>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
@@ -422,7 +423,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
 
     <div>
         <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-basket-shopping text-7xl text-[var(--nd-green)]"
+            <i class="fa fa-basket-shopping text-7xl text-[var(--primary-color)]"
                 style="transform: translateY(-60%) scale(1);
             "></i>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
@@ -436,7 +437,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
 
     <div>
         <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-jug-detergent text-7xl text-[var(--nd-green)]"
+            <i class="fa fa-jug-detergent text-7xl text-[var(--primary-color)]"
                 style="transform: translateY(-60%) scale(1);
             "></i>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
@@ -450,7 +451,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
 
     <div>
         <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-prescription-bottle text-7xl text-[var(--nd-green)]"
+            <i class="fa fa-prescription-bottle text-7xl text-[var(--primary-color)]"
                 style="transform: translateY(-60%) scale(1);
             "></i>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
@@ -464,7 +465,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
 
     <div>
         <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-user-tie text-7xl text-[var(--nd-green)]"
+            <i class="fa fa-user-tie text-7xl text-[var(--primary-color)]"
                 style="transform: translateY(-60%) scale(1);
             "></i>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
@@ -478,7 +479,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
 
     <div>
         <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-shirt text-7xl text-[var(--nd-green)]"
+            <i class="fa fa-shirt text-7xl text-[var(--primary-color)]"
                 style="transform: translateY(-60%) scale(1);
             "></i>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
@@ -486,13 +487,13 @@ window.addEventListener("scroll", updateParallax, { passive: true });
             </span>
         </h1>
         <div class="relative flex items-center justify-center text-xl pt-5 text-center">
-            Organizers Are Helpful Too
+            Closet Organizers Are Helpful Too
         </div>
     </div>
 
     <div>
         <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-shoe-prints text-7xl text-[var(--nd-green)]"
+            <i class="fa fa-shoe-prints text-7xl text-[var(--primary-color)]"
                 style="transform: translateY(-60%) scale(1);
             "></i>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
@@ -500,13 +501,13 @@ window.addEventListener("scroll", updateParallax, { passive: true });
             </span>
         </h1>
         <div class="relative flex items-center justify-center text-xl pt-5 text-center">
-            Casual, Athletic, Formal, etc.
+            Casual, Athletic, Formal, Boots, etc.
         </div>
     </div>
 
     <div>
         <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-shower text-7xl text-[var(--nd-green)]"
+            <i class="fa fa-shower text-7xl text-[var(--primary-color)]"
                 style="transform: translateY(-60%) scale(1);
             "></i>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
@@ -520,7 +521,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
 
     <div>
         <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-laptop text-7xl text-[var(--nd-green)]"
+            <i class="fa fa-laptop text-7xl text-[var(--primary-color)]"
                 style="transform: translateY(-60%) scale(1);
             "></i>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
@@ -534,7 +535,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
 
     <div>
         <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-plug text-7xl text-[var(--nd-green)]"
+            <i class="fa fa-plug text-7xl text-[var(--primary-color)]"
                 style="transform: translateY(-60%) scale(1);
             "></i>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
@@ -542,13 +543,13 @@ window.addEventListener("scroll", updateParallax, { passive: true });
             </span>
         </h1>
         <div class="relative flex items-center justify-center text-xl pt-5 text-center">
-            Outlets Can Be Tucked Away
+            Outlets Are Plentiful, But Tucked Away
         </div>
     </div>
 
     <div>
         <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-charging-station text-7xl text-[var(--nd-green)]"
+            <i class="fa fa-charging-station text-7xl text-[var(--primary-color)]"
                 style="transform: translateY(-60%) scale(1);
             "></i>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
@@ -562,7 +563,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
 
     <div>
         <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-scroll text-7xl text-[var(--nd-green)]"
+            <i class="fa fa-scroll text-7xl text-[var(--primary-color)]"
                 style="transform: translateY(-60%) scale(1);
             "></i>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
@@ -576,7 +577,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
 
     <div>
         <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-pen-ruler text-7xl text-[var(--nd-green)]"
+            <i class="fa fa-pen-ruler text-7xl text-[var(--primary-color)]"
                 style="transform: translateY(-60%) scale(1);
             "></i>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
@@ -590,7 +591,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
 
     <div>
         <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-id-card text-7xl text-[var(--nd-green)]"
+            <i class="fa fa-id-card text-7xl text-[var(--primary-color)]"
                 style="transform: translateY(-60%) scale(1);
             "></i>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
@@ -604,11 +605,11 @@ window.addEventListener("scroll", updateParallax, { passive: true });
 </div>
 
 <div class="flex items-center justify-center my-1 fade-in-section" style="position: relative; z-index: 3; margin-bottom: 5rem; margin-top: 3rem;">
-    <h2 class="text-2xl md:text-3xl text-left font-extrabold mb-6 fade-in-section flex items-center" style="color: var(--nd-green);"
+    <h2 class="text-2xl md:text-3xl text-left font-extrabold mb-6 fade-in-section flex items-center"
         style="position: relative; z-index: 4; margin-top: 0;">
     <span style="position: relative; display: inline-block;">
         <span style="position: relative; z-index: 2;">
-        Items You'll Want
+        What You'll Want
         </span>
     </span>
     </h2>
@@ -618,7 +619,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
     
     <div>
         <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-door-closed text-7xl text-[var(--nd-green)]"
+            <i class="fa fa-door-closed text-7xl text-[var(--primary-color)]"
                 style="transform: translateY(-60%) scale(1);
             "></i>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
@@ -626,13 +627,13 @@ window.addEventListener("scroll", updateParallax, { passive: true });
             </span>
         </h1>
         <div class="relative flex items-center justify-center text-xl pt-5 text-center">
-            Must Be Smaller Than 5 cu. ft
+            No Bigger Than 5 cu. ft
         </div>
     </div>
 
         <div>
         <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-rug text-7xl text-[var(--nd-green)]"
+            <i class="fa fa-rug text-7xl text-[var(--primary-color)]"
                 style="transform: translateY(-60%) scale(1);
             "></i>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
@@ -646,7 +647,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
 
     <div>
         <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-tv text-7xl text-[var(--nd-green)]"
+            <i class="fa fa-tv text-7xl text-[var(--primary-color)]"
                 style="transform: translateY(-60%) scale(1);
             "></i>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
@@ -661,7 +662,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
 
     <div>
         <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-couch text-7xl text-[var(--nd-green)]"
+            <i class="fa fa-couch text-7xl text-[var(--primary-color)]"
                 style="transform: translateY(-60%) scale(1);
             "></i>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
@@ -675,11 +676,11 @@ window.addEventListener("scroll", updateParallax, { passive: true });
 </div>
 
 <div class="flex items-center justify-center my-1 fade-in-section" style="position: relative; z-index: 3; margin-bottom: 3rem; margin-top: 3rem;">
-    <h2 class="text-2xl md:text-3xl text-left font-extrabold mb-6 fade-in-section flex items-center" style="color: var(--nd-green);"
+    <h2 class="text-2xl md:text-3xl text-left font-extrabold mb-6 fade-in-section flex items-center"
         style="position: relative; z-index: 4; margin-top: 0;">
     <span style="position: relative; display: inline-block;">
         <span style="position: relative; z-index: 2;">
-        Prohibited Items
+        What You Can't Bring
         </span>
     </span>
     </h2>
@@ -689,7 +690,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
 
     <div>
         <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-ban text-5xl text-[var(--nd-green)]"
+            <i class="fa fa-ban text-5xl text-[var(--primary-color)]"
                 style="transform: translateY(-60%) scale(1);
             "></i>
             <span class="absolute top-1/2 text-xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
@@ -700,7 +701,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
 
     <div>
         <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-ban text-5xl text-[var(--nd-green)]"
+            <i class="fa fa-ban text-5xl text-[var(--primary-color)]"
                 style="transform: translateY(-60%) scale(1);
             "></i>
             <span class="absolute top-1/2 text-xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
@@ -712,7 +713,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
 
     <div>
         <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-ban text-5xl text-[var(--nd-green)]"
+            <i class="fa fa-ban text-5xl text-[var(--primary-color)]"
                 style="transform: translateY(-60%) scale(1);
             "></i>
             <span class="absolute top-1/2 text-xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
@@ -723,7 +724,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
 
     <div>
         <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-ban text-5xl text-[var(--nd-green)]"
+            <i class="fa fa-ban text-5xl text-[var(--primary-color)]"
                 style="transform: translateY(-60%) scale(1);
             "></i>
             <span class="absolute top-1/2 text-xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
@@ -734,7 +735,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
 
     <div>
         <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-ban text-5xl text-[var(--nd-green)]"
+            <i class="fa fa-ban text-5xl text-[var(--primary-color)]"
                 style="transform: translateY(-60%) scale(1);
             "></i>
             <span class="absolute top-1/2 text-xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
@@ -745,7 +746,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
 
     <div>
         <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-ban text-5xl text-[var(--nd-green)]"
+            <i class="fa fa-ban text-5xl text-[var(--primary-color)]"
                 style="transform: translateY(-60%) scale(1);
             "></i>
             <span class="absolute top-1/2 text-xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
