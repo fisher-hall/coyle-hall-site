@@ -2,7 +2,7 @@
 title: Fr. Greg Haake, C.S.C.
 email: ghaake@nd.edu
 image: "/images/headshots/frgreg.jpg"
-description: Priest-in-Residence of Coyle
+description: Priest-in-Residence
 weight: 4
 params:
     hometown: "Kansas City, MO"

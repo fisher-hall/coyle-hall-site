@@ -2,7 +2,7 @@
 title: Joey Quinones
 email: jquinon3@nd.edu
 image: "/images/headshots/joeyquinones.jpg"
-description: Rector of Coyle
+description: Rector
 weight: 1
 params:
     section: "1st Floor"

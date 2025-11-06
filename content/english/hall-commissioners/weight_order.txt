@@ -9,6 +9,4 @@
 - 60-69: Website
 - 70-79: Gains
 - 80-89: Merch
-- 90-99: Regatta
-- 100-109: Car Smash
 - 110-119: Opportunities
