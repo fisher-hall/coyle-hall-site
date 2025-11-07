@@ -80,6 +80,12 @@ name = "Car Smash"
 url = "/car-smash"
 weight = 3
 
+[[main]]
+parent = "Events"
+name = "Parents Weekend"
+url = "/parents-weekend"
+weight = 4
+
 
 [[main]]
 name = "New Crew"
