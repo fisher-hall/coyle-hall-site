@@ -1,4 +1,7 @@
 {{ define "main" }}
+  {{ if .Params.floating_navbar }}
+    <script>document.body.classList.add('permanent-floating-navbar');</script>
+  {{ end }}
   <h1 class="text-center pt-14">{{ T (printf "%s" (lower .Title)) | default .Title | title }}</h1>
 
 

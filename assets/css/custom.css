@@ -48,7 +48,7 @@ mark {
     left: auto;
     width: 100vw;
     height: 100vh;
-    background: rgba(10, 132, 61, 0.98);
+    background: var(--coyle-dark-green);
     backdrop-filter: blur(10px);
     z-index: 9999;
     display: flex;
@@ -62,7 +62,10 @@ mark {
     opacity: 0;
     visibility: hidden;
     transform: translateX(100vw);
-    transition: transform 0.5s cubic-bezier(.68,-0.55,.27,1.55), opacity 0.4s cubic-bezier(.68,-0.55,.27,1.55), visibility 0.4s cubic-bezier(.68,-0.55,.27,1.55);
+    transition: transform 0.5s cubic-bezier(.68,-0.55,.27,1.55), 
+                opacity 0.4s cubic-bezier(.68,-0.55,.27,1.55), 
+                visibility 0.4s cubic-bezier(.68,-0.55,.27,1.55),
+                background 0.5s ease;
   }
   #nav-menu.navbar-active {
     opacity: 1;
@@ -87,6 +90,7 @@ mark {
   --coyle-dark-fade: rgb(6, 65, 33, 1);
   --coyle-light-green: #0a843d; /* same as nd-green */
   --coyle-accent-green: rgba(87, 187, 72, 1);
+  --coyle-banner-tint: rgba(10, 132, 61, 0.7);
   --nd-blue: #0c2340;
   --nd-gold: rgb(174, 145, 66);
   --nd-light: #5faf81;
@@ -138,6 +142,23 @@ h3, h4, h5, h6 {
 body, p {
   font-family: 'Rubik', sans-serif;
   font-weight: 500; 
+}
+
+.banner-tint-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--coyle-banner-tint);
+  pointer-events: none;
+  z-index: 1;
+}
+.home-banner-text-overlay {
+  position: relative;
+  z-index: 2;
+}
+#banner-parallax {
+  position: relative;
 }
 
 /* Dropdown arrow visibility control */
@@ -200,20 +221,37 @@ label[for="nav-toggle"] i {
 /* Floating header styling */
 .floating-header {
     position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
+    top: 4px !important;
+    left: 8px !important;
+    right: 8px !important;
     z-index: 10000 !important;
     background: none !important;
     width: auto !important;
     padding: 0 !important;
 }
 
+/* Navbar logo: always show white logo, hide green logo */
+.navbar .img-light {
+    display: none !important;
+}
+
+.navbar .img-dark {
+    display: block !important;
+}
+
 .floating-navbar {
+    background-color: transparent !important;
+    backdrop-filter: none !important;
+    border-radius: 24px !important;
+    box-shadow: none !important;
+    transition: background-color 0.5s ease, 
+                box-shadow 0.5s ease;
+}
+
+.floating-navbar.scrolled,
+body.permanent-floating-navbar .floating-navbar {
     background-color: var(--coyle-dark-fade) !important;
-    backdrop-filter: blur(10px) !important;
-    border-radius: 0 !important;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
 }
 
 /* Ensure content scrolls behind floating header */
@@ -224,6 +262,12 @@ body {
 /* Add top padding to main content so it's not hidden behind floating header */
 .main {
     padding-top: 100px !important;
+}
+
+/* Add top padding on pages without parallax header (permanent floating navbar) */
+body.permanent-floating-navbar .main,
+body.permanent-floating-navbar main {
+    padding-top: 64px !important;
 }
 
 
@@ -380,7 +424,7 @@ label[for="nav-toggle"]{
 
 footer .social-icons a {
   border-radius: 16px;
-  background: var(--coyle-light-green) !important;
+  background: var(--primary-color) !important;
   color: white !important;
   transition: transform 0.15s ease-in-out;
 }
@@ -483,6 +527,9 @@ footer .social-icons i {
   min-width: 240px;
   background-color: var(--coyle-dark-green) !important;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 4px 10px rgba(0, 0, 0, 0.2) !important;
+  display: none;
+  visibility: hidden;
+  opacity: 0;
 }
 
 /* Dropdown text color - white on green background */
@@ -670,25 +717,33 @@ footer .social-icons i {
   #nav-menu .nav-dropdown .nav-link .fa-angle-right { font-size:1.75rem; margin-left:0; display:inline-block !important; }
   #nav-menu .nav-dropdown .nav-link .fa-angle-down { display:none !important; }
   
-  /* Submenu overlay */
-  .nav-dropdown .nav-dropdown-list {
-    position: fixed !important;
-    top: 140px !important; left:0 !important;
-    width: 100vw !important; height: 100vh !important;
-    backdrop-filter: blur(10px) !important;
-    z-index: 10000 !important;
-    padding: 120px 34px 34px !important;
-    transform: translateX(40px) scale(.98) !important;
-    opacity: 0 !important; visibility: hidden !important;
-    transition: transform .35s cubic-bezier(.4,0,.2,1), opacity .35s cubic-bezier(.4,0,.2,1) !important;
-    display: none !important;
-    flex-direction: column !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-    min-width: 100% !important;
-    pointer-events: none !important;
+  /* Submenu overlay - mobile only */
+  @media (max-width: 1023px) {
+    .nav-dropdown .nav-dropdown-list {
+      position: fixed !important;
+      top: 140px !important; left:0 !important;
+      width: 100vw !important; height: 100vh !important;
+      backdrop-filter: blur(10px) !important;
+      z-index: 10000 !important;
+      padding: 120px 34px 34px !important;
+      transform: translateX(40px) scale(.98) !important;
+      opacity: 0 !important; visibility: hidden !important;
+      transition: transform .35s cubic-bezier(.4,0,.2,1), opacity .35s cubic-bezier(.4,0,.2,1) !important;
+      display: none !important;
+      flex-direction: column !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      min-width: 100% !important;
+      pointer-events: none !important;
+    }
+    .nav-dropdown.mobile-submenu-active .nav-dropdown-list { 
+      transform: translateX(0) scale(1) !important; 
+      opacity:1 !important; 
+      visibility:visible !important; 
+      display:flex !important; 
+      pointer-events:auto !important; 
+    }
   }
-  .nav-dropdown.mobile-submenu-active .nav-dropdown-list { transform: translateX(0) scale(1) !important; opacity:1 !important; visibility:visible !important; display:flex !important; pointer-events:auto !important; }
   
   /* Main menu stays in place when submenu opens */
   #nav-menu.submenu-open {
@@ -827,10 +882,11 @@ footer .social-icons i {
   #nav-menu .nav-dropdown .nav-link .fa-angle-right { display:none !important; }
   
   /* Desktop dropdown visibility - show when active class is added */
-  .nav-dropdown.active .nav-dropdown-list {
+  .nav-dropdown.active > .nav-dropdown-list {
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
+    pointer-events: auto !important;
   }
   
   .nav-dropdown-list .nav-dropdown-item a {
@@ -850,9 +906,26 @@ footer .social-icons i {
 }
 
 footer {
-    background-color: var(--coyle-dark-green);
+    background-color: transparent;
     color: #fff;
-    border-radius: 24px !important;
+    border-radius: 0 !important;
+}
+
+/* Footer UND wordmark - show blue in light mode, white in dark mode */
+footer .footer-nd-light {
+    display: block;
+}
+
+footer .footer-nd-dark {
+    display: none;
+}
+
+html.dark footer .footer-nd-light {
+    display: none;
+}
+
+html.dark footer .footer-nd-dark {
+    display: block;
 }
 
 /* Inline Search Bar Styling */
@@ -1394,4 +1467,57 @@ main, .main {
     transform: none !important;
     transition: none !important;
   }
+}
+/* Interactive image lift with smooth entry and corner lift */
+.interactive-tilt {
+  transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+  transform-style: preserve-3d;
+  perspective: 800px;
+  will-change: transform, box-shadow;
+  position: relative;
+  z-index: 0;
+}
+
+.interactive-tilt::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.15), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.2s ease-out, background-position 0.05s ease-out;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.interactive-tilt:hover {
+  transform: scale(1.03);
+  transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.25s ease-out;
+  cursor: pointer;
+}
+
+/* Disable hover effects on images in header and footer */
+.header img,
+.header img:hover,
+.header .interactive-tilt,
+.header .interactive-tilt:hover,
+footer img,
+footer img:hover,
+footer .interactive-tilt,
+footer .interactive-tilt:hover {
+  transform: none !important;
+  transition: none !important;
+  box-shadow: none !important;
+}
+
+/* But keep pointer cursor on clickable elements */
+.header a,
+.header button,
+footer a,
+footer button {
+  cursor: pointer !important;
+}
+
+.header .interactive-tilt::after,
+footer .interactive-tilt::after {
+  display: none !important;
 }

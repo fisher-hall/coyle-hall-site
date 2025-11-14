@@ -27,17 +27,18 @@ title: "History"
       padding: 0 2px !important;
     }
   }
-  
+
   #banner-parallax {
-      position: relative;
-      overflow: hidden;
-      background-image: url('/images/Banners/OldFisherBanner.png');
-      background-attachment: fixed;
-      background-position: center 90%;
-      background-repeat: no-repeat;
-      background-size: auto 60%;
-      height: 30vh;
-      min-height: 300px;
+    position: relative;
+    width: 100%;
+    height: 40vh;
+    min-height: 380px;
+    overflow: hidden;
+    background-image: url('/images/Banners/OldFisherBanner.png');
+    background-attachment: fixed;
+    background-position: center 90%;
+    background-repeat: no-repeat;
+    background-size: auto 60%;
   }
 
 #history-banner-img {
@@ -59,28 +60,29 @@ title: "History"
 }
 
 @media (max-width: 1024px) {
-    #banner-parallax {
-        background-size: auto 60%;
-        background-position: center 80%;
-        height: 28vh !important;
-    }
+  #banner-parallax {
+    background-size: auto 60%;
+    background-position: center 80%;
+    height: 38vh !important;
+    min-height: 300px !important;
+  }
 }
 
 @media (max-width: 768px) {
-    #banner-parallax {
-        background-size: auto 60%;
-        background-position: center 75%;
-        height: 30vh !important;
-        min-height: 250px !important;
-    }
+  #banner-parallax {
+    background-size: auto 60%;
+    background-position: center 75%;
+    height: 28vh !important;
+    min-height: 220px !important;
+  }
 }
 </style>
 
-<!-- Banner -->
 <div id="history-banner-wrapper">
-  <div id="banner-parallax" 
-       class="relative mb-8 overflow-hidden"
-  >
+  <div id="banner-parallax" class="relative mb-8 overflow-hidden">
+    <!-- Tint Layer -->
+    <div class="banner-tint-layer"></div>
+    <!-- Text Overlay -->
     <div class="home-banner-text-overlay" id="history-banner-text">
       <span class="home-banner-heading">DORM HISTORY</span>
     </div>
@@ -226,4 +228,3 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 </script>
-
