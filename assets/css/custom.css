@@ -92,7 +92,7 @@ mark {
   --coyle-dark-fade: rgb(6, 65, 33, 1);
   --coyle-light-green: #0a843d; /* same as nd-green */
   --coyle-accent-green: rgba(87, 187, 72, 1);
-  --coyle-banner-tint: rgba(10, 132, 61, 0.7);
+  --coyle-banner-tint: rgba(10, 132, 61, 0.5);
   --nd-blue: #0c2340;
   --nd-gold: rgb(174, 145, 66);
   --nd-light: #5faf81;
