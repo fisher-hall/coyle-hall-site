@@ -24,6 +24,17 @@ mark {
   border-radius: 2px;
 }
 
+/* Text selection highlighting */
+::selection {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+::-moz-selection {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
 /* Force search modal background to be green */
 .search-modal,
 .search-modal-overlay,
