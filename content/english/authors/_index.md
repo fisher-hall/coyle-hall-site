@@ -1,3 +1,4 @@
 ---
 title: "Authors"
+draft: true
 ---

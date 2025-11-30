@@ -19,6 +19,8 @@ title: "ironRA"
     margin-right: -50vw !important;
     padding: 0 0px !important;
     box-sizing: border-box !important;
+    border-radius: 0 !important;
+    overflow: visible !important;
   }
   
   /* Mobile padding for banner */
@@ -29,15 +31,41 @@ title: "ironRA"
   }
   
   #banner-parallax {
-      position: relative;
-      overflow: hidden;
-      background-image: url('/images/Banners/IronRABanner.png');
-      background-attachment: fixed;
-      background-position: center 90%;
-      background-repeat: no-repeat;
-      background-size: auto 60%;
-      height: 30vh;
-      min-height: 300px;
+    position: relative;
+    overflow: hidden;
+    background-image: url('/images/BannerImages/IronRABanner.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: scroll;
+    height: 50vh;
+    max-height: 600px;
+    min-height: 400px;
+    margin-top: 0 !important;
+    border-radius: 0 !important;
+  }
+
+  @media (max-width: 768px) {
+    #banner-parallax {
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+    }
+
+    .banner-tint-layer {
+      position: absolute !important;
+      top: 0;
+      left: 0;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    .home-banner-text-overlay {
+      position: relative !important;
+      z-index: 10 !important;
+      width: 100% !important;
+      text-align: center !important;
+    }
   }
 
 #ironra-banner-img {
@@ -51,30 +79,6 @@ title: "ironRA"
   will-change: transform;
 }
 
-@media (max-width: 1200px) {
-    #banner-parallax {
-        background-size: auto 60%;
-        background-position: center 85%;
-    }
-}
-
-@media (max-width: 1024px) {
-    #banner-parallax {
-        background-size: auto 60%;
-        background-position: center 80%;
-        height: 28vh !important;
-    }
-}
-
-@media (max-width: 768px) {
-    #banner-parallax {
-        background-size: auto 60%;
-        background-position: center 75%;
-        height: 30vh !important;
-        min-height: 250px !important;
-    }
-}
-
   /* Points system text that switches with light/dark mode */
   .points-text {
     color: var(--color-lightmode-gray);
@@ -86,9 +90,10 @@ title: "ironRA"
 
 <!-- Banner -->
 <div id="ironra-banner-wrapper">
-  <div id="banner-parallax" 
-       class="relative mb-8 overflow-hidden"
-  >
+  <div id="banner-parallax" class="relative overflow-hidden">
+    <!-- Tint Layer -->
+    <div class="banner-tint-layer"></div>
+    <!-- Text Overlay -->
     <div class="home-banner-text-overlay" id="ironra-banner-text">
       <span class="home-banner-heading">IRONRA</span>
     </div>
@@ -100,8 +105,16 @@ title: "ironRA"
 function updateParallax() {
   const banner = document.getElementById("banner-parallax");
   if (!banner) return;
+  
   const scrollY = window.scrollY || window.pageYOffset;
-  banner.style.backgroundPositionY = `${scrollY * -0.15}px`;
+  const bannerRect = banner.getBoundingClientRect();
+  
+  // Only apply parallax when banner is visible
+  if (bannerRect.bottom > 0) {
+    // Move background position slower than scroll
+    const offset = scrollY * -0.8;
+    banner.style.backgroundPosition = `center ${-offset}px`;
+  }
 }
 
 document.addEventListener("DOMContentLoaded", updateParallax);

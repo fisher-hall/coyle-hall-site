@@ -143,8 +143,15 @@
     const dropdownMenuToggler = document.querySelectorAll('.nav-dropdown > .nav-link');
     const dropdownItems = document.querySelectorAll('.nav-dropdown');
     const closeAllDropdowns = () => dropdownItems.forEach(i => i.classList.remove('active'));
+    
     dropdownMenuToggler.forEach(toggler => {
-      toggler.addEventListener('click', (e) => {
+      // Remove any existing desktop listener first
+      if (toggler.dataset.desktopBound === '1') return;
+      
+      const dropdown = toggler.closest('.nav-dropdown');
+      
+      // Click handler for desktop
+      const desktopClickHandler = (e) => {
         if (isMobile()) return; // ignore on mobile
         e.preventDefault();
         e.stopPropagation();
@@ -152,8 +159,26 @@
         const was = current.classList.contains('active');
         closeAllDropdowns();
         if (!was) current.classList.add('active');
-      });
+      };
+      
+      // Hover handlers for desktop
+      const mouseEnterHandler = () => {
+        if (isMobile()) return; // ignore on mobile
+        closeAllDropdowns();
+        dropdown.classList.add('active');
+      };
+      
+      const mouseLeaveHandler = () => {
+        if (isMobile()) return; // ignore on mobile
+        dropdown.classList.remove('active');
+      };
+      
+      toggler.addEventListener('click', desktopClickHandler);
+      dropdown.addEventListener('mouseenter', mouseEnterHandler);
+      dropdown.addEventListener('mouseleave', mouseLeaveHandler);
+      toggler.dataset.desktopBound = '1';
     });
+    
     document.addEventListener('click', (e) => {
       if (isMobile()) return;
       if (!e.target.closest('.nav-dropdown')) closeAllDropdowns();
@@ -187,56 +212,48 @@
   // Floating Navbar and Banner Scroll Effect
   // ----------------------------------------
   const floatingHeader = document.querySelector('.floating-header');
+  const navbar = document.querySelector('.floating-navbar');
   const bannerElements = document.querySelectorAll('#banner-parallax, [id*="banner-parallax"]');
-  const scrollDistance = 150; // Distance in pixels over which transition occurs
+  const scrollThreshold = 50; // Trigger floating state after 50px scroll
+  
+  // Check if this page should have permanent floating navbar
+  // Apply to pages without parallax banner OR pages explicitly marked with floating_navbar param
+  const hasBanner = bannerElements.length > 0;
+  const isPermanentFloating = !hasBanner || 
+                              document.body.classList.contains('permanent-floating-navbar');
+  
+  if (isPermanentFloating && navbar) {
+    document.body.classList.add('permanent-floating-navbar');
+    navbar.classList.add('scrolled'); // Start in scrolled state
+  }
   
   console.log('Scroll effect initialized');
   console.log('Found header:', floatingHeader);
+  console.log('Found navbar:', navbar);
   console.log('Found banners:', bannerElements.length);
+  console.log('Has banner:', hasBanner);
+  console.log('Permanent floating:', isPermanentFloating);
 
   const handleScroll = () => {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     const isMobileScreen = window.innerWidth <= 768;
+    const isScrolled = scrollTop > scrollThreshold;
     
-    // Calculate progress from 0 to 1 based on scroll position
-    const progress = Math.min(scrollTop / scrollDistance, 1);
-    
-    // Header transitions
-    if (floatingHeader) {
-      const headerOffset = isMobileScreen ? 6 : 8;
-      const currentOffset = progress * headerOffset;
-      
-      floatingHeader.style.setProperty('top', `${currentOffset}px`, 'important');
-      floatingHeader.style.setProperty('left', `${currentOffset}px`, 'important');
-      floatingHeader.style.setProperty('right', `${currentOffset}px`, 'important');
+    // Toggle 'scrolled' class on navbar for bounce-in animation (skip if permanent)
+    if (navbar && !isPermanentFloating) {
+      if (isScrolled && !navbar.classList.contains('scrolled')) {
+        navbar.classList.add('scrolled');
+      } else if (!isScrolled && navbar.classList.contains('scrolled')) {
+        navbar.classList.remove('scrolled');
+      }
     }
     
-    // Navbar border radius
-    const navbar = document.querySelector('.floating-navbar');
-    if (navbar) {
-      const maxRadius = 24;
-      const currentRadius = progress * maxRadius;
-      navbar.style.setProperty('border-radius', `${currentRadius}px`, 'important');
-      
-      // Shadow intensity
-      const shadowIntensity = 0.05 + (progress * 0.15); // 0.05 to 0.2
-      const shadowBlur = 2 + (progress * 18); // 2px to 20px
-      navbar.style.setProperty('box-shadow', `0 ${shadowBlur}px ${shadowBlur}px rgba(0, 0, 0, ${shadowIntensity})`, 'important');
-    }
-    
-    // Banner transitions
+    // Banner transitions disabled - keep banners full width
     bannerElements.forEach(banner => {
-      const bannerOffset = isMobileScreen ? 6 : 8;
-      const maxMargin = bannerOffset;
-      const currentMargin = progress * maxMargin;
-      
-      const maxRadius = 24;
-      const currentRadius = progress * maxRadius;
-      
-      banner.style.setProperty('border-radius', `${currentRadius}px`, 'important');
-      banner.style.setProperty('margin-left', `${currentMargin}px`, 'important');
-      banner.style.setProperty('margin-right', `${currentMargin}px`, 'important');
-      banner.style.setProperty('width', `calc(100% - ${currentMargin * 2}px)`, 'important');
+      banner.style.setProperty('border-radius', '0px', 'important');
+      banner.style.setProperty('margin-left', '0px', 'important');
+      banner.style.setProperty('margin-right', '0px', 'important');
+      banner.style.setProperty('width', '100%', 'important');
     });
   };
 
@@ -513,5 +530,48 @@
     if (e.key === 'Escape' && isSearchActive) {
       hideInlineSearch();
     }
+  });
+
+  // Automatically apply .interactive-tilt to all non-banner images
+  document.querySelectorAll('img:not([id*="banner"]):not([class*="banner"])').forEach((img) => {
+    img.classList.add('interactive-tilt');
+  });
+
+  // Interactive Image Lift Effect with Smooth Entry and Corner Lift
+  // ----------------------------------------
+  document.querySelectorAll('.interactive-tilt').forEach((img) => {
+    img.addEventListener('mousemove', (e) => {
+      const rect = img.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const xPercent = (x / rect.width - 0.5) * 2;
+      const yPercent = (y / rect.height - 0.5) * 2;
+
+      const rotateX = yPercent * -3; // tilt up/down toward cursor (was -6)
+      const rotateY = xPercent * 3;  // tilt left/right toward cursor (was 6)
+      const lift = 3; // how much it moves forward slightly (was 5)
+
+      img.style.transition = 'transform 0.05s ease-out';
+      img.style.transform = `
+        perspective(800px)
+        rotateX(${rotateX}deg)
+        rotateY(${rotateY}deg)
+        translate(${xPercent * lift}px, ${yPercent * lift}px)
+        scale(1.015)
+      `;
+      img.style.boxShadow = `${-xPercent * 4}px ${-yPercent * 4}px 15px rgba(0,0,0,0.15)`;
+    });
+
+    img.addEventListener('mouseenter', () => {
+      // Ensure transition includes scale (transform covers scale)
+      img.style.transition = 'transform 0.7s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.7s cubic-bezier(0.25, 0.8, 0.25, 1)';
+    });
+
+    img.addEventListener('mouseleave', () => {
+      // Ensure transition includes scale (transform covers scale)
+      img.style.transition = 'transform 0.5s ease-out, box-shadow 0.5s ease-out';
+      img.style.transform = '';
+      img.style.boxShadow = '';
+    });
   });
 })();
