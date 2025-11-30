@@ -32,12 +32,37 @@ title: "Location"
       position: relative;
       overflow: hidden;
       background-image: url('/images/Banners/CoyleRenderBanner.png');
-      background-attachment: fixed;
-      background-position: center 90%;
+      background-position: center center;
       background-repeat: no-repeat;
-      background-size: auto 60%;
-      height: 30vh;
-      min-height: 300px;
+      background-size: cover;
+      background-attachment: scroll;
+      height: 50vh;
+      max-height: 600px;
+      min-height: 400px;
+      margin-top: 0 !important;
+  }
+
+  @media (max-width: 768px) {
+    #banner-parallax {
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+    }
+
+    .banner-tint-layer {
+      position: absolute !important;
+      top: 0;
+      left: 0;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    .home-banner-text-overlay {
+      position: relative !important;
+      z-index: 10 !important;
+      width: 100% !important;
+      text-align: center !important;
+    }
   }
 
 #location-banner-img {
@@ -49,30 +74,6 @@ title: "Location"
   height: auto;
   object-fit: cover;
   will-change: transform;
-}
-
-@media (max-width: 1200px) {
-    #banner-parallax {
-        background-size: auto 60%;
-        background-position: center 85%;
-    }
-}
-
-@media (max-width: 1024px) {
-    #banner-parallax {
-        background-size: auto 60%;
-        background-position: center 80%;
-        height: 28vh !important;
-    }
-}
-
-@media (max-width: 768px) {
-    #banner-parallax {
-        background-size: auto 60%;
-        background-position: center 75%;
-        height: 30vh !important;
-        min-height: 250px !important;
-    }
 }
 </style>
 
@@ -92,8 +93,16 @@ title: "Location"
 function updateParallax() {
   const banner = document.getElementById("banner-parallax");
   if (!banner) return;
+  
   const scrollY = window.scrollY || window.pageYOffset;
-  banner.style.backgroundPositionY = `${scrollY * -0.15}px`;
+  const bannerRect = banner.getBoundingClientRect();
+  
+  // Only apply parallax when banner is visible
+  if (bannerRect.bottom > 0) {
+    // Move background position slower than scroll
+    const offset = scrollY * -0.8;
+    banner.style.backgroundPosition = `center ${-offset}px`;
+  }
 }
 
 document.addEventListener("DOMContentLoaded", updateParallax);
@@ -155,17 +164,17 @@ window.addEventListener("scroll", updateParallax, { passive: true });
         </a>
 </div>
 
-<div class="flex items-center justify-center my-1 fade-in-section" style="position: relative; z-index: 3; margin-bottom: 1rem; margin-top: 5rem;">
+<div class="flex items-center justify-center my-1 fade-in-section" style="position: relative; margin-bottom: 1rem; margin-top: 5rem;">
   <h2 class="text-5xl md:text-7xl text-left font-extrabold mb-6 fade-in-section flex items-center text-black dark:text-white"
-      style="position: relative; z-index: 4; margin-top: 0;">
+      style="position: relative; margin-top: 0;">
     <span style="position: relative; display: inline-block;">
-      <span style="position: relative; z-index: 2;">
+      <span style="position: relative;">
         What's Nearby
       </span>
     </span>
   </h2>
     <i class="fa fa-signs-post absolute text-center top-1/2 text-9xl fade-in-section text-[var(--nd-light)] dark:text-[var(--primary-color)]"
-      style="transform: translateY(-60%) scale(1); z-index: 2;">
+      style="transform: translateY(-60%) scale(1);">
     </i>
     <style>
     @media (max-width: 767px) {
@@ -182,7 +191,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
   </i>
 </div>
 
-<div class="mx-auto relative grid md:grid-cols-3 sm:grid-cols-2 gap-15 gap-y-15 w-full my-8 fade-in-section z-index: 3">
+<div class="mx-auto relative grid md:grid-cols-3 sm:grid-cols-2 gap-15 gap-y-15 w-full my-8 fade-in-section">
 <div class="w-full rounded-2xl relative flex items-center justify-center p-3" style="background-color: var(--primary-color);">    <span class="text-center text-xl z-10 pointer-events-none text-white">
       <span class="font-bold text-3xl">
         <i class="fa fa-utensils"></i>
@@ -346,11 +355,11 @@ window.addEventListener("scroll", updateParallax, { passive: true });
   </div>
 </div>
 
-<div class="flex items-center justify-center my-1 fade-in-section" style="position: relative; z-index: 3; margin-bottom: 1rem; margin-top: 5rem;">
+<div class="flex items-center justify-center my-1 fade-in-section" style="position: relative; margin-bottom: 1rem; margin-top: 5rem;">
   <p class="text-2xl text-center font-extrabold mb-6 fade-in-section flex items-center"
-      style="position: relative; z-index: 4; margin-top: 0;">
+      style="position: relative; margin-top: 0;">
     <span style="position: relative; display: inline-block;">
-      <span style="position: relative; z-index: 2;">
+      <span style="position: relative;">
           <i class="fa fa-location-dot"></i>&nbsp;
           Approximate Time From Zahm Hall
       </span>

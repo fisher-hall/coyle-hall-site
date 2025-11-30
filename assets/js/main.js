@@ -248,20 +248,12 @@
       }
     }
     
-    // Banner transitions (keep scroll-based for banners)
-    const progress = Math.min(scrollTop / 150, 1);
+    // Banner transitions disabled - keep banners full width
     bannerElements.forEach(banner => {
-      const bannerOffset = isMobileScreen ? 6 : 8;
-      const maxMargin = bannerOffset;
-      const currentMargin = progress * maxMargin;
-      
-      const maxRadius = 24;
-      const currentRadius = progress * maxRadius;
-      
-      banner.style.setProperty('border-radius', `${currentRadius}px`, 'important');
-      banner.style.setProperty('margin-left', `${currentMargin}px`, 'important');
-      banner.style.setProperty('margin-right', `${currentMargin}px`, 'important');
-      banner.style.setProperty('width', `calc(100% - ${currentMargin * 2}px)`, 'important');
+      banner.style.setProperty('border-radius', '0px', 'important');
+      banner.style.setProperty('margin-left', '0px', 'important');
+      banner.style.setProperty('margin-right', '0px', 'important');
+      banner.style.setProperty('width', '100%', 'important');
     });
   };
 

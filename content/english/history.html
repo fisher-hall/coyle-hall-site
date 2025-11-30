@@ -19,6 +19,8 @@ title: "History"
     margin-right: -50vw !important;
     padding: 0 0px !important;
     box-sizing: border-box !important;
+    border-radius: 0 !important;
+    overflow: visible !important;
   }
   
   /* Mobile padding for banner */
@@ -30,15 +32,40 @@ title: "History"
 
   #banner-parallax {
     position: relative;
-    width: 100%;
-    height: 40vh;
-    min-height: 380px;
     overflow: hidden;
-    background-image: url('/images/Banners/OldFisherBanner.png');
-    background-attachment: fixed;
-    background-position: center 90%;
+    background-image: url('/images/BannerImages/FisherHallBanner.png');
+    background-position: center center;
     background-repeat: no-repeat;
-    background-size: auto 60%;
+    background-size: cover;
+    background-attachment: scroll;
+    height: 50vh;
+    max-height: 600px;
+    min-height: 400px;
+    margin-top: 0 !important;
+    border-radius: 0 !important;
+  }
+
+  @media (max-width: 768px) {
+    #banner-parallax {
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+    }
+
+    .banner-tint-layer {
+      position: absolute !important;
+      top: 0;
+      left: 0;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    .home-banner-text-overlay {
+      position: relative !important;
+      z-index: 10 !important;
+      width: 100% !important;
+      text-align: center !important;
+    }
   }
 
 #history-banner-img {
@@ -51,35 +78,10 @@ title: "History"
   object-fit: cover;
   will-change: transform;
 }
-
-@media (max-width: 1200px) {
-    #banner-parallax {
-        background-size: auto 60%;
-        background-position: center 85%;
-    }
-}
-
-@media (max-width: 1024px) {
-  #banner-parallax {
-    background-size: auto 60%;
-    background-position: center 80%;
-    height: 38vh !important;
-    min-height: 300px !important;
-  }
-}
-
-@media (max-width: 768px) {
-  #banner-parallax {
-    background-size: auto 60%;
-    background-position: center 75%;
-    height: 28vh !important;
-    min-height: 220px !important;
-  }
-}
 </style>
 
 <div id="history-banner-wrapper">
-  <div id="banner-parallax" class="relative mb-8 overflow-hidden">
+  <div id="banner-parallax" class="relative overflow-hidden">
     <!-- Tint Layer -->
     <div class="banner-tint-layer"></div>
     <!-- Text Overlay -->
@@ -94,8 +96,16 @@ title: "History"
 function updateParallax() {
   const banner = document.getElementById("banner-parallax");
   if (!banner) return;
+  
   const scrollY = window.scrollY || window.pageYOffset;
-  banner.style.backgroundPositionY = `${scrollY * -0.15}px`;
+  const bannerRect = banner.getBoundingClientRect();
+  
+  // Only apply parallax when banner is visible
+  if (bannerRect.bottom > 0) {
+    // Move background position slower than scroll
+    const offset = scrollY * -0.8;
+    banner.style.backgroundPosition = `center ${-offset}px`;
+  }
 }
 
 document.addEventListener("DOMContentLoaded", updateParallax);

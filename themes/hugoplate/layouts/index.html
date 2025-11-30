@@ -3,10 +3,23 @@
   
   {{ with .Params.banner }}
     <style>
+      .home-banner-text-overlay, #home-banner-text {
+        width: 100% !important;
+        text-align: center !important;
+      }
+
+      .banner-tint-layer {
+        width: 100% !important;
+      }
       /* Remove all top spacing for home page */
       body .section:first-of-type,
       body .section-sm:first-of-type {
         margin-top: 0 !important;
+        padding-top: 0 !important;
+      }
+      
+      /* Remove body padding on homepage */
+      body {
         padding-top: 0 !important;
       }
       
@@ -20,6 +33,7 @@
         margin-right: -50vw !important;
         padding: 0 0px !important;
         box-sizing: border-box !important;
+        margin-top: 0 !important;
       }
       
       /* Mobile padding for banner */
@@ -28,17 +42,52 @@
           padding: 0 2px !important;
         }
       }
+
+      @media (max-width: 768px) {
+        #banner-parallax {
+          display: flex !important;
+          justify-content: center !important;
+          align-items: center !important;
+        }
+
+        .banner-tint-layer {
+          position: absolute !important;
+          top: 0;
+          left: 0;
+          width: 100% !important;
+          height: 100% !important;
+        }
+
+        .home-banner-text-overlay {
+          position: relative !important;
+          z-index: 10 !important;
+          width: 100% !important;
+          text-align: center !important;
+        }
+      }
+
+      header, .navbar {
+        margin-bottom: 0 !important;
+        padding-top: 12px !important;
+        padding-bottom: 12px !important;
+      }
+
+      body > *:first-child {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+      }
       
       #banner-parallax {
           position: relative;
           overflow: hidden;
           background-image: url('/images/BannerImages/HomeBanner.png');
-          background-attachment: fixed;
-          background-position: center 90%;
+          background-position: center center;
           background-repeat: no-repeat;
-          background-size: auto 60%;
+          background-size: cover;
           height: 50vh;
+          max-height: 600px;
           min-height: 400px;
+          margin-top: 0 !important;
       }
 
       #home-banner-img {
@@ -52,35 +101,24 @@
         will-change: transform;
       }
 
-      @media (max-width: 1200px) {
-          #banner-parallax {
-              background-size: auto 60%;
-              background-position: center 85%;
-          }
-      }
-
-      @media (max-width: 1024px) {
-          #banner-parallax {
-              background-size: auto 60%;
-              background-position: center 80%;
-              height: 45vh !important;
-          }
-      }
-
       @media (max-width: 768px) {
-          #banner-parallax {
-              background-size: auto 60%;
-              background-position: center 75%;
-              height: 40vh !important;
-              min-height: 350px !important;
-          }
+        #home-banner-text {
+          left: 50% !important;
+          transform: translateX(-50%) !important;
+          width: 100% !important;
+          text-align: center !important;
+        }
+
+        .banner-tint-layer {
+          width: 100% !important;
+        }
       }
     </style>
 
     <!-- Banner -->
     <div id="home-banner-wrapper">
       <div id="banner-parallax" 
-           class="relative mb-8 overflow-hidden"
+           class="relative overflow-hidden"
       >
         <!-- Tint Layer -->
         <div class="banner-tint-layer"></div>
@@ -96,8 +134,16 @@
       function updateParallax() {
         const banner = document.getElementById("banner-parallax");
         if (!banner) return;
+        
         const scrollY = window.scrollY || window.pageYOffset;
-        banner.style.backgroundPositionY = `${scrollY * -0.15}px`;
+        const bannerRect = banner.getBoundingClientRect();
+        
+        // Only apply parallax when banner is visible
+        if (bannerRect.bottom > 0) {
+          // Move background position slower than scroll
+          const offset = scrollY * -0.8;
+          banner.style.backgroundPosition = `center ${-offset}px`;
+        }
       }
 
       document.addEventListener("DOMContentLoaded", updateParallax);
