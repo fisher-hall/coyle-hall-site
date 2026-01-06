@@ -120,12 +120,16 @@ mark {
   --primary-color: var(--coyle-dark-green);
   --secondary-color: var(--coyle-light-green);
   --light-color: var(--nd-light); 
+
+  --background-color: #ffffff;
 }
 
 .dark {
   --primary-color: var(--coyle-light-green);
   --secondary-color: var(--coyle-accent-green);
   --light-color: var(--coyle-light-green);
+
+  --background-color: #000000;
 }
 
 
@@ -219,7 +223,7 @@ body, p {
 }
 
 .social-icons i {
-  color: white !important;
+  color: var(--coyle-dark-green) !important;
   font-size: 1.5rem !important;
   display: flex;
   align-items: center;
@@ -474,8 +478,8 @@ label[for="nav-toggle"]{
 
 footer .social-icons a {
   border-radius: 16px;
-  background: var(--primary-color) !important;
-  color: white !important;
+  background: white !important;
+  color: var(--coyle-dark-green) !important;
   transition: transform 0.15s ease-in-out;
 }
 
@@ -489,7 +493,7 @@ footer .social-icons i {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white !important;
+  color: var(--coyle-dark-green) !important;
 }
 .header .navbar a.nav-link.incoming-students:not(.active):not([aria-current="page"]) {
   color: var(--coyle-light-green) !important;

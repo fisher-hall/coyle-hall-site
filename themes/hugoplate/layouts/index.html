@@ -113,6 +113,54 @@
           width: 100% !important;
         }
       }
+
+      /* Wave SVG Animation */
+      .wave-container {
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 100%;
+        height: 80px;
+        overflow: hidden;
+        z-index: 1;
+      }
+
+      .wave {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 200%;
+        height: 100%;
+        animation: wave-move 15s linear infinite;
+      }
+
+      .wave:nth-child(2) {
+        animation-duration: 20s;
+        animation-direction: reverse;
+        animation-delay: -6s;
+        opacity: 0.5;
+        bottom: 10px;
+      }
+
+      .wave:nth-child(3) {
+        animation-duration: 25s;
+        animation-delay: -10s;
+        opacity: 0.3;
+        bottom: 20px;
+      }
+
+      @keyframes wave-move {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+      }
+
+      /* Disable hover effects for tri-photo */
+      .no-hover-effects:hover {
+        transform: none !important;
+        box-shadow: none !important;
+        scale: 1 !important;
+        filter: none !important;
+      }
     </style>
 
     <!-- Banner -->
@@ -122,6 +170,12 @@
       >
         <!-- Tint Layer -->
         <div class="banner-tint-layer"></div>
+        
+        <!-- Animated Waves at bottom of banner -->
+        <div class="wave-container">
+          <canvas id="wave-canvas" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;"></canvas>
+        </div>
+        
         <!-- Text Overlay -->
         <div class="home-banner-text-overlay" id="home-banner-text">
           <span class="home-banner-subheading">WELCOME TO</span>
@@ -148,6 +202,126 @@
 
       document.addEventListener("DOMContentLoaded", updateParallax);
       window.addEventListener("scroll", updateParallax, { passive: true });
+    </script>
+
+    <!-- Wave Animation Script -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const canvas = document.getElementById('wave-canvas');
+        const ctx = canvas.getContext('2d');
+        let animationId;
+        
+        function resizeCanvas() {
+          const rect = canvas.getBoundingClientRect();
+          canvas.width = rect.width;
+          canvas.height = rect.height;
+        }
+        
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+        
+        // Get CSS color variables
+        function getCSSColor(variable) {
+          return getComputedStyle(document.documentElement).getPropertyValue(variable).trim();
+        }
+        
+        let time = 0;
+        
+        function drawWave(amplitudes, frequencies, speeds, opacity, yOffset, color) {
+          ctx.globalAlpha = opacity;
+          ctx.fillStyle = color || getCSSColor('--background-color') || '#f8f9fa';
+          
+          ctx.beginPath();
+          ctx.moveTo(0, canvas.height);
+          
+          let points = [];
+          
+          // Calculate wave points with higher resolution
+          for (let x = 0; x <= canvas.width; x += 0.5) {
+            let y = yOffset;
+            
+            // Stack multiple sine waves for natural randomness
+            for (let i = 0; i < amplitudes.length; i++) {
+              y += amplitudes[i] * Math.sin((x * frequencies[i] + time * speeds[i]) * Math.PI / 180);
+            }
+            
+            points.push({x, y});
+          }
+          
+          // Draw smooth curves using quadratic curves
+          ctx.lineTo(points[0].x, points[0].y);
+          
+          for (let i = 1; i < points.length - 1; i++) {
+            const current = points[i];
+            const next = points[i + 1];
+            const controlX = current.x;
+            const controlY = current.y;
+            const endX = (current.x + next.x) / 2;
+            const endY = (current.y + next.y) / 2;
+            
+            ctx.quadraticCurveTo(controlX, controlY, endX, endY);
+          }
+          
+          // Complete the last segment
+          if (points.length > 1) {
+            const last = points[points.length - 1];
+            ctx.lineTo(last.x, last.y);
+          }
+          
+          ctx.lineTo(canvas.width, canvas.height);
+          ctx.lineTo(0, canvas.height);
+          ctx.closePath();
+          ctx.fill();
+        }
+        
+        function animate() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          
+          // Draw bottom wave first (furthest back) - simple sine wave
+          {{/*  drawWave(
+            [18], 
+            [0.5], 
+            [0.7], 
+            1, 
+            canvas.height * 0.29
+          );  */}}
+          
+          // Draw middle wave - simple sine wave
+          {{/*  drawWave(
+            [20], // amplitudes
+            [0.42],  //Frequency
+            [-0.8], //speed
+            0.9, //opacity
+            canvas.height * 0.42 //y-offset
+          );  */}}
+          
+          // Draw top wave (closest) - ocean-like wave with vertical movement and recession
+          const baseAmplitude = 10;
+          const verticalMovement = 6 * Math.sin(time * 0.02);
+          const recessionEffect = 2 * Math.sin(time * 0.015);
+          const dynamicAmplitude = baseAmplitude + recessionEffect;
+          
+          drawWave(
+            [dynamicAmplitude, dynamicAmplitude * 0.15], 
+            [0.6, 0.9], 
+            [0.8, 0.6], 
+            1, 
+            canvas.height * 0.38 + verticalMovement
+          );
+          
+          time += 0.8;
+          animationId = requestAnimationFrame(animate);
+        }
+        
+        animate();
+        
+        // Clean up on page unload
+        window.addEventListener('beforeunload', () => {
+          if (animationId) {
+            cancelAnimationFrame(animationId);
+          }
+        });
+      });
     </script>
 
     <!-- Fade-in effect -->
@@ -192,11 +366,11 @@
       });
     </script>
 
-    <h1 class="text-5xl text-center font-extrabold mb-6 px-4 fade-in-section" style="color: var(--primary-color);">
+    <h1 class="text-5xl text-center font-extrabold mb-6 px-4 fade-in-section" style="color: var(--primary-color); margin-top: 3rem;">
       I Will Make You Fishers of Men
     </h1>
 
-    <!-- Animated hand-drawn line graphic -->
+    <!-- Animated hand-drawn wave line graphic -->
     <div class="flex justify-center my-1 fade-in-section" style="position: relative; z-index: 2; margin-bottom: 1rem; margin-top: -1.5rem;">
       <svg id="drawn-line" width="420" height="40" viewBox="0 0 420 25" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;">
         <path
@@ -249,11 +423,7 @@
     <div class="flex items-center justify-center my-1 fade-in-section" style="position: relative; z-index: 3; margin-bottom: 1rem; margin-top: 5rem;">
       <h2 class="text-5xl md:text-7xl text-left font-extrabold mb-6 fade-in-section flex items-center text-black dark:text-white"
           style="position: relative; z-index: 4; margin-top: 0;">
-        <span style="position: relative; display: inline-block;">
-          <span style="position: relative; z-index: 2;">
-            Fast Facts
-          </span>
-        </span>
+        Fast Facts
       </h2>
       <i class="fa fa-water absolute text-center top-1/2 text-9xl fade-in-section" style="transform: translateX(-110%) translateY(-60%) scale(1); z-index: 2; color: var(--light-color);"></i>
     </div>
@@ -364,6 +534,7 @@
     </div>
 
     <div class="flex flex-col md:flex-row gap-4 md:gap-6 mt-20 items-center justify-center fade-in-section" style="margin-top: 6rem; margin-left: 1rem; margin-right: 1rem; margin-bottom: 1rem;">
+        
         <a href="/faith#sacrament" class="btn btn-primary text-center" style="background-color: var(--secondary-color); border-color: var(--secondary-color);">
             Mass & Sacrament Schedule
             <i class="fa fa-arrow-right pl-2"></i>
@@ -380,10 +551,10 @@
             Dorm ResLife Page
             <i class="fa fa-arrow-up-right-from-square pl-2"></i>
         </a>
-</div>
+    </div>
 
     <div class="w-full mt-2 mb-4">
-      <img src="/images/CoyleTriphoto.png" alt="Three photos of Coyle students" class="w-full fade-in-section" />
+      <img src="/images/CoyleTriphoto.png" alt="Three photos of Coyle students" class="w-full fade-in-section no-hover-effects" style="box-shadow: none !important; transform: none !important; transition: none !important;"/>
     </div>
 
   {{ end }}
