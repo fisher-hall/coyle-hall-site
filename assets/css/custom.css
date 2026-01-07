@@ -1,8 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Graduate&display=swap');
 
+/* Sticky footer setup - ensure footer is always at bottom of viewport */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   margin-bottom: 0 !important;
   padding-bottom: 0 !important;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
+
+footer {
+  margin-top: auto;
 }
 
 /* Profile cards - make them distinguishable in light mode only */
@@ -120,6 +138,7 @@ mark {
   --primary-color: var(--coyle-dark-green);
   --secondary-color: var(--coyle-light-green);
   --light-color: var(--nd-light); 
+  --highlight-color: var(--coyle-light-green);
 
   --background-color: #ffffff;
 }
@@ -128,6 +147,7 @@ mark {
   --primary-color: var(--coyle-light-green);
   --secondary-color: var(--coyle-accent-green);
   --light-color: var(--coyle-light-green);
+  --highlight-color: var(--coyle-dark-green);
 
   --background-color: #000000;
 }
@@ -223,7 +243,7 @@ body, p {
 }
 
 .social-icons i {
-  color: var(--coyle-dark-green) !important;
+  color: white !important;
   font-size: 1.5rem !important;
   display: flex;
   align-items: center;

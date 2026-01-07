@@ -45,6 +45,22 @@ title: "ironRA"
     border-radius: 0 !important;
   }
 
+/* Wave Container CSS */
+.wave-container {
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  overflow: hidden;
+  z-index: 10;
+}
+
+/* Ensure tint layer is below waves */
+.banner-tint-layer {
+  z-index: 1 !important;
+}
+
   @media (max-width: 768px) {
     #banner-parallax {
       display: flex !important;
@@ -91,6 +107,11 @@ title: "ironRA"
 <!-- Banner -->
 <div id="ironra-banner-wrapper">
   <div id="banner-parallax" class="relative overflow-hidden">
+    <!-- Animated Waves at bottom of banner -->
+    <div class="wave-container">
+      <canvas id="ironra-wave-canvas" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;"></canvas>
+    </div>
+    
     <!-- Tint Layer -->
     <div class="banner-tint-layer"></div>
     <!-- Text Overlay -->
@@ -119,6 +140,108 @@ function updateParallax() {
 
 document.addEventListener("DOMContentLoaded", updateParallax);
 window.addEventListener("scroll", updateParallax, { passive: true });
+</script>
+
+<!-- Wave Animation Script -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const canvas = document.getElementById('ironra-wave-canvas');
+  const ctx = canvas.getContext('2d');
+  let animationId;
+  
+  function resizeCanvas() {
+    const rect = canvas.getBoundingClientRect();
+    canvas.width = rect.width;
+    canvas.height = rect.height;
+  }
+  
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+  
+  // Get CSS color variables
+  function getCSSColor(variable) {
+    return getComputedStyle(document.documentElement).getPropertyValue(variable).trim();
+  }
+  
+  let time = 0;
+  
+  function drawWave(amplitudes, frequencies, speeds, opacity, yOffset, color) {
+    ctx.globalAlpha = opacity;
+    ctx.fillStyle = color || getCSSColor('--background-color') || '#f8f9fa';
+    
+    ctx.beginPath();
+    ctx.moveTo(0, canvas.height);
+    
+    let points = [];
+    
+    // Calculate wave points with higher resolution
+    for (let x = 0; x <= canvas.width; x += 0.5) {
+      let y = yOffset;
+      
+      // Stack multiple sine waves for natural randomness
+      for (let i = 0; i < amplitudes.length; i++) {
+        y += amplitudes[i] * Math.sin((x * frequencies[i] + time * speeds[i]) * Math.PI / 180);
+      }
+      
+      points.push({x, y});
+    }
+    
+    // Draw smooth curves using quadratic curves
+    ctx.lineTo(points[0].x, points[0].y);
+    
+    for (let i = 1; i < points.length - 1; i++) {
+      const current = points[i];
+      const next = points[i + 1];
+      const controlX = current.x;
+      const controlY = current.y;
+      const endX = (current.x + next.x) / 2;
+      const endY = (current.y + next.y) / 2;
+      
+      ctx.quadraticCurveTo(controlX, controlY, endX, endY);
+    }
+    
+    // Complete the last segment
+    if (points.length > 1) {
+      const last = points[points.length - 1];
+      ctx.lineTo(last.x, last.y);
+    }
+    
+    ctx.lineTo(canvas.width, canvas.height);
+    ctx.lineTo(0, canvas.height);
+    ctx.closePath();
+    ctx.fill();
+  }
+  
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    // Draw top wave (closest) - ocean-like wave with vertical movement and recession
+    const baseAmplitude = 10;
+    const verticalMovement = 6 * Math.sin(time * 0.02);
+    const recessionEffect = 2 * Math.sin(time * 0.015);
+    const dynamicAmplitude = baseAmplitude + recessionEffect;
+    
+    drawWave(
+      [dynamicAmplitude, dynamicAmplitude * 0.15], 
+      [0.6, 0.9], 
+      [0.8, 0.6], 
+      1, 
+      canvas.height * 0.38 + verticalMovement
+    );
+    
+    time += 0.8;
+    animationId = requestAnimationFrame(animate);
+  }
+  
+  animate();
+  
+  // Clean up on page unload
+  window.addEventListener('beforeunload', () => {
+    if (animationId) {
+      cancelAnimationFrame(animationId);
+    }
+  });
+});
 </script>
 
 
