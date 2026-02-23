@@ -324,17 +324,26 @@ body {
 }
 
 /* Add top padding to main content so it's not hidden behind floating header */
-.main {
-    padding-top: 200px !important;
+main {
+    padding-top: 100px !important;
 }
 
 /* Remove top padding on homepage with banner */
-body:has(#banner-parallax) .main,
-body:has(#home-banner-wrapper) .main {
+body:has(#banner-parallax) main,
+body:has(#home-banner-wrapper) main {
     padding-top: 0 !important;
 }
 
-/* Add top padding on pages without parallax header (permanent floating navbar) */
+/* Pages without banner: navbar background always visible */
+body:not(:has(#banner-parallax)):not(:has(#home-banner-wrapper)) .floating-navbar,
+body:not(:has(#banner-parallax)):not(:has(#home-banner-wrapper)) nav.floating-navbar,
+body:not(:has(#banner-parallax)):not(:has(#home-banner-wrapper)) .navbar.floating-navbar {
+    background-color: var(--coyle-navbar-tint) !important;
+    background: var(--coyle-navbar-tint) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2) !important;
+}
 
 
 
@@ -364,13 +373,13 @@ body:has(#home-banner-wrapper) .main {
 @media (max-width: 768px) {
     /* Mobile styles handled by JavaScript scroll effect */
     
-    .main {
-        padding-top: 80px !important;
+    main {
+        padding-top: 120px !important;
     }
     
     /* Remove top padding on homepage with banner (mobile) */
-    body:has(#banner-parallax) .main,
-    body:has(#home-banner-wrapper) .main {
+    body:has(#banner-parallax) main,
+    body:has(#home-banner-wrapper) main {
         padding-top: 0 !important;
     }
 }
