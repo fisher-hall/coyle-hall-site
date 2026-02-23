@@ -209,68 +209,6 @@
     },
   });
 
-  // Floating Navbar and Banner Scroll Effect
-  // ----------------------------------------
-  const floatingHeader = document.querySelector('.floating-header');
-  const navbar = document.querySelector('.floating-navbar');
-  const bannerElements = document.querySelectorAll('#banner-parallax, [id*="banner-parallax"]');
-  const scrollThreshold = 50; // Trigger floating state after 50px scroll
-  
-  // Check if this page should have permanent floating navbar
-  // Apply to pages without parallax banner OR pages explicitly marked with floating_navbar param
-  const hasBanner = bannerElements.length > 0;
-  const isPermanentFloating = !hasBanner || 
-                              document.body.classList.contains('permanent-floating-navbar');
-  
-  if (isPermanentFloating && navbar) {
-    document.body.classList.add('permanent-floating-navbar');
-    navbar.classList.add('scrolled'); // Start in scrolled state
-  }
-  
-  console.log('Scroll effect initialized');
-  console.log('Found header:', floatingHeader);
-  console.log('Found navbar:', navbar);
-  console.log('Found banners:', bannerElements.length);
-  console.log('Has banner:', hasBanner);
-  console.log('Permanent floating:', isPermanentFloating);
-
-  const handleScroll = () => {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const isMobileScreen = window.innerWidth <= 768;
-    const isScrolled = scrollTop > scrollThreshold;
-    
-    // Toggle 'scrolled' class on navbar for bounce-in animation (skip if permanent)
-    if (navbar && !isPermanentFloating) {
-      if (isScrolled && !navbar.classList.contains('scrolled')) {
-        navbar.classList.add('scrolled');
-      } else if (!isScrolled && navbar.classList.contains('scrolled')) {
-        navbar.classList.remove('scrolled');
-      }
-    }
-    
-    // Banner transitions disabled - keep banners full width
-    bannerElements.forEach(banner => {
-      banner.style.setProperty('border-radius', '0px', 'important');
-      banner.style.setProperty('margin-left', '0px', 'important');
-      banner.style.setProperty('margin-right', '0px', 'important');
-      banner.style.setProperty('width', '100%', 'important');
-    });
-  };
-
-  // Throttle scroll events for better performance
-  let ticking = false;
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      window.requestAnimationFrame(() => {
-        handleScroll();
-        ticking = false;
-      });
-      ticking = true;
-    }
-  });
-
-  // Initial check on page load
-  handleScroll();
 
   // Inline Search Bar Toggle
   // ----------------------------------------
@@ -575,3 +513,18 @@
     });
   });
 })();
+// --- SIMPLE NAVBAR SCROLL FADE (WINDOW-LEVEL) ---
+document.addEventListener("DOMContentLoaded", function () {
+  function updateNavbarBackground() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+
+    if (scrollTop > 10) {
+      document.body.classList.add("scrolled-navbar");
+    } else {
+      document.body.classList.remove("scrolled-navbar");
+    }
+  }
+
+  updateNavbarBackground();
+  window.addEventListener("scroll", updateNavbarBackground, { passive: true });
+});

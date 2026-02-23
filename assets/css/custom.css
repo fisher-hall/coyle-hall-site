@@ -2,7 +2,6 @@
 
 /* Sticky footer setup - ensure footer is always at bottom of viewport */
 html, body {
-  height: 100%;
   margin: 0;
   padding: 0;
 }
@@ -12,7 +11,6 @@ body {
   padding-bottom: 0 !important;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
 }
 
 main {
@@ -44,12 +42,12 @@ mark {
 
 /* Text selection highlighting */
 ::selection {
-  background-color: var(--secondary-color);
+  background-color: var(--highlight-color);
   color: white;
 }
 
 ::-moz-selection {
-  background-color: var(--secondary-color);
+  background-color: var(--highlight-color);
   color: white;
 }
 
@@ -121,13 +119,14 @@ mark {
     padding: 4px 16px !important;
   }
 }
-/* ROOT COLORS */
+/* THEME COLORS */
 :root {
   --coyle-dark-green: #064121;
   --coyle-dark-fade: rgb(6, 65, 33, 1);
   --coyle-light-green: #0a843d; /* same as nd-green */
   --coyle-accent-green: rgba(87, 187, 72, 1);
   --coyle-banner-tint: rgba(10, 132, 61, 0.5);
+  --coyle-navbar-tint: rgba(6, 65, 33, 0.8);
   --nd-blue: #0c2340;
   --nd-gold: rgb(174, 145, 66);
   --nd-light: #5faf81;
@@ -147,7 +146,9 @@ mark {
   --primary-color: var(--coyle-light-green);
   --secondary-color: var(--coyle-accent-green);
   --light-color: var(--coyle-light-green);
-  --highlight-color: var(--coyle-dark-green);
+  --highlight-color: var(--coyle-light-green);
+
+  --coyle-navbar-tint: rgba(6, 65, 33, 0.7);
 
   --background-color: #000000;
 }
@@ -282,24 +283,39 @@ label[for="nav-toggle"] i {
     display: block !important;
 }
 
-.floating-navbar {
+.floating-navbar,
+nav.floating-navbar,
+.navbar.floating-navbar {
     background-color: transparent !important;
+    background: transparent !important;
     backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
     border-radius: 24px !important;
     box-shadow: none !important;
     z-index: 10000 !important;
-    transition: background-color 0.5s ease, 
-                box-shadow 0.5s ease;
     padding-top: 12px !important;
     padding-bottom: 12px !important;
     padding-left: 24px !important;
     padding-right: 24px !important;
+    transition: background-color 0.35s ease, backdrop-filter 0.35s ease, box-shadow 0.35s ease !important;
 }
 
 .floating-navbar.scrolled,
-body.permanent-floating-navbar .floating-navbar {
-    background-color: var(--coyle-dark-fade) !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+nav.floating-navbar.scrolled,
+.navbar.floating-navbar.scrolled {
+    background-color: var(--coyle-navbar-tint) !important;
+    background: var(--coyle-navbar-tint) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2) !important;
+}
+
+body.scrolled-navbar .floating-navbar {
+    background-color: var(--coyle-navbar-tint) !important;
+    background: var(--coyle-navbar-tint) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25) !important;
 }
 
 /* Ensure content scrolls behind floating header */
@@ -319,10 +335,7 @@ body:has(#home-banner-wrapper) .main {
 }
 
 /* Add top padding on pages without parallax header (permanent floating navbar) */
-body.permanent-floating-navbar .main,
-body.permanent-floating-navbar main {
-    padding-top: 64px !important;
-}
+
 
 
 /* Floating navbar text colors */
@@ -1334,10 +1347,11 @@ html, body {
   overflow-x: hidden;
 }
 
-/* Add padding to account for fixed header */
+/* Add padding to account for fixed header 
 body {
-  padding-top: 100px; /* Adjust this value based on your header height */
-}
+  padding-top: 100px; /* Adjust this value based on your header height 
+} */
+
 
 /* Ensure main content starts below the fixed header */
 main, .main {
