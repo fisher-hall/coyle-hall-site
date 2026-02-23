@@ -124,7 +124,7 @@ mark {
   --coyle-dark-green: #064121;
   --coyle-dark-fade: rgb(6, 65, 33, 1);
   --coyle-light-green: #0a843d; /* same as nd-green */
-  --coyle-accent-green: rgba(87, 187, 72, 1);
+  --coyle-accent-green: rgb(72, 187, 78);
   --coyle-banner-tint: rgba(10, 132, 61, 0.5);
   --coyle-navbar-tint: rgba(6, 65, 33, 0.8);
   --nd-blue: #0c2340;
