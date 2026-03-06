@@ -950,6 +950,9 @@ footer .social-icons i {
   .header .navbar .nav-dropdown-list .nav-dropdown-item a {
     padding: 4px 16px !important;
   }
+  #nav-menu {
+    gap: 0.35rem !important;
+  }
   .mobile-arrow { display:none !important; }
   .desktop-arrow { display:inline-block !important; margin-left:1px !important; }
   #nav-menu .nav-dropdown .nav-link .fa-angle-down { display:inline-block !important; margin-left:1px !important; }
