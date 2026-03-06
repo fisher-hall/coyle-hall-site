@@ -7,10 +7,16 @@
       "text": "Instagram"
     },
     {
-      "name": "github",
-      "icon": "fab fa-github",
-      "link": "https://github.com/fisher-hall/coyle-hall-site?tab=readme-ov-file",
-      "text": "Site Repo"
+      "name": "youtube",
+      "icon": "fab fa-youtube",
+      "link": "https://www.youtube.com/@CoyleHall",
+      "text": "YouTube"
+    },
+    {
+      "name": "facebook",
+      "icon": "fab fa-facebook",
+      "link": "https://www.facebook.com/groups/2853007481380398/",
+      "text": "Parent Group"
     },
     {
       "name": "linkedin",
@@ -19,10 +25,10 @@
       "text": "LinkedIn Group"
     },
     {
-      "name": "info",
-      "icon": "fab fa-facebook",
-      "link": "https://www.facebook.com/groups/2853007481380398/",
-      "text": "Parent Group"
+      "name": "github",
+      "icon": "fab fa-github",
+      "link": "https://github.com/fisher-hall/coyle-hall-site?tab=readme-ov-file",
+      "text": "Site Repo"
     },
     {
       "name": "info",

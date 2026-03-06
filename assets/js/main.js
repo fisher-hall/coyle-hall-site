@@ -497,7 +497,7 @@
   });
 
   // Automatically apply .interactive-tilt to all non-banner images
-  document.querySelectorAll('img:not([id*="banner"]):not([class*="banner"])').forEach((img) => {
+  document.querySelectorAll('img:not([id*="banner"]):not([class*="banner"]):not(.no-tilt)').forEach((img) => {
     img.classList.add('interactive-tilt');
   });
 
