@@ -32,14 +32,19 @@
 
   // --- Simplified Reliable Mobile Submenu Logic ---
   const handleNavToggleChange = (checked) => {
+    const root = document.documentElement;
     if (checked) {
-      navMenu?.classList.add('navbar-active');
       document.body.style.overflow = 'hidden';
+      root.style.overflow = 'hidden';
+      document.body.classList.add('mobile-menu-open');
+      root.classList.add('mobile-menu-open');
       closeAllSubmenus();
       ensureBackButtons();
     } else {
-      navMenu?.classList.remove('navbar-active');
       document.body.style.overflow = '';
+      root.style.overflow = '';
+      document.body.classList.remove('mobile-menu-open');
+      root.classList.remove('mobile-menu-open');
       closeAllSubmenus();
     }
   };
@@ -214,7 +219,8 @@
   // ----------------------------------------
   const searchButton = document.querySelector('[data-target="search-modal"]');
   const searchNavMenu = document.querySelector('#nav-menu');
-  const navbarRightSide = document.querySelector('.header .navbar > div.order-1');
+  const navbar = document.querySelector('.header .navbar');
+  const mobileSearchSlot = document.querySelector('#mobile-search-slot');
   let isSearchActive = false;
   let searchContainer = null;
 
@@ -302,12 +308,18 @@
     const resultsContainer = createInlineResultsContainer();
     document.body.appendChild(resultsContainer);
     
-    // Get the logo container and right side container to calculate proper width
-    const logoContainer = document.querySelector('.header .navbar > div.order-0');
-    const rightSideContainer = document.querySelector('.header .navbar > div.order-1');
-    
-    // Insert before nav-menu
-    searchNavMenu.parentElement.insertBefore(searchContainer, searchNavMenu);
+    // Keep search bar in navbar on all breakpoints
+    if (window.innerWidth < 1024) {
+      document.body.classList.add('mobile-search-active');
+      if (mobileSearchSlot) {
+        mobileSearchSlot.appendChild(searchContainer);
+      } else {
+        searchNavMenu.parentElement.insertBefore(searchContainer, searchNavMenu);
+      }
+    } else {
+      navbar?.classList.add('desktop-search-active');
+      searchNavMenu.parentElement.insertBefore(searchContainer, searchNavMenu);
+    }
     
     // On large screens, use fixed width and center with absolute positioning
     if (window.innerWidth >= 1024) {
@@ -423,6 +435,8 @@
     // Animate search bar out
     searchContainer.style.opacity = '0';
     searchContainer.style.transform = 'scale(0.95)';
+    document.body.classList.remove('mobile-search-active');
+    navbar?.classList.remove('desktop-search-active');
 
     setTimeout(() => {
       searchContainer.remove();
@@ -461,6 +475,18 @@
       }
       return false;
     }, true);
+  }
+
+  // On mobile: if search is active, hamburger first closes search, then opens menu
+  if (navLabel && navToggle) {
+    navLabel.addEventListener('click', (e) => {
+      if (!isMobile() || !isSearchActive) return;
+      e.preventDefault();
+      e.stopPropagation();
+      hideInlineSearch();
+      navToggle.checked = true;
+      handleNavToggleChange(true);
+    });
   }
 
   // Close search on Escape key

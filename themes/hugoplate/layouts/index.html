@@ -34,12 +34,30 @@
         padding: 0 0px !important;
         box-sizing: border-box !important;
         margin-top: 0 !important;
+        overflow: visible !important;
+      }
+
+      #home-banner-wrapper::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -3px;
+        height: 4px;
+        background: var(--background-color);
+        pointer-events: none;
+        z-index: 3;
       }
       
       /* Mobile padding for banner */
       @media (max-width: 768px) {
         #home-banner-wrapper {
-          padding: 0 2px !important;
+          width: 100vw !important;
+          padding: 0 !important;
+          margin-left: -50vw !important;
+          margin-right: -50vw !important;
+          left: 50% !important;
+          right: 50% !important;
         }
       }
 
@@ -87,7 +105,7 @@
           height: 50vh;
           max-height: 600px;
           min-height: 400px;
-          margin-top: 0 !important;
+          margin: 0 !important;
       }
 
       #home-banner-img {
@@ -117,12 +135,25 @@
       /* Wave SVG Animation */
       .wave-container {
         position: absolute;
-        bottom: -10px;
+        bottom: -12px;
         left: 0;
         width: 100%;
         height: 80px;
         overflow: hidden;
         z-index: 1;
+      }
+
+      #wave-canvas {
+        display: block;
+        bottom: -2px !important;
+        height: calc(100% + 4px) !important;
+        transform: translateZ(0);
+      }
+
+      @media (max-width: 768px) {
+        #home-banner-wrapper {
+          margin-bottom: -2px !important;
+        }
       }
 
       .wave {
@@ -366,8 +397,8 @@
       });
     </script>
 
-    <h1 class="text-5xl text-center font-extrabold mb-6 px-4 fade-in-section" style="color: var(--primary-color); margin-top: 1.5rem;">
-      I Will Make You Fishers of Men
+    <h1 class="text-7xl text-center font-extrabold mb-6 px-4 fade-in-section" style="color: var(--primary-color); margin-top: 1.5rem;">
+      Fishers of Men
     </h1>
 
     <!-- Animated hand-drawn wave line graphic -->
@@ -376,7 +407,7 @@
         <path
           d="M10 18 Q 40 2, 70 18 Q 100 34, 130 18 Q 160 2, 190 18 Q 220 34, 250 18 Q 280 2, 310 18 Q 340 34, 370 18 Q 400 2, 430 18"
           class="stroke-black dark:stroke-white"
-          stroke-width="5"
+          stroke-width="7"
           stroke-linecap="round"
           fill="none"
           style="stroke-dasharray: 420; stroke-dashoffset: 420; transition: stroke-dashoffset 1.2s cubic-bezier(.77,0,.18,1);"
@@ -385,7 +416,7 @@
     </div>
 
     <h1 class="text-2xl text-center font-extrabold mb-6 fade-in-section" style="color: var(--secondary-color);">
-      Matthew 4:19
+      1952 • 2025
     </h1>
 
     <div class="flex items-center justify-start my-1 fade-in-section pl-16" style="position: relative; z-index: 3; margin-bottom: 1rem; margin-top: 5rem;">

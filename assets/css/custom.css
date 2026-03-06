@@ -36,8 +36,11 @@ footer {
 mark {
   background-color: #22c55e;
   color: white;
-  padding: 1px 3px;
-  border-radius: 2px;
+  padding: 0.08em 0.3em;
+  margin: 0 0.08em;
+  border-radius: 10rem;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
 /* Text selection highlighting */
@@ -89,11 +92,9 @@ mark {
     width: 100vw !important;
     height: 100vh !important;
     height: 100dvh !important;
-    background: var(--coyle-navbar-tint);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    background: var(--coyle-dark-green);
     z-index: 100 !important;
-    display: flex;
+    display: flex !important;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -104,7 +105,11 @@ mark {
     overflow-y: auto !important;
     opacity: 0;
     visibility: hidden;
-    transform: translateX(100vw);
+    transform: translate3d(100vw, 0, 0);
+    pointer-events: none;
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
     transition: transform 0.5s cubic-bezier(.68,-0.55,.27,1.55), 
                 opacity 0.4s cubic-bezier(.68,-0.55,.27,1.55), 
                 visibility 0.4s cubic-bezier(.68,-0.55,.27,1.55);
@@ -118,6 +123,31 @@ mark {
 
 /* FINAL OVERRIDE: Desktop dropdown item padding specificity */
 @media (min-width: 1024px) {
+  #nav-menu {
+    position: static !important;
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    overflow: visible !important;
+  }
+
+  #nav-menu .nav-item {
+    width: auto !important;
+    margin: 0 !important;
+  }
+
+  #nav-menu .nav-item .nav-link {
+    opacity: 1 !important;
+    transform: none !important;
+    margin: 0 !important;
+  }
+
   .header .navbar .nav-dropdown-list .nav-dropdown-item a {
     padding: 4px 16px !important;
   }
@@ -268,7 +298,7 @@ label[for="nav-toggle"] i {
 /* Floating header styling */
 .floating-header {
     position: fixed !important;
-    top: 4px !important;
+    top: 6px !important;
     left: 8px !important;
     right: 8px !important;
     z-index: 10000 !important;
@@ -655,11 +685,12 @@ footer .social-icons i {
   }
 }
   
-  #nav-menu.navbar-active {
+@media (max-width: 1023px) {
+  #nav-toggle:checked ~ #nav-menu {
     transform: translateX(0);
     opacity: 1;
     visibility: visible;
-    display: flex !important;
+    pointer-events: auto;
     transition: transform 0.4s cubic-bezier(0.4,0,0.2,1),
                 opacity 0.4s cubic-bezier(0.4,0,0.2,1),
                 visibility 0s linear 0s; /* visible immediately on open */
@@ -696,15 +727,15 @@ footer .social-icons i {
     will-change: opacity, transform;
     transition: opacity .5s ease, transform .6s cubic-bezier(.4,0,.2,1), background-color .25s ease, color .25s ease;
   }
-  #nav-menu.navbar-active .nav-item .nav-link { opacity:1; transform:none; }
-  #nav-menu.navbar-active .nav-item:nth-child(1) .nav-link { transition-delay:.05s; }
-  #nav-menu.navbar-active .nav-item:nth-child(2) .nav-link { transition-delay:.10s; }
-  #nav-menu.navbar-active .nav-item:nth-child(3) .nav-link { transition-delay:.15s; }
-  #nav-menu.navbar-active .nav-item:nth-child(4) .nav-link { transition-delay:.20s; }
-  #nav-menu.navbar-active .nav-item:nth-child(5) .nav-link { transition-delay:.25s; }
-  #nav-menu.navbar-active .nav-item:nth-child(6) .nav-link { transition-delay:.30s; }
-  #nav-menu.navbar-active .nav-item:nth-child(7) .nav-link { transition-delay:.35s; }
-  #nav-menu.navbar-active .nav-item:nth-child(8) .nav-link { transition-delay:.40s; }
+  #nav-toggle:checked ~ #nav-menu .nav-item .nav-link { opacity:1; transform:none; }
+  #nav-toggle:checked ~ #nav-menu .nav-item:nth-child(1) .nav-link { transition-delay:.05s; }
+  #nav-toggle:checked ~ #nav-menu .nav-item:nth-child(2) .nav-link { transition-delay:.10s; }
+  #nav-toggle:checked ~ #nav-menu .nav-item:nth-child(3) .nav-link { transition-delay:.15s; }
+  #nav-toggle:checked ~ #nav-menu .nav-item:nth-child(4) .nav-link { transition-delay:.20s; }
+  #nav-toggle:checked ~ #nav-menu .nav-item:nth-child(5) .nav-link { transition-delay:.25s; }
+  #nav-toggle:checked ~ #nav-menu .nav-item:nth-child(6) .nav-link { transition-delay:.30s; }
+  #nav-toggle:checked ~ #nav-menu .nav-item:nth-child(7) .nav-link { transition-delay:.35s; }
+  #nav-toggle:checked ~ #nav-menu .nav-item:nth-child(8) .nav-link { transition-delay:.40s; }
   /* Light Green hover + active like desktop */
   #nav-menu .nav-item .nav-link:hover { background: var(--coyle-light-green) !important; color:#fff !important; }
   #nav-menu .nav-item .nav-link.active { background: var(--coyle-light-green) !important; color:#fff !important; outline: none !important; }
@@ -912,6 +943,7 @@ footer .social-icons i {
   #nav-toggle:checked + label.hamburger-btn .hb-line:nth-child(1){ top:23px; transform:rotate(45deg); }
   #nav-toggle:checked + label.hamburger-btn .hb-line:nth-child(2){ opacity:0; }
   #nav-toggle:checked + label.hamburger-btn .hb-line:nth-child(3){ top:23px; transform:rotate(-45deg); }
+}
 
 /* --- DESKTOP/MOBILE NAVBAR BREAKPOINT: 1150px --- */
 @media (min-width: 1024px) {
@@ -982,11 +1014,60 @@ html.dark footer .footer-nd-dark {
   order: 1;
 }
 
+#mobile-search-bar {
+  display: none;
+}
+
 /* Small/medium screens - take full width */
 @media (max-width: 1023px) {
+  #mobile-search-bar {
+    display: block;
+    position: fixed;
+    top: calc(1rem + 72px);
+    left: .5rem;
+    right: .5rem;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-8px);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+  }
+
+  #mobile-search-slot {
+    background: var(--coyle-navbar-tint);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 24px;
+    padding: 1rem 1rem;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.22);
+  }
+
+  body.mobile-search-active #mobile-search-bar {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
   .inline-search-container {
     flex: 1;
     width: 100%;
+  }
+
+  #mobile-search-slot .inline-search-container {
+    width: 100%;
+    margin: 0;
+    padding-right: 0;
+  }
+
+  .inline-search-results {
+    left: 50%;
+    transform: translateX(-50%);
+    top: calc(1rem + 72px + 84px) !important;
+    width: 60%;
+    max-width: 900px;
+    border-radius: 24px;
   }
 }
 
@@ -997,6 +1078,13 @@ html.dark footer .footer-nd-dark {
     left: 50%;
     transform: translateX(-50%);
     margin: 0;
+    z-index: 10002;
+  }
+
+  .header .navbar.desktop-search-active #nav-menu {
+    display: none !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
   }
   
   /* Ensure navbar allows absolute positioning */
@@ -1027,7 +1115,7 @@ html.dark footer .footer-nd-dark {
   font-family: 'Rubik', sans-serif;
   font-weight: 500;
   border: 2px solid rgba(255, 255, 255, 0.9);
-  border-radius: 24px;
+  border-radius: 16px;
   background: transparent;
   color: #ffffff;
   outline: none;
@@ -1063,7 +1151,9 @@ html.dark footer .footer-nd-dark {
   width: 60%;
   max-width: 900px;
   max-height: calc(100vh - 140px);
-  background: #0a843d;
+  background: var(--coyle-navbar-tint);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-radius: 24px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.3);
   z-index: 9998;
@@ -1076,14 +1166,14 @@ html.dark footer .footer-nd-dark {
   padding: 1rem 1.5rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   color: #fff !important;
-  background: #0a843d !important;
+  background: transparent !important;
   border: none !important;
   text-decoration: none;
   transition: background 0.2s ease;
 }
 
 .search-result-item:hover {
-  background: #087032 !important;
+  background: rgba(255, 255, 255, 0.1) !important;
   color: #fff !important;
 }
 
@@ -1112,8 +1202,11 @@ html.dark footer .footer-nd-dark {
 mark.bg-yellow-300 {
   background: #fff !important;
   color: #0a843d !important;
-  border-radius: 2px;
-  padding: 1px 3px;
+  border-radius: 0.75em;
+  padding: 0.08em 0.3em;
+  margin: 0 0.08em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
 .btn, .social-icons a{
@@ -1569,8 +1662,14 @@ footer .interactive-tilt::after {
 
 /* Mobile menu should be true fullscreen and not visually inset by navbar scroll background */
 @media (max-width: 1023px) {
+  html.mobile-menu-open,
+  body.mobile-menu-open {
+    overflow: hidden !important;
+    overscroll-behavior: none !important;
+  }
+
   #nav-menu,
-  #nav-menu.navbar-active {
+  #nav-toggle:checked ~ #nav-menu {
     position: fixed !important;
     inset: 0 !important;
     top: 0 !important;
@@ -1584,19 +1683,38 @@ footer .interactive-tilt::after {
     border-radius: 0 !important;
   }
 
-  #nav-menu.navbar-active {
-    background: var(--coyle-navbar-tint) !important;
-    backdrop-filter: blur(16px) !important;
-    -webkit-backdrop-filter: blur(16px) !important;
+  #nav-menu,
+  #nav-toggle:checked ~ #nav-menu {
+    background: var(--coyle-dark-green) !important;
   }
 
-  .header:has(#nav-menu.navbar-active) .floating-navbar,
-  .header:has(#nav-menu.navbar-active) nav.floating-navbar,
-  .header:has(#nav-menu.navbar-active) .navbar.floating-navbar {
+  .header:has(#nav-toggle:checked) .floating-navbar,
+  .header:has(#nav-toggle:checked) nav.floating-navbar,
+  .header:has(#nav-toggle:checked) .navbar.floating-navbar {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
+    transition: none !important;
+  }
+
+  /* Keep header/logo position intact, only expand the menu layer past header inset */
+  body.mobile-menu-open #nav-menu,
+  body.mobile-menu-open #nav-toggle:checked ~ #nav-menu {
+    top: -6px !important;
+    left: -8px !important;
+    right: -8px !important;
+    width: calc(100vw + 16px) !important;
+    height: calc(100dvh + 6px) !important;
+    max-width: none !important;
+  }
+
+  body.mobile-menu-open .floating-navbar,
+  body.mobile-menu-open nav.floating-navbar,
+  body.mobile-menu-open .navbar.floating-navbar {
     background: transparent !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
     box-shadow: none !important;
   }
 }
-
