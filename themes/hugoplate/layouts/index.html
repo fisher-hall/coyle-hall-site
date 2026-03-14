@@ -3,6 +3,11 @@
   
   {{ with .Params.banner }}
     <style>
+      :root {
+        --home-banner-height: clamp(400px, 50vh, 600px);
+        --home-wave-overlap: 2px;
+      }
+
       .home-banner-text-overlay, #home-banner-text {
         width: 100% !important;
         text-align: center !important;
@@ -26,7 +31,8 @@
       /* Make home banner full width at all screen sizes */
       #home-banner-wrapper {
         width: 100vw !important;
-        position: relative !important;
+        position: fixed !important;
+        top: 0 !important;
         left: 50% !important;
         right: 50% !important;
         margin-left: -50vw !important;
@@ -34,12 +40,37 @@
         padding: 0 0px !important;
         box-sizing: border-box !important;
         margin-top: 0 !important;
+        height: var(--home-banner-height) !important;
+        overflow: visible !important;
+        z-index: 0 !important;
+      }
+
+      #home-banner-wrapper::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -3px;
+        height: 4px;
+        background: var(--background-color);
+        pointer-events: none;
+        z-index: 3;
       }
       
       /* Mobile padding for banner */
       @media (max-width: 768px) {
+        :root {
+          --home-banner-height: clamp(340px, 46vh, 500px);
+          --home-wave-overlap: 8px;
+        }
+
         #home-banner-wrapper {
-          padding: 0 2px !important;
+          width: 100vw !important;
+          padding: 0 !important;
+          margin-left: -50vw !important;
+          margin-right: -50vw !important;
+          left: 50% !important;
+          right: 50% !important;
         }
       }
 
@@ -81,13 +112,28 @@
           position: relative;
           overflow: hidden;
           background-image: url('/images/BannerImages/HomeBanner.png');
-          background-position: center center;
+          background-position: center calc(50% + var(--home-parallax-bg-y, 0px));
           background-repeat: no-repeat;
           background-size: cover;
-          height: 50vh;
-          max-height: 600px;
-          min-height: 400px;
-          margin-top: 0 !important;
+          height: var(--home-banner-height);
+          max-height: none;
+          min-height: 0;
+          margin: 0 !important;
+          will-change: background-position;
+      }
+
+      #home-banner-text {
+        --home-banner-text-x: 0px;
+        transform: translate3d(var(--home-banner-text-x), var(--home-parallax-text-y, 0px), 0) !important;
+        will-change: transform;
+      }
+
+      #home-content-layer {
+        position: relative;
+        z-index: 2;
+        margin-top: calc(var(--home-banner-height) - var(--home-wave-overlap));
+        padding-top: var(--home-wave-overlap);
+        background: var(--background-color);
       }
 
       #home-banner-img {
@@ -104,7 +150,7 @@
       @media (max-width: 768px) {
         #home-banner-text {
           left: 50% !important;
-          transform: translateX(-50%) !important;
+          --home-banner-text-x: -50%;
           width: 100% !important;
           text-align: center !important;
         }
@@ -113,15 +159,75 @@
           width: 100% !important;
         }
       }
+
+      /* Wave SVG Animation */
+      .wave-container {
+        position: relative;
+        margin-top: -70px;
+        left: 0;
+        width: 100%;
+        height: 80px;
+        overflow: hidden;
+        z-index: 3;
+      }
+
+      #wave-canvas {
+        display: block;
+        bottom: -2px !important;
+        height: calc(100% + 4px) !important;
+        transform: translateZ(0);
+      }
+
+      @media (max-width: 768px) {
+        #home-banner-wrapper {
+          margin-bottom: -2px !important;
+        }
+      }
+
+      .wave {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 200%;
+        height: 100%;
+        animation: wave-move 15s linear infinite;
+      }
+
+      .wave:nth-child(2) {
+        animation-duration: 20s;
+        animation-direction: reverse;
+        animation-delay: -6s;
+        opacity: 0.5;
+        bottom: 10px;
+      }
+
+      .wave:nth-child(3) {
+        animation-duration: 25s;
+        animation-delay: -10s;
+        opacity: 0.3;
+        bottom: 20px;
+      }
+
+      @keyframes wave-move {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+      }
+
+      /* Disable hover effects for tri-photo */
+      .no-hover-effects:hover {
+        transform: none !important;
+        box-shadow: none !important;
+        scale: 1 !important;
+        filter: none !important;
+      }
     </style>
 
     <!-- Banner -->
     <div id="home-banner-wrapper">
-      <div id="banner-parallax" 
-           class="relative overflow-hidden"
-      >
+      <div id="banner-parallax" class="relative overflow-hidden">
         <!-- Tint Layer -->
         <div class="banner-tint-layer"></div>
+        
         <!-- Text Overlay -->
         <div class="home-banner-text-overlay" id="home-banner-text">
           <span class="home-banner-subheading">WELCOME TO</span>
@@ -131,24 +237,148 @@
     </div>
 
     <script>
-      function updateParallax() {
-        const banner = document.getElementById("banner-parallax");
-        if (!banner) return;
-        
-        const scrollY = window.scrollY || window.pageYOffset;
-        const bannerRect = banner.getBoundingClientRect();
-        
-        // Only apply parallax when banner is visible
-        if (bannerRect.bottom > 0) {
-          // Move background position slower than scroll
-          const offset = scrollY * -0.8;
-          banner.style.backgroundPosition = `center ${-offset}px`;
-        }
-      }
+      document.addEventListener("DOMContentLoaded", function () {
+        const root = document.documentElement;
+        const updateBannerParallax = () => {
+          const scrollY = window.scrollY || window.pageYOffset || 0;
+          const backgroundOffset = Math.max(-90, scrollY * -0.12);
+          const textOffset = Math.max(-42, scrollY * -0.08);
 
-      document.addEventListener("DOMContentLoaded", updateParallax);
-      window.addEventListener("scroll", updateParallax, { passive: true });
+          root.style.setProperty('--home-parallax-bg-y', `${backgroundOffset}px`);
+          root.style.setProperty('--home-parallax-text-y', `${textOffset}px`);
+        };
+
+        updateBannerParallax();
+        window.addEventListener("scroll", updateBannerParallax, { passive: true });
+      });
     </script>
+
+    <!-- Wave Animation Script -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const canvas = document.getElementById('wave-canvas');
+        const ctx = canvas.getContext('2d');
+        let animationId;
+        
+        function resizeCanvas() {
+          const rect = canvas.getBoundingClientRect();
+          canvas.width = rect.width;
+          canvas.height = rect.height;
+        }
+        
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+        
+        // Get CSS color variables
+        function getCSSColor(variable) {
+          return getComputedStyle(document.documentElement).getPropertyValue(variable).trim();
+        }
+        
+        let time = 0;
+        
+        function drawWave(amplitudes, frequencies, speeds, opacity, yOffset, color) {
+          ctx.globalAlpha = opacity;
+          ctx.fillStyle = color || getCSSColor('--background-color') || '#f8f9fa';
+          
+          ctx.beginPath();
+          ctx.moveTo(0, canvas.height);
+          
+          let points = [];
+          
+          // Calculate wave points with higher resolution
+          for (let x = 0; x <= canvas.width; x += 0.5) {
+            let y = yOffset;
+            
+            // Stack multiple sine waves for natural randomness
+            for (let i = 0; i < amplitudes.length; i++) {
+              y += amplitudes[i] * Math.sin((x * frequencies[i] + time * speeds[i]) * Math.PI / 180);
+            }
+            
+            points.push({x, y});
+          }
+          
+          // Draw smooth curves using quadratic curves
+          ctx.lineTo(points[0].x, points[0].y);
+          
+          for (let i = 1; i < points.length - 1; i++) {
+            const current = points[i];
+            const next = points[i + 1];
+            const controlX = current.x;
+            const controlY = current.y;
+            const endX = (current.x + next.x) / 2;
+            const endY = (current.y + next.y) / 2;
+            
+            ctx.quadraticCurveTo(controlX, controlY, endX, endY);
+          }
+          
+          // Complete the last segment
+          if (points.length > 1) {
+            const last = points[points.length - 1];
+            ctx.lineTo(last.x, last.y);
+          }
+          
+          ctx.lineTo(canvas.width, canvas.height);
+          ctx.lineTo(0, canvas.height);
+          ctx.closePath();
+          ctx.fill();
+        }
+        
+        function animate() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          
+          // Draw bottom wave first (furthest back) - simple sine wave
+          {{/*  drawWave(
+            [18], 
+            [0.5], 
+            [0.7], 
+            1, 
+            canvas.height * 0.29
+          );  */}}
+          
+          // Draw middle wave - simple sine wave
+          {{/*  drawWave(
+            [20], // amplitudes
+            [0.42],  //Frequency
+            [-0.8], //speed
+            0.9, //opacity
+            canvas.height * 0.42 //y-offset
+          );  */}}
+          
+          // Draw top wave (closest) - ocean-like wave with vertical movement and recession
+          const baseAmplitude = 10;
+          const verticalMovement = 6 * Math.sin(time * 0.02);
+          const recessionEffect = 2 * Math.sin(time * 0.015);
+          const dynamicAmplitude = baseAmplitude + recessionEffect;
+          
+          drawWave(
+            [dynamicAmplitude, dynamicAmplitude * 0.15], 
+            [0.6, 0.9], 
+            [0.8, 0.6], 
+            1, 
+            canvas.height * 0.38 + verticalMovement,
+            getCSSColor('--background-color')
+          );
+          
+          time += 0.8;
+          animationId = requestAnimationFrame(animate);
+        }
+        
+        animate();
+        
+        // Clean up on page unload
+        window.addEventListener('beforeunload', () => {
+          if (animationId) {
+            cancelAnimationFrame(animationId);
+          }
+        });
+      });
+    </script>
+
+    <div id="home-content-layer">
+      <!-- Animated Waves at top of scrolling content -->
+      <div class="wave-container">
+        <canvas id="wave-canvas" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;"></canvas>
+      </div>
 
     <!-- Fade-in effect -->
     <script>
@@ -192,17 +422,17 @@
       });
     </script>
 
-    <h1 class="text-5xl text-center font-extrabold mb-6 px-4 fade-in-section" style="color: var(--primary-color);">
-      I Will Make You Fishers of Men
+    <h1 class="text-7xl text-center font-extrabold mb-6 px-4 fade-in-section" style="color: var(--primary-color); margin-top: 1.5rem;">
+      Fishers of Men
     </h1>
 
-    <!-- Animated hand-drawn line graphic -->
+    <!-- Animated hand-drawn wave line graphic -->
     <div class="flex justify-center my-1 fade-in-section" style="position: relative; z-index: 2; margin-bottom: 1rem; margin-top: -1.5rem;">
       <svg id="drawn-line" width="420" height="40" viewBox="0 0 420 25" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;">
         <path
           d="M10 18 Q 40 2, 70 18 Q 100 34, 130 18 Q 160 2, 190 18 Q 220 34, 250 18 Q 280 2, 310 18 Q 340 34, 370 18 Q 400 2, 430 18"
           class="stroke-black dark:stroke-white"
-          stroke-width="5"
+          stroke-width="7"
           stroke-linecap="round"
           fill="none"
           style="stroke-dasharray: 420; stroke-dashoffset: 420; transition: stroke-dashoffset 1.2s cubic-bezier(.77,0,.18,1);"
@@ -211,7 +441,7 @@
     </div>
 
     <h1 class="text-2xl text-center font-extrabold mb-6 fade-in-section" style="color: var(--secondary-color);">
-      Matthew 4:19
+      1952 • 2025
     </h1>
 
     <div class="flex items-center justify-start my-1 fade-in-section pl-16" style="position: relative; z-index: 3; margin-bottom: 1rem; margin-top: 5rem;">
@@ -249,11 +479,7 @@
     <div class="flex items-center justify-center my-1 fade-in-section" style="position: relative; z-index: 3; margin-bottom: 1rem; margin-top: 5rem;">
       <h2 class="text-5xl md:text-7xl text-left font-extrabold mb-6 fade-in-section flex items-center text-black dark:text-white"
           style="position: relative; z-index: 4; margin-top: 0;">
-        <span style="position: relative; display: inline-block;">
-          <span style="position: relative; z-index: 2;">
-            Fast Facts
-          </span>
-        </span>
+        Fast Facts
       </h2>
       <i class="fa fa-water absolute text-center top-1/2 text-9xl fade-in-section" style="transform: translateX(-110%) translateY(-60%) scale(1); z-index: 2; color: var(--light-color);"></i>
     </div>
@@ -364,6 +590,7 @@
     </div>
 
     <div class="flex flex-col md:flex-row gap-4 md:gap-6 mt-20 items-center justify-center fade-in-section" style="margin-top: 6rem; margin-left: 1rem; margin-right: 1rem; margin-bottom: 1rem;">
+        
         <a href="/faith#sacrament" class="btn btn-primary text-center" style="background-color: var(--secondary-color); border-color: var(--secondary-color);">
             Mass & Sacrament Schedule
             <i class="fa fa-arrow-right pl-2"></i>
@@ -380,10 +607,11 @@
             Dorm ResLife Page
             <i class="fa fa-arrow-up-right-from-square pl-2"></i>
         </a>
-</div>
+    </div>
 
     <div class="w-full mt-2 mb-4">
-      <img src="/images/CoyleTriphoto.png" alt="Three photos of Coyle students" class="w-full fade-in-section" />
+      <img src="/images/CoyleTriphoto.png" alt="Three photos of Coyle students" class="w-full fade-in-section no-hover-effects" style="box-shadow: none !important; transform: none !important; transition: none !important;"/>
+    </div>
     </div>
 
   {{ end }}

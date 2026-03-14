@@ -1,14 +1,155 @@
+<style>
+  .wave-divider {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    height: 120px;
+    margin-bottom: -1px;
+  }
+
+  .wave-divider canvas {
+    display: block;
+  }
+
+  .footer-wrapper .footer {
+    margin-top: -1px;
+    position: relative;
+  }
+
+  .footer-wrapper .footer::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--coyle-dark-green);
+    pointer-events: none;
+  }
+</style>
+
 <div class="footer-wrapper">
-  <hr id="transition" class="my-2 border-custom-gray" style="height: 1px; border: none; background: linear-gradient(to right, transparent, var(--color-lightmode-gray) 20%, var(--color-lightmode-gray) 80%, transparent);">
-  <footer class="footer bg-light dark:bg-darkmode-light shadow-lg rounded-2xl py-4">
-    <div class="container w-full">
+  <!-- Animated wave divider -->
+  <div id="transition" class="wave-divider" style="margin-top: 1.5rem;">
+    <canvas id="footer-wave-canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></canvas>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const canvas = document.getElementById('footer-wave-canvas');
+      if (!canvas) return;
+      
+      const ctx = canvas.getContext('2d');
+      let animationId;
+      
+      function resizeCanvas() {
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+      }
+      
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+      
+      // Get CSS color variables
+      function getCSSColor(variable) {
+        return getComputedStyle(document.documentElement).getPropertyValue(variable).trim();
+      }
+      
+      let time = 0;
+      
+      function drawWave(amplitudes, frequencies, speeds, strokeWidth, yOffset, color) {
+        ctx.fillStyle = color || getCSSColor('--coyle-dark-green') || '#22c55e';
+        
+        ctx.beginPath();
+        
+        let points = [];
+        
+        // Calculate wave points with higher resolution
+        for (let x = 0; x <= canvas.width; x += 0.5) {
+          let y = yOffset;
+          
+          // Stack multiple sine waves for natural randomness
+          for (let i = 0; i < amplitudes.length; i++) {
+            y += amplitudes[i] * Math.sin((x * frequencies[i] + time * speeds[i]) * Math.PI / 180);
+          }
+          
+          points.push({x, y});
+        }
+        
+        // Start from bottom left
+        ctx.moveTo(0, canvas.height);
+        
+        // Draw to first wave point
+        ctx.lineTo(points[0].x, points[0].y);
+        
+        // Draw smooth curves using quadratic curves
+        for (let i = 1; i < points.length - 1; i++) {
+          const current = points[i];
+          const next = points[i + 1];
+          const controlX = current.x;
+          const controlY = current.y;
+          const endX = (current.x + next.x) / 2;
+          const endY = (current.y + next.y) / 2;
+          
+          ctx.quadraticCurveTo(controlX, controlY, endX, endY);
+        }
+        
+        // Complete the last segment
+        if (points.length > 1) {
+          const last = points[points.length - 1];
+          ctx.lineTo(last.x, last.y);
+        }
+        
+        // Close the path by going to bottom right and back to bottom left
+        ctx.lineTo(canvas.width, canvas.height);
+        ctx.lineTo(0, canvas.height);
+        ctx.closePath();
+        ctx.fill();
+      }
+      
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // Single ocean-like footer wave with dynamic effects - more rounded and uniform
+        const baseAmplitude = 15;
+        const verticalMovement = 4 * Math.sin(time * 0.02);
+        const recessionEffect = 1.5 * Math.sin(time * 0.015);
+        const dynamicAmplitude = baseAmplitude + recessionEffect;
+        
+        drawWave(
+          [dynamicAmplitude], 
+          [0.35], 
+          [0.7], 
+          3, 
+          canvas.height * 0.8 + verticalMovement,
+          getCSSColor('--coyle-dark-green')
+        );
+        
+        time += 0.8;
+        animationId = requestAnimationFrame(animate);
+      }
+      
+      animate();
+      
+      // Clean up on page unload
+      window.addEventListener('beforeunload', () => {
+        if (animationId) {
+          cancelAnimationFrame(animationId);
+        }
+      });
+    });
+  </script>
+  
+  <footer class="footer py-4" style="background-color: var(--coyle-dark-green);">
+    <div class="w-full px-2 md:px-8">
       <div class="flex flex-col md:grid md:grid-cols-3 md:items-center gap-6 md:gap-4">
       {{/*  COYLE LOGO  */}}
-      <div class="flex items-center text-center md:text-left md:justify-self-start">
+      <div class="flex items-center justify-center md:justify-start text-center md:text-left md:justify-self-start">
         <a
-          class="navbar-brand inline-block w-full md:w-auto py-0"
+          class="navbar-brand inline-block py-0"
           href="{{ site.Home.RelPermalink }}">
-          {{ partial "logo" }}
+          <img src="/images/CoyleHookLogo.png" alt="Coyle Hall Logo" style="max-height: 60px; width: auto;" />
         </a>
       </div>
       {{/*  SOCIAL ICONS  */}}
@@ -17,7 +158,8 @@
           {{ range site.Data.social.main }}
           <li>
             <a
-              class="flex items-center justify-center gap-2 px-1 text-dark hover:text-primary dark:text-white dark:hover:text-primary whitespace-nowrap rounded-2xl transition-colors duration-200"
+              class="flex items-center justify-center gap-2 px-3 py-2 whitespace-nowrap rounded-2xl transition-colors duration-200"
+              style="background-color: white; color: var(--coyle-dark-green);"
               href="{{ .link | safeURL }}"
               {{ if hasPrefix .link `http` }}target="_blank" rel="noopener noreferrer nofollow"{{ end }}
               aria-label="{{ .name }}"
@@ -32,7 +174,7 @@
       {{/*  UND WORDMARK  */}}
       <div class="flex items-center justify-center md:justify-self-end">
         <a href="https://nd.edu" target="_blank" rel="noopener" class="footer-image-link">
-          <img src="https://static.nd.edu/images/marks/blue/ndmark.svg" alt="University of Notre Dame" style="max-width:180px; width:100%;" class="footer-nd-light" />
+          <img src="https://static.nd.edu/images/marks/white/ndmark.svg" alt="University of Notre Dame" style="max-width:180px; width:100%;" class="footer-nd-light" />
           <img src="https://static.nd.edu/images/marks/white/ndmark.svg" alt="University of Notre Dame" style="max-width:180px; width:100%;" class="footer-nd-dark" />
         </a>
       </div>  <!-- New row with centered text below the three columns -->

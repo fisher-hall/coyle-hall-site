@@ -32,14 +32,19 @@
 
   // --- Simplified Reliable Mobile Submenu Logic ---
   const handleNavToggleChange = (checked) => {
+    const root = document.documentElement;
     if (checked) {
-      navMenu?.classList.add('navbar-active');
       document.body.style.overflow = 'hidden';
+      root.style.overflow = 'hidden';
+      document.body.classList.add('mobile-menu-open');
+      root.classList.add('mobile-menu-open');
       closeAllSubmenus();
       ensureBackButtons();
     } else {
-      navMenu?.classList.remove('navbar-active');
       document.body.style.overflow = '';
+      root.style.overflow = '';
+      document.body.classList.remove('mobile-menu-open');
+      root.classList.remove('mobile-menu-open');
       closeAllSubmenus();
     }
   };
@@ -209,74 +214,13 @@
     },
   });
 
-  // Floating Navbar and Banner Scroll Effect
-  // ----------------------------------------
-  const floatingHeader = document.querySelector('.floating-header');
-  const navbar = document.querySelector('.floating-navbar');
-  const bannerElements = document.querySelectorAll('#banner-parallax, [id*="banner-parallax"]');
-  const scrollThreshold = 50; // Trigger floating state after 50px scroll
-  
-  // Check if this page should have permanent floating navbar
-  // Apply to pages without parallax banner OR pages explicitly marked with floating_navbar param
-  const hasBanner = bannerElements.length > 0;
-  const isPermanentFloating = !hasBanner || 
-                              document.body.classList.contains('permanent-floating-navbar');
-  
-  if (isPermanentFloating && navbar) {
-    document.body.classList.add('permanent-floating-navbar');
-    navbar.classList.add('scrolled'); // Start in scrolled state
-  }
-  
-  console.log('Scroll effect initialized');
-  console.log('Found header:', floatingHeader);
-  console.log('Found navbar:', navbar);
-  console.log('Found banners:', bannerElements.length);
-  console.log('Has banner:', hasBanner);
-  console.log('Permanent floating:', isPermanentFloating);
-
-  const handleScroll = () => {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const isMobileScreen = window.innerWidth <= 768;
-    const isScrolled = scrollTop > scrollThreshold;
-    
-    // Toggle 'scrolled' class on navbar for bounce-in animation (skip if permanent)
-    if (navbar && !isPermanentFloating) {
-      if (isScrolled && !navbar.classList.contains('scrolled')) {
-        navbar.classList.add('scrolled');
-      } else if (!isScrolled && navbar.classList.contains('scrolled')) {
-        navbar.classList.remove('scrolled');
-      }
-    }
-    
-    // Banner transitions disabled - keep banners full width
-    bannerElements.forEach(banner => {
-      banner.style.setProperty('border-radius', '0px', 'important');
-      banner.style.setProperty('margin-left', '0px', 'important');
-      banner.style.setProperty('margin-right', '0px', 'important');
-      banner.style.setProperty('width', '100%', 'important');
-    });
-  };
-
-  // Throttle scroll events for better performance
-  let ticking = false;
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      window.requestAnimationFrame(() => {
-        handleScroll();
-        ticking = false;
-      });
-      ticking = true;
-    }
-  });
-
-  // Initial check on page load
-  handleScroll();
 
   // Inline Search Bar Toggle
   // ----------------------------------------
   const searchButton = document.querySelector('[data-target="search-modal"]');
   const searchNavMenu = document.querySelector('#nav-menu');
-  const navbarRightSide = document.querySelector('.header .navbar > div.order-1');
+  const navbar = document.querySelector('.header .navbar');
+  const mobileSearchSlot = document.querySelector('#mobile-search-slot');
   let isSearchActive = false;
   let searchContainer = null;
 
@@ -364,12 +308,18 @@
     const resultsContainer = createInlineResultsContainer();
     document.body.appendChild(resultsContainer);
     
-    // Get the logo container and right side container to calculate proper width
-    const logoContainer = document.querySelector('.header .navbar > div.order-0');
-    const rightSideContainer = document.querySelector('.header .navbar > div.order-1');
-    
-    // Insert before nav-menu
-    searchNavMenu.parentElement.insertBefore(searchContainer, searchNavMenu);
+    // Keep search bar in navbar on all breakpoints
+    if (window.innerWidth < 1024) {
+      document.body.classList.add('mobile-search-active');
+      if (mobileSearchSlot) {
+        mobileSearchSlot.appendChild(searchContainer);
+      } else {
+        searchNavMenu.parentElement.insertBefore(searchContainer, searchNavMenu);
+      }
+    } else {
+      navbar?.classList.add('desktop-search-active');
+      searchNavMenu.parentElement.insertBefore(searchContainer, searchNavMenu);
+    }
     
     // On large screens, use fixed width and center with absolute positioning
     if (window.innerWidth >= 1024) {
@@ -485,6 +435,8 @@
     // Animate search bar out
     searchContainer.style.opacity = '0';
     searchContainer.style.transform = 'scale(0.95)';
+    document.body.classList.remove('mobile-search-active');
+    navbar?.classList.remove('desktop-search-active');
 
     setTimeout(() => {
       searchContainer.remove();
@@ -525,6 +477,18 @@
     }, true);
   }
 
+  // On mobile: if search is active, hamburger first closes search, then opens menu
+  if (navLabel && navToggle) {
+    navLabel.addEventListener('click', (e) => {
+      if (!isMobile() || !isSearchActive) return;
+      e.preventDefault();
+      e.stopPropagation();
+      hideInlineSearch();
+      navToggle.checked = true;
+      handleNavToggleChange(true);
+    });
+  }
+
   // Close search on Escape key
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && isSearchActive) {
@@ -533,7 +497,7 @@
   });
 
   // Automatically apply .interactive-tilt to all non-banner images
-  document.querySelectorAll('img:not([id*="banner"]):not([class*="banner"])').forEach((img) => {
+  document.querySelectorAll('img:not([id*="banner"]):not([class*="banner"]):not(.no-tilt)').forEach((img) => {
     img.classList.add('interactive-tilt');
   });
 
@@ -575,3 +539,18 @@
     });
   });
 })();
+// --- SIMPLE NAVBAR SCROLL FADE (WINDOW-LEVEL) ---
+document.addEventListener("DOMContentLoaded", function () {
+  function updateNavbarBackground() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+
+    if (scrollTop > 10) {
+      document.body.classList.add("scrolled-navbar");
+    } else {
+      document.body.classList.remove("scrolled-navbar");
+    }
+  }
+
+  updateNavbarBackground();
+  window.addEventListener("scroll", updateNavbarBackground, { passive: true });
+});

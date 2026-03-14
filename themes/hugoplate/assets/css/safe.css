@@ -7,10 +7,6 @@ input#nav-toggle:checked + label #hide-button {
   @apply block;
 }
 
-input#nav-toggle:checked ~ #nav-menu {
-  @apply block;
-}
-
 /* swiper pagination */
 .swiper-pagination-bullet {
   @apply !h-2.5 !w-2.5 !bg-light !opacity-100 dark:!bg-darkmode-light;
