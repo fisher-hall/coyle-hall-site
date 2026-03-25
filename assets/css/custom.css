@@ -1281,20 +1281,22 @@ mark.bg-yellow-300 {
 }
 
 .home-banner-subheading {
-  font-family: 'Rubik', sans-serif !important;
-  font-weight: 900 !important;
-  letter-spacing: 0.35em !important;
+  font-family: 'Alfa Slab One', serif !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.2em !important;
   font-size: clamp(1.5rem, 3vw, 2.5rem) !important;
   text-transform: uppercase !important;
+  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.28) !important;
 }
 
 .home-banner-heading {
-  font-family: 'Graduate', 'Rubik', sans-serif !important;
-  font-weight: 1000 !important;
-  font-size: clamp(4rem, 11vw, 8.5rem) !important;
+  font-family: 'Alfa Slab One', serif !important;
+  font-weight: 400 !important;
+  font-size: clamp(4rem, 11vw, 8rem) !important;
   text-transform: uppercase !important;
   letter-spacing: 0.08em !important;
   line-height: 0.95 !important;
+  text-shadow: 0 4px 14px rgba(0, 0, 0, 0.32) !important;
 }
 
 
