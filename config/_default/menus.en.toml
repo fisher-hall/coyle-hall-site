@@ -55,7 +55,7 @@ weight = 2
 [[main]]
 parent = "Events"
 name = "Traditions"
-url = "/traditions"
+url = "/events/traditions"
 weight = 1
 
 [[main]]
@@ -65,26 +65,32 @@ weight = 6
 
 [[main]]
 name = "Events"
-url = "/current"
+url = "/events"
 weight = 5
 
 [[main]]
 parent = "Events"
 name = "IronRA"
-url = "/current/ironra"
+url = "/events/ironra"
+weight = 3
+
+[[main]]
+parent = "Events"
+name = "The Regatta"
+url = "/events/regatta"
 weight = 2
 
 [[main]]
 parent = "Events"
 name = "Car Smash"
-url = "/car-smash"
-weight = 3
+url = "/events/car-smash"
+weight = 4
 
 [[main]]
 parent = "Events"
 name = "Parents Weekend"
-url = "/parents-weekend"
-weight = 4
+url = "/events/parents-weekend"
+weight = 5
 
 
 [[main]]

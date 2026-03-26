@@ -1,0 +1,735 @@
+---
+title: "The Regatta"
+url: "/events/regatta"
+aliases:
+  - "/regatta"
+---
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://use.typekit.net/xnv6pmy.css">
+<style>
+  /* Remove all top spacing for incoming students page */
+  body .section:first-of-type,
+  body .section-sm:first-of-type {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+  
+  /* Make incoming banner full width at all screen sizes */
+  #incoming-banner-wrapper {
+    width: 100vw !important;
+    position: relative !important;
+    left: 50% !important;
+    right: 50% !important;
+    margin-left: -50vw !important;
+    margin-right: -50vw !important;
+    padding: 0 0px !important;
+    box-sizing: border-box !important;
+    z-index: 1 !important;
+  }
+  
+  /* Mobile padding for banner */
+  @media (max-width: 768px) {
+    #incoming-banner-wrapper {
+      padding: 0 2px !important;
+    }
+  }
+  
+  #banner-parallax {
+    position: relative;
+    overflow: hidden;
+    background-image: url('/images/BannerImages/RegattaBanner.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: scroll;
+    height: 50vh;
+    max-height: 600px;
+    min-height: 400px;
+    margin-top: 0 !important;
+    border-radius: 0 !important;
+  }
+
+  @media (max-width: 768px) {
+    #banner-parallax {
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+    }
+
+    .banner-tint-layer {
+      position: absolute !important;
+      top: 0;
+      left: 0;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+  .home-banner-text-overlay {
+      position: relative !important;
+      z-index: 10 !important;
+      width: 100% !important;
+      text-align: center !important;
+    }
+  }
+
+#incoming-banner-img {
+  position: absolute !important;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: auto;
+  object-fit: cover;
+  will-change: transform;
+  /* Wave Animation for incoming students page */
+  .wave-container {
+    position: absolute;
+    top: 400px;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    overflow: hidden;
+    z-index: 10;
+  }
+  
+  /* Ensure tint layer is below waves */
+  .banner-tint-layer {
+    z-index: 1 !important;
+  }
+}
+
+#incoming-banner-text .home-banner-heading,
+#incoming-banner-text .home-banner-subheading {
+  font-family: "aquavit", sans-serif !important;
+  font-weight: 1000 !important;
+  line-height: 0.82 !important;
+}
+
+#incoming-banner-text .home-banner-subheading {
+  font-size: clamp(2.25rem, 5vw, 4rem) !important;
+}
+
+#incoming-banner-text .home-banner-heading {
+  font-size: clamp(5rem, 13vw, 11.5rem) !important;
+}
+
+#countdown-section .stats-number {
+  font-family: "aquavit", sans-serif !important;
+  font-weight: 1000 !important;
+}
+
+#countdown-section h1 {
+  font-family: "aquavit", sans-serif !important;
+  font-weight: 1000 !important;
+}
+
+body .section-sm > .container {
+  max-width: 1600px !important;
+}
+
+body:has(.regatta-bottom-graphic) {
+  overflow-x: clip;
+}
+
+body:has(.regatta-bottom-graphic) .section-sm {
+  padding-bottom: 0 !important;
+}
+
+body:has(.regatta-bottom-graphic) footer {
+  position: relative;
+  z-index: 3;
+  margin-top: -10rem;
+  background-color: transparent !important;
+}
+
+body:has(.regatta-bottom-graphic) .footer-wrapper .footer::before {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  body .section-sm > .container .row.justify-center > .lg\:col-10 {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+.regatta-meta {
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 900px) {
+  .regatta-meta {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 2.5rem;
+  }
+}
+
+.regatta-carousel-section {
+  margin: 5rem 0 2rem;
+}
+
+.regatta-bottom-graphic {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-top: 3rem;
+  margin-bottom: -15rem;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.regatta-bottom-graphic img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-position: bottom;
+  transform: none !important;
+  transition: none !important;
+  box-shadow: none !important;
+}
+
+.regatta-bottom-graphic img:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.regatta-carousel-shell {
+  position: relative;
+  overflow: hidden;
+  border-radius: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-shadow: 0 20px 50px rgba(7, 65, 33, 0.12);
+}
+
+.regatta-carousel-track {
+  display: flex;
+  transition: transform 450ms ease;
+  will-change: transform;
+}
+
+.regatta-carousel-slide {
+  min-width: 100%;
+  margin: 0;
+}
+
+.regatta-carousel-slide img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 8;
+  object-fit: cover;
+  transform: none !important;
+  transition: none !important;
+  box-shadow: none !important;
+}
+
+.regatta-carousel-slide img:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.regatta-carousel-control {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 4.5rem;
+  border: 0;
+  border-radius: 1rem;
+  background: var(--coyle-dark-green);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.16);
+  transform: translateY(-50%);
+  transition: background-color 180ms ease, box-shadow 180ms ease;
+}
+
+.regatta-carousel-control:hover {
+  background: color-mix(in srgb, var(--coyle-dark-green) 88%, white 12%);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.2);
+}
+
+.regatta-carousel-control i {
+  font-size: 1.3rem;
+  font-weight: 1200;
+}
+
+.regatta-carousel-control.prev {
+  left: 1rem;
+}
+
+.regatta-carousel-control.next {
+  right: 1rem;
+}
+
+.regatta-carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.65rem;
+  margin-top: 1.25rem;
+}
+
+.regatta-carousel-dot {
+  width: 0.8rem;
+  height: 0.8rem;
+  border: 0;
+  border-radius: 9999px;
+  background: rgba(7, 65, 33, 0.42);
+  cursor: pointer;
+  transition: transform 180ms ease, background-color 180ms ease;
+}
+
+.dark .regatta-carousel-dot {
+  background: var(--coyle-dark-green);
+}
+
+.regatta-carousel-dot:hover {
+  background: rgba(7, 65, 33, 0.42);
+  transform: scale(1.08);
+}
+
+.dark .regatta-carousel-dot:hover {
+  background: rgba(255, 255, 255, 0.62);
+}
+
+.regatta-carousel-dot.is-active {
+  background: var(--primary-color);
+  transform: scale(1.15);
+}
+
+@media (max-width: 767px) {
+  .regatta-carousel-shell {
+    border-radius: 1.5rem;
+  }
+
+  .regatta-carousel-control {
+    width: 2.75rem;
+    height: 3.25rem;
+  }
+
+  .regatta-carousel-control.prev {
+    left: 0.75rem;
+  }
+
+  .regatta-carousel-control.next {
+    right: 0.75rem;
+  }
+
+  .regatta-bottom-graphic {
+    margin-bottom: -10rem;
+  }
+
+  .regatta-bottom-graphic img {
+    position: relative;
+    bottom: -16.5rem;
+  }
+}
+</style>
+
+<!-- Banner -->
+<div id="incoming-banner-wrapper" class="relative">
+  <div id="banner-parallax" class="relative overflow-hidden">
+    <!-- Tint Layer -->
+    <div class="banner-tint-layer"></div>
+    
+    <!-- Text Overlay -->
+    <div class="home-banner-text-overlay" id="incoming-banner-text">
+        <span class="home-banner-subheading">The</span>
+        <span class="home-banner-heading">Regatta</span>
+    </div>
+  </div>
+</div>
+
+<!-- Animated Waves positioned after banner -->
+<div class="wave-container" style="position: relative; margin-top: -20px; z-index: 10; width: 100vw; left: 50%; margin-left: -50vw;">
+  <canvas id="incoming-wave-canvas" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 60px;"></canvas>
+</div>
+
+
+<script>
+function updateParallax() {
+  const banner = document.getElementById("banner-parallax");
+  if (!banner) return;
+  
+  const scrollY = window.scrollY || window.pageYOffset;
+  const bannerRect = banner.getBoundingClientRect();
+  
+  // Only apply parallax when banner is visible
+  if (bannerRect.bottom > 0) {
+    // Move background position slower than scroll
+    const offset = scrollY * -0.8;
+    banner.style.backgroundPosition = `center ${-offset}px`;
+  }
+}
+
+document.addEventListener("DOMContentLoaded", updateParallax);
+window.addEventListener("scroll", updateParallax, { passive: true });
+</script>
+
+<!-- Wave Animation Script for Incoming Students -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const canvas = document.getElementById('incoming-wave-canvas');
+    if (!canvas) return; // Exit if canvas doesn't exist
+    
+    const ctx = canvas.getContext('2d');
+    let animationId;
+    
+    function resizeCanvas() {
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = rect.height;
+    }
+    
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    
+    // Get CSS color variables
+    function getCSSColor(variable) {
+      return getComputedStyle(document.documentElement).getPropertyValue(variable).trim();
+    }
+    
+    let time = 0;
+    
+    function drawWave(amplitudes, frequencies, speeds, opacity, yOffset, color) {
+      ctx.globalAlpha = opacity;
+      ctx.fillStyle = color || getCSSColor('--background-color') || '#f8f9fa';
+      
+      ctx.beginPath();
+      ctx.moveTo(0, canvas.height);
+      
+      let points = [];
+      
+      // Calculate wave points with higher resolution
+      for (let x = 0; x <= canvas.width; x += 0.5) {
+        let y = yOffset;
+        
+        // Stack multiple sine waves for natural randomness
+        for (let i = 0; i < amplitudes.length; i++) {
+          y += amplitudes[i] * Math.sin((x * frequencies[i] + time * speeds[i]) * Math.PI / 180);
+        }
+        
+        points.push({x, y});
+      }
+      
+      // Draw smooth curves using quadratic curves
+      ctx.lineTo(points[0].x, points[0].y);
+      
+      for (let i = 1; i < points.length - 1; i++) {
+        const current = points[i];
+        const next = points[i + 1];
+        const controlX = current.x;
+        const controlY = current.y;
+        const endX = (current.x + next.x) / 2;
+        const endY = (current.y + next.y) / 2;
+        
+        ctx.quadraticCurveTo(controlX, controlY, endX, endY);
+      }
+      
+      // Complete the last segment
+      if (points.length > 1) {
+        const last = points[points.length - 1];
+        ctx.lineTo(last.x, last.y);
+      }
+      
+      ctx.lineTo(canvas.width, canvas.height);
+      ctx.lineTo(0, canvas.height);
+      ctx.closePath();
+      ctx.fill();
+    }
+    
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Draw wave with ocean-like effects (similar to homepage)
+      const baseAmplitude = 10;
+      const verticalMovement = 6 * Math.sin(time * 0.02);
+      const recessionEffect = 2 * Math.sin(time * 0.015);
+      const dynamicAmplitude = baseAmplitude + recessionEffect;
+      
+      drawWave(
+        [dynamicAmplitude, dynamicAmplitude * 0.15], 
+        [0.6, 0.9], 
+        [0.8, 0.6], 
+        1, 
+        canvas.height * 0.38 + verticalMovement
+      );
+      
+      time += 0.8;
+      animationId = requestAnimationFrame(animate);
+    }
+    
+    animate();
+    
+    // Clean up on page unload
+    window.addEventListener('beforeunload', () => {
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+      }
+    });
+  });
+</script>
+
+<!-- Fade-in effect -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const faders = document.querySelectorAll('.fade-in-section');
+    const appearOptions = {
+        threshold: 0.2,
+        rootMargin: "0px 0px -40px 0px"
+    };
+
+    const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+        entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+        }
+        });
+    }, appearOptions);
+
+    faders.forEach(fader => {
+        appearOnScroll.observe(fader);
+    });
+    });
+</script>
+
+<!-- Countdown Section -->
+<div id="countdown-section" data-target-date="2026-04-11T12:00:00">
+  <div class="row text-center my-8" style="margin-top: 2rem;">
+    <div class="col-6 col-md-3 text-center">
+        <div class="countdown-block">
+        <span id="countdown-days" class="stats-number">00</span>
+        <div class="stats-description">Days</div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3 text-center">
+        <div class="countdown-block">
+        <span id="countdown-hours" class="stats-number">00</span>
+        <div class="stats-description">Hours</div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3 text-center">
+        <div class="countdown-block">
+        <span id="countdown-mins" class="stats-number">00</span>
+        <div class="stats-description">Minutes</div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3 text-center">
+        <div class="countdown-block">
+        <span id="countdown-secs" class="stats-number">00</span>
+        <div class="stats-description">Seconds</div>
+        </div>
+    </div>
+    <h1 class="text-7xl text-center font-extrabold mb-6 fade-in-section" style="color: var(--primary-color);">
+        Ya Gotta <span style="color: var(--secondary-color);">Regatta</span>
+    </h1>
+  </div>
+</div>
+
+<div class="flex items-center justify-start my-1 fade-in-section" style="position: relative; z-index: 3; margin-top: 3rem;">
+    <h1 class="text-3xl ml-4 mr-4 md:text-4xl text-left font-extrabold fade-in-section flex items-center"
+        style="position: relative; z-index: 4; margin-top: 0; color: var(--primary-color);">
+        <span style="position: relative; display: inline-block;">
+          <span style="position: relative; z-index: 2;">
+            Celebrating 15 Years of the 25th Regatta
+          </span>
+        </span>
+    </h1>
+    </div>
+    <!-- Text -->
+    <div class="w-full flex flex-col justify-center fade-in-section text-left;">
+      <p class="mb-2 ml-4 mr-4 text-lg">
+        The Regatta is known as one of the largest, most successful, and most outrageous signature event on campus. 
+        Each spring, Coyle Hall hosts a multi-heat boat-racing tournament on St. Mary’s Lake, and each boat entered must be home-made. 
+        Most dorms field at least one boat, and other non-dorm boats, like the ND Concrete Canoe team, compete as well. 
+        Past years have seen everything from giant pirate ships and floundering Styrofoam rafts to floating basketball courts and tv lounges, and each year brings something new.
+        The Regatta draws over a thousand participants and spectators, with food, merch, music, live broadcasting, and great vibes all day.
+      </br></br>
+        Of course, we forgot to mention the infamous Regatta Hawk, a legendary tradition known across campus, where Fresh Crew all shave their hair into mohawks to promote dorm unity and the spirit of the Regatta.
+      </p>
+    </div>
+</div>
+
+<div class="flex flex-col md:flex-row gap-4 md:gap-6 mt-4 items-center justify-center fade-in-section" style="margin-top: 4rem; margin-bottom: 3rem;">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeMDuBcVETK3aMkKcE2h21eYALpjLldjJ4PC-T62rMhRCrA5Q/viewform" class="btn btn-primary text-center" style="background-color: var(--secondary-color); border-color: var(--secondary-color);">
+            Register Here
+            <i class="fa fa-circle-arrow-right pl-2"></i>
+        </a>
+        <a href="https://docs.google.com/document/d/1U0EGSME95sEja58-stEaHzaerd2Ap8WR5Uh6XLVj3Sk/edit?tab=t.0" class="btn btn-primary text-center" target="_blank" rel="noopener">
+            View Rule Handbook
+            <i class="fa fa-file pl-2"></i>
+        </a>
+        <a href="https://www.youtube.com/@CoyleHall" class="btn btn-primary text-center" target="_blank" rel="noopener">
+            Live Broadcast
+            <i class="fa-brands fa-youtube pl-2"></i>
+        </a>
+</div>
+
+<div class="flex regatta-meta items-center w-full my-1 fade-in-section" style="position: relative; margin-bottom: 1rem; margin-top: 5rem;">
+    <h1 class="text-3xl ml-4 mr-4 md:text-4xl text-left font-extrabold fade-in-section flex items-center"
+        style="position: relative; z-index: 4; margin-top: 0; color: var(--primary-color);">
+        <span style="position: relative; display: inline-block;">
+          <span style="position: relative; z-index: 2;">
+            <i class="fa fa-calendar"></i>&nbsp;
+            Sat Apr 11, 2026
+          </span>
+        </span>
+    </h1>
+    <h1 class="text-3xl ml-4 mr-4 md:text-4xl text-left font-extrabold fade-in-section flex items-center"
+        style="position: relative; z-index: 4; margin-top: 0; color: var(--primary-color);">
+        <span style="position: relative; display: inline-block;">
+          <span style="position: relative; z-index: 2;">
+            <i class="fa fa-clock"></i>&nbsp;
+            12 - 4 PM
+          </span>
+        </span>
+    </h1>
+    <h1 class="text-3xl ml-4 mr-4 md:text-4xl text-left font-extrabold fade-in-section flex items-center"
+        style="position: relative; z-index: 4; margin-top: 0; color: var(--primary-color);">
+        <span style="position: relative; display: inline-block;">
+          <span style="position: relative; z-index: 2;">
+            <i class="fa fa-location-dot"></i>&nbsp;
+            St. Mary's Lake
+          </span>
+        </span>
+    </h1>
+</div>
+
+
+<section class="regatta-carousel-section fade-in-section">
+  <div class="flex items-center justify-start my-1" style="position: relative; z-index: 3; margin-top: 4rem;">
+  </div>
+  <div class="regatta-carousel-shell" id="regatta-carousel" aria-label="Regatta photo carousel">
+    <div class="regatta-carousel-track">
+      <figure class="regatta-carousel-slide">
+        <img src="/images/regatta/Regatta6.jpg" alt="Crowd gathered around the lake at Regatta">
+      </figure>
+      <figure class="regatta-carousel-slide">
+        <img src="/images/regatta/hawks.jpg" alt="Students with Regatta hawk haircuts">
+      </figure>
+      <figure class="regatta-carousel-slide">
+        <img src="/images/regatta/regatta1.jpg" alt="Homemade boat racing during the Regatta">
+      </figure>
+      <figure class="regatta-carousel-slide">
+        <img src="/images/regatta/regatta2.jpg" alt="Boat team competing on St. Mary's Lake">
+      </figure>
+      <figure class="regatta-carousel-slide">
+        <img src="/images/regatta/regatta3.jpg" alt="Regatta boat crossing the lake">
+      </figure>
+      <figure class="regatta-carousel-slide">
+        <img src="/images/regatta/regatta4.jpg" alt="Regatta participants paddling a homemade boat">
+      </figure>
+      <figure class="regatta-carousel-slide">
+        <img src="/images/regatta/regatta5.jpg" alt="Students celebrating at the Regatta">
+      </figure>
+    </div>
+    <button class="regatta-carousel-control prev" type="button" aria-label="Previous slide">
+      <i class="fa fa-chevron-left"></i>
+    </button>
+    <button class="regatta-carousel-control next" type="button" aria-label="Next slide">
+      <i class="fa fa-chevron-right"></i>
+    </button>
+  </div>
+  <div class="regatta-carousel-dots" aria-label="Carousel pagination"></div>
+</section>
+
+<div class="regatta-bottom-graphic">
+  <img src="/images/regatta/RegattaWebGraphic.svg" alt="Regatta decorative graphic">
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const carousel = document.getElementById("regatta-carousel");
+    if (!carousel) return;
+
+    const track = carousel.querySelector(".regatta-carousel-track");
+    const slides = Array.from(carousel.querySelectorAll(".regatta-carousel-slide"));
+    const prevButton = carousel.querySelector(".regatta-carousel-control.prev");
+    const nextButton = carousel.querySelector(".regatta-carousel-control.next");
+    const dotsContainer = carousel.parentElement.querySelector(".regatta-carousel-dots");
+    const intervalMs = 3500;
+    let currentIndex = 0;
+    let autoplayId = null;
+
+    slides.forEach((_, index) => {
+      const dot = document.createElement("button");
+      dot.type = "button";
+      dot.className = "regatta-carousel-dot";
+      dot.setAttribute("aria-label", "Go to slide " + (index + 1));
+      dot.dataset.index = String(index);
+      dotsContainer.appendChild(dot);
+    });
+
+    const dots = Array.from(dotsContainer.querySelectorAll(".regatta-carousel-dot"));
+
+    function render(index) {
+      currentIndex = (index + slides.length) % slides.length;
+      track.style.transform = "translateX(-" + (currentIndex * 100) + "%)";
+      dots.forEach((dot, dotIndex) => {
+        dot.classList.toggle("is-active", dotIndex === currentIndex);
+        dot.setAttribute("aria-current", dotIndex === currentIndex ? "true" : "false");
+      });
+    }
+
+    function stopAutoplay() {
+      if (autoplayId !== null) {
+        window.clearInterval(autoplayId);
+        autoplayId = null;
+      }
+    }
+
+    function startAutoplay() {
+      stopAutoplay();
+      autoplayId = window.setInterval(() => {
+        render(currentIndex + 1);
+      }, intervalMs);
+    }
+
+    function goTo(index) {
+      render(index);
+      startAutoplay();
+    }
+
+    prevButton.addEventListener("click", () => goTo(currentIndex - 1));
+    nextButton.addEventListener("click", () => goTo(currentIndex + 1));
+
+    dots.forEach((dot) => {
+      dot.addEventListener("click", () => {
+        goTo(Number(dot.dataset.index));
+      });
+    });
+
+    carousel.addEventListener("mouseenter", stopAutoplay);
+    carousel.addEventListener("mouseleave", startAutoplay);
+    carousel.addEventListener("focusin", stopAutoplay);
+    carousel.addEventListener("focusout", (event) => {
+      if (!carousel.contains(event.relatedTarget)) {
+        startAutoplay();
+      }
+    });
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        stopAutoplay();
+      } else {
+        startAutoplay();
+      }
+    });
+
+    render(0);
+    startAutoplay();
+  });
+</script>
+
+<script src="/regatta-Countdown.js"></script>

@@ -286,7 +286,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
 
 <div class="flex items-center justify-center my-1 fade-in-section" style="position: relative; margin-bottom: 1rem; margin-top: 5rem;">
   <h2 class="text-5xl md:text-7xl text-left font-extrabold mb-6 fade-in-section flex items-center text-black dark:text-white"
-      style="position: relative; margin-top: 0;">
+      style="position: relative; margin-top: 0; z-index: 2;">
     <span style="position: relative; display: inline-block;">
       <span style="position: relative;">
         What's Nearby
@@ -294,7 +294,8 @@ window.addEventListener("scroll", updateParallax, { passive: true });
     </span>
   </h2>
     <i class="fa fa-signs-post absolute text-center top-1/2 text-9xl fade-in-section text-[var(--nd-light)] dark:text-[var(--primary-color)]"
-      style="transform: translateY(-60%) scale(1);">
+      style="transform: translateY(-60%) scale(1); z-index: 1;"
+    >
     </i>
     <style>
     @media (max-width: 767px) {
@@ -308,11 +309,10 @@ window.addEventListener("scroll", updateParallax, { passive: true });
       }
     }
     </style>
-  </i>
 </div>
 
 <div class="mx-auto relative grid md:grid-cols-3 sm:grid-cols-2 gap-15 gap-y-15 w-full my-8 fade-in-section">
-<div class="w-full rounded-2xl relative flex items-center justify-center p-3" style="background-color: var(--primary-color);">    <span class="text-center text-xl z-10 pointer-events-none text-white">
+<div class="w-full rounded-3xl relative flex items-center justify-center p-3" style="background-color: var(--primary-color);">    <span class="text-center text-xl z-10 pointer-events-none text-white">
       <span class="font-bold text-3xl">
         <i class="fa fa-utensils"></i>
           &nbsp;&nbsp;Dining
@@ -329,7 +329,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
       <i class="fa fa-person-walking"></i>
     </span>
   </div>
-  <div class="bg-[var(--primary-color)] w-full rounded-2xl relative flex items-center justify-center p-3">
+  <div class="bg-[var(--primary-color)] w-full rounded-3xl relative flex items-center justify-center p-3">
     <span class="text-center text-xl z-10 pointer-events-none text-white">
       <span class="font-bold text-3xl">
         <i class="fa fa-landmark-dome"></i>
@@ -347,7 +347,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
         <i class="fa fa-person-walking"></i>
       </span>
   </div>
-  <div class="bg-[var(--primary-color)] w-full rounded-2xl relative flex items-center justify-center p-3">
+  <div class="bg-[var(--primary-color)] w-full rounded-3xl relative flex items-center justify-center p-3">
     <span class="text-center text-xl z-10 pointer-events-none text-white">
       <span class="font-bold text-3xl">
         <i class="fa fa-cross"></i>
@@ -365,7 +365,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
         <i class="fa fa-person-walking"></i>
     </span>
   </div>
-  <div class="bg-[var(--primary-color)] w-full rounded-2xl relative flex items-center justify-center p-3">
+  <div class="bg-[var(--primary-color)] w-full rounded-3xl relative flex items-center justify-center p-3">
     <span class="text-center text-xl z-10 pointer-events-none text-white">
       <span class="font-bold text-3xl">
         <i class="fa fa-book"></i>
@@ -383,7 +383,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
         <i class="fa fa-person-walking"></i>
     </span>
   </div>
-  <div class="bg-[var(--primary-color)] w-full rounded-2xl relative flex items-center justify-center p-3">
+  <div class="bg-[var(--primary-color)] w-full rounded-3xl relative flex items-center justify-center p-3">
     <span class="text-center text-xl z-10 pointer-events-none text-white">
       <span class="font-bold text-3xl">
         <i class="fa fa-football"></i>
@@ -401,7 +401,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
         <i class="fa fa-person-walking"></i>
     </span>
   </div>
-  <div class="bg-[var(--primary-color)] w-full rounded-2xl relative flex items-center justify-center p-3">
+  <div class="bg-[var(--primary-color)] w-full rounded-3xl relative flex items-center justify-center p-3">
     <span class="text-center text-xl z-10 pointer-events-none text-white">
       <span class="font-bold text-3xl">
         <i class="fa fa-users"></i>
@@ -419,7 +419,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
         <i class="fa fa-person-walking"></i>
     </span>
   </div>
-  <div class="bg-[var(--primary-color)] w-full rounded-2xl relative flex items-center justify-center p-3">
+  <div class="bg-[var(--primary-color)] w-full rounded-3xl relative flex items-center justify-center p-3">
     <span class="text-center text-xl z-10 pointer-events-none text-white">
       <span class="font-bold text-3xl">
         <i class="fa fa-cart-shopping"></i>
@@ -437,7 +437,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
         <i class="fa fa-person-walking"></i>
     </span>
   </div>
-  <div class="bg-[var(--primary-color)] w-full rounded-2xl relative flex items-center justify-center p-3">
+  <div class="bg-[var(--primary-color)] w-full rounded-3xl relative flex items-center justify-center p-3">
     <span class="text-center text-xl z-10 pointer-events-none text-white">
       <span class="font-bold text-3xl">
         <i class="fa fa-graduation-cap"></i>
@@ -455,7 +455,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
         <i class="fa fa-person-walking"></i>
     </span>
   </div>
-  <div class="bg-[var(--primary-color)] w-full rounded-2xl relative flex items-center justify-center p-3">
+  <div class="bg-[var(--primary-color)] w-full rounded-3xl relative flex items-center justify-center p-3">
     <span class="text-center text-xl z-10 pointer-events-none text-white">
       <span class="font-bold text-3xl">
         <i class="fa fa-route"></i>
