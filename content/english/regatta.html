@@ -216,14 +216,17 @@ body:has(.regatta-bottom-graphic) .footer-wrapper .footer::before {
 }
 
 .regatta-carousel-slide {
+  position: relative;
   min-width: 100%;
   margin: 0;
+  aspect-ratio: 16 / 8;
+  overflow: hidden;
 }
 
 .regatta-carousel-slide img {
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 8;
+  height: 100%;
   object-fit: cover;
   transform: none !important;
   transition: none !important;
@@ -562,9 +565,9 @@ window.addEventListener("scroll", updateParallax, { passive: true });
 </div>
 
 <div class="flex flex-col md:flex-row gap-4 md:gap-6 mt-4 items-center justify-center fade-in-section" style="margin-top: 4rem; margin-bottom: 3rem;">
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeMDuBcVETK3aMkKcE2h21eYALpjLldjJ4PC-T62rMhRCrA5Q/viewform" class="btn btn-primary text-center" style="background-color: var(--secondary-color); border-color: var(--secondary-color);">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeMDuBcVETK3aMkKcE2h21eYALpjLldjJ4PC-T62rMhRCrA5Q/viewform" class="btn btn-primary text-center" target="_blank" style="background-color: var(--secondary-color); border-color: var(--secondary-color);">
             Register Here
-            <i class="fa fa-circle-arrow-right pl-2"></i>
+            <i class="fa fa-arrow-up-right-from-square pl-2"></i>
         </a>
         <a href="https://docs.google.com/document/d/1U0EGSME95sEja58-stEaHzaerd2Ap8WR5Uh6XLVj3Sk/edit?tab=t.0" class="btn btn-primary text-center" target="_blank" rel="noopener">
             View Rule Handbook
@@ -613,25 +616,60 @@ window.addEventListener("scroll", updateParallax, { passive: true });
   <div class="regatta-carousel-shell" id="regatta-carousel" aria-label="Regatta photo carousel">
     <div class="regatta-carousel-track">
       <figure class="regatta-carousel-slide">
-        <img src="/images/regatta/Regatta6.jpg" alt="Crowd gathered around the lake at Regatta">
+        <img
+          src="/images/regatta/Regatta6.jpg"
+          alt="Crowd gathered around the lake at Regatta"
+          width="8256"
+          height="5504"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async">
       </figure>
       <figure class="regatta-carousel-slide">
-        <img src="/images/regatta/hawks.jpg" alt="Students with Regatta hawk haircuts">
+        <img
+          src="/images/regatta/hawks.jpg"
+          alt="Students with Regatta hawk haircuts"
+          width="2208"
+          height="1471"
+          loading="lazy"
+          decoding="async">
       </figure>
       <figure class="regatta-carousel-slide">
-        <img src="/images/regatta/regatta1.jpg" alt="Homemade boat racing during the Regatta">
+        <img
+          src="/images/regatta/regatta1.jpg"
+          alt="Homemade boat racing during the Regatta"
+          width="4848"
+          height="2848"
+          loading="lazy"
+          decoding="async">
       </figure>
       <figure class="regatta-carousel-slide">
-        <img src="/images/regatta/regatta2.jpg" alt="Boat team competing on St. Mary's Lake">
+        <img
+          src="/images/regatta/regatta2.jpg"
+          alt="Boat team competing on St. Mary's Lake"
+          loading="lazy"
+          decoding="async">
       </figure>
       <figure class="regatta-carousel-slide">
-        <img src="/images/regatta/regatta3.jpg" alt="Regatta boat crossing the lake">
+        <img
+          src="/images/regatta/regatta3.jpg"
+          alt="Regatta boat crossing the lake"
+          loading="lazy"
+          decoding="async">
       </figure>
       <figure class="regatta-carousel-slide">
-        <img src="/images/regatta/regatta4.jpg" alt="Regatta participants paddling a homemade boat">
+        <img
+          src="/images/regatta/regatta4.jpg"
+          alt="Regatta participants paddling a homemade boat"
+          loading="lazy"
+          decoding="async">
       </figure>
       <figure class="regatta-carousel-slide">
-        <img src="/images/regatta/regatta5.jpg" alt="Students celebrating at the Regatta">
+        <img
+          src="/images/regatta/regatta5.jpg"
+          alt="Students celebrating at the Regatta"
+          loading="lazy"
+          decoding="async">
       </figure>
     </div>
     <button class="regatta-carousel-control prev" type="button" aria-label="Previous slide">
