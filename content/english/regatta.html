@@ -254,11 +254,11 @@ body:has(.regatta-bottom-graphic) .footer-wrapper .footer::before {
   cursor: pointer;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.16);
   transform: translateY(-50%);
-  transition: background-color 180ms ease, box-shadow 180ms ease;
+  transition: transform 180ms ease, box-shadow 180ms ease;
 }
 
 .regatta-carousel-control:hover {
-  background: color-mix(in srgb, var(--coyle-dark-green) 88%, white 12%);
+  transform: translateY(-50%) scale(1.08);
   box-shadow: 0 14px 34px rgba(0, 0, 0, 0.2);
 }
 
@@ -623,7 +623,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
     <div class="regatta-carousel-track">
       <figure class="regatta-carousel-slide">
         <img
-          src="/images/regatta/Regatta6.jpg"
+          src="/images/regatta/Regatta6.JPG"
           alt="Crowd gathered around the lake at Regatta"
           width="8256"
           height="5504"
