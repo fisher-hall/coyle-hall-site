@@ -254,11 +254,11 @@ body:has(.regatta-bottom-graphic) .footer-wrapper .footer::before {
   cursor: pointer;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.16);
   transform: translateY(-50%);
-  transition: background-color 180ms ease, box-shadow 180ms ease;
+  transition: transform 180ms ease, box-shadow 180ms ease;
 }
 
 .regatta-carousel-control:hover {
-  background: color-mix(in srgb, var(--coyle-dark-green) 88%, white 12%);
+  transform: translateY(-50%) scale(1.08);
   box-shadow: 0 14px 34px rgba(0, 0, 0, 0.2);
 }
 
@@ -569,9 +569,15 @@ window.addEventListener("scroll", updateParallax, { passive: true });
             Register Here
             <i class="fa fa-arrow-up-right-from-square pl-2"></i>
         </a>
+
+        <a href="https://www.google.com/url?q=https://shop.nd.edu/C21688_ustores/web/product_detail.jsp?PRODUCTID%3D13673%26SINGLESTORE%3Dtrue&source=gmail-imap&ust=1776197650000000&usg=AOvVaw1xtxmdmSrLNAWlEPsHXJ1z" class="btn btn-primary text-center" target="_blank" style="background-color: var(--secondary-color); border-color: var(--secondary-color);">
+            Donate Here
+            <i class="fa fa-hand-holding-dollar pl-2"></i>
+        </a>
+
         <a href="https://docs.google.com/document/d/1U0EGSME95sEja58-stEaHzaerd2Ap8WR5Uh6XLVj3Sk/edit?tab=t.0" class="btn btn-primary text-center" target="_blank" rel="noopener">
             View Rule Handbook
-            <i class="fa fa-file pl-2"></i>
+            <i class="fa fa-file-lines pl-2"></i>
         </a>
         <a href="https://www.youtube.com/@CoyleHall" class="btn btn-primary text-center" target="_blank" rel="noopener">
             Live Broadcast
@@ -617,7 +623,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
     <div class="regatta-carousel-track">
       <figure class="regatta-carousel-slide">
         <img
-          src="/images/regatta/Regatta6.jpg"
+          src="/images/regatta/Regatta6.JPG"
           alt="Crowd gathered around the lake at Regatta"
           width="8256"
           height="5504"
