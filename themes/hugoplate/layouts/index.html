@@ -171,16 +171,66 @@
         z-index: 3;
       }
 
-      #wave-canvas {
+      .wave-canvas {
         display: block;
-        bottom: -2px !important;
-        height: calc(100% + 4px) !important;
+        bottom: 0 !important;
+        height: 100% !important;
         transform: translateZ(0);
+        box-shadow: none !important;
+        filter: none !important;
+      }
+
+      .banner-divider-wave {
+        position: absolute;
+        left: 0;
+        right: 0;
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        height: 80px;
+        transform: none;
+        bottom: 80px;
+        overflow: visible;
+        z-index: 4;
+        pointer-events: none;
+      }
+
+      .award-logos-row {
+        display: flex;
+      }
+
+      .home-top-banner {
+        position: relative;
+        overflow: visible;
+      }
+
+      .home-top-banner,
+      .home-top-banner__inner {
+        width: 100%;
       }
 
       @media (max-width: 768px) {
         #home-banner-wrapper {
           margin-bottom: -2px !important;
+        }
+
+        .home-top-banner {
+          display: block !important;
+        }
+
+        .home-top-banner__inner {
+          display: block !important;
+        }
+
+        .banner-divider-wave {
+          left: 0 !important;
+          right: 0 !important;
+          width: 100% !important;
+          min-width: 0 !important;
+          max-width: 100% !important;
+          transform: none !important;
+          bottom: 80px !important;
+          overflow: visible !important;
         }
       }
 
@@ -220,6 +270,51 @@
         scale: 1 !important;
         filter: none !important;
       }
+
+      .award-divider-svg {
+        display: block;
+        flex: 0 0 auto;
+        overflow: visible;
+      }
+
+      .award-divider-line {
+        stroke-dasharray: 20;
+        stroke-dashoffset: 20;
+        animation: award-divider-draw 0.7s cubic-bezier(.77, 0, .18, 1) forwards;
+      }
+
+      .award-divider-line--a {
+        animation-delay: 0.08s;
+      }
+
+      .award-divider-line--b {
+        animation-delay: 0.2s;
+      }
+
+      @keyframes award-divider-draw {
+        to {
+          stroke-dashoffset: 0;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .award-divider-line {
+          animation: none;
+          stroke-dashoffset: 0;
+        }
+      }
+
+      #drawn-line {
+        width: 420px;
+        max-width: 100%;
+        height: auto;
+      }
+
+      @media (max-width: 768px) {
+        #drawn-line {
+          width: min(320px, 82vw);
+        }
+      }
     </style>
 
     <!-- Banner -->
@@ -256,29 +351,70 @@
     <!-- Wave Animation Script -->
     <script>
       document.addEventListener("DOMContentLoaded", function() {
-        const canvas = document.getElementById('wave-canvas');
-        const ctx = canvas.getContext('2d');
+        const waveTargets = [
+          { canvas: document.getElementById('wave-canvas'), colorMode: 'gradient' },
+          { canvas: document.getElementById('wave-canvas-divider'), colorMode: 'theme' }
+        ]
+          .filter(target => target.canvas)
+          .map(target => ({
+            ...target,
+            ctx: target.canvas.getContext('2d')
+          }))
+          .filter(target => target.ctx);
+
+        if (!waveTargets.length) return;
+
         let animationId;
         
-        function resizeCanvas() {
-          const rect = canvas.getBoundingClientRect();
-          canvas.width = rect.width;
-          canvas.height = rect.height;
+        function resizeCanvases() {
+          waveTargets.forEach(target => {
+            const rect = target.canvas.getBoundingClientRect();
+            target.canvas.width = rect.width;
+            target.canvas.height = rect.height;
+          });
         }
         
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
+        resizeCanvases();
+        window.addEventListener('resize', resizeCanvases);
         
-        // Get CSS color variables
+        function isDarkMode() {
+          const savedTheme = localStorage.getItem('theme');
+          if (savedTheme === 'dark') return true;
+          if (savedTheme === 'light') return false;
+
+          const root = document.documentElement;
+          if (root.classList.contains('dark')) return true;
+          if (root.classList.contains('light')) return false;
+          return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        }
+
         function getCSSColor(variable) {
           return getComputedStyle(document.documentElement).getPropertyValue(variable).trim();
+        }
+
+        function getWaveColor(target) {
+          if (target.canvas.id === 'wave-canvas-divider') {
+            return isDarkMode() ? '#000000' : '#ffffff';
+          }
+
+          if (target.canvas.id === 'wave-canvas') {
+            const gradient = target.ctx.createLinearGradient(0, 0, target.canvas.width, 0);
+            gradient.addColorStop(0, getCSSColor('--coyle-dark-green') || '#064121');
+            gradient.addColorStop(1, getCSSColor('--coyle-light-green') || '#0a843d');
+            return gradient;
+          }
+
+          return '#ffffff';
         }
         
         let time = 0;
         
-        function drawWave(amplitudes, frequencies, speeds, opacity, yOffset, color) {
+        function drawWave(target, amplitudes, frequencies, speeds, opacity, yOffset, color) {
+          const { ctx, canvas } = target;
           ctx.globalAlpha = opacity;
-          ctx.fillStyle = color || getCSSColor('--background-color') || '#f8f9fa';
+          ctx.shadowBlur = 0;
+          ctx.shadowColor = 'transparent';
+          ctx.fillStyle = color || '#ffffff';
           
           ctx.beginPath();
           ctx.moveTo(0, canvas.height);
@@ -324,40 +460,26 @@
         }
         
         function animate() {
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-          
-          // Draw bottom wave first (furthest back) - simple sine wave
-          {{/*  drawWave(
-            [18], 
-            [0.5], 
-            [0.7], 
-            1, 
-            canvas.height * 0.29
-          );  */}}
-          
-          // Draw middle wave - simple sine wave
-          {{/*  drawWave(
-            [20], // amplitudes
-            [0.42],  //Frequency
-            [-0.8], //speed
-            0.9, //opacity
-            canvas.height * 0.42 //y-offset
-          );  */}}
-          
-          // Draw top wave (closest) - ocean-like wave with vertical movement and recession
-          const baseAmplitude = 10;
-          const verticalMovement = 6 * Math.sin(time * 0.02);
-          const recessionEffect = 2 * Math.sin(time * 0.015);
-          const dynamicAmplitude = baseAmplitude + recessionEffect;
-          
-          drawWave(
-            [dynamicAmplitude, dynamicAmplitude * 0.15], 
-            [0.6, 0.9], 
-            [0.8, 0.6], 
-            1, 
-            canvas.height * 0.38 + verticalMovement,
-            getCSSColor('--background-color')
-          );
+          waveTargets.forEach(target => {
+            const { ctx, canvas } = target;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw top wave (closest) - ocean-like wave with vertical movement and recession
+            const baseAmplitude = 10;
+            const verticalMovement = 6 * Math.sin(time * 0.02);
+            const recessionEffect = 2 * Math.sin(time * 0.015);
+            const dynamicAmplitude = baseAmplitude + recessionEffect;
+            
+            drawWave(
+              target,
+              [dynamicAmplitude, dynamicAmplitude * 0.15], 
+              [0.6, 0.9], 
+              [0.8, 0.6], 
+              1, 
+              canvas.height * 0.38 + verticalMovement,
+              getWaveColor(target)
+            );
+          });
           
           time += 0.8;
           animationId = requestAnimationFrame(animate);
@@ -377,8 +499,79 @@
     <div id="home-content-layer">
       <!-- Animated Waves at top of scrolling content -->
       <div class="wave-container">
-        <canvas id="wave-canvas" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;"></canvas>
+        <canvas id="wave-canvas" class="wave-canvas" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;"></canvas>
       </div>
+      {{ $coyleCrest := resources.Get "images/CoyleCrestWhite.svg" }}
+      {{ $hpcLogo := resources.Get "images/HPCLogo.svg" }}
+
+      <section class="home-top-banner fade-in-section" aria-label="Homepage announcement">
+        <div class="home-top-banner__inner">
+          <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; width: 100%; max-width: 920px; margin: 0 auto;">
+            <p
+              class="home-top-banner__eyebrow fade-in-section"
+              style="font-family: 'Rubik', sans-serif; font-weight: 700; letter-spacing: 0.2em; font-size: clamp(1.5rem, 2.2vw, 2rem); text-transform: uppercase; margin: 0;">
+              2025-2026
+            </p>
+            <div style="height: 1rem;"></div>
+            <h2
+              class="home-top-banner__title fade-in-section"
+              style="font-family: 'Alfa Slab One', serif; font-weight: 400; font-size: clamp(2.5rem, 6vw, 4.5rem); text-transform: uppercase; letter-spacing: 0.08em; line-height: 0.95; color: #fff; margin: 0;">
+              Hall of the Year
+            </h2>
+            <div style="height: 1rem;"></div>
+            <div class="home-top-banner__body fade-in-section" style="margin-top: 0.5rem;">
+              <p class="fade-in-section" style="margin-top: 0.9rem; margin-bottom: 0;">
+                From unmatched traditions like The Regatta and Car Smash, to brand new events like Coyleween, Coyle Crushes, and the Coyle Ice Chapel Mass that drew national attention, this past year was momentous. 
+                This award marks the beginning of a new chapter for our dorm, and we couldn't have done it without the hard work of our residents, leadership team, and the support of the entire ND community. Thank you!
+              </p>
+            </div>
+            <div class="award-logos-row" style="align-items: center; justify-content: center; gap: 1.5rem; margin-top: 2rem; margin-bottom: 8rem;">
+              <img
+                src="{{ $coyleCrest.RelPermalink }}"
+                alt="Coyle Hall crest"
+                class="no-hover-effects"
+                style="display: block; width: auto; height: 72px; max-width: none; object-fit: contain; box-shadow: none !important; transform: none !important; transition: none !important;" />
+              <svg
+                aria-hidden="true"
+                class="award-divider-svg"
+                width="18"
+                height="18"
+                viewBox="0 0 18 18"
+                xmlns="http://www.w3.org/2000/svg">
+                <line
+                  class="award-divider-line award-divider-line--a"
+                  x1="2"
+                  y1="2"
+                  x2="16"
+                  y2="16"
+                  stroke="white"
+                  stroke-width="4"
+                  stroke-linecap="round" />
+                <line
+                  class="award-divider-line award-divider-line--b"
+                  x1="16"
+                  y1="2"
+                  x2="2"
+                  y2="16"
+                  stroke="white"
+                  stroke-width="4"
+                  stroke-linecap="round" />
+              </svg>
+              <img
+                src="{{ $hpcLogo.RelPermalink }}"
+                alt="Hall Presidents Council logo"
+                class="no-hover-effects"
+                style="display: block; width: auto; height: 72px; max-width: none; object-fit: contain; box-shadow: none !important; transform: none !important; transition: none !important;" />
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Purple Divider Wave -->
+        <div class="banner-divider-wave" aria-hidden="true">
+          <canvas id="wave-canvas-divider" class="wave-canvas" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;"></canvas>
+        </div>
+      </section>
 
     <!-- Fade-in effect -->
     <script>
@@ -404,38 +597,19 @@
       });
     </script>
 
-    <!-- Draw Effect -->
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const line = document.querySelector('#drawn-line path');
-        const svgContainer = document.getElementById('drawn-line');
-        function animateLine() {
-          const rect = svgContainer.getBoundingClientRect();
-          if (rect.top < window.innerHeight * 0.85) {
-            line.style.strokeDashoffset = 0;
-            window.removeEventListener('scroll', animateLine);
-          }
-        }
-        window.addEventListener('scroll', animateLine);
-        // Animate if already in view
-        animateLine();
-      });
-    </script>
-
-    <h1 class="text-7xl text-center font-extrabold mb-6 px-4 fade-in-section" style="color: var(--primary-color); margin-top: 1.5rem;">
+    <h1 class="text-7xl text-center font-extrabold mb-6 px-4 fade-in-section" style="color: var(--primary-color); margin-top: 0rem;">
       Fishers of Men
     </h1>
 
     <!-- Animated hand-drawn wave line graphic -->
     <div class="flex justify-center my-1 fade-in-section" style="position: relative; z-index: 2; margin-bottom: 1rem; margin-top: -1.5rem;">
-      <svg id="drawn-line" width="420" height="40" viewBox="0 0 420 25" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;">
+      <svg id="drawn-line" width="420" height="40" viewBox="0 0 440 25" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block; overflow: visible;">
         <path
           d="M10 18 Q 40 2, 70 18 Q 100 34, 130 18 Q 160 2, 190 18 Q 220 34, 250 18 Q 280 2, 310 18 Q 340 34, 370 18 Q 400 2, 430 18"
           class="stroke-black dark:stroke-white"
           stroke-width="7"
           stroke-linecap="round"
           fill="none"
-          style="stroke-dasharray: 420; stroke-dashoffset: 420; transition: stroke-dashoffset 1.2s cubic-bezier(.77,0,.18,1);"
         />
       </svg>
     </div>
@@ -458,7 +632,7 @@
     </div>
     <div class="w-full flex flex-col justify-center fade-in-section px-4 pl-16 text-left">
       <i class="fa fa-anchor absolute top-5/6 right-1 text-9xl fade-in-section"
-        style="transform: translateY(30%) translateX(2%) scale(1.85) rotate(30deg); color: var(--primary-color); z-index: 2;">
+        style="transform: translateY(30%) translateX(2%) scale(1.85) rotate(30deg); color: var(--light-color); z-index: 2;">
       </i>
     </div>
     <!-- Text -->
