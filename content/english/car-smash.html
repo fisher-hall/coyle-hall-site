@@ -1,12 +1,487 @@
-
 ---
 title: "Car Smash"
 url: "/events/car-smash"
 aliases:
   - "/car-smash"
 ---
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://use.typekit.net/xnv6pmy.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik+Dirt&display=swap" rel="stylesheet">
+<style>
+  /* Remove all top spacing */
+  body .section:first-of-type,
+  body .section-sm:first-of-type {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+  
+  /* Make car smash banner full width at all screen sizes */
+  #car-smash-banner-wrapper {
+    width: 100vw !important;
+    position: relative !important;
+    left: 50% !important;
+    right: 50% !important;
+    margin-left: -50vw !important;
+    margin-right: -50vw !important;
+    padding: 0 0px !important;
+    box-sizing: border-box !important;
+    z-index: 1 !important;
+  }
+  
+  /* Mobile padding for banner */
+  @media (max-width: 768px) {
+    #car-smash-banner-wrapper {
+      padding: 0 2px !important;
+    }
+  }
+  
+  #banner-parallax {
+    position: relative;
+    overflow: hidden;
+    height: 50vh;
+    max-height: 600px;
+    min-height: 400px;
+    margin-top: 0 !important;
+    border-radius: 0 !important;
+  }
+
+  .car-smash-parallax-layer {
+    position: absolute;
+    inset: -10% 0;
+    background-image: url('/images/BannerImages/CarSmashBanner.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transform: translate3d(0, var(--car-smash-parallax-y, 0px), 0) scale(1.03);
+    will-change: transform;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  @media (max-width: 768px) {
+    #banner-parallax {
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+    }
+
+    .car-smash-parallax-layer {
+      inset: -6% 0;
+    }
+
+    .banner-tint-layer {
+      position: absolute !important;
+      top: 0;
+      left: 0;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+  .home-banner-text-overlay {
+      position: relative !important;
+      z-index: 10 !important;
+      width: 100% !important;
+      text-align: center !important;
+    }
+  }
+
+#car-smash-banner-text .home-banner-heading {
+  font-family: "Rubik Dirt", sans-serif !important;
+  font-weight: 1000 !important;
+  line-height: 0.82 !important;
+  display: inline-block;
+  position: relative;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.32) !important;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+#car-smash-banner-text .home-banner-heading {
+  font-size: clamp(3rem, 13vw, 9rem) !important;
+}
+
+#car-smash-countdown-section .stats-number {
+  font-family: "Rubik Dirt", sans-serif !important;
+  font-weight: 1000 !important;
+}
+
+#car-smash-countdown-section h1 {
+  font-family: "Rubik Dirt", sans-serif !important;
+  font-weight: 1000 !important;
+}
+
+body .section-sm > .container {
+  max-width: 1600px !important;
+}
+
+body:has(.car-smash-bottom-graphic) {
+  overflow-x: clip;
+}
+
+body:has(.car-smash-bottom-graphic) .section-sm {
+  padding-bottom: 0 !important;
+}
+
+body:has(.car-smash-bottom-graphic) footer {
+  position: relative;
+  z-index: 3;
+  margin-top: -10rem;
+  background-color: transparent !important;
+}
+
+body:has(.car-smash-bottom-graphic) .footer-wrapper .footer::before {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  body .section-sm > .container .row.justify-center > .lg\:col-10 {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+.car-smash-meta {
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 900px) {
+  .car-smash-meta {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 2.5rem;
+  }
+}
+
+.car-smash-carousel-section {
+  margin: 5rem 0 2rem;
+}
+
+.car-smash-bottom-graphic {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-top: 3rem;
+  margin-bottom: -15rem;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.car-smash-bottom-graphic img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-position: bottom;
+  transform: none !important;
+  transition: none !important;
+  box-shadow: none !important;
+}
+
+.car-smash-bottom-graphic img:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.car-smash-carousel-shell {
+  position: relative;
+  overflow: hidden;
+  border-radius: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-shadow: 0 20px 50px rgba(7, 65, 33, 0.12);
+}
+
+.car-smash-carousel-track {
+  display: flex;
+  transition: transform 450ms ease;
+  will-change: transform;
+}
+
+.car-smash-carousel-slide {
+  position: relative;
+  min-width: 100%;
+  margin: 0;
+  aspect-ratio: 16 / 8;
+  overflow: hidden;
+}
+
+.car-smash-carousel-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: none !important;
+  transition: none !important;
+  box-shadow: none !important;
+}
+
+.car-smash-carousel-slide img:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.car-smash-carousel-control {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 4.5rem;
+  border: 0;
+  border-radius: 1rem;
+  background: var(--coyle-dark-green);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.16);
+  transform: translateY(-50%);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.car-smash-carousel-control:hover {
+  transform: translateY(-50%) scale(1.08);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.2);
+}
+
+.car-smash-carousel-control i {
+  font-size: 1.3rem;
+  font-weight: 1200;
+}
+
+.car-smash-carousel-control.prev {
+  left: 1rem;
+}
+
+.car-smash-carousel-control.next {
+  right: 1rem;
+}
+
+.car-smash-carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.65rem;
+  margin-top: 1.25rem;
+}
+
+.car-smash-carousel-dot {
+  width: 0.8rem;
+  height: 0.8rem;
+  border: 0;
+  border-radius: 9999px;
+  background: rgba(7, 65, 33, 0.42);
+  cursor: pointer;
+  transition: transform 180ms ease, background-color 180ms ease;
+}
+
+.dark .car-smash-carousel-dot {
+  background: var(--coyle-dark-green);
+}
+
+.car-smash-carousel-dot:hover {
+  background: rgba(7, 65, 33, 0.42);
+  transform: scale(1.08);
+}
+
+.dark .car-smash-carousel-dot:hover {
+  background: rgba(255, 255, 255, 0.62);
+}
+
+.car-smash-carousel-dot.is-active {
+  background: var(--primary-color);
+  transform: scale(1.15);
+}
+
+@media (max-width: 767px) {
+  .car-smash-carousel-shell {
+    border-radius: 1.5rem;
+  }
+
+  .car-smash-carousel-control {
+    width: 2.75rem;
+    height: 3.25rem;
+  }
+
+  .car-smash-carousel-control.prev {
+    left: 0.75rem;
+  }
+
+  .car-smash-carousel-control.next {
+    right: 0.75rem;
+  }
+
+  .car-smash-bottom-graphic {
+    margin-bottom: -10rem;
+  }
+
+  .car-smash-bottom-graphic img {
+    position: relative;
+    bottom: -16.5rem;
+  }
+}
+</style>
+
+<!-- Banner -->
+<div id="car-smash-banner-wrapper" class="relative">
+  <div id="banner-parallax" class="relative overflow-hidden">
+    <div class="car-smash-parallax-layer" aria-hidden="true"></div>
+    <!-- Tint Layer -->
+    <div class="banner-tint-layer"></div>
+    
+    <!-- Text Overlay -->
+    <div class="home-banner-text-overlay" id="car-smash-banner-text">
+        <span class="home-banner-heading">Car Smash</span>
+    </div>
+  </div>
+</div>
+
+<!-- Animated waves positioned after banner -->
+<div class="wave-container" style="position: relative; margin-top: -20px; z-index: 10; width: 100vw; left: 50%; margin-left: -50vw;">
+  <canvas id="car-smash-wave-canvas" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 60px;"></canvas>
+</div>
+
+
+<script>
+let carSmashParallaxFrame = null;
+
+function updateCarSmashParallax() {
+  const banner = document.getElementById("banner-parallax");
+  if (!banner) return;
+
+  const root = document.documentElement;
+  const scrollY = window.scrollY || window.pageYOffset || 0;
+  const bannerRect = banner.getBoundingClientRect();
+
+  if (bannerRect.bottom <= 0 || bannerRect.top >= window.innerHeight) return;
+
+  const offset = Math.max(-140, scrollY * -0.18);
+  root.style.setProperty("--car-smash-parallax-y", `${offset}px`);
+}
+
+function queueCarSmashParallax() {
+  if (carSmashParallaxFrame !== null) return;
+
+  carSmashParallaxFrame = window.requestAnimationFrame(() => {
+    updateCarSmashParallax();
+    carSmashParallaxFrame = null;
+  });
+}
+
+document.addEventListener("DOMContentLoaded", updateCarSmashParallax);
+window.addEventListener("scroll", queueCarSmashParallax, { passive: true });
+window.addEventListener("resize", queueCarSmashParallax, { passive: true });
+</script>
+
+<!-- Wave animation script -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const canvas = document.getElementById('car-smash-wave-canvas');
+    if (!canvas) return; // Exit if canvas doesn't exist
+    
+    const ctx = canvas.getContext('2d');
+    let animationId;
+    
+    function resizeCanvas() {
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = rect.height;
+    }
+    
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    
+    // Get CSS color variables
+    function getCSSColor(variable) {
+      return getComputedStyle(document.documentElement).getPropertyValue(variable).trim();
+    }
+    
+    let time = 0;
+    
+    function drawWave(amplitudes, frequencies, speeds, opacity, yOffset, color) {
+      ctx.globalAlpha = opacity;
+      ctx.fillStyle = color || getCSSColor('--background-color') || '#f8f9fa';
+      
+      ctx.beginPath();
+      ctx.moveTo(0, canvas.height);
+      
+      let points = [];
+      
+      // Calculate wave points with higher resolution
+      for (let x = 0; x <= canvas.width; x += 0.5) {
+        let y = yOffset;
+        
+        // Stack multiple sine waves for natural randomness
+        for (let i = 0; i < amplitudes.length; i++) {
+          y += amplitudes[i] * Math.sin((x * frequencies[i] + time * speeds[i]) * Math.PI / 180);
+        }
+        
+        points.push({x, y});
+      }
+      
+      // Draw smooth curves using quadratic curves
+      ctx.lineTo(points[0].x, points[0].y);
+      
+      for (let i = 1; i < points.length - 1; i++) {
+        const current = points[i];
+        const next = points[i + 1];
+        const controlX = current.x;
+        const controlY = current.y;
+        const endX = (current.x + next.x) / 2;
+        const endY = (current.y + next.y) / 2;
+        
+        ctx.quadraticCurveTo(controlX, controlY, endX, endY);
+      }
+      
+      // Complete the last segment
+      if (points.length > 1) {
+        const last = points[points.length - 1];
+        ctx.lineTo(last.x, last.y);
+      }
+      
+      ctx.lineTo(canvas.width, canvas.height);
+      ctx.lineTo(0, canvas.height);
+      ctx.closePath();
+      ctx.fill();
+    }
+    
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Draw wave with ocean-like effects (similar to homepage)
+      const baseAmplitude = 10;
+      const verticalMovement = 6 * Math.sin(time * 0.02);
+      const recessionEffect = 2 * Math.sin(time * 0.015);
+      const dynamicAmplitude = baseAmplitude + recessionEffect;
+      
+      drawWave(
+        [dynamicAmplitude, dynamicAmplitude * 0.15], 
+        [0.6, 0.9], 
+        [0.8, 0.6], 
+        1, 
+        canvas.height * 0.38 + verticalMovement
+      );
+      
+      time += 0.8;
+      animationId = requestAnimationFrame(animate);
+    }
+    
+    animate();
+    
+    // Clean up on page unload
+    window.addEventListener('beforeunload', () => {
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+      }
+    });
+  });
+</script>
 
 <!-- Fade-in effect -->
 <script>
@@ -32,19 +507,214 @@ aliases:
     });
 </script>
 
-
-<div style="text-align:center; margin-bottom:2rem;">
-    <a href="/events/traditions" class="btn btn-primary">
-        Learn More About This Tradition
-        <i class="fa fa-arrow-right pl-2"></i>
-    </a>
+<!-- Countdown Section -->
+<div id="car-smash-countdown-section" data-target-date="2026-04-11T12:00:00">
+  <div class="row text-center my-8" style="margin-top: 2rem;">
+    <div class="col-6 col-md-3 text-center">
+        <div class="countdown-block">
+        <span id="car-smash-countdown-days" class="stats-number">00</span>
+        <div class="stats-description">Days</div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3 text-center">
+        <div class="countdown-block">
+        <span id="car-smash-countdown-hours" class="stats-number">00</span>
+        <div class="stats-description">Hours</div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3 text-center">
+        <div class="countdown-block">
+        <span id="car-smash-countdown-mins" class="stats-number">00</span>
+        <div class="stats-description">Minutes</div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3 text-center">
+        <div class="countdown-block">
+        <span id="car-smash-countdown-secs" class="stats-number">00</span>
+        <div class="stats-description">Seconds</div>
+        </div>
+    </div>
+    <h1 class="text-7xl text-center font-extrabold mb-6 fade-in-section" style="color: var(--primary-color);">
+        Until the <span style="color: var(--secondary-color);">Car Smash</span>
+    </h1>
+  </div>
 </div>
 
-<a href="/images/CarSmash.pdf" target="_blank" rel="noopener">
-          <img
-            src="/images/CarSmash.jpg"
-            alt="Coyle Hall Car Smash - Nov 21, 3-6pm, Fieldhouse Mall"
-            class="rounded-2xl w-full max-w-xl shadow-lg md:mt-6 no-tilt"
-            style="object-fit: cover;"
-          />
+<div class="flex items-center justify-start my-1 fade-in-section" style="position: relative; z-index: 3; margin-top: 3rem;">
+    <h1 class="text-3xl ml-4 mr-4 md:text-4xl text-left font-extrabold fade-in-section flex items-center"
+        style="position: relative; z-index: 4; margin-top: 0; color: var(--primary-color); text-align: left; width: 100%;">
+        <span style="position: relative; display: inline-block; text-align: left;">
+          <span style="position: relative; z-index: 2;">
+            Smashing Cars, Building Futures
+          </span>
+        </span>
+    </h1>
+    </div>
+    <!-- Text -->
+    <div class="w-full flex flex-col justify-center fade-in-section text-left;">
+      <p class="mb-2 ml-4 mr-4 text-lg">
+        As one of Coyle Hall's signature and most beloved events, the Car Smash is a fun and casual way to raise money for St. Adalbert's.
+        Every year, the Friday before a fall home game, Coyle Hall brings an old car out to Fieldhouse Mall.
+        For a small donation, participants have the chance to smash the car with a hammer, and even bring home their own pieces as souvenirs.
+        Not to mention, the opponents mascot is on the car, providing the perfect opportunity for fans to express their true feelings. 
+      </br></br>
+        With music, good food, fun vibes, and a lively atmosphere, the Car Smash is the best way to kick off a home game weekend and help support a great cause in the process!
+     </p>
+    </div>
+</div>
+
+
+<div class="flex flex-col md:flex-row gap-4 md:gap-6 mt-4 items-center justify-center fade-in-section" style="margin-top: 4rem; margin-bottom: 3rem;">
+        <!--
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeMDuBcVETK3aMkKcE2h21eYALpjLldjJ4PC-T62rMhRCrA5Q/viewform" class="btn btn-primary text-center" target="_blank" style="background-color: var(--secondary-color); border-color: var(--secondary-color);">
+            Register Here
+            <i class="fa fa-arrow-up-right-from-square pl-2"></i>
         </a>
+
+        <a href="https://www.google.com/url?q=https://shop.nd.edu/C21688_ustores/web/product_detail.jsp?PRODUCTID%3D13673%26SINGLESTORE%3Dtrue&source=gmail-imap&ust=1776197650000000&usg=AOvVaw1xtxmdmSrLNAWlEPsHXJ1z" class="btn btn-primary text-center" target="_blank" style="background-color: var(--secondary-color); border-color: var(--secondary-color);">
+            Donate Here
+            <i class="fa fa-hand-holding-dollar pl-2"></i>
+        </a>
+
+        <a href="https://docs.google.com/document/d/1U0EGSME95sEja58-stEaHzaerd2Ap8WR5Uh6XLVj3Sk/edit?tab=t.0" class="btn btn-primary text-center" target="_blank" rel="noopener">
+            View Rule Handbook
+            <i class="fa fa-file-lines pl-2"></i>
+        </a>  */}}
+      -->
+        
+</div>
+
+<div class="flex car-smash-meta items-center w-full my-1 fade-in-section" style="position: relative; margin-bottom: 1rem; margin-top: 3rem;">
+    <h1 class="text-3xl ml-4 mr-4 md:text-4xl text-center font-extrabold fade-in-section"
+        style="position: relative; z-index: 4; margin-top: 0; color: var(--primary-color); text-align: center; width: 100%;">
+        <span style="position: relative; display: inline-block; text-align: center;">
+          <span style="position: relative; z-index: 2;">
+            Thanks to everyone who came out to support the Car Smash this past year, we'll see you in the Fall!
+          </span>
+        </span>
+    </h1>
+    <!--
+    <h1 class="text-3xl ml-4 mr-4 md:text-4xl text-left font-extrabold fade-in-section flex items-center"
+        style="position: relative; z-index: 4; margin-top: 0; color: var(--primary-color);">
+        <span style="position: relative; display: inline-block;">
+          <span style="position: relative; z-index: 2;">
+            <i class="fa fa-clock"></i>&nbsp;
+            12 - 4 PM
+          </span>
+        </span>
+    </h1>
+    <h1 class="text-3xl ml-4 mr-4 md:text-4xl text-left font-extrabold fade-in-section flex items-center"
+        style="position: relative; z-index: 4; margin-top: 0; color: var(--primary-color);">
+        <span style="position: relative; display: inline-block;">
+          <span style="position: relative; z-index: 2;">
+            <i class="fa fa-location-dot"></i>&nbsp;
+            Fieldhouse Mall
+          </span>
+        </span>
+    </h1>
+  -->
+</div>
+
+
+<section class="car-smash-carousel-section fade-in-section">
+  <div class="flex items-center justify-start my-1" style="position: relative; z-index: 3; margin-top: 4rem;">
+  </div>
+  <div class="car-smash-carousel-shell" id="car-smash-carousel" aria-label="Car Smash photo carousel">
+    <div class="car-smash-carousel-track">
+      {{< car-smash-carousel-slides >}}
+    </div>
+    <button class="car-smash-carousel-control prev" type="button" aria-label="Previous slide">
+      <i class="fa fa-chevron-left"></i>
+    </button>
+    <button class="car-smash-carousel-control next" type="button" aria-label="Next slide">
+      <i class="fa fa-chevron-right"></i>
+    </button>
+  </div>
+  <div class="car-smash-carousel-dots" aria-label="Carousel pagination"></div>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const carousel = document.getElementById("car-smash-carousel");
+    if (!carousel) return;
+
+    const track = carousel.querySelector(".car-smash-carousel-track");
+    const slides = Array.from(carousel.querySelectorAll(".car-smash-carousel-slide"));
+    const prevButton = carousel.querySelector(".car-smash-carousel-control.prev");
+    const nextButton = carousel.querySelector(".car-smash-carousel-control.next");
+    const dotsContainer = carousel.parentElement.querySelector(".car-smash-carousel-dots");
+    const intervalMs = 3500;
+    let currentIndex = 0;
+    let autoplayId = null;
+
+    slides.forEach((_, index) => {
+      const dot = document.createElement("button");
+      dot.type = "button";
+      dot.className = "car-smash-carousel-dot";
+      dot.setAttribute("aria-label", "Go to slide " + (index + 1));
+      dot.dataset.index = String(index);
+      dotsContainer.appendChild(dot);
+    });
+
+    const dots = Array.from(dotsContainer.querySelectorAll(".car-smash-carousel-dot"));
+
+    function render(index) {
+      currentIndex = (index + slides.length) % slides.length;
+      track.style.transform = "translateX(-" + (currentIndex * 100) + "%)";
+      dots.forEach((dot, dotIndex) => {
+        dot.classList.toggle("is-active", dotIndex === currentIndex);
+        dot.setAttribute("aria-current", dotIndex === currentIndex ? "true" : "false");
+      });
+    }
+
+    function stopAutoplay() {
+      if (autoplayId !== null) {
+        window.clearInterval(autoplayId);
+        autoplayId = null;
+      }
+    }
+
+    function startAutoplay() {
+      stopAutoplay();
+      autoplayId = window.setInterval(() => {
+        render(currentIndex + 1);
+      }, intervalMs);
+    }
+
+    function goTo(index) {
+      render(index);
+      startAutoplay();
+    }
+
+    prevButton.addEventListener("click", () => goTo(currentIndex - 1));
+    nextButton.addEventListener("click", () => goTo(currentIndex + 1));
+
+    dots.forEach((dot) => {
+      dot.addEventListener("click", () => {
+        goTo(Number(dot.dataset.index));
+      });
+    });
+
+    carousel.addEventListener("mouseenter", stopAutoplay);
+    carousel.addEventListener("mouseleave", startAutoplay);
+    carousel.addEventListener("focusin", stopAutoplay);
+    carousel.addEventListener("focusout", (event) => {
+      if (!carousel.contains(event.relatedTarget)) {
+        startAutoplay();
+      }
+    });
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        stopAutoplay();
+      } else {
+        startAutoplay();
+      }
+    });
+
+    render(0);
+    startAutoplay();
+  });
+</script>
+
+<script src="/car-smash-countdown.js"></script>

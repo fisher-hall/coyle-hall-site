@@ -7,7 +7,7 @@ aliases:
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://use.typekit.net/xnv6pmy.css">
 <style>
-  /* Remove all top spacing for incoming students page */
+  /* Remove all top spacing */
   body .section:first-of-type,
   body .section-sm:first-of-type {
     margin-top: 0 !important;
@@ -363,16 +363,15 @@ body:has(.regatta-bottom-graphic) .footer-wrapper .footer::before {
 function updateParallax() {
   const banner = document.getElementById("banner-parallax");
   if (!banner) return;
-  
-  const scrollY = window.scrollY || window.pageYOffset;
+
+  const root = document.documentElement;
+  const scrollY = window.scrollY || window.pageYOffset || 0;
   const bannerRect = banner.getBoundingClientRect();
-  
-  // Only apply parallax when banner is visible
-  if (bannerRect.bottom > 0) {
-    // Move background position slower than scroll
-    const offset = scrollY * -0.8;
-    banner.style.backgroundPosition = `center ${-offset}px`;
-  }
+
+  if (bannerRect.bottom <= 0 || bannerRect.top >= window.innerHeight) return;
+
+  const offset = scrollY * -0.8;
+  banner.style.backgroundPosition = `center ${-offset}px`;
 }
 
 document.addEventListener("DOMContentLoaded", updateParallax);
@@ -584,7 +583,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
         
 </div>
 
-<div class="flex regatta-meta items-center w-full my-1 fade-in-section" style="position: relative; margin-bottom: 1rem; margin-top: 5rem;">
+<div class="flex regatta-meta items-center w-full my-1 fade-in-section" style="position: relative; margin-bottom: 1rem; margin-top: 3rem;">
     <h1 class="text-3xl ml-4 mr-4 md:text-4xl text-left font-extrabold fade-in-section flex items-center"
         style="position: relative; z-index: 4; margin-top: 0; color: var(--primary-color);">
         <span style="position: relative; display: inline-block;">
@@ -625,62 +624,7 @@ window.addEventListener("scroll", updateParallax, { passive: true });
   </div>
   <div class="regatta-carousel-shell" id="regatta-carousel" aria-label="Regatta photo carousel">
     <div class="regatta-carousel-track">
-      <figure class="regatta-carousel-slide">
-        <img
-          src="/images/regatta/Regatta6.JPG"
-          alt="Crowd gathered around the lake at Regatta"
-          width="8256"
-          height="5504"
-          loading="eager"
-          fetchpriority="high"
-          decoding="async">
-      </figure>
-      <figure class="regatta-carousel-slide">
-        <img
-          src="/images/regatta/hawks.jpg"
-          alt="Students with Regatta hawk haircuts"
-          width="2208"
-          height="1471"
-          loading="lazy"
-          decoding="async">
-      </figure>
-      <figure class="regatta-carousel-slide">
-        <img
-          src="/images/regatta/regatta1.jpg"
-          alt="Homemade boat racing during the Regatta"
-          width="4848"
-          height="2848"
-          loading="lazy"
-          decoding="async">
-      </figure>
-      <figure class="regatta-carousel-slide">
-        <img
-          src="/images/regatta/regatta2.jpg"
-          alt="Boat team competing on St. Mary's Lake"
-          loading="lazy"
-          decoding="async">
-      </figure>
-      <figure class="regatta-carousel-slide">
-        <img
-          src="/images/regatta/regatta3.jpg"
-          alt="Regatta boat crossing the lake"
-          loading="lazy"
-          decoding="async">
-      </figure>
-      <figure class="regatta-carousel-slide">
-        <img
-          src="/images/regatta/regatta4.jpg"
-          alt="Regatta participants paddling a homemade boat"
-          loading="lazy"
-          decoding="async">
-      </figure>
-      <figure class="regatta-carousel-slide">
-        <img
-          src="/images/regatta/regatta5.jpg"
-          alt="Students celebrating at the Regatta"
-          loading="lazy"
-          decoding="async">
-      </figure>
+      {{< regatta-carousel-slides >}}
     </div>
     <button class="regatta-carousel-control prev" type="button" aria-label="Previous slide">
       <i class="fa fa-chevron-left"></i>
