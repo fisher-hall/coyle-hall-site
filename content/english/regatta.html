@@ -37,11 +37,6 @@ aliases:
   #banner-parallax {
     position: relative;
     overflow: hidden;
-    background-image: url('/images/BannerImages/RegattaBanner.png');
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: scroll;
     height: 50vh;
     max-height: 600px;
     min-height: 400px;
@@ -49,11 +44,28 @@ aliases:
     border-radius: 0 !important;
   }
 
+  .regatta-parallax-layer {
+    position: absolute;
+    inset: -10% 0;
+    background-image: url('/images/BannerImages/RegattaBanner.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transform: translate3d(0, var(--regatta-parallax-y, 0px), 0) scale(1.03);
+    will-change: transform;
+    pointer-events: none;
+    z-index: 0;
+  }
+
   @media (max-width: 768px) {
     #banner-parallax {
       display: flex !important;
       justify-content: center !important;
       align-items: center !important;
+    }
+
+    .regatta-parallax-layer {
+      inset: -6% 0;
     }
 
     .banner-tint-layer {
@@ -342,9 +354,10 @@ body:has(.regatta-bottom-graphic) .footer-wrapper .footer::before {
 <!-- Banner -->
 <div id="incoming-banner-wrapper" class="relative">
   <div id="banner-parallax" class="relative overflow-hidden">
+    <div class="regatta-parallax-layer" aria-hidden="true"></div>
     <!-- Tint Layer -->
     <div class="banner-tint-layer"></div>
-    
+
     <!-- Text Overlay -->
     <div class="home-banner-text-overlay" id="incoming-banner-text">
         <span class="home-banner-subheading">The</span>
@@ -360,7 +373,9 @@ body:has(.regatta-bottom-graphic) .footer-wrapper .footer::before {
 
 
 <script>
-function updateParallax() {
+let regattaParallaxFrame = null;
+
+function updateRegattaParallax() {
   const banner = document.getElementById("banner-parallax");
   if (!banner) return;
 
@@ -370,12 +385,22 @@ function updateParallax() {
 
   if (bannerRect.bottom <= 0 || bannerRect.top >= window.innerHeight) return;
 
-  const offset = scrollY * -0.8;
-  banner.style.backgroundPosition = `center ${-offset}px`;
+  const offset = Math.max(-140, scrollY * -0.18);
+  root.style.setProperty("--regatta-parallax-y", `${offset}px`);
 }
 
-document.addEventListener("DOMContentLoaded", updateParallax);
-window.addEventListener("scroll", updateParallax, { passive: true });
+function queueRegattaParallax() {
+  if (regattaParallaxFrame !== null) return;
+
+  regattaParallaxFrame = window.requestAnimationFrame(() => {
+    updateRegattaParallax();
+    regattaParallaxFrame = null;
+  });
+}
+
+document.addEventListener("DOMContentLoaded", updateRegattaParallax);
+window.addEventListener("scroll", queueRegattaParallax, { passive: true });
+window.addEventListener("resize", queueRegattaParallax, { passive: true });
 </script>
 
 <!-- Wave Animation Script for Incoming Students -->

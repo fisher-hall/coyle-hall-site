@@ -33,11 +33,6 @@ title: "Incoming Students"
   #banner-parallax {
     position: relative;
     overflow: hidden;
-    background-image: url('/images/BannerImages/HomeBanner.png');
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: scroll;
     height: 50vh;
     max-height: 600px;
     min-height: 400px;
@@ -45,12 +40,29 @@ title: "Incoming Students"
     border-radius: 0 !important;
   }
 
+    .incoming-parallax-layer {
+        position: absolute;
+        inset: -10% 0;
+        background-image: url('/images/BannerImages/HomeBanner.png');
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        transform: translate3d(0, var(--incoming-parallax-y, 0px), 0) scale(1.03);
+        will-change: transform;
+        pointer-events: none;
+        z-index: 0;
+    }
+
   @media (max-width: 768px) {
     #banner-parallax {
       display: flex !important;
       justify-content: center !important;
       align-items: center !important;
     }
+
+        .incoming-parallax-layer {
+            inset: -6% 0;
+        }
 
     .banner-tint-layer {
       position: absolute !important;
@@ -98,6 +110,7 @@ title: "Incoming Students"
 <!-- Banner -->
 <div id="incoming-banner-wrapper" class="relative">
   <div id="banner-parallax" class="relative overflow-hidden">
+        <div class="incoming-parallax-layer" aria-hidden="true"></div>
     <!-- Tint Layer -->
     <div class="banner-tint-layer"></div>
     
@@ -116,23 +129,34 @@ title: "Incoming Students"
 
 
 <script>
-function updateParallax() {
+let incomingParallaxFrame = null;
+
+function updateIncomingParallax() {
   const banner = document.getElementById("banner-parallax");
   if (!banner) return;
-  
+
+    const root = document.documentElement;
   const scrollY = window.scrollY || window.pageYOffset;
   const bannerRect = banner.getBoundingClientRect();
-  
-  // Only apply parallax when banner is visible
-  if (bannerRect.bottom > 0) {
-    // Move background position slower than scroll
-    const offset = scrollY * -0.8;
-    banner.style.backgroundPosition = `center ${-offset}px`;
-  }
+
+    if (bannerRect.bottom <= 0 || bannerRect.top >= window.innerHeight) return;
+
+    const offset = Math.max(-140, scrollY * -0.18);
+    root.style.setProperty("--incoming-parallax-y", `${offset}px`);
 }
 
-document.addEventListener("DOMContentLoaded", updateParallax);
-window.addEventListener("scroll", updateParallax, { passive: true });
+function queueIncomingParallax() {
+    if (incomingParallaxFrame !== null) return;
+
+    incomingParallaxFrame = window.requestAnimationFrame(() => {
+        updateIncomingParallax();
+        incomingParallaxFrame = null;
+    });
+}
+
+document.addEventListener("DOMContentLoaded", updateIncomingParallax);
+window.addEventListener("scroll", queueIncomingParallax, { passive: true });
+window.addEventListener("resize", queueIncomingParallax, { passive: true });
 </script>
 
 <!-- Wave Animation Script for Incoming Students -->

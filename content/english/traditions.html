@@ -35,11 +35,6 @@ aliases:
   #banner-parallax {
     position: relative;
     overflow: hidden;
-    background-image: url('/images/BannerImages/TraditionsBanner.png');
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: scroll;
     height: 50vh;
     max-height: 600px;
     min-height: 400px;
@@ -47,11 +42,28 @@ aliases:
     border-radius: 0 !important;
   }
 
+  .traditions-parallax-layer {
+    position: absolute;
+    inset: -10% 0;
+    background-image: url('/images/BannerImages/TraditionsBanner.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transform: translate3d(0, var(--traditions-parallax-y, 0px), 0) scale(1.03);
+    will-change: transform;
+    pointer-events: none;
+    z-index: 0;
+  }
+
   @media (max-width: 768px) {
     #banner-parallax {
       display: flex !important;
       justify-content: center !important;
       align-items: center !important;
+    }
+
+    .traditions-parallax-layer {
+      inset: -6% 0;
     }
 
     .banner-tint-layer {
@@ -96,6 +108,7 @@ aliases:
 <!-- Banner -->
 <div id="traditions-banner-wrapper">
   <div id="banner-parallax" class="relative overflow-hidden">
+    <div class="traditions-parallax-layer" aria-hidden="true"></div>
     <!-- Tint Layer -->
     <div class="banner-tint-layer"></div>
     
@@ -113,23 +126,34 @@ aliases:
 
 
 <script>
-function updateParallax() {
+let traditionsParallaxFrame = null;
+
+function updateTraditionsParallax() {
   const banner = document.getElementById("banner-parallax");
   if (!banner) return;
-  
+
+  const root = document.documentElement;
   const scrollY = window.scrollY || window.pageYOffset;
   const bannerRect = banner.getBoundingClientRect();
-  
-  // Only apply parallax when banner is visible
-  if (bannerRect.bottom > 0) {
-    // Move background position slower than scroll
-    const offset = scrollY * -0.8;
-    banner.style.backgroundPosition = `center ${-offset}px`;
-  }
+
+  if (bannerRect.bottom <= 0 || bannerRect.top >= window.innerHeight) return;
+
+  const offset = Math.max(-140, scrollY * -0.18);
+  root.style.setProperty("--traditions-parallax-y", `${offset}px`);
 }
 
-document.addEventListener("DOMContentLoaded", updateParallax);
-window.addEventListener("scroll", updateParallax, { passive: true });
+function queueTraditionsParallax() {
+  if (traditionsParallaxFrame !== null) return;
+
+  traditionsParallaxFrame = window.requestAnimationFrame(() => {
+    updateTraditionsParallax();
+    traditionsParallaxFrame = null;
+  });
+}
+
+document.addEventListener("DOMContentLoaded", updateTraditionsParallax);
+window.addEventListener("scroll", queueTraditionsParallax, { passive: true });
+window.addEventListener("resize", queueTraditionsParallax, { passive: true });
 </script>
 
 <!-- Wave Animation Script -->
