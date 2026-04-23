@@ -31,15 +31,23 @@ title: "Location"
   #banner-parallax {
       position: relative;
       overflow: hidden;
-      background-image: url('/images/Banners/CoyleRenderBanner.png');
-      background-position: center center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-attachment: scroll;
       height: 50vh;
       max-height: 600px;
       min-height: 400px;
       margin-top: 0 !important;
+  }
+
+  .location-parallax-layer {
+    position: absolute;
+    inset: -10% 0;
+    background-image: url('/images/Banners/CoyleRenderBanner.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transform: translate3d(0, var(--location-parallax-y, 0px), 0) scale(1.03);
+    will-change: transform;
+    pointer-events: none;
+    z-index: 0;
   }
 
   @media (max-width: 768px) {
@@ -47,6 +55,10 @@ title: "Location"
       display: flex !important;
       justify-content: center !important;
       align-items: center !important;
+    }
+
+    .location-parallax-layer {
+      inset: -6% 0;
     }
 
     .banner-tint-layer {
@@ -93,6 +105,7 @@ title: "Location"
   <div id="banner-parallax" 
        class="relative mb-8 overflow-hidden"
   >
+    <div class="location-parallax-layer" aria-hidden="true"></div>
     <!-- Animated Waves at bottom of banner -->
     <div class="wave-container">
       <canvas id="location-wave-canvas" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;"></canvas>
@@ -106,23 +119,34 @@ title: "Location"
 
 
 <script>
-function updateParallax() {
+let locationParallaxFrame = null;
+
+function updateLocationParallax() {
   const banner = document.getElementById("banner-parallax");
   if (!banner) return;
-  
+
+  const root = document.documentElement;
   const scrollY = window.scrollY || window.pageYOffset;
   const bannerRect = banner.getBoundingClientRect();
-  
-  // Only apply parallax when banner is visible
-  if (bannerRect.bottom > 0) {
-    // Move background position slower than scroll
-    const offset = scrollY * -0.8;
-    banner.style.backgroundPosition = `center ${-offset}px`;
-  }
+
+  if (bannerRect.bottom <= 0 || bannerRect.top >= window.innerHeight) return;
+
+  const offset = Math.max(-140, scrollY * -0.18);
+  root.style.setProperty("--location-parallax-y", `${offset}px`);
 }
 
-document.addEventListener("DOMContentLoaded", updateParallax);
-window.addEventListener("scroll", updateParallax, { passive: true });
+function queueLocationParallax() {
+  if (locationParallaxFrame !== null) return;
+
+  locationParallaxFrame = window.requestAnimationFrame(() => {
+    updateLocationParallax();
+    locationParallaxFrame = null;
+  });
+}
+
+document.addEventListener("DOMContentLoaded", updateLocationParallax);
+window.addEventListener("scroll", queueLocationParallax, { passive: true });
+window.addEventListener("resize", queueLocationParallax, { passive: true });
 </script>
 
 <!-- Wave Animation Script for Location -->

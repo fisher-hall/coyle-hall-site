@@ -36,16 +36,24 @@ aliases:
   #banner-parallax {
     position: relative;
     overflow: hidden;
-    background-image: url('/images/BannerImages/IronRABanner.png');
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: scroll;
     height: 50vh;
     max-height: 600px;
     min-height: 400px;
     margin-top: 0 !important;
     border-radius: 0 !important;
+  }
+
+  .ironra-parallax-layer {
+    position: absolute;
+    inset: -10% 0;
+    background-image: url('/images/BannerImages/IronRABanner.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transform: translate3d(0, var(--ironra-parallax-y, 0px), 0) scale(1.03);
+    will-change: transform;
+    pointer-events: none;
+    z-index: 0;
   }
 
 /* Wave Container CSS */
@@ -69,6 +77,10 @@ aliases:
       display: flex !important;
       justify-content: center !important;
       align-items: center !important;
+    }
+
+    .ironra-parallax-layer {
+      inset: -6% 0;
     }
 
     .banner-tint-layer {
@@ -110,6 +122,7 @@ aliases:
 <!-- Banner -->
 <div id="ironra-banner-wrapper">
   <div id="banner-parallax" class="relative overflow-hidden">
+    <div class="ironra-parallax-layer" aria-hidden="true"></div>
     <!-- Animated Waves at bottom of banner -->
     <div class="wave-container">
       <canvas id="ironra-wave-canvas" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;"></canvas>
@@ -126,23 +139,34 @@ aliases:
 
 
 <script>
-function updateParallax() {
+let ironraParallaxFrame = null;
+
+function updateIronraParallax() {
   const banner = document.getElementById("banner-parallax");
   if (!banner) return;
-  
+
+  const root = document.documentElement;
   const scrollY = window.scrollY || window.pageYOffset;
   const bannerRect = banner.getBoundingClientRect();
-  
-  // Only apply parallax when banner is visible
-  if (bannerRect.bottom > 0) {
-    // Move background position slower than scroll
-    const offset = scrollY * -0.8;
-    banner.style.backgroundPosition = `center ${-offset}px`;
-  }
+
+  if (bannerRect.bottom <= 0 || bannerRect.top >= window.innerHeight) return;
+
+  const offset = Math.max(-140, scrollY * -0.18);
+  root.style.setProperty("--ironra-parallax-y", `${offset}px`);
 }
 
-document.addEventListener("DOMContentLoaded", updateParallax);
-window.addEventListener("scroll", updateParallax, { passive: true });
+function queueIronraParallax() {
+  if (ironraParallaxFrame !== null) return;
+
+  ironraParallaxFrame = window.requestAnimationFrame(() => {
+    updateIronraParallax();
+    ironraParallaxFrame = null;
+  });
+}
+
+document.addEventListener("DOMContentLoaded", updateIronraParallax);
+window.addEventListener("scroll", queueIronraParallax, { passive: true });
+window.addEventListener("resize", queueIronraParallax, { passive: true });
 </script>
 
 <!-- Wave Animation Script -->
