@@ -501,7 +501,7 @@
       <div class="wave-container">
         <canvas id="wave-canvas" class="wave-canvas" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;"></canvas>
       </div>
-      {{ $coyleCrest := resources.Get "images/CoyleCrestWhite.svg" }}
+      {{ $coyleCrest := resources.Get "images/CoyleCrestMainOutline.svg" }}
       {{ $hpcLogo := resources.Get "images/HPCLogo.svg" }}
 
       <section class="home-top-banner fade-in-section" aria-label="Homepage announcement">
@@ -557,11 +557,13 @@
                   stroke-width="4"
                   stroke-linecap="round" />
               </svg>
-              <img
-                src="{{ $hpcLogo.RelPermalink }}"
-                alt="Hall Presidents Council logo"
-                class="no-hover-effects"
-                style="display: block; width: auto; height: 72px; max-width: none; object-fit: contain; box-shadow: none !important; transform: none !important; transition: none !important;" />
+              <a href="https://hpc.nd.edu/" target="_blank" rel="noopener">
+                <img
+                  src="{{ $hpcLogo.RelPermalink }}"
+                  alt="Hall Presidents Council logo"
+                  class="no-hover-effects"
+                  style="display: block; width: auto; height: 72px; max-width: none; object-fit: contain; box-shadow: none !important; transform: none !important; transition: none !important;" />
+              </a>
             </div>
           </div>
 
@@ -771,10 +773,6 @@
         </a>
         <a href="/incoming-students" class="btn btn-primary text-center">
             New Student Info
-            <i class="fa fa-arrow-right pl-2"></i>
-        </a>
-        <a href="/history#transition" class="btn btn-primary text-center">
-            Dorm Transition Guide
             <i class="fa fa-arrow-right pl-2"></i>
         </a>
         <a href="https://residentiallife.nd.edu/undergraduate/halls/coyle-community-in-zahm-hall/" class="btn btn-primary text-center" target="_blank" rel="noopener">
