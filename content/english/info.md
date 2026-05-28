@@ -50,8 +50,49 @@ For technical issues with the website or suggestions for improvements, please co
 
 ---
 
-##### © 2025 <a href="https://residentiallife.nd.edu/undergraduate/halls/coyle-community-in-zahm-hall/" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">Coyle Hall - University of Notre Dame</a>
+# Privacy Policy
 
-*Updated: August 2025*
+This website is a static site built with Hugo and hosted on GitHub Pages.
+
+## Information We Collect
+
+We do not directly collect, store, or sell personal information from visitors.
+
+The site does not use user accounts, forms, analytics, cookies for tracking, or advertising services.
+
+## Third-Party Services
+
+### GitHub Pages
+
+This website is hosted by GitHub Pages, a service provided by GitHub, Inc. GitHub may collect standard server and technical information such as IP addresses, browser information, and request logs as part of hosting and security operations.
+
+For more information, see GitHub’s Privacy Statement:
+https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement
+
+### Behold Instagram Integration
+
+This website uses Behold to display Instagram content. When Instagram content is loaded, Behold and related third-party services may process technical information necessary to deliver embedded media.
+
+For more information, see:
+- https://behold.so/legal/privacy-policy
+- https://privacycenter.instagram.com/policy
+
+## Cookies
+
+This website does not intentionally use cookies for tracking or advertising purposes. However, third-party services used to display embedded content may use cookies as part of their normal functionality.
+
+## Changes to This Policy
+
+This Privacy Policy may be updated from time to time. Any changes will be posted on this page with an updated revision date.
+
+## Contact
+
+If you have questions about this Privacy Policy, you may contact the site owner through the appropriate contact method listed on this website.
+
+---
+
+##### © 2025-2026 <a href="https://residentiallife.nd.edu/undergraduate/halls/coyle-community-in-zahm-hall/" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">Coyle Hall - University of Notre Dame</a>
+
+*Last Updated: May 2026*
 
 *Changelog available on [GitHub](https://github.com/fisher-hall/coyle-hall-site?tab=readme-ov-file)*
