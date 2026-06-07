@@ -58,32 +58,28 @@ aliases:
 </div>
 
 <!-- Countdown Section -->
-<div class="row text-center my-8" style="margin-top: 2rem;">
-  <h1 class="text-5xl text-center font-extrabold mb-6 fade-in-section" style="color: var(--primary-color);">Training Time Left</h1>
-    <div class="col-6 col-md-3 text-center fade-in-section">
-        <div class="countdown-block">
-        <span id="ironra-countdown-days" class="stats-number">00</span>
-        <div class="stats-description">Days</div>
-        </div>
+<div data-countdown data-countdown-keep data-target-date="2025-12-06T00:00:00">
+  <div class="my-8" style="margin-top: 2rem;">
+    <h1 class="text-5xl text-center font-extrabold mb-6 fade-in-section" style="color: var(--primary-color);">Training Time Left</h1>
+    <div class="CountdownGrid CountdownGrid--display max-w-none fade-in-section" style="font-weight: 700;">
+      <div class="CountdownBlock">
+        <span class="CountdownBlock-number" data-unit="days">00</span>
+        <span class="CountdownBlock-label">Days</span>
+      </div>
+      <div class="CountdownBlock">
+        <span class="CountdownBlock-number" data-unit="hours">00</span>
+        <span class="CountdownBlock-label">Hours</span>
+      </div>
+      <div class="CountdownBlock">
+        <span class="CountdownBlock-number" data-unit="mins">00</span>
+        <span class="CountdownBlock-label">Minutes</span>
+      </div>
+      <div class="CountdownBlock">
+        <span class="CountdownBlock-number" data-unit="secs">00</span>
+        <span class="CountdownBlock-label">Seconds</span>
+      </div>
     </div>
-    <div class="col-6 col-md-3 text-center fade-in-section">
-        <div class="countdown-block">
-        <span id="ironra-countdown-hours" class="stats-number">00</span>
-        <div class="stats-description">Hours</div>
-        </div>
-    </div>
-    <div class="col-6 col-md-3 text-center fade-in-section">
-        <div class="countdown-block">
-        <span id="ironra-countdown-mins" class="stats-number">00</span>
-        <div class="stats-description">Minutes</div>
-        </div>
-    </div>
-    <div class="col-6 col-md-3 text-center fade-in-section">
-        <div class="countdown-block">
-        <span id="ironra-countdown-secs" class="stats-number">00</span>
-        <div class="stats-description">Seconds</div>
-        </div>
-    </div>
+  </div>
 </div>
 
 
@@ -210,7 +206,3 @@ aliases:
 
 </div>
 
-
-
-
-<script src="/ironRA-Countdown.js"></script>

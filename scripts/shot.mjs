@@ -5,7 +5,7 @@ import { chromium } from 'playwright-core';
 import { mkdir } from 'node:fs/promises';
 
 const outDir = process.argv[2] || '/tmp/coyle-shots';
-const base = 'http://127.0.0.1:1313';
+const base = 'http://localhost:1313';
 
 const pages = [
   ['home', '/'],

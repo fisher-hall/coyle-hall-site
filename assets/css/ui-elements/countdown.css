@@ -51,4 +51,25 @@
     opacity: 0.6;
   }
 
+  /* ── --display ──────────────────────────────────────────────────
+     Large "event" countdown used on the Regatta / Car Smash / Welcome
+     pages. Big numbers + plain green labels (the pre-migration look).
+     The number inherits font-family/weight from the grid, so each event
+     page sets its own display face inline (e.g. aquavit, Rubik Dirt). */
+  .CountdownGrid--display .CountdownBlock-number {
+    font-size: 6rem;
+    line-height: 1.1;
+    font-family: inherit;
+    font-weight: inherit;
+  }
+
+  .CountdownGrid--display .CountdownBlock-label {
+    font-size: 1.3rem;
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: normal;
+    opacity: 1;
+    color: var(--secondary-color);
+  }
+
 }

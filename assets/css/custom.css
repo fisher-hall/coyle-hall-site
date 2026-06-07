@@ -1417,45 +1417,6 @@ body:has(.page-banner-wrapper) main {
 }
 
 /* ═══════════════════════════════════
-   COUNTDOWN & STATS
-═══════════════════════════════════ */
-.stats-number {
-  font-size: 6rem !important;
-  font-weight: bold !important;
-  color: var(--primary-color) !important;
-  line-height: 1.1 !important;
-  margin-bottom: 0.15em !important;
-}
-
-.stats-description {
-  font-size: 1.3rem !important;
-  margin-bottom: 0.2em !important;
-  color: var(--secondary-color) !important;
-}
-
-.countdown-block {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1em;
-}
-
-.countdown-extra-text {
-  font-size: 1.25rem;
-  color: #555;
-  font-style: italic;
-  margin-bottom: 1em;
-}
-
-@media (min-width: 768px) {
-  .row.text-center > .col-6.col-md-3 {
-    flex: 0 0 25%;
-    max-width: 25%;
-  }
-}
-
-/* ═══════════════════════════════════
    FADE-IN ANIMATIONS
 ═══════════════════════════════════ */
 .fade-in-section {
