@@ -1,0 +1,313 @@
+---
+banner:
+  title: "Welcome To Coyle Hall!"
+  content: "The Cadillac of Dorms"
+  image: "/images/CoyleTriphoto.png"
+  button:
+    enable: true
+    label: "View the old Fisher site here"
+    link: "https://fisher.nd.edu"
+---
+<!-- Banner -->
+<div id="home-banner-wrapper">
+      <div id="banner-parallax" class="relative overflow-hidden">
+        <!-- Tint Layer -->
+        <div class="banner-tint-layer"></div>
+        
+        <!-- Text Overlay -->
+        <div class="home-banner-text-overlay" id="home-banner-text">
+          <span class="home-banner-subheading">WELCOME TO</span>
+          <span class="home-banner-heading">COYLE HALL</span>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div id="home-content-layer">
+      <!-- Animated Waves at top of scrolling content -->
+      <div class="wave-container">
+        <canvas id="wave-canvas" class="wave-canvas" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;"></canvas>
+      </div>
+
+      <section class="home-top-banner fade-in-section" aria-label="Homepage announcement">
+        <div class="home-top-banner__inner">
+          <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; width: 100%; max-width: 920px; margin: 0 auto;">
+            <p
+              class="home-top-banner__eyebrow fade-in-section"
+              style="font-family: 'Rubik', sans-serif; font-weight: 700; letter-spacing: 0.2em; font-size: clamp(1.5rem, 2.2vw, 2rem); text-transform: uppercase; margin: 0;">
+              2025-2026
+            </p>
+            <div style="height: 1rem;"></div>
+            <h2
+              class="home-top-banner__title fade-in-section"
+              style="font-family: 'Alfa Slab One', serif; font-weight: 400; font-size: clamp(2.5rem, 6vw, 4.5rem); text-transform: uppercase; letter-spacing: 0.08em; line-height: 0.95; color: #fff; margin: 0;">
+              Hall of the Year
+            </h2>
+            <div style="height: 1rem;"></div>
+            <div class="home-top-banner__body fade-in-section" style="margin-top: 0.5rem;">
+              <p class="fade-in-section" style="margin-top: 0.9rem; margin-bottom: 0;">
+                From unmatched traditions like The Regatta and Car Smash, to brand new events like Coyleween, Coyle Crushes, and the Coyle Ice Chapel Mass that drew national attention, this past year was momentous. 
+                This award marks the beginning of a new chapter for our dorm, and we couldn't have done it without the hard work of our residents, leadership team, and the support of the entire ND community. Thank you!
+              </p>
+            </div>
+            {{< home-awards >}}
+          </div>
+
+        </div>
+
+        <!-- Divider Wave -->
+        <div class="banner-divider-wave" aria-hidden="true">
+          <canvas id="wave-canvas-divider" class="wave-canvas" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;"></canvas>
+        </div>
+      </section>
+
+
+    <h1 class="text-7xl text-center font-extrabold mb-6 px-4 fade-in-section" style="color: var(--primary-color); margin-top: 0rem;">
+      Fishers of Men
+    </h1>
+
+    <!-- Animated hand-drawn wave line graphic -->
+    <div class="flex justify-center my-1 fade-in-section" style="position: relative; z-index: 2; margin-bottom: 1rem; margin-top: -1.5rem;">
+      <svg id="drawn-line" width="420" height="40" viewBox="0 0 440 25" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block; overflow: visible;">
+        <path
+          d="M10 18 Q 40 2, 70 18 Q 100 34, 130 18 Q 160 2, 190 18 Q 220 34, 250 18 Q 280 2, 310 18 Q 340 34, 370 18 Q 400 2, 430 18"
+          class="stroke-black dark:stroke-white"
+          stroke-width="7"
+          stroke-linecap="round"
+          fill="none"
+        />
+      </svg>
+    </div>
+
+    <p class="text-2xl text-center font-extrabold mb-6 fade-in-section" style="color: var(--secondary-color);">
+      1952 • 2025
+    </p>
+
+    <div class="flex items-center justify-start my-1 fade-in-section pl-16" style="position: relative; z-index: 3; margin-bottom: 1rem; margin-top: 5rem;">
+      <h2 class="text-2xl md:text-4xl text-left font-extrabold mb-6 fade-in-section flex items-center text-black dark:text-white"
+          style="position: relative; z-index: 4; margin-top: 0;">
+        <span style="position: relative; display: inline-block;">
+          <i class="text-7xl fa fa-quote-left" style="color: var(--light-color); position: absolute; left: -2rem; top: 50%; transform: translateY(-50%); z-index: 1;"></i>
+          <i class="text-7xl fa fa-quote-right" style="color: var(--light-color); position: absolute; right: -2rem; top: 50%; transform: translateY(-50%); z-index: 1;"></i>
+          <span style="position: relative; z-index: 2;">
+            All Are Welcome in This Place
+          </span>
+        </span>
+      </h2>
+    </div>
+    <div class="w-full flex flex-col justify-center fade-in-section px-4 pl-16 text-left">
+      <i class="fa fa-anchor absolute top-5/6 right-1 text-9xl fade-in-section"
+        style="transform: translateY(30%) translateX(2%) scale(1.85) rotate(30deg); color: var(--light-color); z-index: 2;"
+        aria-hidden="true">
+      </i>
+    </div>
+    <!-- Text -->
+    <div class="w-5/6 flex flex-col justify-center fade-in-section px-4 pl-16 text-left;">
+      <p class="mb-4 text-lg" style="position: relative; z-index: 2;">
+        Crew. Fishermen. Green Wave. Brothers. Coyle Hall has been known by many names over the years, but its legacy as one of the most iconic dorms at Notre Dame remains steadfast.
+      </p>
+      <p class="mb-4 text-lg" style="position: relative; z-index: 2;">
+        Home to generations of proud residents, this brotherhood has long been one of the most tight-knit, spirited, and iconic on campus.
+        From legendary events and unmatched camaraderie, to unforgettable haircuts and unwavering support, Coyle Hall isn't just a place for students to reside — it's a community of friendships, traditions, and countless memories that last a lifetime.
+        Students come from every major, from every corner of the world and from every background, united by their shared identity as the Crew, and the bonds forged here are unlike any other.
+      </p>
+      <p class="mb-2 text-lg" style="position: relative; z-index: 2;">
+        The mantra of "All are welcome" has carried through since the community's inception in 1952 as Fisher Hall, and it is even more true now, in the newest (and nicest) dorm on campus.
+        The Cadillac, as the dorm is affectionately known, is a place for students to work, relax, study, grow, pray, but above all live at Notre Dame, and we couldn't be more happy to welcome you to our home!
+      </p>
+    </div>
+
+    <!-- Fast Facts -->
+    <div class="flex items-center justify-center my-1 fade-in-section" style="position: relative; z-index: 3; margin-bottom: 1rem; margin-top: 5rem;">
+      <h2 class="text-5xl md:text-7xl text-left font-extrabold mb-6 fade-in-section flex items-center text-black dark:text-white"
+          style="position: relative; z-index: 4; margin-top: 0;">
+        Fast Facts
+      </h2>
+    </div>
+
+      <!-- Coyle Hall Trace with fun-facts overlay -->
+      <div class="fade-in-section relative flex w-full justify-center mb-8">
+        <div class="relative w-[min(1100px,100%)] max-w-full px-4 max-[900px]:flex max-[900px]:flex-col max-[900px]:gap-3.5" aria-hidden="false">
+          {{< coyle-trace >}}
+
+          <div class="absolute left-1/2 top-[1%] grid w-[min(320px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-[24px] bg-[var(--primary-color)] px-2 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
+            <i class="fa fa-location-dot flex h-11 w-11 items-center justify-start text-[3rem] text-white/95 max-[540px]:h-[38px] max-[540px]:w-[38px]" aria-hidden="true"></i>
+            <div class="min-w-0 pl-2">
+              <p class="mb-1 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-white/72">Location</p>
+              <h3 class="mb-1.5 text-[1.05rem] font-bold leading-[1.1] text-white max-[540px]:text-[0.98rem]">South Quad</h3>
+              <p class="m-0 text-[0.9rem] leading-[1.35] text-white/82 max-[540px]:text-[0.84rem]">AKA the longest quad in America</p>
+            </div>
+          </div>
+
+          <div class="absolute right-[1.5%] top-[17%] grid w-[min(320px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-[24px] bg-[var(--primary-color)] px-4 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
+            <i class="fa fa-people-roof ml-1.5 flex h-11 w-11 items-center justify-start text-[1.3rem] text-white/95 max-[540px]:h-[38px] max-[540px]:w-[38px] max-[540px]:text-[1.15rem]" aria-hidden="true"></i>
+            <div class="min-w-0">
+              <p class="mb-1 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-white/72">Population</p>
+              <h3 class="mb-1.5 text-[1.05rem] font-bold leading-[1.1] text-white max-[540px]:text-[0.98rem]">262 Residents</h3>
+              <p class="m-0 text-[0.9rem] leading-[1.35] text-white/82 max-[540px]:text-[0.84rem]">From every grade and major</p>
+            </div>
+          </div>
+
+          <div class="absolute right-0 top-[47%] grid w-[min(320px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-[24px] bg-[var(--primary-color)] px-4 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
+            <i class="fa fa-sailboat ml-1.5 flex h-11 w-11 items-center justify-start text-[1.3rem] text-white/95 max-[540px]:h-[38px] max-[540px]:w-[38px] max-[540px]:text-[1.15rem]" aria-hidden="true"></i>
+            <div class="min-w-0">
+              <p class="mb-1 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-white/72">Dorm Mascot</p>
+              <h3 class="mb-1.5 text-[1.05rem] font-bold leading-[1.1] text-white max-[540px]:text-[0.98rem]">The Crew</h3>
+              <p class="m-0 text-[0.9rem] leading-[1.35] text-white/82 max-[540px]:text-[0.84rem]">A legacy built on the water</p>
+            </div>
+          </div>
+
+          <div class="absolute bottom-0 left-1/2 grid w-[min(320px,32vw)] min-h-[108px] -translate-x-1/2 translate-y-[45%] grid-cols-[44px_1fr] items-center gap-3.5 rounded-[24px] bg-[var(--primary-color)] px-4 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
+            <i class="fa fa-church ml-1.5 flex h-11 w-11 items-center justify-start text-[1.3rem] text-white/95 max-[540px]:h-[38px] max-[540px]:w-[38px] max-[540px]:text-[1.15rem]" aria-hidden="true"></i>
+            <div class="min-w-0">
+              <p class="mb-1 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-white/72">Chapel</p>
+              <h3 class="mb-1.5 text-[1.05rem] font-bold leading-[1.1] text-white max-[540px]:text-[0.98rem]">St. Paul</h3>
+              <p class="m-0 text-[0.9rem] leading-[1.35] text-white/82 max-[540px]:text-[0.84rem]">Named for the old Fisher Hall</p>
+            </div>
+          </div>
+
+          <div class="absolute left-0 top-[47%] grid w-[min(320px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-[24px] bg-[var(--primary-color)] px-4 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
+            <i class="fa fa-fan ml-1.5 flex h-11 w-11 items-center justify-start text-[1.3rem] text-white/95 max-[540px]:h-[38px] max-[540px]:w-[38px] max-[540px]:text-[1.15rem]" aria-hidden="true"></i>
+            <div class="min-w-0">
+              <p class="mb-1 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-white/72">Amenities</p>
+              <div class="flex items-center gap-2">
+                <i class="fa fa-check text-white/95 text-[1.05rem] flex-none self-center translate-y-[-3px] leading-none" aria-hidden="true"></i>
+                <h3 class="mb-1.5 text-[1.05rem] font-bold leading-[1] text-white max-[540px]:text-[0.98rem]">Air Conditioned</h3>
+              </div>
+              <p class="m-0 text-[0.9rem] leading-[1.35] text-white/82 max-[540px]:text-[0.84rem]">Cool and comfy</p>
+            </div>
+          </div>
+
+          <div class="absolute left-[1.5%] top-[17%] grid w-[min(320px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-[24px] bg-[var(--primary-color)] px-4 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
+            <i class="fa fa-building ml-1.5 flex h-11 w-11 items-center justify-start text-[1.3rem] text-white/95 max-[540px]:h-[38px] max-[540px]:w-[38px] max-[540px]:text-[1.15rem]" aria-hidden="true"></i>
+            <div class="min-w-0">
+              <p class="mb-1 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-white/72">Building Structure</p>
+              <h3 class="mb-1.5 text-[1.05rem] font-bold leading-[1.1] text-white max-[540px]:text-[0.98rem]">3 Floors</h3>
+              <p class="m-0 text-[0.9rem] leading-[1.35] text-white/82 max-[540px]:text-[0.84rem]">8 sections + a basement</p>
+            </div>
+          </div>
+
+          <div class="absolute left-[19.5%] top-[13%] grid w-[min(320px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-[24px] bg-[var(--primary-color)] px-4 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
+            <i class="fa fa-palette ml-1.5 flex h-11 w-11 items-center justify-start text-[1.3rem] text-white/95 max-[540px]:h-[38px] max-[540px]:w-[38px] max-[540px]:text-[1.15rem]" aria-hidden="true"></i>
+            <div class="min-w-0">
+              <p class="mb-1 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-white/72">Dorm Colors</p>
+              <h3 class="mb-1.5 text-[1.05rem] font-bold leading-[1.1] text-white max-[540px]:text-[0.98rem]">Green & White</h3>
+              <p class="m-0 text-[0.9rem] leading-[1.35] text-white/82 max-[540px]:text-[0.84rem]">Traditional, bold, and vibrant</p>
+            </div>
+          </div>
+
+          <a href="https://www.mcglinnhallnd.com/" target="_blank" rel="noopener" aria-label="Link to McGlinn Hall website">
+            <div class="absolute right-[23.5%] top-[15%] grid w-[min(320px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-[24px] bg-[var(--primary-color)] px-4 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3" aria-hidden="true">
+              <i class="fa fa-venus ml-1.5 flex h-11 w-11 items-center justify-start text-[1.3rem] text-white/95 max-[540px]:h-[38px] max-[540px]:w-[38px] max-[540px]:text-[1.15rem]"></i>
+              <div class="min-w-0">
+                <p class="mb-1 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-white/72">Sister Dorm</p>
+                <h3 class="mb-1.5 text-[1.05rem] font-bold leading-[1.1] text-white max-[540px]:text-[0.98rem]">McGlinn Hall</h3>
+                <div class="flex items-center gap-2 text-[0.9rem]">
+                  <i class="fa fa-arrow-up-right-from-square text-white/82 flex-none self-center leading-none"></i>
+                  <p class="m-0 leading-[0.5] text-white/82 max-[540px]:text-[0.84rem]">Home of the Shamrocks</p>
+                </div>
+              </div>
+            </div>
+          </a>
+
+          <a href="https://www.mcglinnhallnd.com/" target="_blank" rel="noopener" aria-label="Link to McGlinn Hall website">
+            <div class="absolute bottom-[16%] right-[12%] grid w-[min(320px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-[24px] bg-[var(--primary-color)] px-4 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3" aria-hidden="true">
+              <i class="fa fa-arrow-up-right-from-square ml-1.5 flex h-11 w-11 items-center justify-start text-[1.3rem] text-white/95 max-[540px]:h-[38px] max-[540px]:w-[38px] max-[540px]:text-[1.15rem]"></i>
+              <div class="min-w-0">
+                <p class="mb-1 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-white/72">Learn More</p>
+                <h3 class="mb-1.5 text-[1.05rem] font-bold leading-[1.1] text-white max-[540px]:text-[0.98rem]">ND ResLife Info</h3>
+                <p class="m-0 text-[0.9rem] leading-[1.35] text-white/82 max-[540px]:text-[0.84rem]">Visit for more info</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <hr class="Divider my-6 fade-in-section opacity-100">
+
+          <!-- Instagram Feed -->
+      <section class="fade-in-section" style="margin: 4rem auto 3rem; max-width: 1320px; padding: 0 1.5rem;">
+        <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 2rem;">
+          <a href="https://www.instagram.com/real_coylehall/" target="_blank" rel="noopener"
+            style="display: inline-flex; align-items: center; gap: 0.6rem; color: var(--secondary-color); font-family: 'Rubik', sans-serif; font-weight: 700; font-size: clamp(2rem, 5vw, 3.5rem); text-transform: none; letter-spacing: normal; text-decoration: none;">
+            @real_coylehall
+            <i class="fa-brands fa-instagram" style="font-size: 1em;"></i>
+          </a>
+        </div>
+
+      <!-- Instagram feed via Behold.so JSON — feed ID: 9XCk73VEQkyAaVvvrrBh; manage at behold.so (Daniel Burke, dburke6) -->
+
+      <div id="ig-feed-grid">
+        <div id="ig-feed-loading">Loading posts…</div>
+      </div>
+
+
+    </section>
+
+    <!-- Photo Ticker -->
+    <!-- Add images to /static/images/ticker/ to populate this strip -->
+
+    <hr class="Divider my-6 fade-in-section opacity-100">
+
+    <div class="ticker-outer">
+      <div id="ticker-track" class="ticker-track">
+        <!-- Set 1 -->
+        <img src="/images/ticker/COYLEgrass.png"    class="ticker-img" style="--rot: -2.5deg" alt="">
+        <img src="/images/ticker/DSC03204.JPG"      class="ticker-img" style="--rot:  1.8deg" alt="">
+        <img src="/images/ticker/DSC03695.JPG"      class="ticker-img" style="--rot: -1.2deg" alt="">
+        <img src="/images/ticker/DSC03867.JPG"      class="ticker-img" style="--rot:  3.0deg" alt="">
+        <img src="/images/ticker/DSC07769.JPG"      class="ticker-img" style="--rot: -3.5deg" alt="">
+        <img src="/images/ticker/IMG_0434.jpeg"     class="ticker-img" style="--rot:  2.2deg" alt="" loading="lazy">
+        <img src="/images/ticker/IMG_0757.jpeg"     class="ticker-img" style="--rot: -1.8deg" alt="" loading="lazy">
+        <img src="/images/ticker/IMG_4680.jpeg"     class="ticker-img" style="--rot:  3.5deg" alt="" loading="lazy">
+        <img src="/images/ticker/dahnke.png"        class="ticker-img" style="--rot: -2.8deg" alt="" loading="lazy">
+        <img src="/images/ticker/formal.png"        class="ticker-img" style="--rot:  1.5deg" alt="" loading="lazy">
+        <img src="/images/ticker/group.png"         class="ticker-img" style="--rot: -1.0deg" alt="" loading="lazy">
+        <img src="/images/ticker/names.png"         class="ticker-img" style="--rot:  2.8deg" alt="" loading="lazy">
+        <img src="/images/ticker/pineapple.png"     class="ticker-img" style="--rot: -1.5deg" alt="" loading="lazy">
+        <img src="/images/ticker/quad1.jpg"         class="ticker-img" style="--rot:  3.2deg" alt="" loading="lazy">
+        <img src="/images/ticker/regatta1.jpg"      class="ticker-img" style="--rot: -2.0deg" alt="" loading="lazy">
+        <img src="/images/ticker/regatta5.jpg"      class="ticker-img" style="--rot:  1.2deg" alt="" loading="lazy">
+        <img src="/images/ticker/stadiumFolks.png"  class="ticker-img" style="--rot: -3.8deg" alt="" loading="lazy">
+        <!-- Set 2 — duplicate for seamless loop -->
+        <img src="/images/ticker/COYLEgrass.png"    class="ticker-img" style="--rot: -2.5deg" alt="" loading="lazy">
+        <img src="/images/ticker/DSC03204.JPG"      class="ticker-img" style="--rot:  1.8deg" alt="" loading="lazy">
+        <img src="/images/ticker/DSC03695.JPG"      class="ticker-img" style="--rot: -1.2deg" alt="" loading="lazy">
+        <img src="/images/ticker/DSC03867.JPG"      class="ticker-img" style="--rot:  3.0deg" alt="" loading="lazy">
+        <img src="/images/ticker/DSC07769.JPG"      class="ticker-img" style="--rot: -3.5deg" alt="" loading="lazy">
+        <img src="/images/ticker/IMG_0434.jpeg"     class="ticker-img" style="--rot:  2.2deg" alt="" loading="lazy">
+        <img src="/images/ticker/IMG_0757.jpeg"     class="ticker-img" style="--rot: -1.8deg" alt="" loading="lazy">
+        <img src="/images/ticker/IMG_4680.jpeg"     class="ticker-img" style="--rot:  3.5deg" alt="" loading="lazy">
+        <img src="/images/ticker/dahnke.png"        class="ticker-img" style="--rot: -2.8deg" alt="" loading="lazy">
+        <img src="/images/ticker/formal.png"        class="ticker-img" style="--rot:  1.5deg" alt="" loading="lazy">
+        <img src="/images/ticker/group.png"         class="ticker-img" style="--rot: -1.0deg" alt="" loading="lazy">
+        <img src="/images/ticker/names.png"         class="ticker-img" style="--rot:  2.8deg" alt="" loading="lazy">
+        <img src="/images/ticker/pineapple.png"     class="ticker-img" style="--rot: -1.5deg" alt="" loading="lazy">
+        <img src="/images/ticker/quad1.jpg"         class="ticker-img" style="--rot:  3.2deg" alt="" loading="lazy">
+        <img src="/images/ticker/regatta1.jpg"      class="ticker-img" style="--rot: -2.0deg" alt="" loading="lazy">
+        <img src="/images/ticker/regatta5.jpg"      class="ticker-img" style="--rot:  1.2deg" alt="" loading="lazy">
+        <img src="/images/ticker/stadiumFolks.png"  class="ticker-img" style="--rot: -3.8deg" alt="" loading="lazy">
+      </div>
+    </div>
+
+
+    <!-- New Crew Section -->
+    <section class="new-crew-section fade-in-section" aria-label="Information for incoming students">
+      <div class="new-crew-inner">
+        <div class="new-crew-text">
+          <span class="new-crew-pill">Incoming Students</span>
+          <h2 class="new-crew-heading">Ready to join the Crew?</h2>
+          <p class="new-crew-body">Move-in day is just the beginning. Find everything you need before you arrive — orientation events, hall traditions, and what life at Coyle actually looks like.</p>
+          <a href="/incoming-students" class="new-crew-btn">
+            New Crew Guide
+            <i class="fa fa-arrow-right" aria-hidden="true"></i>
+          </a>
+        </div>
+        <div class="new-crew-hook" aria-hidden="true">
+          <img src="/images/CoyleHookLogo.png" alt="" width="220" height="220" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    </div>
