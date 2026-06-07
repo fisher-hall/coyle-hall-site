@@ -1,0 +1,22 @@
+{{- /* Emits <figure class="Carousel-slide"> for every image in
+       static/images/<dir>, sorted by name. Used by the .Carousel component.
+       Params: dir (image subfolder), alt (alt-text prefix). */ -}}
+{{- $dir := .Get "dir" -}}
+{{- $alt := .Get "alt" -}}
+{{- $files := readDir (printf "static/images/%s" $dir) -}}
+{{- range $index, $file := sort $files "Name" -}}
+  {{- if not $file.IsDir -}}
+    {{- $name := $file.Name -}}
+    {{- $ext := lower (path.Ext $name) -}}
+    {{- if in (slice ".jpg" ".jpeg" ".png" ".webp" ".gif" ".avif") $ext -}}
+<figure class="Carousel-slide">
+  <img
+    src="{{ printf "/images/%s/%s" $dir $name }}"
+    alt="{{ printf "%s %d" $alt (add $index 1) }}"
+    loading="{{ if eq $index 0 }}eager{{ else }}lazy{{ end }}"
+    {{ if eq $index 0 }}fetchpriority="high"{{ end }}
+    decoding="async">
+</figure>
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

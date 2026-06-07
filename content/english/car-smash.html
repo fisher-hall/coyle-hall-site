@@ -102,134 +102,7 @@ body:has(.car-smash-bottom-graphic) .footer-wrapper .footer::before {
   box-shadow: none !important;
 }
 
-.car-smash-carousel-shell {
-  position: relative;
-  overflow: hidden;
-  border-radius: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  box-shadow: 0 20px 50px rgba(7, 65, 33, 0.12);
-}
-
-.car-smash-carousel-track {
-  display: flex;
-  transition: transform 450ms ease;
-  will-change: transform;
-}
-
-.car-smash-carousel-slide {
-  position: relative;
-  min-width: 100%;
-  margin: 0;
-  aspect-ratio: 16 / 8;
-  overflow: hidden;
-}
-
-.car-smash-carousel-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transform: none !important;
-  transition: none !important;
-  box-shadow: none !important;
-}
-
-.car-smash-carousel-slide img:hover {
-  transform: none !important;
-  box-shadow: none !important;
-}
-
-.car-smash-carousel-control {
-  position: absolute;
-  top: 50%;
-  z-index: 2;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2rem;
-  height: 4.5rem;
-  border: 0;
-  border-radius: 1rem;
-  background: var(--coyle-dark-green);
-  color: #fff;
-  cursor: pointer;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.16);
-  transform: translateY(-50%);
-  transition: transform 180ms ease, box-shadow 180ms ease;
-}
-
-.car-smash-carousel-control:hover {
-  transform: translateY(-50%) scale(1.08);
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.2);
-}
-
-.car-smash-carousel-control i {
-  font-size: 1.3rem;
-  font-weight: 1200;
-}
-
-.car-smash-carousel-control.prev {
-  left: 1rem;
-}
-
-.car-smash-carousel-control.next {
-  right: 1rem;
-}
-
-.car-smash-carousel-dots {
-  display: flex;
-  justify-content: center;
-  gap: 0.65rem;
-  margin-top: 1.25rem;
-}
-
-.car-smash-carousel-dot {
-  width: 0.8rem;
-  height: 0.8rem;
-  border: 0;
-  border-radius: 9999px;
-  background: rgba(7, 65, 33, 0.42);
-  cursor: pointer;
-  transition: transform 180ms ease, background-color 180ms ease;
-}
-
-.dark .car-smash-carousel-dot {
-  background: var(--coyle-dark-green);
-}
-
-.car-smash-carousel-dot:hover {
-  background: rgba(7, 65, 33, 0.42);
-  transform: scale(1.08);
-}
-
-.dark .car-smash-carousel-dot:hover {
-  background: rgba(255, 255, 255, 0.62);
-}
-
-.car-smash-carousel-dot.is-active {
-  background: var(--primary-color);
-  transform: scale(1.15);
-}
-
 @media (max-width: 767px) {
-  .car-smash-carousel-shell {
-    border-radius: 1.5rem;
-  }
-
-  .car-smash-carousel-control {
-    width: 2.75rem;
-    height: 3.25rem;
-  }
-
-  .car-smash-carousel-control.prev {
-    left: 0.75rem;
-  }
-
-  .car-smash-carousel-control.next {
-    right: 0.75rem;
-  }
-
   .car-smash-bottom-graphic {
     margin-bottom: -10rem;
   }
@@ -368,100 +241,16 @@ body:has(.car-smash-bottom-graphic) .footer-wrapper .footer::before {
 <section class="car-smash-carousel-section fade-in-section">
   <div class="flex items-center justify-start my-1" style="position: relative; z-index: 3; margin-top: 4rem;">
   </div>
-  <div class="car-smash-carousel-shell" id="car-smash-carousel" aria-label="Car Smash photo carousel">
-    <div class="car-smash-carousel-track">
-      {{< car-smash-carousel-slides >}}
+  <div class="Carousel" aria-label="Car Smash photo carousel">
+    <div class="Carousel-track">
+      {{< carousel-slides dir="car-smash" alt="Car Smash photo" >}}
     </div>
-    <button class="car-smash-carousel-control prev" type="button" aria-label="Previous slide">
+    <button class="Carousel-control Carousel-control--prev" type="button" aria-label="Previous slide">
       <i class="fa fa-chevron-left"></i>
     </button>
-    <button class="car-smash-carousel-control next" type="button" aria-label="Next slide">
+    <button class="Carousel-control Carousel-control--next" type="button" aria-label="Next slide">
       <i class="fa fa-chevron-right"></i>
     </button>
   </div>
-  <div class="car-smash-carousel-dots" aria-label="Carousel pagination"></div>
+  <div class="Carousel-dots" aria-label="Carousel pagination"></div>
 </section>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const carousel = document.getElementById("car-smash-carousel");
-    if (!carousel) return;
-
-    const track = carousel.querySelector(".car-smash-carousel-track");
-    const slides = Array.from(carousel.querySelectorAll(".car-smash-carousel-slide"));
-    const prevButton = carousel.querySelector(".car-smash-carousel-control.prev");
-    const nextButton = carousel.querySelector(".car-smash-carousel-control.next");
-    const dotsContainer = carousel.parentElement.querySelector(".car-smash-carousel-dots");
-    const intervalMs = 3500;
-    let currentIndex = 0;
-    let autoplayId = null;
-
-    slides.forEach((_, index) => {
-      const dot = document.createElement("button");
-      dot.type = "button";
-      dot.className = "car-smash-carousel-dot";
-      dot.setAttribute("aria-label", "Go to slide " + (index + 1));
-      dot.dataset.index = String(index);
-      dotsContainer.appendChild(dot);
-    });
-
-    const dots = Array.from(dotsContainer.querySelectorAll(".car-smash-carousel-dot"));
-
-    function render(index) {
-      currentIndex = (index + slides.length) % slides.length;
-      track.style.transform = "translateX(-" + (currentIndex * 100) + "%)";
-      dots.forEach((dot, dotIndex) => {
-        dot.classList.toggle("is-active", dotIndex === currentIndex);
-        dot.setAttribute("aria-current", dotIndex === currentIndex ? "true" : "false");
-      });
-    }
-
-    function stopAutoplay() {
-      if (autoplayId !== null) {
-        window.clearInterval(autoplayId);
-        autoplayId = null;
-      }
-    }
-
-    function startAutoplay() {
-      stopAutoplay();
-      autoplayId = window.setInterval(() => {
-        render(currentIndex + 1);
-      }, intervalMs);
-    }
-
-    function goTo(index) {
-      render(index);
-      startAutoplay();
-    }
-
-    prevButton.addEventListener("click", () => goTo(currentIndex - 1));
-    nextButton.addEventListener("click", () => goTo(currentIndex + 1));
-
-    dots.forEach((dot) => {
-      dot.addEventListener("click", () => {
-        goTo(Number(dot.dataset.index));
-      });
-    });
-
-    carousel.addEventListener("mouseenter", stopAutoplay);
-    carousel.addEventListener("mouseleave", startAutoplay);
-    carousel.addEventListener("focusin", stopAutoplay);
-    carousel.addEventListener("focusout", (event) => {
-      if (!carousel.contains(event.relatedTarget)) {
-        startAutoplay();
-      }
-    });
-
-    document.addEventListener("visibilitychange", () => {
-      if (document.hidden) {
-        stopAutoplay();
-      } else {
-        startAutoplay();
-      }
-    });
-
-    render(0);
-    startAutoplay();
-  });
-</script>

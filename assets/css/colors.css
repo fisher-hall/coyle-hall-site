@@ -17,7 +17,6 @@
   --coyle-accent-green:  rgb(72, 187, 78);
   --coyle-banner-tint:   rgba(10, 132, 61, 0.5);
   --coyle-navbar-tint:   var(--coyle-dark-green);
-  --coyle-dark-tint:     rgba(6, 65, 33, 0.72);   /* coyle-dark-green @ 72% — carousel controls */
 
   /* ── Notre Dame ───────────────────────────────────────────── */
   --nd-blue:   #0c2340;

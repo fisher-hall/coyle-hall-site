@@ -99,134 +99,7 @@ body:has(.regatta-bottom-graphic) .footer-wrapper .footer::before {
   box-shadow: none !important;
 }
 
-.regatta-carousel-shell {
-  position: relative;
-  overflow: hidden;
-  border-radius: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  box-shadow: 0 20px 50px rgba(7, 65, 33, 0.12);
-}
-
-.regatta-carousel-track {
-  display: flex;
-  transition: transform 450ms ease;
-  will-change: transform;
-}
-
-.regatta-carousel-slide {
-  position: relative;
-  min-width: 100%;
-  margin: 0;
-  aspect-ratio: 16 / 8;
-  overflow: hidden;
-}
-
-.regatta-carousel-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transform: none !important;
-  transition: none !important;
-  box-shadow: none !important;
-}
-
-.regatta-carousel-slide img:hover {
-  transform: none !important;
-  box-shadow: none !important;
-}
-
-.regatta-carousel-control {
-  position: absolute;
-  top: 50%;
-  z-index: 2;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2rem;
-  height: 4.5rem;
-  border: 0;
-  border-radius: 1rem;
-  background: var(--coyle-dark-green);
-  color: #fff;
-  cursor: pointer;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.16);
-  transform: translateY(-50%);
-  transition: transform 180ms ease, box-shadow 180ms ease;
-}
-
-.regatta-carousel-control:hover {
-  transform: translateY(-50%) scale(1.08);
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.2);
-}
-
-.regatta-carousel-control i {
-  font-size: 1.3rem;
-  font-weight: 1200;
-}
-
-.regatta-carousel-control.prev {
-  left: 1rem;
-}
-
-.regatta-carousel-control.next {
-  right: 1rem;
-}
-
-.regatta-carousel-dots {
-  display: flex;
-  justify-content: center;
-  gap: 0.65rem;
-  margin-top: 1.25rem;
-}
-
-.regatta-carousel-dot {
-  width: 0.8rem;
-  height: 0.8rem;
-  border: 0;
-  border-radius: 9999px;
-  background: rgba(7, 65, 33, 0.42);
-  cursor: pointer;
-  transition: transform 180ms ease, background-color 180ms ease;
-}
-
-.dark .regatta-carousel-dot {
-  background: var(--coyle-dark-green);
-}
-
-.regatta-carousel-dot:hover {
-  background: rgba(7, 65, 33, 0.42);
-  transform: scale(1.08);
-}
-
-.dark .regatta-carousel-dot:hover {
-  background: rgba(255, 255, 255, 0.62);
-}
-
-.regatta-carousel-dot.is-active {
-  background: var(--primary-color);
-  transform: scale(1.15);
-}
-
 @media (max-width: 767px) {
-  .regatta-carousel-shell {
-    border-radius: 1.5rem;
-  }
-
-  .regatta-carousel-control {
-    width: 2.75rem;
-    height: 3.25rem;
-  }
-
-  .regatta-carousel-control.prev {
-    left: 0.75rem;
-  }
-
-  .regatta-carousel-control.next {
-    right: 0.75rem;
-  }
-
   .regatta-bottom-graphic {
     margin-bottom: -10rem;
   }
@@ -370,104 +243,21 @@ body:has(.regatta-bottom-graphic) .footer-wrapper .footer::before {
 <section class="regatta-carousel-section fade-in-section">
   <div class="flex items-center justify-start my-1" style="position: relative; z-index: 3; margin-top: 4rem;">
   </div>
-  <div class="regatta-carousel-shell" id="regatta-carousel" aria-label="Regatta photo carousel">
-    <div class="regatta-carousel-track">
-      {{< regatta-carousel-slides >}}
+  <div class="Carousel" aria-label="Regatta photo carousel">
+    <div class="Carousel-track">
+      {{< carousel-slides dir="regatta" alt="Regatta photo" >}}
     </div>
-    <button class="regatta-carousel-control prev" type="button" aria-label="Previous slide">
+    <button class="Carousel-control Carousel-control--prev" type="button" aria-label="Previous slide">
       <i class="fa fa-chevron-left"></i>
     </button>
-    <button class="regatta-carousel-control next" type="button" aria-label="Next slide">
+    <button class="Carousel-control Carousel-control--next" type="button" aria-label="Next slide">
       <i class="fa fa-chevron-right"></i>
     </button>
   </div>
-  <div class="regatta-carousel-dots" aria-label="Carousel pagination"></div>
+  <div class="Carousel-dots" aria-label="Carousel pagination"></div>
 </section>
 
 <div class="regatta-bottom-graphic">
   <img src="/images/regatta/RegattaWebGraphic.svg" alt="Regatta decorative graphic">
 </div>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const carousel = document.getElementById("regatta-carousel");
-    if (!carousel) return;
-
-    const track = carousel.querySelector(".regatta-carousel-track");
-    const slides = Array.from(carousel.querySelectorAll(".regatta-carousel-slide"));
-    const prevButton = carousel.querySelector(".regatta-carousel-control.prev");
-    const nextButton = carousel.querySelector(".regatta-carousel-control.next");
-    const dotsContainer = carousel.parentElement.querySelector(".regatta-carousel-dots");
-    const intervalMs = 3500;
-    let currentIndex = 0;
-    let autoplayId = null;
-
-    slides.forEach((_, index) => {
-      const dot = document.createElement("button");
-      dot.type = "button";
-      dot.className = "regatta-carousel-dot";
-      dot.setAttribute("aria-label", "Go to slide " + (index + 1));
-      dot.dataset.index = String(index);
-      dotsContainer.appendChild(dot);
-    });
-
-    const dots = Array.from(dotsContainer.querySelectorAll(".regatta-carousel-dot"));
-
-    function render(index) {
-      currentIndex = (index + slides.length) % slides.length;
-      track.style.transform = "translateX(-" + (currentIndex * 100) + "%)";
-      dots.forEach((dot, dotIndex) => {
-        dot.classList.toggle("is-active", dotIndex === currentIndex);
-        dot.setAttribute("aria-current", dotIndex === currentIndex ? "true" : "false");
-      });
-    }
-
-    function stopAutoplay() {
-      if (autoplayId !== null) {
-        window.clearInterval(autoplayId);
-        autoplayId = null;
-      }
-    }
-
-    function startAutoplay() {
-      stopAutoplay();
-      autoplayId = window.setInterval(() => {
-        render(currentIndex + 1);
-      }, intervalMs);
-    }
-
-    function goTo(index) {
-      render(index);
-      startAutoplay();
-    }
-
-    prevButton.addEventListener("click", () => goTo(currentIndex - 1));
-    nextButton.addEventListener("click", () => goTo(currentIndex + 1));
-
-    dots.forEach((dot) => {
-      dot.addEventListener("click", () => {
-        goTo(Number(dot.dataset.index));
-      });
-    });
-
-    carousel.addEventListener("mouseenter", stopAutoplay);
-    carousel.addEventListener("mouseleave", startAutoplay);
-    carousel.addEventListener("focusin", stopAutoplay);
-    carousel.addEventListener("focusout", (event) => {
-      if (!carousel.contains(event.relatedTarget)) {
-        startAutoplay();
-      }
-    });
-
-    document.addEventListener("visibilitychange", () => {
-      if (document.hidden) {
-        stopAutoplay();
-      } else {
-        startAutoplay();
-      }
-    });
-
-    render(0);
-    startAutoplay();
-  });
-</script>

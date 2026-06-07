@@ -20,6 +20,7 @@
 <!-- main script -->
 {{ $scripts = $scripts | append (resources.Get "js/page-animations.js") }}
 {{ $scripts = $scripts | append (resources.Get "js/countdown.js") }}
+{{ $scripts = $scripts | append (resources.Get "js/carousel.js") }}
 {{ $scripts = $scripts | append (resources.Get "js/main.js") }}
 {{ $scripts = $scripts | resources.Concat "js/script.js" }}
 
