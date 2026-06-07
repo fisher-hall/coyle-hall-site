@@ -124,29 +124,15 @@ notAlternative = true
 [[params.plugins.css]]
 link = "css/search.css"
 lazy = false
-[[params.plugins.css]]
-link = "plugins/swiper/swiper-bundle.css"
-lazy = true
+# FontAwesome: all.min.css already bundles brands/solid/regular — one sheet is enough.
 [[params.plugins.css]]
 link = "plugins/glightbox/glightbox.css"
 lazy = true
 [[params.plugins.css]]
 link = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
 lazy = true
-[[params.plugins.css]]
-link = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/brands.min.css"
-lazy = true
-[[params.plugins.css]]
-link = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/solid.min.css"
-lazy = true
-[[params.plugins.css]]
-link = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/regular.min.css"
-lazy = true
 
 # JS Plugins
-[[params.plugins.js]]
-link = "plugins/swiper/swiper-bundle.js"
-lazy = false
 [[params.plugins.js]]
 link = "plugins/cookie.js"
 lazy = false
