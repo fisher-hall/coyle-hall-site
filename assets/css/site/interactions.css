@@ -1,0 +1,111 @@
+/* ═══════════════════════════════════
+   BUTTONS & INTERACTIONS
+═══════════════════════════════════ */
+.btn, .social-icons a {
+  transition: transform 0.15s ease-in-out;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1) !important;
+}
+
+.btn:hover, .social-icons a:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1) !important;
+}
+
+/* Interactive image tilt */
+.interactive-tilt {
+  transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+  transform-style: preserve-3d;
+  perspective: 800px;
+  will-change: transform, box-shadow;
+  position: relative;
+  z-index: 0;
+}
+
+.interactive-tilt::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.15), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.2s ease-out, background-position 0.05s ease-out;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.interactive-tilt:hover {
+  transform: scale(1.03);
+  transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.25s ease-out;
+  cursor: pointer;
+}
+
+/* Disable tilt/hover effects in header and footer */
+.header img,
+.header img:hover,
+.header .interactive-tilt,
+.header .interactive-tilt:hover,
+footer img,
+footer img:hover,
+footer .interactive-tilt,
+footer .interactive-tilt:hover {
+  transform: none !important;
+  transition: none !important;
+  box-shadow: none !important;
+}
+
+.header .interactive-tilt::after,
+footer .interactive-tilt::after {
+  display: none !important;
+}
+
+.header a,
+.header button,
+footer a,
+footer button {
+  cursor: pointer !important;
+}
+
+@media (max-width: 768px) {
+  /* Main content offset on mobile */
+  main {
+    padding-top: 120px !important;
+  }
+
+  body:has(#banner-parallax) main,
+  body:has(#home-banner-wrapper) main {
+    padding-top: 0 !important;
+  }
+}
+
+/* ═══════════════════════════════════
+   FADE-IN ANIMATIONS
+═══════════════════════════════════ */
+.fade-in-section {
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  will-change: opacity, transform;
+}
+
+/* JS adds .fade-ready before observing — only hide after JS has claimed the element */
+.fade-in-section.fade-ready:not(.visible) {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.fade-in-section img {
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-in-section {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    will-change: auto;
+  }
+}
+
+.fade-in-section img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+}
+
+

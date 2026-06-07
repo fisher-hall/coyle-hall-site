@@ -1,0 +1,105 @@
+
+/* ═══════════════════════════════════
+   RESET & LAYOUT
+═══════════════════════════════════ */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+body {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  padding-top: 100px !important;
+}
+
+footer {
+  margin-top: auto;
+  background-color: transparent;
+  color: #fff;
+  border-radius: 0 !important;
+}
+
+.bg-custom-light {
+  background-color: var(--color-custom-light) !important;
+}
+
+.border-custom-gray {
+  border-color: var(--color-lightmode-gray) !important;
+}
+
+.dark .border-custom-gray {
+  border-color: var(--color-darkmode-gray) !important;
+}
+
+/* ═══════════════════════════════════
+   TYPOGRAPHY
+═══════════════════════════════════ */
+h1 {
+  font-family: 'Rubik', sans-serif;
+  font-weight: 800;
+}
+
+h2 {
+  font-family: 'Rubik', sans-serif;
+  font-weight: 700;
+}
+
+h3, h4, h5, h6 {
+  font-family: 'Rubik', sans-serif;
+  font-weight: 600;
+}
+
+body, p {
+  font-family: 'Rubik', sans-serif;
+  font-weight: 500;
+}
+
+/* Text selection highlighting */
+::selection {
+  background-color: var(--highlight-color);
+  color: white;
+}
+
+::-moz-selection {
+  background-color: var(--highlight-color);
+  color: white;
+}
+
+/* Green highlighting for search results */
+mark {
+  background-color: var(--search-highlight);
+  color: white;
+  padding: 0.08em 0.3em;
+  margin: 0 0.08em;
+  border-radius: 10rem;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+mark.bg-yellow-300 {
+  background: #fff !important;
+  color: var(--coyle-light-green) !important;
+  border-radius: 0.75em;
+  padding: 0.08em 0.3em;
+  margin: 0 0.08em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* Profile cards */
+:not(.dark) .bg-light.rounded-2xl.p-8.text-center {
+  background-color: #EFEEEE !important;
+}
+
+.dark .bg-light.rounded-2xl.p-8.text-center {
+  background-color: #222222 !important;
+}
+

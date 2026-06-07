@@ -1,0 +1,45 @@
+/* ═══════════════════════════════════
+   FOOTER
+═══════════════════════════════════ */
+footer .footer-nd-light { display: block; }
+footer .footer-nd-dark  { display: none; }
+html.dark footer .footer-nd-light { display: none; }
+html.dark footer .footer-nd-dark  { display: block; }
+
+.social-icons a {
+  border-radius: 16px;
+}
+
+/* Ensure Tailwind's `rounded-full` produces a true circular icon here
+   Override the generic 16px radius when the utility class is present. */
+.social-icons a.rounded-full {
+  border-radius: 9999px !important;
+}
+
+.social-icons i {
+  color: white !important;
+  font-size: 1.5rem !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+footer .social-icons a {
+  background: white !important;
+  color: var(--coyle-dark-green) !important;
+  transition: transform 0.15s ease-in-out;
+}
+
+footer .social-icons a:hover {
+  transform: scale(1.15);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1) !important;
+}
+
+footer .social-icons i {
+  color: var(--coyle-dark-green) !important;
+}
+
+.footer-extra-text {
+  color: #FFF !important;
+}
+
