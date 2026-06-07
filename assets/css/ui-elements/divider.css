@@ -16,8 +16,8 @@
     background: linear-gradient(
       to right,
       transparent,
-      var(--color-lightmode-gray, #444) 20%,
-      var(--color-lightmode-gray, #444) 80%,
+      var(--color-lightmode-gray) 20%,
+      var(--color-lightmode-gray) 80%,
       transparent
     );
     opacity: 0.3;
@@ -27,8 +27,8 @@
     background: linear-gradient(
       to right,
       transparent,
-      var(--color-darkmode-gray, #B4AFB5) 20%,
-      var(--color-darkmode-gray, #B4AFB5) 80%,
+      var(--color-darkmode-gray) 20%,
+      var(--color-darkmode-gray) 80%,
       transparent
     );
   }

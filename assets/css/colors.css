@@ -17,6 +17,7 @@
   --coyle-accent-green:  rgb(72, 187, 78);
   --coyle-banner-tint:   rgba(10, 132, 61, 0.5);
   --coyle-navbar-tint:   var(--coyle-dark-green);
+  --coyle-dark-tint:     rgba(6, 65, 33, 0.72);   /* coyle-dark-green @ 72% — carousel controls */
 
   /* ── Notre Dame ───────────────────────────────────────────── */
   --nd-blue:   #0c2340;
@@ -25,6 +26,7 @@
 
   /* ── Neutrals ─────────────────────────────────────────────── */
   --color-custom-light:   #cccccc;
+  --search-highlight:     #22c55e;   /* <mark> search-result highlight */
   --color-darkmode-gray:  #B4AFB5;
   --color-lightmode-gray: #444444;
 

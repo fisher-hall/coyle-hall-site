@@ -86,7 +86,7 @@ body, p {
 
 /* Green highlighting for search results */
 mark {
-  background-color: #22c55e;
+  background-color: var(--search-highlight);
   color: white;
   padding: 0.08em 0.3em;
   margin: 0 0.08em;
@@ -97,7 +97,7 @@ mark {
 
 mark.bg-yellow-300 {
   background: #fff !important;
-  color: #0a843d !important;
+  color: var(--coyle-light-green) !important;
   border-radius: 0.75em;
   padding: 0.08em 0.3em;
   margin: 0 0.08em;

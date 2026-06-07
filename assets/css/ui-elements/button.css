@@ -61,7 +61,7 @@
   Button:active { transform: scale(0.98); }
 
   Button:focus-visible {
-    outline: 3px solid var(--coyle-accent-green, #48bb4e);
+    outline: 3px solid var(--coyle-accent-green);
     outline-offset: 3px;
   }
 
@@ -165,7 +165,7 @@
   Button.outline-white:hover,
   Button.outline-white:focus-visible {
     background: var(--Button-ink);
-    color: var(--background-color, #ffffff);
+    color: var(--background-color);
   }
 
 
@@ -214,16 +214,16 @@
 
   /* ─── nd ─────────────────────────────────────────────────────── */
   Button.nd {
-    background: color-mix(in srgb, #ffffff 10%, var(--nd-blue, #0c2340));
-    color: var(--nd-gold, #ae9142);
+    background: color-mix(in srgb, #ffffff 10%, var(--nd-blue));
+    color: var(--nd-gold);
     box-shadow: 0 2px 8px rgba(12, 35, 64, 0.22);
   }
   Button.nd:hover,
   Button.nd:focus-visible {
     filter: brightness(1.15);
-    color: var(--nd-gold, #ae9142);
+    color: var(--nd-gold);
   }
-  Button.nd:focus-visible { outline-color: var(--nd-gold, #ae9142); }
+  Button.nd:focus-visible { outline-color: var(--nd-gold); }
 
   @media (prefers-reduced-motion: reduce) {
     Button, Button::before, Button::after { transition: none; }

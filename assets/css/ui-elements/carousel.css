@@ -54,7 +54,7 @@
     height: 2.5rem;
     border-radius: 50%;
     border: none;
-    background: rgba(6, 65, 33, 0.72);
+    background: var(--coyle-dark-tint);
     color: #ffffff;
     font-size: 1rem;
     cursor: pointer;
@@ -71,7 +71,7 @@
   }
 
   .Carousel-control:focus-visible {
-    outline: 3px solid var(--coyle-accent-green, #48bb4e);
+    outline: 3px solid var(--coyle-accent-green);
     outline-offset: 3px;
   }
 
@@ -93,7 +93,7 @@
     border-radius: 50%;
     border: none;
     padding: 0;
-    background: var(--color-lightmode-gray, #444);
+    background: var(--color-lightmode-gray);
     opacity: 0.3;
     cursor: pointer;
     transition:
@@ -110,7 +110,7 @@
   }
 
   :where(.dark) .Carousel-dot {
-    background: var(--color-darkmode-gray, #B4AFB5);
+    background: var(--color-darkmode-gray);
   }
 
   :where(.dark) .Carousel-dot.active,
