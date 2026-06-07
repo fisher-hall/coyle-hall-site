@@ -71,6 +71,13 @@
   integrity="{{ $styles.Data.Integrity }}"
   rel="stylesheet" />
 
+<!-- homepage-only styles (scoped to the home layout) -->
+{{ if .IsHome }}
+  {{ $home := resources.Get "css/home.css" }}
+  {{ if hugo.IsProduction }}{{ $home = $home | minify | fingerprint }}{{ end }}
+  <link href="{{ $home.RelPermalink }}" rel="stylesheet" />
+{{ end }}
+
 <!-- link lazy style -->
 <link
   rel="stylesheet"

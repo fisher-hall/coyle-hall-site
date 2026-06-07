@@ -46,6 +46,13 @@
   integrity="{{ $scriptsLazy.Data.Integrity }}"
   src="{{ $scriptsLazy.RelPermalink }}"></script>
 
+{{/* homepage-only behaviour (parallax, dual-canvas wave, IG feed, ticker) */}}
+{{ if .IsHome }}
+  {{ $home := resources.Get "js/home.js" }}
+  {{ if hugo.IsProduction }}{{ $home = $home | minify | fingerprint }}{{ end }}
+  <script defer src="{{ $home.RelPermalink }}"></script>
+{{ end }}
+
 <!-- progressive web app -->
 {{ partialCached "pwa.html" . }}
 

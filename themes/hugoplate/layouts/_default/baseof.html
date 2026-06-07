@@ -11,8 +11,8 @@
     {{ partial "essentials/head.html" . }}
 
 
-    <!-- style (always cache it) -->
-    {{ partialCached "essentials/style.html" . }}
+    <!-- style (cache per is-home so the homepage-only stylesheet is included) -->
+    {{ partialCached "essentials/style.html" . .IsHome }}
 
   </head>
 
@@ -61,7 +61,7 @@
     {{ partial "essentials/footer.html" . }}
 
 
-  <!-- script (always cache it) -->
-  {{ partialCached "essentials/script.html" . }}
+  <!-- script (cache per is-home so the homepage-only script is included) -->
+  {{ partialCached "essentials/script.html" . .IsHome }}
   </body>
 </html>
