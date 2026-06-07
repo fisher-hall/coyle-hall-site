@@ -149,9 +149,6 @@ lazy = true
 link = "js/tab.js"
 lazy = true
 [[params.plugins.js]]
-link = "js/main.js"
-lazy = false
-[[params.plugins.js]]
 link = "js/modal.js"
 lazy = true
 [[params.plugins.js]]

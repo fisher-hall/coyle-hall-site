@@ -31,19 +31,19 @@
   {{ $scriptsLazy = $scriptsLazy | minify | fingerprint }}
 {{ end }}
 
-{{/* scripts */}}
+{{/* scripts — SRI/crossorigin only in production; in dev they cause the
+     bundle to be CORS-blocked whenever the access origin (localhost vs
+     127.0.0.1, or a mismatched port) differs from Hugo's injected <base>. */}}
 <script
   defer
-  crossorigin="anonymous"
-  integrity="{{ $scripts.Data.Integrity }}"
+  {{ if hugo.IsProduction }}crossorigin="anonymous" integrity="{{ $scripts.Data.Integrity }}"{{ end }}
   src="{{ $scripts.RelPermalink }}"></script>
 
 {{/* scripts lazy */}}
 <script
   defer
   async
-  crossorigin="anonymous"
-  integrity="{{ $scriptsLazy.Data.Integrity }}"
+  {{ if hugo.IsProduction }}crossorigin="anonymous" integrity="{{ $scriptsLazy.Data.Integrity }}"{{ end }}
   src="{{ $scriptsLazy.RelPermalink }}"></script>
 
 {{/* homepage-only behaviour (parallax, dual-canvas wave, IG feed, ticker) */}}
