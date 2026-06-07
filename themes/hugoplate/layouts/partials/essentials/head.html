@@ -23,6 +23,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <!-- Alfa Slab One Google Font -->
 <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
+<!-- Graduate Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Graduate&display=swap" rel="stylesheet">
+
+{{ if .IsHome }}
+<link rel="preload" as="image" href="/images/BannerImages/HomeBanner.png" fetchpriority="high">
+{{ end }}
 
 <style>
   body, .header, .navbar, .nav-link, .navbar-brand {

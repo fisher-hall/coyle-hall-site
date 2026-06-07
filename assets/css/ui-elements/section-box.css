@@ -1,0 +1,55 @@
+/* ═══════════════════════════════════════════════════════════════
+   SECTION CONTAINERS
+   ─────────────────────────────────────────────────────────────
+   Bleed      — stretches to 100vw regardless of parent width
+   SectionBox — rounded green callout/container box
+   SectionBand — full-bleed green band (combines both)
+═══════════════════════════════════════════════════════════════ */
+
+@layer components {
+
+  /* Full viewport-width bleed — use on any block-level element */
+  .Bleed {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+  }
+
+  /* ── Rounded green container ── */
+  .SectionBox {
+    background: var(--primary-color);
+    color: #ffffff;
+    border-radius: 1rem;
+    padding: 2rem;
+    width: 100%;
+  }
+
+  .SectionBox--lg {
+    padding: 3rem;
+    border-radius: 1.75rem;
+  }
+
+  /* ── Full-bleed green band ── */
+  /* Combines Bleed + SectionBox. Inner content constrained by
+     .SectionBand-inner with max-width. */
+  .SectionBand {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    background: var(--primary-color);
+    color: #ffffff;
+    padding: 4rem 2rem;
+  }
+
+  .SectionBand-inner {
+    max-width: 64rem;
+    margin: 0 auto;
+  }
+
+}

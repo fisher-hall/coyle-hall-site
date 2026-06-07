@@ -1,0 +1,84 @@
+/* ═══════════════════════════════════════════════════════════════
+   INFO CARD — icon + label + title + description on green bg
+   Usage:
+     <div class="InfoCard">
+       <i class="fa fa-location-dot InfoCard-icon" aria-hidden="true"></i>
+       <div class="InfoCard-body">
+         <p class="InfoCard-label">Location</p>
+         <h3 class="InfoCard-title">South Quad</h3>
+         <p class="InfoCard-desc">AKA the longest quad in America</p>
+       </div>
+     </div>
+     <!-- As a link -->
+     <a href="..." class="InfoCard InfoCard--link" aria-label="...">…</a>
+═══════════════════════════════════════════════════════════════ */
+
+@layer components {
+
+  .InfoCard {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    align-items: center;
+    gap: 0.875rem;
+    border-radius: 1.5rem;
+    background: var(--primary-color);
+    padding: 0.875rem 1rem;
+    font-family: 'Rubik', sans-serif;
+    color: #ffffff;
+    text-decoration: none;
+  }
+
+  @media (max-width: 540px) {
+    .InfoCard {
+      grid-template-columns: 38px 1fr;
+      padding: 0.75rem 0.875rem;
+    }
+  }
+
+  .InfoCard-icon {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 1.3rem;
+    color: rgba(255, 255, 255, 0.95);
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+  }
+
+  .InfoCard-body { min-width: 0; }
+
+  .InfoCard-label {
+    font-size: 0.74rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgba(255, 255, 255, 0.72);
+    margin: 0 0 0.2rem;
+  }
+
+  .InfoCard-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.1;
+    color: #ffffff;
+    margin: 0 0 0.3rem;
+  }
+
+  .InfoCard-desc {
+    font-size: 0.9rem;
+    line-height: 1.35;
+    color: rgba(255, 255, 255, 0.82);
+    margin: 0;
+  }
+
+  .InfoCard--link {
+    transition: filter 0.2s ease, transform 0.15s ease;
+  }
+
+  .InfoCard--link:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+  }
+
+}

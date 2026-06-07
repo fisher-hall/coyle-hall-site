@@ -1,0 +1,232 @@
+/* ═══════════════════════════════════════════════════════════════
+   COYLE BUTTON SYSTEM
+   ───────────────────────────────────────────────────────────────
+   Uses <Button> as a custom HTML element selector — no JS needed.
+   Wrap in <a href="..."> for links; the anchor becomes layout-
+   transparent via a:has(> Button) { display: contents }.
+
+   Usage:
+     <Button class="gradient">Join the Crew</Button>
+     <a href="/page"><Button class="white">Read More</Button></a>
+     <Button class="outline-green sm">Learn More</Button>
+
+   Variants : default · light · gradient · white · ghost ·
+              outline-green · outline-white · outline-grad · nd
+   Sizes    : sm · lg  (default is md)
+═══════════════════════════════════════════════════════════════ */
+
+/* @property must live at the top level, outside any @layer */
+@property --Button-angle {
+  syntax: '<angle>';
+  inherits: true;
+  initial-value: 60deg;
+}
+
+@layer components {
+
+  /* Anchor wrapper becomes invisible to flex/grid layout */
+  a:has(> Button) {
+    display: contents;
+  }
+
+  /* ─── Base ─────────────────────────────────────────────────── */
+  Button {
+    --Button-angle: 60deg;
+    --Button-radius: 1rem;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--Button-radius);
+    font-family: 'Rubik', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    position: relative;
+    user-select: none;
+    -webkit-user-select: none;
+    transition:
+      filter      0.2s  ease,
+      background  0.2s  ease,
+      color       0.2s  ease,
+      box-shadow  0.2s  ease,
+      transform   0.15s ease;
+  }
+
+  Button:active { transform: scale(0.98); }
+
+  Button:focus-visible {
+    outline: 3px solid var(--coyle-accent-green, #48bb4e);
+    outline-offset: 3px;
+  }
+
+  Button.sm { padding: 0.5rem 1rem;  font-size: 0.875rem; }
+  Button.lg { padding: 1rem  2rem;   font-size: 1.125rem; }
+
+
+  /* ─── default ─────────────────────────────────────────────── */
+  Button.default {
+    background: var(--primary-color);
+    color: var(--button-text-white);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  }
+  Button.default:hover,
+  Button.default:focus-visible { filter: brightness(1.12); }
+
+
+  /* ─── light ────────────────────────────────────────────── */
+  Button.light {
+    background: var(--secondary-color);
+    color: var(--button-text-white);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  }
+  Button.light:hover,
+  Button.light:focus-visible { filter: brightness(1.12); }
+
+
+  /* ─── gradient ─────────────────────────────────────────────── */
+  Button.gradient {
+    background: linear-gradient(var(--Button-angle), var(--button-grad-dark), var(--button-grad-light));
+    color: var(--button-text-white);
+    box-shadow: 0 2px 8px rgba(6, 65, 33, 0.22);
+    overflow: hidden;
+  }
+
+  Button.gradient::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: var(--button-hover-tint);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+  }
+
+  Button.gradient:hover::before,
+  Button.gradient:focus-visible::before { opacity: 1; }
+
+  :where(.dark) Button.gradient {
+    background: linear-gradient(var(--Button-angle), var(--button-grad-dark-dm), var(--button-grad-light-dm));
+  }
+
+
+  /* ─── white ────────────────────────────────────────────────── */
+  Button.white {
+    background: #ffffff;
+    color: var(--coyle-dark-green);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  }
+  Button.white:hover,
+  Button.white:focus-visible {
+    background: color-mix(in srgb, var(--coyle-light-green) 6%, #ffffff);
+  }
+
+
+  /* ─── ghost ─────────────────────────────────────────────────── */
+  Button.ghost {
+    background: transparent;
+    color: var(--coyle-dark-green);
+    box-shadow: none;
+  }
+  :where(.dark) Button.ghost { color: var(--coyle-light-green); }
+  Button.ghost:hover,
+  Button.ghost:focus-visible {
+    box-shadow: inset 0 0 0 2px var(--primary-color);
+  }
+
+
+  /* ─── outline-green ─────────────────────────────────────────── */
+  Button.outline-green {
+    background: transparent;
+    color: var(--primary-color);
+    box-shadow: inset 0 0 0 2px var(--primary-color), 0 1px 4px rgba(0, 0, 0, 0.08);
+  }
+  Button.outline-green:hover,
+  Button.outline-green:focus-visible {
+    background: var(--primary-color);
+    color: var(--button-text-white);
+  }
+
+
+  /* ─── outline-white ───────────────────────────────────────────────── */
+  Button.outline-white {
+    --Button-ink: #1e1e1e;
+    background: transparent;
+    color: var(--Button-ink);
+    box-shadow: inset 0 0 0 2px var(--Button-ink), 0 1px 4px rgba(0, 0, 0, 0.08);
+  }
+  :where(.dark) Button.outline-white { --Button-ink: rgba(255, 255, 255, 0.88); }
+  Button.outline-white:hover,
+  Button.outline-white:focus-visible {
+    background: var(--Button-ink);
+    color: var(--background-color, #ffffff);
+  }
+
+
+  /* ─── outline-grad ──────────────────────────────────────────── */
+  /* ::before = gradient border ring (CSS mask).
+     ::after  = gradient fill (fades in on hover).
+     Matching gradients make the stroke→fill transition seamless. */
+  Button.outline-grad {
+    background: transparent;
+    border: none;
+    color: var(--primary-color);
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  }
+  Button.outline-grad::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 2px;
+    background: linear-gradient(var(--Button-angle), var(--button-grad-dark), var(--button-grad-light));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+  }
+  Button.outline-grad::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(var(--Button-angle), var(--button-grad-dark), var(--button-grad-light));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+  }
+  Button.outline-grad:hover,
+  Button.outline-grad:focus-visible { color: #ffffff; }
+  Button.outline-grad:hover::before,
+  Button.outline-grad:focus-visible::before { opacity: 0; }
+  Button.outline-grad:hover::after,
+  Button.outline-grad:focus-visible::after { opacity: 1; }
+
+
+  /* ─── nd ─────────────────────────────────────────────────────── */
+  Button.nd {
+    background: color-mix(in srgb, #ffffff 10%, var(--nd-blue, #0c2340));
+    color: var(--nd-gold, #ae9142);
+    box-shadow: 0 2px 8px rgba(12, 35, 64, 0.22);
+  }
+  Button.nd:hover,
+  Button.nd:focus-visible {
+    filter: brightness(1.15);
+    color: var(--nd-gold, #ae9142);
+  }
+  Button.nd:focus-visible { outline-color: var(--nd-gold, #ae9142); }
+
+  @media (prefers-reduced-motion: reduce) {
+    Button, Button::before, Button::after { transition: none; }
+  }
+
+} /* end @layer components */

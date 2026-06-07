@@ -301,15 +301,15 @@
       searchIcon.style.transform = 'rotate(0deg) scale(1)';
     }, 150);
 
-    // Create and insert search bar
     searchContainer = createSearchBar();
-    
+    const isDesktop = window.innerWidth >= 1024;
+
     // Create results container
     const resultsContainer = createInlineResultsContainer();
     document.body.appendChild(resultsContainer);
-    
-    // Keep search bar in navbar on all breakpoints
-    if (window.innerWidth < 1024) {
+
+    if (!isDesktop) {
+      // Mobile: slide in the search bar below the navbar via CSS (mobile-search-active class)
       document.body.classList.add('mobile-search-active');
       if (mobileSearchSlot) {
         mobileSearchSlot.appendChild(searchContainer);
@@ -317,43 +317,35 @@
         searchNavMenu.parentElement.insertBefore(searchContainer, searchNavMenu);
       }
     } else {
+      // Desktop: hide the element BEFORE inserting so the browser never renders it visible
+      searchContainer.style.opacity = '0';
+
       navbar?.classList.add('desktop-search-active');
       searchNavMenu.parentElement.insertBefore(searchContainer, searchNavMenu);
-    }
-    
-    // On large screens, use fixed width and center with absolute positioning
-    if (window.innerWidth >= 1024) {
-      // Use 60% of screen width with a reasonable max
+
+      // Fix width so left:50% + translateX(-50%) works correctly
       const searchWidth = Math.min(900, window.innerWidth * 0.6);
       searchContainer.style.width = `${searchWidth}px`;
-      searchContainer.style.maxWidth = 'none'; // Allow it to scale freely
+
+      // Force a synchronous reflow so opacity:0 is committed as the "before" state,
+      // then add the transition — only future changes will animate, not the insertion.
+      void searchContainer.offsetWidth;
+      searchContainer.style.transition = 'opacity 0.2s ease';
     }
 
-    // Animate nav menu out
-    searchNavMenu.style.opacity = '0';
-    searchNavMenu.style.transform = 'translateX(-20px)';
-    searchNavMenu.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-    
+    // Animate nav menu out on desktop
+    if (isDesktop) {
+      searchNavMenu.style.opacity = '0';
+      searchNavMenu.style.transform = 'translateX(-20px)';
+      searchNavMenu.style.transition = 'opacity 0.1s ease, transform 0.3s ease';
+    }
+
     setTimeout(() => {
-      searchNavMenu.style.display = 'none';
-      // Animate search bar in - start from scaled down and slightly left
-      searchContainer.style.opacity = '0';
-      // On large screens, maintain the translateX(-50%) for centering, slide in from left
-      if (window.innerWidth >= 1024) {
-        searchContainer.style.transform = 'translateX(calc(-50% - 20px)) scale(0.95)';
-      } else {
-        searchContainer.style.transform = 'translateX(-20px) scale(0.95)';
-      }
-      searchContainer.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-      
-      setTimeout(() => {
-        searchContainer.style.opacity = '1';
-        // Slide to center position
-        if (window.innerWidth >= 1024) {
-          searchContainer.style.transform = 'translateX(-50%) scale(1)';
-        } else {
-          searchContainer.style.transform = 'translateX(0) scale(1)';
-        }
+      if (isDesktop) searchNavMenu.style.display = 'none';
+
+      // Fade in — element is already centered via CSS, just reveal it
+      requestAnimationFrame(() => {
+        if (isDesktop) searchContainer.style.opacity = '1';
         // Focus the input
         const input = document.getElementById('inline-search-input');
         const resultsDiv = document.getElementById('inline-search-results');
@@ -405,7 +397,7 @@
             }, 100);
           });
         }
-      }, 10);
+      }); // end requestAnimationFrame
     }, 300);
   };
 
@@ -432,9 +424,9 @@
       searchIcon.style.transform = 'rotate(0deg) scale(1)';
     }, 150);
 
-    // Animate search bar out
-    searchContainer.style.opacity = '0';
-    searchContainer.style.transform = 'scale(0.95)';
+    // Fade out (transition was set at show-time; no-op on mobile where opacity isn't managed here)
+    if (searchContainer.style.transition) searchContainer.style.opacity = '0';
+    const wasDesktop = window.innerWidth >= 1024;
     document.body.classList.remove('mobile-search-active');
     navbar?.classList.remove('desktop-search-active');
 
@@ -442,15 +434,18 @@
       searchContainer.remove();
       searchContainer = null;
 
-      // Animate nav menu back in
-      searchNavMenu.style.display = '';
-      searchNavMenu.style.opacity = '0';
-      searchNavMenu.style.transform = 'translateX(-20px)';
-
-      setTimeout(() => {
-        searchNavMenu.style.opacity = '1';
-        searchNavMenu.style.transform = 'translateX(0)';
-      }, 10);
+      // Only restore nav menu inline styles on desktop; on mobile the CSS
+      // checkbox-hack controls nav menu visibility — don't override it.
+      if (wasDesktop) {
+        searchNavMenu.style.display = '';
+        searchNavMenu.style.opacity = '0';
+        searchNavMenu.style.transform = 'translateX(-20px)';
+        searchNavMenu.style.transition = 'opacity 0.2s ease, transform 0.3s ease';
+        setTimeout(() => {
+          searchNavMenu.style.opacity = '1';
+          searchNavMenu.style.transform = 'translateX(0)';
+        }, 10);
+      }
     }, 300);
   };
 

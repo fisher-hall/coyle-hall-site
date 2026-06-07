@@ -1,0 +1,56 @@
+/* ═══════════════════════════════════════════════════════════════
+   COYLE HALL — COLOR TOKENS
+   Single source of truth for all CSS custom properties.
+   Imported by custom.css before any other rules.
+═══════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Coyle greens ─────────────────────────────────────────── */
+  --coyle-dark-green:    #064121;
+  --coyle-dark-fade:     rgb(6, 65, 33);
+  --coyle-light-green:   #0a843d;
+  --coyle-gradient-end:  #0B6832;   /* button / banner gradient stop */
+  --button-grad-dark:       #074d28;  /* gradient button dark stop  */
+  --button-grad-light:      #0d7a3c;  /* gradient button light stop */
+  --button-grad-dark-dm:    #075c2a;  /* dark mode dark stop  */
+  --button-grad-light-dm:   #11a84e;  /* dark mode light stop */
+  --coyle-accent-green:  rgb(72, 187, 78);
+  --coyle-banner-tint:   rgba(10, 132, 61, 0.5);
+  --coyle-navbar-tint:   var(--coyle-dark-green);
+
+  /* ── Notre Dame ───────────────────────────────────────────── */
+  --nd-blue:   #0c2340;
+  --nd-gold:   rgb(174, 145, 66);
+  --nd-light:  #5faf81;
+
+  /* ── Neutrals ─────────────────────────────────────────────── */
+  --color-custom-light:   #cccccc;
+  --color-darkmode-gray:  #B4AFB5;
+  --color-lightmode-gray: #444444;
+
+  /* ── Semantic aliases (override in .dark below) ───────────── */
+  --primary-color:    var(--coyle-dark-green);
+  --secondary-color:  var(--coyle-light-green);
+  --light-color:      var(--nd-light);
+  --highlight-color:  var(--coyle-light-green);
+  --background-color: #ffffff;
+
+  /* ── Component interaction tokens ────────────────────────── */
+  --button-tint:       rgba(255, 255, 255, 0.18);
+  --button-hover-tint: rgba(255, 255, 255, 0.18);
+  --button-text-white: #ffffff;
+
+  /* ── Layout tokens ────────────────────────────────────────── */
+  --page-banner-height: clamp(400px, 50vh, 600px);
+}
+
+/* Dark mode overrides */
+.dark {
+  --primary-color:       var(--coyle-light-green);
+  --secondary-color:     var(--coyle-accent-green);
+  --light-color:         var(--coyle-light-green);
+  --highlight-color:     var(--coyle-light-green);
+  --coyle-navbar-tint:   rgba(6, 65, 33, 0.7);
+  --background-color:    #000000;
+  --button-text-white:   #000000;
+}

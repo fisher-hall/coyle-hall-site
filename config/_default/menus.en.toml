@@ -68,11 +68,11 @@ name = "Events"
 url = "/events"
 weight = 5
 
-[[main]]
-parent = "Events"
-name = "IronRA"
-url = "/events/ironra"
-weight = 3
+# [[main]]
+# parent = "Events"
+# name = "IronRA"
+# url = "/events/ironra"
+# weight = 3
 
 [[main]]
 parent = "Events"

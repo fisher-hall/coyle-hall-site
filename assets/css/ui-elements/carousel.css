@@ -1,0 +1,127 @@
+/* ═══════════════════════════════════════════════════════════════
+   CAROUSEL — slide deck with controls and dots
+   Usage:
+     <div class="Carousel">
+       <div class="Carousel-track">
+         <div class="Carousel-slide"><img src="..." alt="..."></div>
+         …
+       </div>
+       <button class="Carousel-control Carousel-control--prev" aria-label="Previous">❮</button>
+       <button class="Carousel-control Carousel-control--next" aria-label="Next">❯</button>
+     </div>
+     <div class="Carousel-dots" role="tablist">
+       <button class="Carousel-dot active" aria-label="Slide 1"></button>
+       …
+     </div>
+═══════════════════════════════════════════════════════════════ */
+
+@layer components {
+
+  .Carousel {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+    user-select: none;
+  }
+
+  .Carousel-track {
+    display: flex;
+    transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+  }
+
+  .Carousel-slide {
+    flex: 0 0 100%;
+    width: 100%;
+  }
+
+  .Carousel-slide img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  /* Prev / Next controls */
+  .Carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    border: none;
+    background: rgba(6, 65, 33, 0.72);
+    color: #ffffff;
+    font-size: 1rem;
+    cursor: pointer;
+    z-index: 2;
+    backdrop-filter: blur(4px);
+    transition:
+      background  0.2s ease,
+      transform   0.15s ease;
+  }
+
+  .Carousel-control:hover {
+    background: var(--primary-color);
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  .Carousel-control:focus-visible {
+    outline: 3px solid var(--coyle-accent-green, #48bb4e);
+    outline-offset: 3px;
+  }
+
+  .Carousel-control--prev { left:  0.75rem; }
+  .Carousel-control--next { right: 0.75rem; }
+
+  /* Dot navigation */
+  .Carousel-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .Carousel-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    border: none;
+    padding: 0;
+    background: var(--color-lightmode-gray, #444);
+    opacity: 0.3;
+    cursor: pointer;
+    transition:
+      opacity    0.2s ease,
+      transform  0.2s ease,
+      background 0.2s ease;
+  }
+
+  .Carousel-dot.active,
+  .Carousel-dot[aria-selected="true"] {
+    opacity: 1;
+    background: var(--primary-color);
+    transform: scale(1.35);
+  }
+
+  :where(.dark) .Carousel-dot {
+    background: var(--color-darkmode-gray, #B4AFB5);
+  }
+
+  :where(.dark) .Carousel-dot.active,
+  :where(.dark) .Carousel-dot[aria-selected="true"] {
+    background: var(--secondary-color);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .Carousel-track { transition: none; }
+    .Carousel-control,
+    .Carousel-dot   { transition: none; }
+  }
+
+}

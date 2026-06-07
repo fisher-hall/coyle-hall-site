@@ -189,7 +189,7 @@
         max-width: 100%;
         height: 80px;
         transform: none;
-        bottom: 70px;
+        bottom: -24px;
         overflow: visible;
         z-index: 4;
         pointer-events: none;
@@ -229,7 +229,7 @@
           min-width: 0 !important;
           max-width: 100% !important;
           transform: none !important;
-          bottom: 80px !important;
+          bottom: -12px !important;
           overflow: visible !important;
         }
       }
@@ -421,7 +421,7 @@
           let points = [];
           
           // Calculate wave points with higher resolution
-          for (let x = 0; x <= canvas.width; x += 0.5) {
+          for (let x = 0; x <= canvas.width; x += 2) {
             let y = yOffset;
             
             // Stack multiple sine waves for natural randomness
@@ -524,7 +524,7 @@
                 This award marks the beginning of a new chapter for our dorm, and we couldn't have done it without the hard work of our residents, leadership team, and the support of the entire ND community. Thank you!
               </p>
             </div>
-            <div class="award-logos-row" style="align-items: center; justify-content: center; gap: 1.5rem; margin-top: 2rem; margin-bottom: 8rem;">
+            <div class="award-logos-row" style="align-items: center; justify-content: center; gap: 1.5rem; margin-top: 2rem; margin-bottom: 4rem;">
               <img
                 src="{{ $coyleCrest.RelPermalink }}"
                 alt="Coyle Hall crest"
@@ -568,7 +568,7 @@
 
         </div>
 
-        <!-- Purple Divider Wave -->
+        <!-- Divider Wave -->
         <div class="banner-divider-wave" aria-hidden="true">
           <canvas id="wave-canvas-divider" class="wave-canvas" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;"></canvas>
         </div>
@@ -615,9 +615,9 @@
       </svg>
     </div>
 
-    <h1 class="text-2xl text-center font-extrabold mb-6 fade-in-section" style="color: var(--secondary-color);">
+    <p class="text-2xl text-center font-extrabold mb-6 fade-in-section" style="color: var(--secondary-color);">
       1952 • 2025
-    </h1>
+    </p>
 
     <div class="flex items-center justify-start my-1 fade-in-section pl-16" style="position: relative; z-index: 3; margin-bottom: 1rem; margin-top: 5rem;">
       <h2 class="text-2xl md:text-4xl text-left font-extrabold mb-6 fade-in-section flex items-center text-black dark:text-white"
@@ -633,21 +633,24 @@
     </div>
     <div class="w-full flex flex-col justify-center fade-in-section px-4 pl-16 text-left">
       <i class="fa fa-anchor absolute top-5/6 right-1 text-9xl fade-in-section"
-        style="transform: translateY(30%) translateX(2%) scale(1.85) rotate(30deg); color: var(--light-color); z-index: 2;">
+        style="transform: translateY(30%) translateX(2%) scale(1.85) rotate(30deg); color: var(--light-color); z-index: 2;"
+        aria-hidden="true">
       </i>
     </div>
     <!-- Text -->
     <div class="w-5/6 flex flex-col justify-center fade-in-section px-4 pl-16 text-left;">
-      <body class="mb-2 text-lg">
-        <span style="position: relative; z-index: 2;">
-          Crew. Fishermen. Green Wave. Brothers. Coyle Hall has been known by many names of the years, but its legacy as one of the most iconic dorms at Notre Dame remains steadfast.
-          Home to generations of proud residents, this brotherhood has long been one of the most tight-knit, spirited, and iconic on campus.
-          From legendary events and unmatched camaraderie, to unforgettable haircuts and unwavering support, Coyle Hall isn't just a place for students to reside—it's a community of friendships, traditions, and countless memories that last a lifetime. 
-          Students come from every major, from every corner of the world and from every background, united by their shared identity as the Crew, and the bonds forged here are unlike any other.  
-          The mantra of "All are welcome" has carried through since the community's inception in 1952 as Fisher Hall, and it is even more true now, in the newest (and nicest) dorm on campus.
-          The Cadillac, as the dorm is affectionately known, is a place for students to work, relax, study, grow, pray, but above all live at Notre Dame, and we couldn't be more happy to welcome you to our home!
-        </span>
-      </body>
+      <p class="mb-4 text-lg" style="position: relative; z-index: 2;">
+        Crew. Fishermen. Green Wave. Brothers. Coyle Hall has been known by many names over the years, but its legacy as one of the most iconic dorms at Notre Dame remains steadfast.
+      </p>
+      <p class="mb-4 text-lg" style="position: relative; z-index: 2;">
+        Home to generations of proud residents, this brotherhood has long been one of the most tight-knit, spirited, and iconic on campus.
+        From legendary events and unmatched camaraderie, to unforgettable haircuts and unwavering support, Coyle Hall isn't just a place for students to reside — it's a community of friendships, traditions, and countless memories that last a lifetime.
+        Students come from every major, from every corner of the world and from every background, united by their shared identity as the Crew, and the bonds forged here are unlike any other.
+      </p>
+      <p class="mb-2 text-lg" style="position: relative; z-index: 2;">
+        The mantra of "All are welcome" has carried through since the community's inception in 1952 as Fisher Hall, and it is even more true now, in the newest (and nicest) dorm on campus.
+        The Cadillac, as the dorm is affectionately known, is a place for students to work, relax, study, grow, pray, but above all live at Notre Dame, and we couldn't be more happy to welcome you to our home!
+      </p>
     </div>
 
     {{/*  Fast Facts  */}}
@@ -656,139 +659,122 @@
           style="position: relative; z-index: 4; margin-top: 0;">
         Fast Facts
       </h2>
-      <i class="fa fa-water absolute text-center top-1/2 text-9xl fade-in-section" style="transform: translateX(-110%) translateY(-60%) scale(1); z-index: 2; color: var(--light-color);"></i>
     </div>
 
-    <div class="mx-auto relative grid md:grid-cols-3 sm:grid-cols-2 gap-4 gap-y-15 w-5/6 my-8 fade-in-section z-index: 3" style="margin-bottom: 4rem;">
-      <div>
-        <h1 class="relative flex items-center justify-center h-32">
-          <i class="fa fa-location-dot text-9xl -translate-x-1/2" style="color: var(--light-color);"></i>
-          <span class="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/4 text-5xl font-bold z-10 pointer-events-none" style="white-space:nowrap;">
-            North<br>Quad
-          </span>
-        </h1>
-        <div class="relative flex items-center justify-center text-2xl pt-5 text-center">
-          Location
-        </div>
-      </div>
-      <div>
-        <h1 class="relative flex items-center justify-center h-32">
-            <i class="fa fa-people-roof text-9xl -translate-x-1/2" style="color: var(--light-color);"></i>
-            <span class="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/4 text-5xl font-bold z-10 pointer-events-none" style="white-space:nowrap;">
-              176<br>Students
-            </span>
-        </h1>
-        <div class="relative flex items-center justify-center text-2xl pt-5 text-center">
-          Capacity
-        </div>
-      </div>
-      <div>
-        <h1 class="relative flex items-center justify-center h-32">
-            <i class="fa fa-sailboat text-9xl -translate-x-1/2" style="color: var(--light-color);"></i>
-            <span class="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/4 text-5xl font-bold z-10 pointer-events-none" style="white-space:nowrap;">
-              The<br>Crew
-            </span>
-        </h1>
-        <div class="relative flex items-center justify-center text-2xl pt-5 text-center">
-          Dorm Mascot
-        </div>
-      </div>
-      <div>
-        <h1 class="relative flex items-center justify-center h-32">
-            <i class="fa fa-church text-9xl -translate-x-1/2" style="color: var(--light-color);"></i>
-            <span class="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/4 text-5xl font-bold z-10 pointer-events-none" style="white-space:nowrap;">
-              St. Albert<br>the Great
-            </span>
-        </h1>
-        <div class="relative flex items-center justify-center text-2xl pt-5 text-center">
-          Chapel
-        </div>
-      </div>
-      <div>
-        <h1 class="relative flex items-center justify-center h-32">
-            <i class="fa fa-fan text-9xl -translate-x-1/2" style="color: var(--light-color);"></i>
-            <span class="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/4 text-5xl font-bold z-10 pointer-events-none" style="white-space:nowrap;">
-              No <br>A/C Yet
-            </span>
-        </h1>
-        <div class="relative flex items-center justify-center text-2xl pt-5 text-center">
-          But Coming Soon
-        </div>
-      </div>      
-      <div>
-        <h1 class="relative flex items-center justify-center h-32">
-            <i class="fa fa-building text-9xl -translate-x-1/2" style="color: var(--light-color);"></i>
-            <span class="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/4 text-5xl font-bold z-10 pointer-events-none" style="white-space:nowrap;">
-              Four<br>Floors
-            </span>
-        </h1>
-        <div class="relative flex items-center justify-center text-2xl pt-5 text-center">
-          + Basement
-        </div>
-      </div>
-      <!-- MAKE SURE LINKS ARE UPDATED -->
-      <a href="https://cavanaughhallnd.weebly.com/" class="block w-full h-full" target="_blank">
-        <h1 class="relative flex items-center justify-center h-32">
-          <i class="fa fa-venus text-9xl -translate-x-3/4" style="color: var(--light-color);"></i>
-          <span class="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/4 text-5xl font-bold z-10 pointer-events-none" style="white-space:nowrap;">
-            Cavanaugh<br>Hall
-          </span>
-        </h1>
-        <div class="relative flex items-center justify-center text-2xl pt-5 text-center">
-          '25-'26 Sister Dorm
-          <i class="fa fa-arrow-up-right-from-square ml-2"></i>
-        </div>
-      </a>
-      <div>
-        <h1 class="relative flex items-center justify-center h-32">
-            <i class="fa fa-palette text-9xl -translate-x-1/2" style="color: var(--light-color);"></i>
-            <span class="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/4 text-5xl font-bold z-10 pointer-events-none" style="white-space:nowrap;">
-              Green<br>White
-            </span>
-        </h1>
-        <div class="relative flex items-center justify-center text-2xl pt-5 text-center">
-          Dorm Colors
-        </div>
-      </div>
-      <a href="https://stanfordhall.nd.edu" class="block w-full h-full" target="_blank">
-        <h1 class="relative flex items-center justify-center h-32">
-            <i class="fa fa-mars text-9xl -translate-x-3/4" style="color: var(--light-color);"></i>
-            <span class="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/4 text-5xl font-bold z-10 pointer-events-none" style="white-space:nowrap;">
-              Stanford<br>Hall
-            </span>
-        </h1>
-        <div class="relative flex items-center justify-center text-2xl pt-5 text-center">
-          '25-'26 Brother Dorm
-          <i class="fa fa-arrow-up-right-from-square ml-2"></i>
-        </div>
-      </a>
-    </div>
+      <!-- Coyle Hall Trace with fun-facts overlay -->
+      <div class="fade-in-section relative flex w-full justify-center mb-8">
+        <div class="relative w-[min(1100px,100%)] max-w-full px-4 max-[900px]:flex max-[900px]:flex-col max-[900px]:gap-3.5" aria-hidden="false">
+          {{ $trace := replaceRE "fill: #0c8442;" "fill: currentColor;" (readFile "static/images/CoyleHallTrace.svg") }}
+          {{ with $trace }}
+            <div class="w-full text-[var(--secondary-color)] [&_svg]:block [&_svg]:h-auto [&_svg]:w-full [&_svg]:opacity-95 [&_svg]:pointer-events-none [&_svg]:transition-none" aria-hidden="true">
+              {{ . | safeHTML }}
+            </div>
+          {{ end }}
 
-    <div class="flex flex-col md:flex-row gap-4 md:gap-6 mt-20 items-center justify-center fade-in-section" style="margin-top: 6rem; margin-left: 1rem; margin-right: 1rem; margin-bottom: 1rem;">
-        
-        <a href="/faith#sacrament" class="btn btn-primary text-center" style="background-color: var(--secondary-color); border-color: var(--secondary-color);">
-            Mass & Sacrament Schedule
-            <i class="fa fa-arrow-right pl-2"></i>
-        </a>
-        <a href="/incoming-students" class="btn btn-primary text-center">
-            New Student Info
-            <i class="fa fa-arrow-right pl-2"></i>
-        </a>
-        <a href="https://residentiallife.nd.edu/undergraduate/halls/coyle-community-in-zahm-hall/" class="btn btn-primary text-center" target="_blank" rel="noopener">
-            Dorm ResLife Page
-            <i class="fa fa-arrow-up-right-from-square pl-2"></i>
-        </a>
-    </div>
+          <div class="absolute left-1/2 top-[1%] grid w-[min(320px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-[24px] bg-[var(--primary-color)] px-2 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
+            <i class="fa fa-location-dot flex h-11 w-11 items-center justify-start text-[3rem] text-white/95 max-[540px]:h-[38px] max-[540px]:w-[38px]" aria-hidden="true"></i>
+            <div class="min-w-0 pl-2">
+              <p class="mb-1 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-white/72">Location</p>
+              <h3 class="mb-1.5 text-[1.05rem] font-bold leading-[1.1] text-white max-[540px]:text-[0.98rem]">South Quad</h3>
+              <p class="m-0 text-[0.9rem] leading-[1.35] text-white/82 max-[540px]:text-[0.84rem]">AKA the longest quad in America</p>
+            </div>
+          </div>
 
-    <!-- Instagram Feed -->
-    <section class="fade-in-section" style="margin: 4rem auto 3rem; max-width: 1400px; padding: 0 1.5rem;">
-      <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 2rem;">
-        <a href="https://www.instagram.com/real_coylehall/" target="_blank" rel="noopener"
-           style="display: inline-flex; align-items: center; gap: 0.6rem; color: var(--secondary-color); font-family: 'Rubik', sans-serif; font-weight: 700; font-size: clamp(2rem, 5vw, 3.5rem); text-transform: none; letter-spacing: normal; text-decoration: none;">
-          @real_coylehall
-          <i class="fa-brands fa-instagram" style="font-size: 1em;"></i>
-        </a>
+          <div class="absolute right-[1.5%] top-[17%] grid w-[min(320px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-[24px] bg-[var(--primary-color)] px-4 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
+            <i class="fa fa-people-roof ml-1.5 flex h-11 w-11 items-center justify-start text-[1.3rem] text-white/95 max-[540px]:h-[38px] max-[540px]:w-[38px] max-[540px]:text-[1.15rem]" aria-hidden="true"></i>
+            <div class="min-w-0">
+              <p class="mb-1 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-white/72">Population</p>
+              <h3 class="mb-1.5 text-[1.05rem] font-bold leading-[1.1] text-white max-[540px]:text-[0.98rem]">262 Residents</h3>
+              <p class="m-0 text-[0.9rem] leading-[1.35] text-white/82 max-[540px]:text-[0.84rem]">From every grade and major</p>
+            </div>
+          </div>
+
+          <div class="absolute right-0 top-[47%] grid w-[min(320px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-[24px] bg-[var(--primary-color)] px-4 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
+            <i class="fa fa-sailboat ml-1.5 flex h-11 w-11 items-center justify-start text-[1.3rem] text-white/95 max-[540px]:h-[38px] max-[540px]:w-[38px] max-[540px]:text-[1.15rem]" aria-hidden="true"></i>
+            <div class="min-w-0">
+              <p class="mb-1 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-white/72">Dorm Mascot</p>
+              <h3 class="mb-1.5 text-[1.05rem] font-bold leading-[1.1] text-white max-[540px]:text-[0.98rem]">The Crew</h3>
+              <p class="m-0 text-[0.9rem] leading-[1.35] text-white/82 max-[540px]:text-[0.84rem]">A legacy built on the water</p>
+            </div>
+          </div>
+
+          <div class="absolute bottom-0 left-1/2 grid w-[min(320px,32vw)] min-h-[108px] -translate-x-1/2 translate-y-[45%] grid-cols-[44px_1fr] items-center gap-3.5 rounded-[24px] bg-[var(--primary-color)] px-4 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
+            <i class="fa fa-church ml-1.5 flex h-11 w-11 items-center justify-start text-[1.3rem] text-white/95 max-[540px]:h-[38px] max-[540px]:w-[38px] max-[540px]:text-[1.15rem]" aria-hidden="true"></i>
+            <div class="min-w-0">
+              <p class="mb-1 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-white/72">Chapel</p>
+              <h3 class="mb-1.5 text-[1.05rem] font-bold leading-[1.1] text-white max-[540px]:text-[0.98rem]">St. Paul</h3>
+              <p class="m-0 text-[0.9rem] leading-[1.35] text-white/82 max-[540px]:text-[0.84rem]">Named for the old Fisher Hall</p>
+            </div>
+          </div>
+
+          <div class="absolute left-0 top-[47%] grid w-[min(320px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-[24px] bg-[var(--primary-color)] px-4 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
+            <i class="fa fa-fan ml-1.5 flex h-11 w-11 items-center justify-start text-[1.3rem] text-white/95 max-[540px]:h-[38px] max-[540px]:w-[38px] max-[540px]:text-[1.15rem]" aria-hidden="true"></i>
+            <div class="min-w-0">
+              <p class="mb-1 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-white/72">Amenities</p>
+              <div class="flex items-center gap-2">
+                <i class="fa fa-check text-white/95 text-[1.05rem] flex-none self-center translate-y-[-3px] leading-none" aria-hidden="true"></i>
+                <h3 class="mb-1.5 text-[1.05rem] font-bold leading-[1] text-white max-[540px]:text-[0.98rem]">Air Conditioned</h3>
+              </div>
+              <p class="m-0 text-[0.9rem] leading-[1.35] text-white/82 max-[540px]:text-[0.84rem]">Cool and comfy</p>
+            </div>
+          </div>
+
+          <div class="absolute left-[1.5%] top-[17%] grid w-[min(320px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-[24px] bg-[var(--primary-color)] px-4 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
+            <i class="fa fa-building ml-1.5 flex h-11 w-11 items-center justify-start text-[1.3rem] text-white/95 max-[540px]:h-[38px] max-[540px]:w-[38px] max-[540px]:text-[1.15rem]" aria-hidden="true"></i>
+            <div class="min-w-0">
+              <p class="mb-1 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-white/72">Building Structure</p>
+              <h3 class="mb-1.5 text-[1.05rem] font-bold leading-[1.1] text-white max-[540px]:text-[0.98rem]">3 Floors</h3>
+              <p class="m-0 text-[0.9rem] leading-[1.35] text-white/82 max-[540px]:text-[0.84rem]">8 sections + a basement</p>
+            </div>
+          </div>
+
+          <div class="absolute left-[19.5%] top-[13%] grid w-[min(320px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-[24px] bg-[var(--primary-color)] px-4 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
+            <i class="fa fa-palette ml-1.5 flex h-11 w-11 items-center justify-start text-[1.3rem] text-white/95 max-[540px]:h-[38px] max-[540px]:w-[38px] max-[540px]:text-[1.15rem]" aria-hidden="true"></i>
+            <div class="min-w-0">
+              <p class="mb-1 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-white/72">Dorm Colors</p>
+              <h3 class="mb-1.5 text-[1.05rem] font-bold leading-[1.1] text-white max-[540px]:text-[0.98rem]">Green & White</h3>
+              <p class="m-0 text-[0.9rem] leading-[1.35] text-white/82 max-[540px]:text-[0.84rem]">Traditional, bold, and vibrant</p>
+            </div>
+          </div>
+
+          <a href="https://www.mcglinnhallnd.com/" target="_blank" rel="noopener" aria-label="Link to McGlinn Hall website">
+            <div class="absolute right-[23.5%] top-[15%] grid w-[min(320px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-[24px] bg-[var(--primary-color)] px-4 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3" aria-hidden="true">
+              <i class="fa fa-venus ml-1.5 flex h-11 w-11 items-center justify-start text-[1.3rem] text-white/95 max-[540px]:h-[38px] max-[540px]:w-[38px] max-[540px]:text-[1.15rem]"></i>
+              <div class="min-w-0">
+                <p class="mb-1 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-white/72">Sister Dorm</p>
+                <h3 class="mb-1.5 text-[1.05rem] font-bold leading-[1.1] text-white max-[540px]:text-[0.98rem]">McGlinn Hall</h3>
+                <div class="flex items-center gap-2 text-[0.9rem]">
+                  <i class="fa fa-arrow-up-right-from-square text-white/82 flex-none self-center leading-none"></i>
+                  <p class="m-0 leading-[0.5] text-white/82 max-[540px]:text-[0.84rem]">Home of the Shamrocks</p>
+                </div>
+              </div>
+            </div>
+          </a>
+
+          <a href="https://www.mcglinnhallnd.com/" target="_blank" rel="noopener" aria-label="Link to McGlinn Hall website">
+            <div class="absolute bottom-[16%] right-[12%] grid w-[min(320px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-[24px] bg-[var(--primary-color)] px-4 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3" aria-hidden="true">
+              <i class="fa fa-arrow-up-right-from-square ml-1.5 flex h-11 w-11 items-center justify-start text-[1.3rem] text-white/95 max-[540px]:h-[38px] max-[540px]:w-[38px] max-[540px]:text-[1.15rem]"></i>
+              <div class="min-w-0">
+                <p class="mb-1 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-white/72">Learn More</p>
+                <h3 class="mb-1.5 text-[1.05rem] font-bold leading-[1.1] text-white max-[540px]:text-[0.98rem]">ND ResLife Info</h3>
+                <p class="m-0 text-[0.9rem] leading-[1.35] text-white/82 max-[540px]:text-[0.84rem]">Visit for more info</p>
+              </div>
+            </div>
+          </a>
+        </div>
       </div>
+
+      <hr class="my-6 fade-in-section border-custom-gray" style="height: 1px; border: none; background: linear-gradient(to right, transparent, var(--color-lightmode-gray) 20%, var(--color-lightmode-gray) 80%, transparent);">
+
+          <!-- Instagram Feed -->
+      <section class="fade-in-section" style="margin: 4rem auto 3rem; max-width: 1320px; padding: 0 1.5rem;">
+        <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 2rem;">
+          <a href="https://www.instagram.com/real_coylehall/" target="_blank" rel="noopener"
+            style="display: inline-flex; align-items: center; gap: 0.6rem; color: var(--secondary-color); font-family: 'Rubik', sans-serif; font-weight: 700; font-size: clamp(2rem, 5vw, 3.5rem); text-transform: none; letter-spacing: normal; text-decoration: none;">
+            @real_coylehall
+            <i class="fa-brands fa-instagram" style="font-size: 1em;"></i>
+          </a>
+        </div>
 
       {{/* Instagram feed via Behold.so JSON — feed ID: 9XCk73VEQkyAaVvvrrBh */}}
       {{/* Manage at behold.so — contact Daniel Burke (dburke6) */}}
@@ -852,7 +838,7 @@
         #ig-feed-grid {
           display: grid;
           grid-template-columns: repeat(6, 1fr);
-          gap: 1.25rem;
+          gap: 1.75rem;
         }
         #ig-feed-loading {
           grid-column: 1 / -1;
@@ -866,13 +852,13 @@
         @media (max-width: 900px) {
           #ig-feed-grid {
             grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
+            gap: 1.25rem;
           }
         }
         @media (max-width: 540px) {
           #ig-feed-grid {
             grid-template-columns: repeat(2, 1fr);
-            gap: 0.75rem;
+            gap: 1rem;
           }
         }
       </style>
@@ -885,46 +871,77 @@
         (function () {
           var grid = document.getElementById('ig-feed-grid');
           var loading = document.getElementById('ig-feed-loading');
+          var fetched = false;
 
-          fetch('https://feeds.behold.so/9XCk73VEQkyAaVvvrrBh')
-            .then(function (r) { return r.json(); })
-            .then(function (data) {
-              if (loading) loading.remove();
-              var posts = Array.isArray(data) ? data : (data.posts || data.data || []);
-              if (!posts.length) {
-                grid.innerHTML = '<p style="opacity:0.5;text-align:center;padding:2rem;">No posts found.</p>';
-                return;
+          function loadFeed() {
+            if (fetched) return;
+            fetched = true;
+
+            var timeout = setTimeout(function () {
+              if (loading && loading.parentNode) {
+                loading.textContent = 'Follow us @real_coylehall on Instagram.';
               }
-              posts.slice(0, 6).forEach(function (post) {
-                var imgUrl = post.mediaType === 'VIDEO'
-                  ? (post.thumbnailUrl || '')
-                  : ((post.sizes && post.sizes.medium && post.sizes.medium.url) || post.mediaUrl || post.thumbnailUrl || '');
-                if (!imgUrl) return;
+            }, 8000);
 
-                var caption = post.caption || '';
-                var typeIcon = post.mediaType === 'VIDEO'
-                  ? '<i class="fa-solid fa-video ig-type-icon"></i>'
-                  : post.mediaType === 'CAROUSEL_ALBUM'
-                    ? '<i class="fa-solid fa-images ig-type-icon"></i>'
-                    : '';
+            fetch('https://feeds.behold.so/9XCk73VEQkyAaVvvrrBh')
+              .then(function (r) { return r.json(); })
+              .then(function (data) {
+                clearTimeout(timeout);
+                if (loading) loading.remove();
+                var posts = Array.isArray(data) ? data : (data.posts || data.data || []);
+                posts = posts
+                  .slice()
+                  .sort(function (a, b) {
+                    return new Date(b.timestamp || 0) - new Date(a.timestamp || 0);
+                  });
+                if (!posts.length) {
+                  grid.innerHTML = '<p style="opacity:0.5;text-align:center;padding:2rem;">No posts found.</p>';
+                  return;
+                }
+                posts.slice(0, 6).forEach(function (post) {
+                  var imgUrl = post.mediaType === 'VIDEO'
+                    ? (post.thumbnailUrl || '')
+                    : ((post.sizes && post.sizes.medium && post.sizes.medium.url) || post.mediaUrl || post.thumbnailUrl || '');
+                  if (!imgUrl) return;
 
-                var a = document.createElement('a');
-                a.className = 'ig-post';
-                a.href = post.permalink;
-                a.target = '_blank';
-                a.rel = 'noopener';
-                a.setAttribute('aria-label', caption || 'View on Instagram');
-                a.innerHTML =
-                  '<div class="ig-post-img-wrap">' +
-                    '<img src="' + imgUrl + '" alt="" loading="lazy">' +
-                    '<div class="ig-post-overlay">' + typeIcon + '<p>' + caption + '</p></div>' +
-                  '</div>';
-                grid.appendChild(a);
+                  var caption = post.caption || '';
+                  var typeIcon = post.mediaType === 'VIDEO'
+                    ? '<i class="fa-solid fa-video ig-type-icon" aria-hidden="true"></i>'
+                    : post.mediaType === 'CAROUSEL_ALBUM'
+                      ? '<i class="fa-solid fa-images ig-type-icon" aria-hidden="true"></i>'
+                      : '';
+
+                  var a = document.createElement('a');
+                  a.className = 'ig-post';
+                  a.href = post.permalink;
+                  a.target = '_blank';
+                  a.rel = 'noopener';
+                  a.setAttribute('aria-label', caption || 'View on Instagram');
+                  a.innerHTML =
+                    '<div class="ig-post-img-wrap">' +
+                      '<img src="' + imgUrl + '" alt="" loading="lazy">' +
+                      '<div class="ig-post-overlay">' + typeIcon + '<p>' + caption + '</p></div>' +
+                    '</div>';
+                  grid.appendChild(a);
+                });
+              })
+              .catch(function () {
+                clearTimeout(timeout);
+                if (loading) loading.textContent = 'Follow us @real_coylehall on Instagram.';
               });
-            })
-            .catch(function () {
-              if (loading) loading.textContent = 'Could not load feed.';
-            });
+          }
+
+          if ('IntersectionObserver' in window) {
+            var observer = new IntersectionObserver(function (entries, obs) {
+              if (entries[0].isIntersecting) {
+                obs.disconnect();
+                loadFeed();
+              }
+            }, { rootMargin: '200px' });
+            observer.observe(grid);
+          } else {
+            loadFeed();
+          }
         })();
       </script>
 
@@ -976,6 +993,8 @@
       }
     </style>
 
+    <hr class="my-6 fade-in-section border-custom-gray" style="height: 1px; border: none; background: linear-gradient(to right, transparent, var(--color-lightmode-gray) 20%, var(--color-lightmode-gray) 80%, transparent);">
+
     <div class="ticker-outer">
       <div id="ticker-track" class="ticker-track">
         {{/* Set 1 */}}
@@ -984,36 +1003,36 @@
         <img src="/images/ticker/DSC03695.JPG"      class="ticker-img" style="--rot: -1.2deg" alt="">
         <img src="/images/ticker/DSC03867.JPG"      class="ticker-img" style="--rot:  3.0deg" alt="">
         <img src="/images/ticker/DSC07769.JPG"      class="ticker-img" style="--rot: -3.5deg" alt="">
-        <img src="/images/ticker/IMG_0434.jpeg"     class="ticker-img" style="--rot:  2.2deg" alt="">
-        <img src="/images/ticker/IMG_0757.jpeg"     class="ticker-img" style="--rot: -1.8deg" alt="">
-        <img src="/images/ticker/IMG_4680.jpeg"     class="ticker-img" style="--rot:  3.5deg" alt="">
-        <img src="/images/ticker/dahnke.png"        class="ticker-img" style="--rot: -2.8deg" alt="">
-        <img src="/images/ticker/formal.png"        class="ticker-img" style="--rot:  1.5deg" alt="">
-        <img src="/images/ticker/group.png"         class="ticker-img" style="--rot: -1.0deg" alt="">
-        <img src="/images/ticker/names.png"         class="ticker-img" style="--rot:  2.8deg" alt="">
-        <img src="/images/ticker/pineapple.png"     class="ticker-img" style="--rot: -1.5deg" alt="">
-        <img src="/images/ticker/quad1.jpg"         class="ticker-img" style="--rot:  3.2deg" alt="">
-        <img src="/images/ticker/regatta1.jpg"      class="ticker-img" style="--rot: -2.0deg" alt="">
-        <img src="/images/ticker/regatta5.jpg"      class="ticker-img" style="--rot:  1.2deg" alt="">
-        <img src="/images/ticker/stadiumFolks.png"  class="ticker-img" style="--rot: -3.8deg" alt="">
+        <img src="/images/ticker/IMG_0434.jpeg"     class="ticker-img" style="--rot:  2.2deg" alt="" loading="lazy">
+        <img src="/images/ticker/IMG_0757.jpeg"     class="ticker-img" style="--rot: -1.8deg" alt="" loading="lazy">
+        <img src="/images/ticker/IMG_4680.jpeg"     class="ticker-img" style="--rot:  3.5deg" alt="" loading="lazy">
+        <img src="/images/ticker/dahnke.png"        class="ticker-img" style="--rot: -2.8deg" alt="" loading="lazy">
+        <img src="/images/ticker/formal.png"        class="ticker-img" style="--rot:  1.5deg" alt="" loading="lazy">
+        <img src="/images/ticker/group.png"         class="ticker-img" style="--rot: -1.0deg" alt="" loading="lazy">
+        <img src="/images/ticker/names.png"         class="ticker-img" style="--rot:  2.8deg" alt="" loading="lazy">
+        <img src="/images/ticker/pineapple.png"     class="ticker-img" style="--rot: -1.5deg" alt="" loading="lazy">
+        <img src="/images/ticker/quad1.jpg"         class="ticker-img" style="--rot:  3.2deg" alt="" loading="lazy">
+        <img src="/images/ticker/regatta1.jpg"      class="ticker-img" style="--rot: -2.0deg" alt="" loading="lazy">
+        <img src="/images/ticker/regatta5.jpg"      class="ticker-img" style="--rot:  1.2deg" alt="" loading="lazy">
+        <img src="/images/ticker/stadiumFolks.png"  class="ticker-img" style="--rot: -3.8deg" alt="" loading="lazy">
         {{/* Set 2 — duplicate for seamless loop */}}
-        <img src="/images/ticker/COYLEgrass.png"    class="ticker-img" style="--rot: -2.5deg" alt="">
-        <img src="/images/ticker/DSC03204.JPG"      class="ticker-img" style="--rot:  1.8deg" alt="">
-        <img src="/images/ticker/DSC03695.JPG"      class="ticker-img" style="--rot: -1.2deg" alt="">
-        <img src="/images/ticker/DSC03867.JPG"      class="ticker-img" style="--rot:  3.0deg" alt="">
-        <img src="/images/ticker/DSC07769.JPG"      class="ticker-img" style="--rot: -3.5deg" alt="">
-        <img src="/images/ticker/IMG_0434.jpeg"     class="ticker-img" style="--rot:  2.2deg" alt="">
-        <img src="/images/ticker/IMG_0757.jpeg"     class="ticker-img" style="--rot: -1.8deg" alt="">
-        <img src="/images/ticker/IMG_4680.jpeg"     class="ticker-img" style="--rot:  3.5deg" alt="">
-        <img src="/images/ticker/dahnke.png"        class="ticker-img" style="--rot: -2.8deg" alt="">
-        <img src="/images/ticker/formal.png"        class="ticker-img" style="--rot:  1.5deg" alt="">
-        <img src="/images/ticker/group.png"         class="ticker-img" style="--rot: -1.0deg" alt="">
-        <img src="/images/ticker/names.png"         class="ticker-img" style="--rot:  2.8deg" alt="">
-        <img src="/images/ticker/pineapple.png"     class="ticker-img" style="--rot: -1.5deg" alt="">
-        <img src="/images/ticker/quad1.jpg"         class="ticker-img" style="--rot:  3.2deg" alt="">
-        <img src="/images/ticker/regatta1.jpg"      class="ticker-img" style="--rot: -2.0deg" alt="">
-        <img src="/images/ticker/regatta5.jpg"      class="ticker-img" style="--rot:  1.2deg" alt="">
-        <img src="/images/ticker/stadiumFolks.png"  class="ticker-img" style="--rot: -3.8deg" alt="">
+        <img src="/images/ticker/COYLEgrass.png"    class="ticker-img" style="--rot: -2.5deg" alt="" loading="lazy">
+        <img src="/images/ticker/DSC03204.JPG"      class="ticker-img" style="--rot:  1.8deg" alt="" loading="lazy">
+        <img src="/images/ticker/DSC03695.JPG"      class="ticker-img" style="--rot: -1.2deg" alt="" loading="lazy">
+        <img src="/images/ticker/DSC03867.JPG"      class="ticker-img" style="--rot:  3.0deg" alt="" loading="lazy">
+        <img src="/images/ticker/DSC07769.JPG"      class="ticker-img" style="--rot: -3.5deg" alt="" loading="lazy">
+        <img src="/images/ticker/IMG_0434.jpeg"     class="ticker-img" style="--rot:  2.2deg" alt="" loading="lazy">
+        <img src="/images/ticker/IMG_0757.jpeg"     class="ticker-img" style="--rot: -1.8deg" alt="" loading="lazy">
+        <img src="/images/ticker/IMG_4680.jpeg"     class="ticker-img" style="--rot:  3.5deg" alt="" loading="lazy">
+        <img src="/images/ticker/dahnke.png"        class="ticker-img" style="--rot: -2.8deg" alt="" loading="lazy">
+        <img src="/images/ticker/formal.png"        class="ticker-img" style="--rot:  1.5deg" alt="" loading="lazy">
+        <img src="/images/ticker/group.png"         class="ticker-img" style="--rot: -1.0deg" alt="" loading="lazy">
+        <img src="/images/ticker/names.png"         class="ticker-img" style="--rot:  2.8deg" alt="" loading="lazy">
+        <img src="/images/ticker/pineapple.png"     class="ticker-img" style="--rot: -1.5deg" alt="" loading="lazy">
+        <img src="/images/ticker/quad1.jpg"         class="ticker-img" style="--rot:  3.2deg" alt="" loading="lazy">
+        <img src="/images/ticker/regatta1.jpg"      class="ticker-img" style="--rot: -2.0deg" alt="" loading="lazy">
+        <img src="/images/ticker/regatta5.jpg"      class="ticker-img" style="--rot:  1.2deg" alt="" loading="lazy">
+        <img src="/images/ticker/stadiumFolks.png"  class="ticker-img" style="--rot: -3.8deg" alt="" loading="lazy">
       </div>
     </div>
 
@@ -1039,6 +1058,9 @@
         }
 
         function init() {
+          if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            return;
+          }
           halfWidth = track.scrollWidth / 2;
           tick();
         }
@@ -1050,6 +1072,113 @@
         }
       })();
     </script>
+
+    <!-- New Crew Section -->
+    <section class="new-crew-section fade-in-section" aria-label="Information for incoming students">
+      <style>
+        .new-crew-section {
+          width: 100vw;
+          position: relative;
+          left: 50%;
+          margin-left: -50vw;
+          background: var(--primary-color);
+          padding: 5rem 2rem 5.5rem;
+          margin-top: 4rem;
+        }
+        .new-crew-inner {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 3rem;
+          max-width: 960px;
+          margin: 0 auto;
+        }
+        .new-crew-text { flex: 1; min-width: 0; }
+        .new-crew-pill {
+          display: inline-block;
+          background: rgba(255,255,255,0.15);
+          color: rgba(255,255,255,0.85);
+          font-family: Rubik, sans-serif;
+          font-size: 0.78rem;
+          font-weight: 700;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          padding: 4px 14px;
+          border-radius: 100px;
+          margin-bottom: 1rem;
+        }
+        .new-crew-heading {
+          font-family: Rubik, sans-serif;
+          font-size: clamp(1.75rem, 4vw, 2.75rem);
+          font-weight: 800;
+          color: #ffffff;
+          margin: 0 0 1rem;
+          line-height: 1.1;
+          text-wrap: balance;
+        }
+        .new-crew-body {
+          font-family: Rubik, sans-serif;
+          font-size: 1.05rem;
+          line-height: 1.65;
+          color: rgba(255,255,255,0.82);
+          margin: 0 0 2rem;
+          max-width: 55ch;
+        }
+        .new-crew-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.6rem;
+          background: #ffffff;
+          color: #064121;
+          padding: 14px 28px;
+          border-radius: 16px;
+          font-family: Rubik, sans-serif;
+          font-weight: 800;
+          font-size: 1rem;
+          text-decoration: none;
+          transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+        .new-crew-btn:hover {
+          background: #0a843d;
+          color: #ffffff;
+          transform: scale(1.05);
+          box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        .new-crew-btn:focus-visible {
+          outline: 3px solid #48bb4e;
+          outline-offset: 3px;
+        }
+        .new-crew-hook {
+          flex-shrink: 0;
+          opacity: 0.12;
+          pointer-events: none;
+          user-select: none;
+        }
+        .new-crew-hook img { width: 220px; height: auto; }
+        @media (max-width: 768px) {
+          .new-crew-inner {
+            flex-direction: column;
+            text-align: center;
+          }
+          .new-crew-body { max-width: none; }
+          .new-crew-hook { display: none; }
+        }
+      </style>
+      <div class="new-crew-inner">
+        <div class="new-crew-text">
+          <span class="new-crew-pill">Incoming Students</span>
+          <h2 class="new-crew-heading">Ready to join the Crew?</h2>
+          <p class="new-crew-body">Move-in day is just the beginning. Find everything you need before you arrive — orientation events, hall traditions, and what life at Coyle actually looks like.</p>
+          <a href="/incoming-students" class="new-crew-btn">
+            New Crew Guide
+            <i class="fa fa-arrow-right" aria-hidden="true"></i>
+          </a>
+        </div>
+        <div class="new-crew-hook" aria-hidden="true">
+          <img src="/images/CoyleHookLogo.png" alt="" width="220" height="220" loading="lazy">
+        </div>
+      </div>
+    </section>
 
     </div>
 

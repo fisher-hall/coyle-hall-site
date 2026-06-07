@@ -1,0 +1,54 @@
+/* ═══════════════════════════════════════════════════════════════
+   COUNTDOWN — grid of time blocks
+   Usage:
+     <div class="CountdownGrid">
+       <div class="CountdownBlock">
+         <span class="CountdownBlock-number" id="days">00</span>
+         <span class="CountdownBlock-label">Days</span>
+       </div>
+       …
+     </div>
+═══════════════════════════════════════════════════════════════ */
+
+@layer components {
+
+  .CountdownGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    max-width: 36rem;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 540px) {
+    .CountdownGrid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .CountdownBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .CountdownBlock-number {
+    display: block;
+    font-family: 'Rubik', sans-serif;
+    font-size: clamp(2.25rem, 6vw, 3.75rem);
+    font-weight: 800;
+    line-height: 1;
+    color: var(--primary-color);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .CountdownBlock-label {
+    font-family: 'Rubik', sans-serif;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: inherit;
+    opacity: 0.6;
+  }
+
+}

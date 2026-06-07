@@ -1,0 +1,50 @@
+/* ═══════════════════════════════════════════════════════════════
+   IMAGE CAPTION — figure with styled caption
+   Usage:
+     <figure class="ImageCaption">
+       <img src="..." alt="...">
+       <figcaption>Caption text</figcaption>
+     </figure>
+═══════════════════════════════════════════════════════════════ */
+
+@layer components {
+
+  .ImageCaption {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.625rem;
+    margin: 0;
+  }
+
+  .ImageCaption img {
+    display: block;
+    width: 100%;
+    border-radius: 1rem;
+    object-fit: cover;
+    box-shadow:
+      0 8px  24px rgba(0, 0, 0, 0.12),
+      0 2px   8px rgba(0, 0, 0, 0.08);
+    transition:
+      transform   0.25s cubic-bezier(0.25, 1, 0.5, 1),
+      box-shadow  0.25s ease-out;
+  }
+
+  .ImageCaption img:hover {
+    transform: scale(1.02);
+    box-shadow:
+      0 12px 32px rgba(0, 0, 0, 0.15),
+      0 4px  12px rgba(0, 0, 0, 0.10);
+  }
+
+  .ImageCaption figcaption {
+    font-family: 'Rubik', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-align: center;
+    color: var(--secondary-color);
+    line-height: 1.4;
+    max-width: 55ch;
+  }
+
+}

@@ -18,6 +18,7 @@
 
 
 <!-- main script -->
+{{ $scripts = $scripts | append (resources.Get "js/page-animations.js") }}
 {{ $scripts = $scripts | append (resources.Get "js/main.js") }}
 {{ $scripts = $scripts | resources.Concat "js/script.js" }}
 
@@ -30,6 +31,7 @@
 
 {{/* scripts */}}
 <script
+  defer
   crossorigin="anonymous"
   integrity="{{ $scripts.Data.Integrity }}"
   src="{{ $scripts.RelPermalink }}"></script>

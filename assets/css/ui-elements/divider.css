@@ -1,0 +1,41 @@
+/* ═══════════════════════════════════════════════════════════════
+   DIVIDER — gradient horizontal rule
+   Usage:
+     <hr class="Divider">
+     <hr class="Divider Divider--thick">
+═══════════════════════════════════════════════════════════════ */
+
+@layer components {
+
+  .Divider {
+    display: block;
+    height: 1px;
+    width: 100%;
+    border: none;
+    margin: 2rem 0;
+    background: linear-gradient(
+      to right,
+      transparent,
+      var(--color-lightmode-gray, #444) 20%,
+      var(--color-lightmode-gray, #444) 80%,
+      transparent
+    );
+    opacity: 0.3;
+  }
+
+  :where(.dark) .Divider {
+    background: linear-gradient(
+      to right,
+      transparent,
+      var(--color-darkmode-gray, #B4AFB5) 20%,
+      var(--color-darkmode-gray, #B4AFB5) 80%,
+      transparent
+    );
+  }
+
+  .Divider--thick {
+    height: 2px;
+    opacity: 0.2;
+  }
+
+}
