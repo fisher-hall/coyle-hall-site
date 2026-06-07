@@ -1,27 +1,7 @@
 ---
 title: "History"
 ---
-<!-- Banner -->
-<div class="page-banner-wrapper">
-  <div id="banner-parallax" class="relative mb-8 overflow-hidden" style="background-image: url('/images/Banners/ZahmBanner.png');">
-    <div class="banner-tint-layer"></div>
-    <div class="home-banner-text-overlay">
-      <span class="home-banner-subheading">THE BUILDING</span>
-      <span class="home-banner-heading">COYLE HALL</span>
-    </div>
-  </div>
-</div>
-<div class="page-content-wave">
-  <canvas id="page-wave-canvas" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;"></canvas>
-</div>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    CoyleAnim.initWave('page-wave-canvas');
-    CoyleAnim.initParallax();
-    CoyleAnim.initFadeIn();
-  });
-</script>
+{{< banner image="/images/Banners/ZahmBanner.png" subheading="THE BUILDING" heading="COYLE HALL" >}}
 
 <h1 class="text-5xl text-center font-extrabold mb-6 fade-in-section" style="color: var(--primary-color);">
   Home Sweet <span style="color: var(--secondary-color);">(Temporary)</span> Home

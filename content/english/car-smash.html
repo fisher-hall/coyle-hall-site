@@ -114,26 +114,7 @@ body:has(.car-smash-bottom-graphic) .footer-wrapper .footer::before {
 }
 </style>
 
-<!-- Banner -->
-<div class="page-banner-wrapper">
-  <div id="banner-parallax" class="relative overflow-hidden" style="background-image: url('/images/BannerImages/CarSmashBanner.png');">
-    <div class="banner-tint-layer"></div>
-    <div class="home-banner-text-overlay" id="car-smash-banner-text">
-      <span class="home-banner-heading">Car Smash</span>
-    </div>
-  </div>
-</div>
-<div class="page-content-wave">
-  <canvas id="page-wave-canvas" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;"></canvas>
-</div>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    CoyleAnim.initWave('page-wave-canvas');
-    CoyleAnim.initParallax();
-    CoyleAnim.initFadeIn();
-  });
-</script>
+{{< banner image="/images/BannerImages/CarSmashBanner.png" heading="Car Smash" textid="car-smash-banner-text" >}}
 
 <!-- Countdown Section -->
 <div data-countdown data-target-date="2026-10-03T12:00:00">

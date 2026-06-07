@@ -121,4 +121,21 @@
     faders.forEach(function (el) { observer.observe(el); });
   };
 
+  /* Auto-initialise: every page gets fade-in; pages with the inner-page
+     banner wave canvas also get the wave + parallax. Replaces the per-page
+     inline init scripts. (The homepage keeps its own bespoke wave/parallax.) */
+  function autoInit() {
+    CoyleAnim.initFadeIn();
+    if (document.getElementById('page-wave-canvas')) {
+      CoyleAnim.initWave('page-wave-canvas');
+      CoyleAnim.initParallax();
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', autoInit);
+  } else {
+    autoInit();
+  }
+
 })();

@@ -1,26 +1,7 @@
 ---
 title: "Faith"
 ---
-<!-- Banner -->
-<div class="page-banner-wrapper">
-  <div id="banner-parallax" class="relative overflow-hidden" style="background-image: url('/images/BannerImages/ChapelBanner.jpeg');">
-    <div class="banner-tint-layer"></div>
-    <div class="home-banner-text-overlay">
-      <span class="home-banner-heading">FAITH LIFE</span>
-    </div>
-  </div>
-</div>
-<div class="page-content-wave">
-  <canvas id="page-wave-canvas" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;"></canvas>
-</div>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    CoyleAnim.initWave('page-wave-canvas');
-    CoyleAnim.initParallax();
-    CoyleAnim.initFadeIn();
-  });
-</script>
+{{< banner image="/images/BannerImages/ChapelBanner.jpeg" heading="FAITH LIFE" >}}
 
 <h1 class="text-7xl text-center font-extrabold mb-6 fade-in-section" style="color: var(--primary-color);">
   Fishers <span style="color: var(--secondary-color);">of Men</span>
