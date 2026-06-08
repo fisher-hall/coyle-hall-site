@@ -6,9 +6,25 @@
     {{- $first = false -}}
     
     {{- $title := .Title -}}
-    {{- $description := .Description | default .Summary -}}
-    {{- $content := .Plain -}}
-    
+
+    {{- /* Build a clean plain-text body. .Content on raw .html pages keeps
+           <style>/<script> blocks and unexpanded shortcodes, whose text survives
+           plainify, so strip those first, then plainify away remaining tags and
+           collapse whitespace. The index must never carry raw markup/CSS or the
+           search UI renders a full page preview instead of a snippet. */ -}}
+    {{- $raw := .Content -}}
+    {{- $raw = replaceRE `(?is)<style[^>]*>.*?</style>` " " $raw -}}
+    {{- $raw = replaceRE `(?is)<script[^>]*>.*?</script>` " " $raw -}}
+    {{- $raw = replaceRE `\{\{[<%][^}]*[>%]\}\}` " " $raw -}}
+    {{- $clean := $raw | plainify -}}
+    {{- $clean = replaceRE `\s+` " " $clean -}}
+    {{- $clean = trim $clean " " -}}
+
+    {{- /* Always derive the description from cleaned plain text. .Description can
+           contain raw HTML head matter (<meta>/<link>/<style>) on these pages. */ -}}
+    {{- $description := $clean -}}
+    {{- $content := $clean -}}
+
     {{- if or (eq .Section "hall-staff") (eq .Section "hall-gov") (eq .Section "hall-commissioners") -}}
       {{- $hometown := .Params.params.hometown | default "" -}}
       {{- $major := .Params.params.major | default .Params.params.studying | default "" -}}
@@ -26,8 +42,8 @@
       {{- if $hobbies -}}{{- $contentParts = $contentParts | append (printf "Hobbies: %s" $hobbies) -}}{{- end -}}
       {{- if $favoritepart -}}{{- $contentParts = $contentParts | append (printf "Favorite part: %s" $favoritepart) -}}{{- end -}}
       {{- if $section -}}{{- $contentParts = $contentParts | append (printf "Section: %s" $section) -}}{{- end -}}
-      {{- if .Plain -}}{{- $contentParts = $contentParts | append .Plain -}}{{- end -}}
-      
+      {{- if $clean -}}{{- $contentParts = $contentParts | append $clean -}}{{- end -}}
+
       {{- $content = delimit $contentParts ". " -}}
     {{- end -}}
     

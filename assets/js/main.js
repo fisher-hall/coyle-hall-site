@@ -265,21 +265,47 @@
       return;
     }
 
+    // Strip any HTML so result rows never render raw markup / a full page preview.
+    const stripHtml = (text) => {
+      if (!text) return '';
+      const tmp = document.createElement('div');
+      tmp.innerHTML = text;
+      return (tmp.textContent || tmp.innerText || '').replace(/\s+/g, ' ').trim();
+    };
+
+    // Escape text before injecting, then re-apply only our own <mark> highlight.
+    const escapeHtml = (text) =>
+      (text || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
     const highlightText = (text, query) => {
-      if (!text || !query) return text;
+      const safe = escapeHtml(stripHtml(text));
+      if (!safe || !query) return safe;
       const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
-      return text.replace(regex, '<mark class="bg-yellow-300 text-gray-900 px-1 rounded">$1</mark>');
+      return safe.replace(regex, '<mark class="bg-yellow-300 text-gray-900 px-1 rounded">$1</mark>');
+    };
+
+    // Build a short snippet (~150 chars) centred on the match.
+    const makeSnippet = (text, query, len = 150) => {
+      const clean = stripHtml(text);
+      if (!clean) return '';
+      const idx = clean.toLowerCase().indexOf(query.toLowerCase());
+      let start = 0;
+      if (idx > -1) start = Math.max(0, idx - Math.floor(len / 2));
+      let snippet = clean.substring(start, start + len);
+      if (start > 0) snippet = '…' + snippet;
+      if (start + len < clean.length) snippet = snippet + '…';
+      return snippet;
     };
 
     const html = results.slice(0, 10).map(page => {
       if (!page) return '';
       const title = highlightText(page.title, query);
-      const description = highlightText(page.description || '', query);
-      
+      const snippet = highlightText(makeSnippet(page.description || page.content || '', query), query);
+
       return `
         <a href="${page.url}" class="search-result-item">
           <div class="search-result-title">${title}</div>
-          ${description ? `<div class="search-result-description">${description}</div>` : ''}
+          ${snippet ? `<div class="search-result-description">${snippet}</div>` : ''}
         </a>
       `;
     }).join('');

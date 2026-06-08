@@ -79,7 +79,7 @@
   padding: 16px;
   border-radius: 16px;
   border: none !important;
-  background-color: #0a843d !important;
+  background-color: var(--coyle-light-green) !important;
   color: #fff !important;
   transition: 0s;
   margin-bottom: 4px;
@@ -120,7 +120,7 @@
 .search-result-item:focus,
 .search-result-item.search-item-selected,
 .search-result-item:hover {
-  background-color: #087032 !important;
+  background-color: var(--coyle-dark-green) !important;
   color: #fff !important;
   outline: none !important;
 }
@@ -134,7 +134,7 @@
 .search-result-item.search-item-selected mark,
 .search-result-item:hover mark {
   background-color: #fff !important;
-  color: #0a843d !important;
+  color: var(--coyle-light-green) !important;
 }
 
 .search-result-item [data-result-item] u {
