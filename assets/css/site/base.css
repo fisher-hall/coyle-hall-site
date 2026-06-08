@@ -42,24 +42,29 @@ footer {
 /* ═══════════════════════════════════
    TYPOGRAPHY
 ═══════════════════════════════════ */
-h1 {
-  font-family: 'Rubik', sans-serif;
-  font-weight: 800;
-}
 
-h2 {
-  font-family: 'Rubik', sans-serif;
-  font-weight: 700;
-}
+/* Inside @layer base so Tailwind utility classes (font-bold, font-extrabold, etc.)
+   in @layer utilities can still override these per-element defaults. */
+@layer base {
+  h1 {
+    font-family: 'Rubik', sans-serif;
+    font-weight: 800;
+  }
 
-h3, h4, h5, h6 {
-  font-family: 'Rubik', sans-serif;
-  font-weight: 600;
-}
+  h2 {
+    font-family: 'Rubik', sans-serif;
+    font-weight: 700;
+  }
 
-body, p {
-  font-family: 'Rubik', sans-serif;
-  font-weight: 500;
+  h3, h4, h5, h6 {
+    font-family: 'Rubik', sans-serif;
+    font-weight: 600;
+  }
+
+  body, p {
+    font-family: 'Rubik', sans-serif;
+    font-weight: 500;
+  }
 }
 
 /* Text selection highlighting */

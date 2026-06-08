@@ -31,9 +31,9 @@
   },
   "fonts": {
     "font_family": {
-      "primary": "Roboto Condensed:wght@400;600",
+      "primary": "Rubik:wght@300;400;500;600;700;800",
       "primary_type": "sans-serif",
-      "secondary": "Roboto:wght@500;700",
+      "secondary": "Rubik:wght@400;500;600;700;800",
       "secondary_type": "sans-serif"
     },
     "font_size": {
