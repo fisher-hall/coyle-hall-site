@@ -1,0 +1,51 @@
+{{- /* Reusable responsive image shortcode. Processes an asset image into a set
+       of WebP widths and emits an <img> with srcset + width/height (to avoid CLS).
+
+       Params:
+         src     (required) a /images/... path that must resolve under assets/
+         alt     (optional) alt text (default "")
+         class   (optional) class attribute
+         loading (optional) "lazy" (default) or "eager"
+         sizes   (optional) sizes attribute (default "100vw")
+         link    (optional) when "true", wrap the <img> in an <a> linking to the
+                 full processed image (opens in a new tab) — used for the
+                 ImageCaption lightbox behavior. */ -}}
+{{- $src := .Get "src" -}}
+{{- $alt := .Get "alt" | default "" -}}
+{{- $class := .Get "class" -}}
+{{- $loading := .Get "loading" | default "lazy" -}}
+{{- $sizes := .Get "sizes" | default "100vw" -}}
+{{- $style := .Get "style" -}}
+{{- $link := eq (.Get "link") "true" -}}
+{{- $assetPath := strings.TrimPrefix "/" $src -}}
+{{- with resources.Get $assetPath -}}
+  {{- $orig := . -}}
+  {{- $widths := slice 480 768 1200 -}}
+  {{- $renditions := slice -}}
+  {{- range $widths -}}
+    {{- if le . $orig.Width -}}
+      {{- $renditions = $renditions | append ($orig.Resize (printf "%dx webp q80" .)) -}}
+    {{- end -}}
+  {{- end -}}
+  {{- /* always include a full-width WebP rendition (capped at original width) */ -}}
+  {{- $full := $orig.Resize (printf "%dx webp q82" $orig.Width) -}}
+  {{- $renditions = $renditions | append $full -}}
+  {{- $srcset := slice -}}
+  {{- range $renditions -}}
+    {{- $srcset = $srcset | append (printf "%s %dw" .RelPermalink .Width) -}}
+  {{- end -}}
+  {{- if $link }}<a href="{{ $full.RelPermalink }}" target="_blank" rel="noopener">{{ end -}}
+  <img
+    src="{{ $full.RelPermalink }}"
+    srcset="{{ delimit $srcset ", " }}"
+    sizes="{{ $sizes }}"
+    width="{{ $full.Width }}"
+    height="{{ $full.Height }}"
+    alt="{{ $alt }}"
+    loading="{{ $loading }}"
+    decoding="async"{{ with $class }} class="{{ . }}"{{ end }}{{ with $style }} style="{{ . | safeCSS }}"{{ end }}>
+  {{- if $link }}</a>{{ end -}}
+{{- else -}}
+  {{- warnf "img shortcode: asset not found for src %q (looked for %q under assets/)" $src $assetPath -}}
+  <img src="{{ $src }}" alt="{{ $alt }}" loading="{{ $loading }}" decoding="async"{{ with $class }} class="{{ . }}"{{ end }}>
+{{- end -}}

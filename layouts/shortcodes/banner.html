@@ -6,8 +6,19 @@
          subheading (optional) small kicker above the heading
          textid     (optional) id on the text overlay, for per-page
                     banner-font overrides (e.g. car-smash, regatta) */ -}}
+{{- /* Resolve the banner image through Hugo's asset pipeline when possible.
+       The image param is a /images/... path. We strip the leading slash and try
+       resources.Get against assets/. If found, resize to a large WebP and use
+       the processed URL; otherwise fall back to the raw path (e.g. HomeBanner.png,
+       which is intentionally kept under static/). */ -}}
+{{- $raw := .Get "image" -}}
+{{- $src := $raw -}}
+{{- $assetPath := strings.TrimPrefix "/" $raw -}}
+{{- with resources.Get $assetPath -}}
+  {{- $src = (.Resize "1600x webp q82").RelPermalink -}}
+{{- end -}}
 <div class="page-banner-wrapper">
-  <div id="banner-parallax" style="background-image: url('{{ .Get "image" }}');">
+  <div id="banner-parallax" style="background-image: url('{{ $src }}');">
     <div class="banner-tint-layer"></div>
     <div class="home-banner-text-overlay"{{ with .Get "textid" }} id="{{ . }}"{{ end }}>
       {{- with .Get "subheading" }}
