@@ -1,0 +1,16 @@
+{{- /* Homepage photo ticker. Reads assets/images/ticker/*, resizes each to
+       a ~420px-tall WebP (displayed at 210px, so crisp on retina), and emits
+       the strip twice for the seamless CSS/JS loop. Replaces ~224MB of raw
+       full-res images with a few hundred KB of WebP. */ -}}
+{{- $rots := slice "-2.5deg" "1.8deg" "-1.2deg" "3.0deg" "-3.5deg" "2.2deg" "-1.8deg" "3.5deg" "-2.8deg" "1.5deg" "-1.0deg" "2.8deg" "-1.5deg" "3.2deg" "-2.0deg" "1.2deg" "-3.8deg" -}}
+{{- $imgs := sort (resources.Match "images/ticker/*") "Name" -}}
+<div class="ticker-outer">
+  <div id="ticker-track" class="ticker-track">
+    {{- range $set := (seq 2) -}}
+      {{- range $i, $img := $imgs -}}
+        {{- $t := $img.Resize "x420 webp q80" -}}
+        <img src="{{ $t.RelPermalink }}" width="{{ $t.Width }}" height="{{ $t.Height }}" class="ticker-img" style="--rot: {{ index $rots (mod $i (len $rots)) }}" alt=""{{ if not (and (eq $set 1) (eq $i 0)) }} loading="lazy"{{ end }}>
+      {{- end -}}
+    {{- end -}}
+  </div>
+</div>
