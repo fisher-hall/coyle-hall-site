@@ -9,14 +9,14 @@
         "dark": "#020202"
       },
       "text_color": {
-        "text": "#444444",
+        "text": "#333333",
         "text_dark": "#020202",
         "text_light": "#717171"
       }
     },
     "darkmode": {
       "theme_color": {
-        "primary": "#0a843d",
+        "primary": "#0A8A3F",
         "body": "#000000",
         "border": "#3E3E3E",
         "light": "#222222",

@@ -10,8 +10,8 @@
   --coyle-dark-fade:     rgb(6, 65, 33);
   --coyle-light-green:   #0a843d;
   --coyle-gradient-end:  #0B6832;   /* button / banner gradient stop */
-  --button-grad-dark:       #074d28;  /* gradient button dark stop  */
-  --button-grad-light:      #0d7a3c;  /* gradient button light stop */
+  --button-grad-dark-lm:       #074d28;  /* gradient button dark stop  */
+  --button-grad-light-lm:      #0d7a3c;  /* gradient button light stop */
   --button-grad-dark-dm:    #075c2a;  /* dark mode dark stop  */
   --button-grad-light-dm:   #11a84e;  /* dark mode light stop */
   --coyle-accent-green:  rgb(72, 187, 78);
@@ -34,6 +34,8 @@
   --secondary-color:  var(--coyle-light-green);
   --light-color:      var(--nd-light);
   --highlight-color:  var(--coyle-light-green);
+  --coyle-grad-light: var(--button-grad-light-lm);
+  --coyle-grad-dark: var(--button-grad-dark-lm);
   --background-color: #ffffff;
 
   /* ── Component interaction tokens ────────────────────────── */
@@ -54,4 +56,6 @@
   --coyle-navbar-tint:   rgba(6, 65, 33, 0.7);
   --background-color:    #000000;
   --button-text-white:   #000000;
+  --coyle-grad-light: var(--button-grad-light-dm);
+  --coyle-grad-dark: var(--button-grad-dark-dm);
 }

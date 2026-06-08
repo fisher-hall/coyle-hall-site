@@ -500,13 +500,13 @@ body > *:first-child {
   transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 .new-crew-btn:hover {
-  background: #0a843d;
+  background: var(coyle-light-green);
   color: #ffffff;
   transform: scale(1.05);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 .new-crew-btn:focus-visible {
-  outline: 3px solid #48bb4e;
+  outline: 3px solid var(--coyle-accent-green);
   outline-offset: 3px;
 }
 .new-crew-hook {

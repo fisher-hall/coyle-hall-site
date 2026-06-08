@@ -8,19 +8,19 @@
         "role": "primary",
         "displayName": "Deep Forest Green",
         "canonical": "#064121",
-        "tonalRamp": ["#010d07", "#021a0d", "#032814", "#043519", "#064121", "#0a5c2e", "#0a843d", "#12b357", "#48bb4e", "#a8e8b0"]
+        "tonalRamp": ["#010d07", "#021a0d", "#032814", "#043519", "#064121", "#0a5c2e", "#0A8A3F", "#12b357", "#53f55c", "#a8e8b0"]
       },
       "coyle-light-green": {
         "role": "primary-interactive",
         "displayName": "Coyle Green",
-        "canonical": "#0a843d",
-        "tonalRamp": ["#021a0d", "#043519", "#064121", "#085130", "#0a843d", "#0da84d", "#14c45d", "#4dd87d", "#90e9ac", "#d0f6de"]
+        "canonical": "#0A8A3F",
+        "tonalRamp": ["#021a0d", "#043519", "#064121", "#085130", "#0A8A3F", "#0da84d", "#14c45d", "#4dd87d", "#90e9ac", "#d0f6de"]
       },
       "coyle-accent": {
         "role": "primary-dark-mode",
         "displayName": "Bright Crew Green",
-        "canonical": "#48bb4e",
-        "tonalRamp": ["#0d2610", "#1a4d1c", "#257328", "#2e9034", "#48bb4e", "#6acc6f", "#8dd990", "#b2e9b4", "#d3f4d4", "#edfaee"]
+        "canonical": "#53f55c",
+        "tonalRamp": ["#0d2610", "#1a4d1c", "#257328", "#2e9034", "#53f55c", "#6acc6f", "#8dd990", "#b2e9b4", "#d3f4d4", "#edfaee"]
       },
       "nd-blue": {
         "role": "tertiary",
@@ -87,7 +87,7 @@
       "refersTo": "button-primary",
       "description": "Default CTA. Dark green at rest, Coyle Green on hover, slight scale lift. Warm and tactile.",
       "html": "<button class=\"ds-btn-primary\">Join the Crew</button>",
-      "css": ".ds-btn-primary { background: #064121; color: #ffffff; padding: 12px 24px; border-radius: 16px; border: none; font-family: Rubik, sans-serif; font-weight: 600; font-size: 1rem; cursor: pointer; box-shadow: none; transition: background 0.2s ease, transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out; } .ds-btn-primary:hover { background: #0a843d; transform: scale(1.05); box-shadow: 0 4px 8px rgba(0,0,0,0.1); } .ds-btn-primary:focus-visible { outline: 3px solid #48bb4e; outline-offset: 3px; }"
+      "css": ".ds-btn-primary { background: #064121; color: #ffffff; padding: 12px 24px; border-radius: 16px; border: none; font-family: Rubik, sans-serif; font-weight: 600; font-size: 1rem; cursor: pointer; box-shadow: none; transition: background 0.2s ease, transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out; } .ds-btn-primary:hover { background: #0A8A3F; transform: scale(1.05); box-shadow: 0 4px 8px rgba(0,0,0,0.1); } .ds-btn-primary:focus-visible { outline: 3px solid #53f55c; outline-offset: 3px; }"
     },
     {
       "name": "Ghost Button",
@@ -95,7 +95,7 @@
       "refersTo": "button-ghost",
       "description": "White background, dark green text. Used for the Incoming Students / New Crew CTA on dark navbar surfaces.",
       "html": "<button class=\"ds-btn-ghost\">New Crew</button>",
-      "css": ".ds-btn-ghost { background: #ffffff; color: #064121; padding: 12px 24px; border-radius: 16px; border: none; font-family: Rubik, sans-serif; font-weight: 800; font-size: 1rem; cursor: pointer; box-shadow: none; transition: background 0.2s ease, transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out; } .ds-btn-ghost:hover { background: #0a843d; color: #ffffff; transform: scale(1.05); box-shadow: 0 4px 8px rgba(0,0,0,0.1); } .ds-btn-ghost:focus-visible { outline: 3px solid #48bb4e; outline-offset: 3px; }"
+      "css": ".ds-btn-ghost { background: #ffffff; color: #064121; padding: 12px 24px; border-radius: 16px; border: none; font-family: Rubik, sans-serif; font-weight: 800; font-size: 1rem; cursor: pointer; box-shadow: none; transition: background 0.2s ease, transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out; } .ds-btn-ghost:hover { background: #0A8A3F; color: #ffffff; transform: scale(1.05); box-shadow: 0 4px 8px rgba(0,0,0,0.1); } .ds-btn-ghost:focus-visible { outline: 3px solid #53f55c; outline-offset: 3px; }"
     },
     {
       "name": "Nav Link",
@@ -103,7 +103,7 @@
       "refersTo": "nav-link",
       "description": "Floating navbar link. Transparent at rest, Coyle Green on hover/active, 16px pill radius.",
       "html": "<a class=\"ds-nav-link\" href=\"#\">Traditions</a>",
-      "css": ".ds-nav-link { display: inline-block; padding: 12px 16px; border-radius: 16px; color: rgba(255,255,255,0.9); font-family: Rubik, sans-serif; font-weight: 600; font-size: 1.1rem; text-decoration: none; background: transparent; transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease; } .ds-nav-link:hover { background: #0a843d; color: #ffffff; border-radius: 16px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transform: translateY(-1px); } .ds-nav-link.ds-nav-link--active { background: #0a843d; color: #ffffff; border-radius: 12px; } .ds-nav-link:focus-visible { outline: 3px solid #48bb4e; outline-offset: 2px; }"
+      "css": ".ds-nav-link { display: inline-block; padding: 12px 16px; border-radius: 16px; color: rgba(255,255,255,0.9); font-family: Rubik, sans-serif; font-weight: 600; font-size: 1.1rem; text-decoration: none; background: transparent; transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease; } .ds-nav-link:hover { background: #0A8A3F; color: #ffffff; border-radius: 16px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transform: translateY(-1px); } .ds-nav-link.ds-nav-link--active { background: #0A8A3F; color: #ffffff; border-radius: 12px; } .ds-nav-link:focus-visible { outline: 3px solid #53f55c; outline-offset: 2px; }"
     },
     {
       "name": "Search Input",
@@ -143,7 +143,7 @@
     ],
     "dos": [
       "Do use #064121 (Deep Forest Green) as the primary identity surface for navbars, overlays, and dropdown menus.",
-      "Do use #0a843d (Coyle Green) for hover states, active links, CTA buttons, and interactive indicators.",
+      "Do use #0A8A3F (Coyle Green) for hover states, active links, CTA buttons, and interactive indicators.",
       "Do keep Alfa Slab One exclusively for banner/hero headings over full-width imagery with the green tint layer.",
       "Do honor prefers-reduced-motion on all animations — content must be visible without the transition firing.",
       "Do verify #444 body text on white background passes WCAG AA (4.5:1) before switching to any lighter gray.",

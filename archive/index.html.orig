@@ -399,7 +399,7 @@
           if (target.canvas.id === 'wave-canvas') {
             const gradient = target.ctx.createLinearGradient(0, 0, target.canvas.width, 0);
             gradient.addColorStop(0, getCSSColor('--coyle-dark-green') || '#064121');
-            gradient.addColorStop(1, getCSSColor('--coyle-light-green') || '#0a843d');
+            gradient.addColorStop(1, getCSSColor('--coyle-light-green') || '#0A8A3F');
             return gradient;
           }
 
@@ -1139,13 +1139,13 @@
           transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
         }
         .new-crew-btn:hover {
-          background: #0a843d;
+          background: var(--coyle-light-green);
           color: #ffffff;
           transform: scale(1.05);
           box-shadow: 0 4px 8px rgba(0,0,0,0.15);
         }
         .new-crew-btn:focus-visible {
-          outline: 3px solid #48bb4e;
+          outline: 3px solid #53f55c;
           outline-offset: 3px;
         }
         .new-crew-hook {

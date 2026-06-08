@@ -3,8 +3,8 @@ name: Coyle Hall
 description: Official website for Coyle Hall at the University of Notre Dame — brotherhood, tradition, and community, built in green.
 colors:
   coyle-dark-green: "#064121"
-  coyle-light-green: "#0a843d"
-  coyle-accent: "#48bb4e"
+  coyle-light-green: "#0A8A3F"
+  coyle-accent: "#53f55c"
   nd-blue: "#0c2340"
   nd-gold: "#ae9142"
   surface-white: "#ffffff"
@@ -116,10 +116,10 @@ Green is not an accent here. It *is* the system. The palette reads as deeply sat
 
 ### Primary
 - **Deep Forest Green** (`#064121`): The primary surface color. Used on the navbar (when scrolled), mobile menu full-screen overlay, dropdown menus, and as the darkest green in the homepage banner gradient. The floor of the palette.
-- **Coyle Green** (`#0a843d`): The interactive and accent green. Hover states on nav links, active page indicators, homepage banner gradient endpoint, search result highlight marks. The voice of the system.
+- **Coyle Green** (`#0A8A3F`): The interactive and accent green. Hover states on nav links, active page indicators, homepage banner gradient endpoint, search result highlight marks. The voice of the system.
 
 ### Secondary
-- **Bright Crew Green** (`#48bb4e`): Used in dark mode as the primary and secondary interaction color. Brighter and warmer than Coyle Green; provides the same visual role at lower overall luminance.
+- **Bright Crew Green** (`#53f55c`): Used in dark mode as the primary and secondary interaction color. Brighter and warmer than Coyle Green; provides the same visual role at lower overall luminance.
 
 ### Tertiary
 - **Notre Dame Blue** (`#0c2340`): Present in brand identity (logo area, ND institutional references) but not used as a UI surface color. Reserved for co-branding contexts.
@@ -179,7 +179,7 @@ This is a flat-by-default system. Surfaces sit at rest without shadow. Depth app
 Warm and tactile — pressing a button should feel like engaging something physical, not tapping glass.
 - **Shape:** Rounded pill (16px radius)
 - **Primary (dark green):** Background `#064121`, text white, padding 12px 24px. Scale hover: `transform: scale(1.05)` + `box-shadow: 0 4px 8px rgba(0,0,0,0.1)`. Transition: `0.15s ease-in-out`.
-- **Primary (light green):** Background `#0a843d`, text white. Used as CTA on dark surfaces (mobile nav "Incoming Students" resolved state).
+- **Primary (light green):** Background `#0A8A3F`, text white. Used as CTA on dark surfaces (mobile nav "Incoming Students" resolved state).
 - **Ghost / Outline:** White background, dark green text. Used for the "Incoming Students" nav CTA on light surfaces. Border-radius 16px, no explicit border.
 
 ### Navigation
@@ -187,9 +187,9 @@ The floating navbar is the system's signature. It starts transparent over banner
 - **Default (over banner):** Background transparent, backdrop-filter none. All link text white.
 - **Scrolled state:** Background `rgba(6, 65, 33, 0.7)` with `backdrop-filter: blur(16px)`. Box-shadow `0 6px 24px rgba(0,0,0,0.2)`.
 - **Nav link default:** Transparent bg, white text, Rubik 600, 1.1rem, padding 12px 16px.
-- **Nav link hover:** Background `#0a843d`, white text, border-radius 16px, `translateY(-1px)`. Transition 0.2s ease.
-- **Nav link active:** Background `#0a843d`, white text, border-radius 12px.
-- **Dropdown:** Background `#064121`, border-radius 16px, `0 8px 25px rgba(0,0,0,0.3)`. Items hover to `#0a843d` with 16px radius.
+- **Nav link hover:** Background `#0A8A3F`, white text, border-radius 16px, `translateY(-1px)`. Transition 0.2s ease.
+- **Nav link active:** Background `#0A8A3F`, white text, border-radius 12px.
+- **Dropdown:** Background `#064121`, border-radius 16px, `0 8px 25px rgba(0,0,0,0.3)`. Items hover to `#0A8A3F` with 16px radius.
 - **Mobile menu:** Full-screen overlay, background `#064121`. Nav links at 1.9rem Rubik 700, centered, staggered translateY entrance animation. Hamburger morphs to X on open.
 
 ### Cards / Image Containers
@@ -218,7 +218,7 @@ The page-establishing layer that gives every page its visual identity.
 
 ### Do:
 - **Do** use `#064121` (Deep Forest Green) as the primary identity surface for navbars, overlays, and dropdown menus.
-- **Do** use `#0a843d` (Coyle Green) for hover states, active links, CTA buttons, and interactive indicators.
+- **Do** use `#0A8A3F` (Coyle Green) for hover states, active links, CTA buttons, and interactive indicators.
 - **Do** keep Alfa Slab One exclusively for banner/hero headings over full-width imagery with the green tint layer. Rubik owns everything below.
 - **Do** honor `prefers-reduced-motion` on all animations — especially `.fade-in-section`, parallax, and mobile nav stagger. Content must be visible without the transition firing.
 - **Do** verify `#444` body text on white (`#ffffff`) background passes WCAG AA (4.5:1) before switching to any lighter gray.

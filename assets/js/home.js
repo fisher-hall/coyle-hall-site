@@ -66,7 +66,7 @@
       if (target.canvas.id === 'wave-canvas') {
         var gradient = target.ctx.createLinearGradient(0, 0, target.canvas.width, 0);
         gradient.addColorStop(0, getCSSColor('--coyle-dark-green') || '#064121');
-        gradient.addColorStop(1, getCSSColor('--coyle-light-green') || '#0a843d');
+        gradient.addColorStop(1, getCSSColor('--coyle-light-green') || '#0A8A3F');
         return gradient;
       }
       return '#ffffff';

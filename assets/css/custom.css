@@ -26,3 +26,6 @@
 @import "site/search.css";
 @import "site/footer.css";
 @import "site/interactions.css";
+
+/* Ensure gradient icon rules load last so they can override site chrome styles */
+@import "ui-elements/gradient-icon.css";

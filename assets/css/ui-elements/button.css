@@ -76,7 +76,7 @@
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
   }
   Button.default:hover,
-  Button.default:focus-visible { filter: brightness(1.12); }
+  Button.default:focus-visible { filter: brightness(1.2); }
 
 
   /* ─── light ────────────────────────────────────────────── */
@@ -86,12 +86,12 @@
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
   }
   Button.light:hover,
-  Button.light:focus-visible { filter: brightness(1.12); }
+  Button.light:focus-visible { filter: brightness(1.2); }
 
 
   /* ─── gradient ─────────────────────────────────────────────── */
   Button.gradient {
-    background: linear-gradient(var(--Button-angle), var(--button-grad-dark), var(--button-grad-light));
+    background: linear-gradient(var(--Button-angle), var(--button-grad-dark-lm), var(--button-grad-light-lm));
     color: var(--button-text-white);
     box-shadow: 0 2px 8px rgba(6, 65, 33, 0.22);
     overflow: hidden;
@@ -137,7 +137,7 @@
   :where(.dark) Button.ghost { color: var(--coyle-light-green); }
   Button.ghost:hover,
   Button.ghost:focus-visible {
-    box-shadow: inset 0 0 0 2px var(--primary-color);
+    box-shadow: inset 0 0 0 2.5px var(--primary-color);
   }
 
 
@@ -145,11 +145,24 @@
   Button.outline-green {
     background: transparent;
     color: var(--primary-color);
-    box-shadow: inset 0 0 0 2px var(--primary-color), 0 1px 4px rgba(0, 0, 0, 0.08);
+    box-shadow: inset 0 0 0 2.5px var(--primary-color), 0 1px 4px rgba(0, 0, 0, 0.08);
   }
   Button.outline-green:hover,
   Button.outline-green:focus-visible {
     background: var(--primary-color);
+    color: var(--button-text-white);
+  }
+
+
+  /* ─── outline-light ─────────────────────────────────────────── */
+  Button.outline-light {
+    background: transparent;
+    color: var(--contrast-green);
+    box-shadow: inset 0 0 0 2.5px var(--contrast-green), 0 1px 4px rgba(0, 0, 0, 0.08);
+  }
+  Button.outline-light:hover,
+  Button.outline-light:focus-visible {
+    background: var(--contrast-green);
     color: var(--button-text-white);
   }
 
@@ -159,9 +172,9 @@
     --Button-ink: #1e1e1e;
     background: transparent;
     color: var(--Button-ink);
-    box-shadow: inset 0 0 0 2px var(--Button-ink), 0 1px 4px rgba(0, 0, 0, 0.08);
+    box-shadow: inset 0 0 0 2.5px var(--Button-ink), 0 1px 4px rgba(0, 0, 0, 0.08);
   }
-  :where(.dark) Button.outline-white { --Button-ink: rgba(255, 255, 255, 0.88); }
+  :where(.dark) Button.outline-white { --Button-ink: rgba(255, 255, 255, 1); }
   Button.outline-white:hover,
   Button.outline-white:focus-visible {
     background: var(--Button-ink);
@@ -176,9 +189,9 @@
   Button.outline-grad {
     background: transparent;
     border: none;
-    color: var(--primary-color);
+    color: var(--contrast-green); /* text color */
     overflow: hidden;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 1px 2.5px rgba(0, 0, 0, 0.08);
   }
   Button.outline-grad::before {
     content: '';
@@ -186,7 +199,7 @@
     inset: 0;
     border-radius: inherit;
     padding: 2px;
-    background: linear-gradient(var(--Button-angle), var(--button-grad-dark), var(--button-grad-light));
+    background: linear-gradient(var(--Button-angle), var(--button-grad-dark-lm), var(--button-grad-light-lm));
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -199,7 +212,7 @@
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    background: linear-gradient(var(--Button-angle), var(--button-grad-dark), var(--button-grad-light));
+    background: linear-gradient(var(--Button-angle), var(--button-grad-dark-lm), var(--button-grad-light-lm));
     opacity: 0;
     transition: opacity 0.3s ease;
     z-index: -1;
@@ -220,7 +233,7 @@
   }
   Button.nd:hover,
   Button.nd:focus-visible {
-    filter: brightness(1.15);
+    filter: brightness(1.2);
     color: var(--nd-gold);
   }
   Button.nd:focus-visible { outline-color: var(--nd-gold); }

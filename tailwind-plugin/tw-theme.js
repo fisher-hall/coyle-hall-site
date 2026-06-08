@@ -47,8 +47,44 @@ const getVars = (groups) => {
   return vars;
 };
 
-const defaultVars = getVars(defaultColorGroups);
-const darkVars = getVars(darkColorGroups);
+// Prefer canonical CSS variables from assets/css/colors.css when available.
+const colorsPath = path.join(__dirname, "../assets/css/colors.css");
+let cssContent = "";
+try {
+  cssContent = fs.readFileSync(colorsPath, "utf8");
+} catch (e) {
+  cssContent = "";
+}
+const cssVarRegex = /--([a-z0-9\-\_]+)\s*:\s*([^;]+);/gi;
+const cssVars = {};
+let _m;
+while ((_m = cssVarRegex.exec(cssContent)) !== null) {
+  cssVars[_m[1]] = _m[2].trim();
+}
+const cssVarOr = (name, fallback) => (cssVars[name] ? `var(--${name})` : fallback);
+
+// Build theme color variables using the user's mapping and prefer colors.css tokens.
+const defaultVars = {
+  '--color-primary': cssVarOr('coyle-dark-green', themeConfig.colors.default.theme_color.primary),
+  '--color-body': themeConfig.colors.default.theme_color.body || '#fff',
+  '--color-border': themeConfig.colors.default.theme_color.border || '#eaeaea',
+  '--color-light': themeConfig.colors.default.theme_color.light || '#ffffff',
+  '--color-dark': themeConfig.colors.default.theme_color.dark || '#020202',
+  '--color-text': cssVarOr('color-lightmode-gray', themeConfig.colors.default.text_color.text),
+  '--color-text-dark': themeConfig.colors.default.text_color.text_dark || '#020202',
+  '--color-text-light': themeConfig.colors.default.text_color.text_light || '#717171',
+};
+
+const darkVars = {
+  '--color-darkmode-primary': cssVarOr('coyle-light-green', themeConfig.colors.darkmode?.theme_color?.primary || '#0A8A3F'),
+  '--color-darkmode-body': themeConfig.colors.darkmode?.theme_color?.body || '#000000',
+  '--color-darkmode-border': themeConfig.colors.darkmode?.theme_color?.border || '#3E3E3E',
+  '--color-darkmode-light': themeConfig.colors.darkmode?.theme_color?.light || '#222222',
+  '--color-darkmode-dark': themeConfig.colors.darkmode?.theme_color?.dark || '#ffffff',
+  '--color-darkmode-text': cssVarOr('color-darkmode-gray', themeConfig.colors.darkmode?.text_color?.text || '#B4AFB6'),
+  '--color-darkmode-text-dark': themeConfig.colors.darkmode?.text_color?.text_dark || '#ffffff',
+  '--color-darkmode-text-light': themeConfig.colors.darkmode?.text_color?.text_light || '#B4AFB6',
+};
 
 const baseSize = Number(themeConfig.fonts.font_size.base);
 const scale = Number(themeConfig.fonts.font_size.scale);
