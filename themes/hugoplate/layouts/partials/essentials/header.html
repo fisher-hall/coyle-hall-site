@@ -12,7 +12,6 @@
       <input id="nav-toggle" type="checkbox" class="hidden" />
       <label
         for="nav-toggle"
-        role="button"
         tabindex="0"
         aria-label="Toggle navigation menu"
         aria-controls="nav-menu"
@@ -55,9 +54,9 @@
                 class="nav-link rounded-xl transition inline-flex px-4 items-center align-middle {{ if $hasActiveChild }}active{{ end }}">
                 {{ .Name | safeHTML}}
                 <!-- Mobile right arrow -->
-                <i class="fa-solid fa-angle-right mobile-arrow"></i>
+                <i class="fa-solid fa-angle-right mobile-arrow" aria-hidden="true"></i>
                 <!-- Desktop down arrow -->
-                <i class="fa-solid fa-angle-down ml-2 desktop-arrow"></i>
+                <i class="fa-solid fa-angle-down ml-2 desktop-arrow" aria-hidden="true"></i>
               </span>
               <ul
                 id="{{ $submenuID }}"

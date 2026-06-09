@@ -26,7 +26,7 @@
 
   /* ── Neutrals ─────────────────────────────────────────────── */
   --color-custom-light:   #cccccc;
-  --search-highlight:     #22c55e;   /* <mark> search-result highlight */
+  --search-highlight:     #076e34;   /* <mark> search-result highlight (AA: white text ≈5.3:1) */
   --color-darkmode-gray:  #B4AFB5;
   --color-lightmode-gray: #444444;
 

@@ -44,6 +44,9 @@
 
     function start() {
       if (slides.length < 2) return;
+      // Respect reduced-motion (OS preference or the accessibility panel):
+      // never auto-advance; manual prev/next/dots still work.
+      if (document.documentElement.getAttribute("data-motion") === "reduced") return;
       stop();
       autoplayId = window.setInterval(function () {
         render(currentIndex + 1);
