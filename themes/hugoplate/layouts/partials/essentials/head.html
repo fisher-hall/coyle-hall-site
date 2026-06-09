@@ -25,7 +25,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Graduate&display=swap" rel="stylesheet">
 
 {{ if .IsHome }}
-<link rel="preload" as="image" href="/images/BannerImages/HomeBanner.png" fetchpriority="high">
+  {{ with resources.Get "images/BannerImages/HomeBanner.png" }}
+    {{ $hb := .Resize "1920x webp q80" }}
+    <link rel="preload" as="image" href="{{ $hb.RelPermalink }}" fetchpriority="high">
+  {{ end }}
 {{ end }}
 
 <style>

@@ -15,6 +15,8 @@
   const closeAllSubmenus = () => {
     document.querySelectorAll(".nav-dropdown").forEach((dropdown) => {
       dropdown.classList.remove("mobile-submenu-active");
+      const toggle = dropdown.querySelector(":scope > .nav-link");
+      if (toggle) toggle.setAttribute("aria-expanded", "false");
     });
     navMenu?.classList.remove("submenu-open");
   };
@@ -33,6 +35,7 @@
   // --- Simplified Reliable Mobile Submenu Logic ---
   const handleNavToggleChange = (checked) => {
     const root = document.documentElement;
+    if (navLabel) navLabel.setAttribute('aria-expanded', checked ? 'true' : 'false');
     if (checked) {
       document.body.style.overflow = 'hidden';
       root.style.overflow = 'hidden';
@@ -83,22 +86,37 @@
     // Accessibility semantics for mobile
     link.setAttribute('role', 'button');
     link.style.cursor = 'pointer';
-      link.addEventListener('click', (e) => {
-        if (!isMobile()) return; // desktop handled elsewhere
+      const openSubmenu = (link) => {
         if (!navToggle?.checked) return; // menu closed
-        e.preventDefault();
-        e.stopPropagation();
         const parent = link.closest('.nav-dropdown');
         const was = parent.classList.contains('mobile-submenu-active');
         closeAllSubmenus();
         if (!was) {
           parent.classList.add('mobile-submenu-active');
+          link.setAttribute('aria-expanded', 'true');
           navMenu?.classList.add('submenu-open');
       // rotate arrow if present
       const svg = link.querySelector('svg');
       if (svg) svg.style.transform = 'rotate(-90deg)';
         } else {
           navMenu?.classList.remove('submenu-open');
+        }
+      };
+      link.addEventListener('click', (e) => {
+        if (!isMobile()) return; // desktop handled elsewhere
+        if (!navToggle?.checked) return; // menu closed
+        e.preventDefault();
+        e.stopPropagation();
+        openSubmenu(link);
+      });
+      // Keyboard activation on mobile (Enter/Space)
+      link.addEventListener('keydown', (e) => {
+        if (!isMobile()) return;
+        if (!navToggle?.checked) return;
+        if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+          e.preventDefault();
+          e.stopPropagation();
+          openSubmenu(link);
         }
       });
       link.dataset.mobileBound = '1';
@@ -120,6 +138,20 @@
   const initializeMobileMenu = () => {
     navToggle = document.querySelector('#nav-toggle'); // refresh reference in case of re-render
     navToggle?.addEventListener('change', (e) => handleNavToggleChange(e.target.checked));
+
+    // Keyboard activation for the hamburger label (the underlying checkbox is
+    // display:none, so the label needs explicit Enter/Space handling).
+    if (navLabel && navToggle) {
+      navLabel.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+          e.preventDefault();
+          // If search is open, the existing click handler closes it + opens menu.
+          navToggle.checked = !navToggle.checked;
+          handleNavToggleChange(navToggle.checked);
+        }
+      });
+    }
+
     bindMobileTopLevel();
 
     // Outside click (only when open)
@@ -147,14 +179,27 @@
   const desktopSetup = () => {
     const dropdownMenuToggler = document.querySelectorAll('.nav-dropdown > .nav-link');
     const dropdownItems = document.querySelectorAll('.nav-dropdown');
-    const closeAllDropdowns = () => dropdownItems.forEach(i => i.classList.remove('active'));
-    
+    // Keep aria-expanded in sync with the open/closed (.active) state
+    const setExpanded = (dropdown, expanded) => {
+      const toggle = dropdown.querySelector(':scope > .nav-link');
+      if (toggle) toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+    };
+    const closeAllDropdowns = () => dropdownItems.forEach(i => {
+      i.classList.remove('active');
+      setExpanded(i, false);
+    });
+    const openDropdown = (dropdown) => {
+      closeAllDropdowns();
+      dropdown.classList.add('active');
+      setExpanded(dropdown, true);
+    };
+
     dropdownMenuToggler.forEach(toggler => {
       // Remove any existing desktop listener first
       if (toggler.dataset.desktopBound === '1') return;
-      
+
       const dropdown = toggler.closest('.nav-dropdown');
-      
+
       // Click handler for desktop
       const desktopClickHandler = (e) => {
         if (isMobile()) return; // ignore on mobile
@@ -163,27 +208,77 @@
         const current = e.currentTarget.closest('.nav-dropdown');
         const was = current.classList.contains('active');
         closeAllDropdowns();
-        if (!was) current.classList.add('active');
+        if (!was) openDropdown(current);
       };
-      
+
+      // Keyboard: Enter/Space toggles, ArrowDown opens, Escape closes
+      const desktopKeydownHandler = (e) => {
+        if (isMobile()) return; // ignore on mobile
+        if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+          e.preventDefault();
+          e.stopPropagation();
+          const was = dropdown.classList.contains('active');
+          closeAllDropdowns();
+          if (!was) openDropdown(dropdown);
+        } else if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          openDropdown(dropdown);
+          const firstLink = dropdown.querySelector('.nav-dropdown-list a');
+          if (firstLink) firstLink.focus();
+        } else if (e.key === 'Escape') {
+          dropdown.classList.remove('active');
+          setExpanded(dropdown, false);
+          toggler.focus();
+        }
+      };
+
+      // Open on keyboard focus reaching the toggle (helps :focus-within too)
+      const focusHandler = () => {
+        if (isMobile()) return;
+        openDropdown(dropdown);
+      };
+
       // Hover handlers for desktop
       const mouseEnterHandler = () => {
         if (isMobile()) return; // ignore on mobile
-        closeAllDropdowns();
-        dropdown.classList.add('active');
+        openDropdown(dropdown);
       };
-      
+
       const mouseLeaveHandler = () => {
         if (isMobile()) return; // ignore on mobile
         dropdown.classList.remove('active');
+        setExpanded(dropdown, false);
       };
-      
+
       toggler.addEventListener('click', desktopClickHandler);
+      toggler.addEventListener('keydown', desktopKeydownHandler);
+      toggler.addEventListener('focus', focusHandler);
       dropdown.addEventListener('mouseenter', mouseEnterHandler);
       dropdown.addEventListener('mouseleave', mouseLeaveHandler);
+
+      // Close when focus leaves the whole dropdown (toggle + submenu)
+      dropdown.addEventListener('focusout', (e) => {
+        if (isMobile()) return;
+        if (!dropdown.contains(e.relatedTarget)) {
+          dropdown.classList.remove('active');
+          setExpanded(dropdown, false);
+        }
+      });
+
+      // Escape from inside the submenu closes and returns focus to the toggle
+      dropdown.addEventListener('keydown', (e) => {
+        if (isMobile()) return;
+        if (e.key === 'Escape' && dropdown.classList.contains('active')) {
+          e.stopPropagation();
+          dropdown.classList.remove('active');
+          setExpanded(dropdown, false);
+          toggler.focus();
+        }
+      });
+
       toggler.dataset.desktopBound = '1';
     });
-    
+
     document.addEventListener('click', (e) => {
       if (isMobile()) return;
       if (!e.target.closest('.nav-dropdown')) closeAllDropdowns();
@@ -229,14 +324,17 @@
   const createSearchBar = () => {
     const container = document.createElement('div');
     container.className = 'inline-search-container';
+    container.setAttribute('role', 'search');
     container.innerHTML = `
       <i class="fa-solid fa-search search-icon-inside"></i>
-      <input 
-        type="text" 
+      <input
+        type="text"
         id="inline-search-input"
-        class="inline-search-input" 
+        class="inline-search-input"
         placeholder="Search..."
         autocomplete="off"
+        aria-label="Search"
+        aria-controls="inline-search-results"
       />
     `;
     
@@ -255,6 +353,8 @@
     const resultsDiv = document.createElement('div');
     resultsDiv.id = 'inline-search-results';
     resultsDiv.className = 'inline-search-results';
+    resultsDiv.setAttribute('role', 'region');
+    resultsDiv.setAttribute('aria-label', 'Search results');
     return resultsDiv;
   };
 

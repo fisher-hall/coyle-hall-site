@@ -9,6 +9,7 @@
   --coyle-dark-green:    #064121;
   --coyle-dark-fade:     rgb(6, 65, 33);
   --coyle-light-green:   #0a843d;
+  --coyle-green-text:    #076e34;   /* a11y: green text that clears WCAG AA (≥4.5:1) on white and light-gray cards */
   --coyle-gradient-end:  #0B6832;   /* button / banner gradient stop */
   --button-grad-dark-lm:       #074d28;  /* gradient button dark stop  */
   --button-grad-light-lm:      #0d7a3c;  /* gradient button light stop */
@@ -32,6 +33,9 @@
   /* ── Semantic aliases (override in .dark below) ───────────── */
   --primary-color:    var(--coyle-dark-green);
   --secondary-color:  var(--coyle-light-green);
+  /* Text-specific green: darker than --secondary-color so green copy on white /
+     light surfaces meets WCAG AA. Dark mode overrides below. */
+  --secondary-text-color: var(--coyle-green-text);
   --light-color:      var(--nd-light);
   --highlight-color:  var(--coyle-light-green);
   --coyle-grad-light: var(--button-grad-light-lm);
@@ -51,6 +55,9 @@
 .dark {
   --primary-color:       var(--coyle-light-green);
   --secondary-color:     var(--coyle-accent-green);
+  /* Dark mode: green text sits on dark surfaces, so the brighter accent green is
+     correct and high-contrast (~8.5:1 on black). */
+  --secondary-text-color: var(--coyle-accent-green);
   --light-color:         var(--coyle-light-green);
   --highlight-color:     var(--coyle-light-green);
   --coyle-navbar-tint:   rgba(6, 65, 33, 0.7);

@@ -9,6 +9,7 @@ banner:
     link: "https://fisher.nd.edu"
 ---
 <!-- Banner -->
+{{< home-banner-bg >}}
 <div id="home-banner-wrapper">
       <div id="banner-parallax" class="relative overflow-hidden">
         <!-- Tint Layer -->
@@ -17,7 +18,7 @@ banner:
         <!-- Text Overlay -->
         <div class="home-banner-text-overlay" id="home-banner-text">
           <span class="home-banner-subheading">WELCOME TO</span>
-          <span class="home-banner-heading">COYLE HALL</span>
+          <h1 class="home-banner-heading">COYLE HALL</h1>
         </div>
       </div>
     </div>
@@ -30,23 +31,20 @@ banner:
         <canvas id="wave-canvas" class="wave-canvas" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;"></canvas>
       </div>
 
-      <section class="home-top-banner fade-in-section" aria-label="Homepage announcement">
+      <section class="home-top-banner overflow-visible fade-in-section" aria-label="Homepage announcement">
         <div class="home-top-banner__inner">
-          <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; width: 100%; max-width: 920px; margin: 0 auto;">
-            <p
-              class="home-top-banner__eyebrow fade-in-section"
-              style="font-family: 'Rubik', sans-serif; font-weight: 700; letter-spacing: 0.2em; font-size: clamp(1.5rem, 2.2vw, 2rem); text-transform: uppercase; margin: 0;">
+          <div class="flex flex-col items-center justify-center text-center w-full max-w-[920px] mx-auto">
+            <p class="fade-in-section font-bold tracking-[0.2em] text-[clamp(1.5rem,2.2vw,2rem)] uppercase m-0">
               2025-2026
             </p>
-            <div style="height: 1rem;"></div>
+            <div class="h-4"></div>
             <h2
-              class="home-top-banner__title fade-in-section"
-              style="font-family: 'Alfa Slab One', serif; font-weight: 400; font-size: clamp(2.5rem, 6vw, 4.5rem); text-transform: uppercase; letter-spacing: 0.08em; line-height: 0.95; color: #fff; margin: 0;">
+              class="fade-in-section font-['Alfa_Slab_One',serif] font-normal text-[clamp(2.5rem,6vw,4.5rem)] uppercase tracking-[0.08em] leading-[0.95] text-white m-0">
               Hall of the Year
             </h2>
-            <div style="height: 1rem;"></div>
-            <div class="home-top-banner__body fade-in-section" style="margin-top: 0.5rem;">
-              <p class="fade-in-section" style="margin-top: 0.9rem; margin-bottom: 0;">
+            <div class="h-4"></div>
+            <div class="home-top-banner__body fade-in-section mt-2">
+              <p class="fade-in-section mt-[0.9rem] mb-0">
                 From unmatched traditions like The Regatta and Car Smash, to brand new events like Coyleween, Coyle Crushes, and the Coyle Ice Chapel Mass that drew national attention, this past year was momentous. 
                 This award marks the beginning of a new chapter for our dorm, and we couldn't have done it without the hard work of our residents, leadership team, and the support of the entire ND community. Thank you!
               </p>
@@ -63,13 +61,13 @@ banner:
       </section>
 
 
-    <h1 class="text-7xl text-center font-extrabold mb-6 px-4 fade-in-section" style="color: var(--primary-color); margin-top: 0rem;">
+    <h2 class="text-7xl text-center font-extrabold mb-6 px-4 fade-in-section mt-0 text-[var(--primary-color)]">
       Fishers of Men
-    </h1>
+    </h2>
 
     <!-- Animated hand-drawn wave line graphic -->
-    <div class="flex justify-center my-1 fade-in-section" style="position: relative; z-index: 2; margin-bottom: 1rem; margin-top: -1.5rem;">
-      <svg id="drawn-line" width="420" height="40" viewBox="0 0 440 25" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block; overflow: visible;">
+    <div class="flex justify-center my-1 fade-in-section relative z-[2] mb-4 -mt-6">
+      <svg id="drawn-line" width="420" height="40" viewBox="0 0 440 25" fill="none" xmlns="http://www.w3.org/2000/svg" class="block overflow-visible w-[420px] max-w-full h-auto max-[768px]:w-[min(320px,82vw)]">
         <path
           d="M10 18 Q 40 2, 70 18 Q 100 34, 130 18 Q 160 2, 190 18 Q 220 34, 250 18 Q 280 2, 310 18 Q 340 34, 370 18 Q 400 2, 430 18"
           class="stroke-black dark:stroke-white"
@@ -80,39 +78,38 @@ banner:
       </svg>
     </div>
 
-    <p class="text-2xl text-center font-extrabold mb-6 fade-in-section" style="color: var(--secondary-color);">
+    <p class="text-2xl text-center font-extrabold mb-6 fade-in-section text-[var(--secondary-color)]">
       1952 • 2025
     </p>
 
-    <div class="flex items-center justify-start my-1 fade-in-section pl-16" style="position: relative; z-index: 3; margin-bottom: 1rem; margin-top: 5rem;">
-      <h2 class="text-2xl md:text-4xl text-left font-extrabold mb-6 fade-in-section flex items-center text-black dark:text-white"
-          style="position: relative; z-index: 4; margin-top: 0;">
-        <span style="position: relative; display: inline-block;">
-          <i class="text-7xl fa fa-quote-left" style="color: var(--light-color); position: absolute; left: -2rem; top: 50%; transform: translateY(-50%); z-index: 1;"></i>
-          <i class="text-7xl fa fa-quote-right" style="color: var(--light-color); position: absolute; right: -2rem; top: 50%; transform: translateY(-50%); z-index: 1;"></i>
-          <span style="position: relative; z-index: 2;">
+    <div class="flex items-center justify-start my-1 fade-in-section pl-16 relative z-[3] mb-4 mt-20">
+      <h2 class="text-2xl md:text-4xl text-left font-extrabold mb-6 fade-in-section flex items-center text-black dark:text-white relative z-[4] mt-0">
+        <span class="relative inline-block">
+          <i class="text-7xl fa fa-quote-left text-[var(--light-color)] absolute left-[-2rem] top-1/2 -translate-y-1/2 z-[1]"></i>
+          <i class="text-7xl fa fa-quote-right text-[var(--light-color)] absolute right-[-2rem] top-1/2 -translate-y-1/2 z-[1]"></i>
+          <span class="relative z-[2]">
             All Are Welcome in This Place
           </span>
         </span>
       </h2>
     </div>
     <div class="w-full flex flex-col justify-center fade-in-section px-4 pl-16 text-left">
-      <i class="fa fa-anchor absolute top-5/6 right-1 text-9xl fade-in-section"
-        style="transform: translateY(30%) translateX(2%) scale(1.85) rotate(30deg); color: var(--light-color); z-index: 2;"
+      <i class="fa fa-anchor absolute top-5/6 right-1 text-9xl fade-in-section text-[var(--light-color)] z-[2]"
+        style="transform: translateY(30%) translateX(2%) scale(1.85) rotate(30deg);"
         aria-hidden="true">
       </i>
     </div>
     <!-- Text -->
-    <div class="w-5/6 flex flex-col justify-center fade-in-section px-4 pl-16 text-left;">
-      <p class="mb-4 text-lg" style="position: relative; z-index: 2;">
+    <div class="w-5/6 flex flex-col justify-center fade-in-section px-4 pl-16 text-left">
+      <p class="mb-4 text-lg relative z-[2]">
         Crew. Fishermen. Green Wave. Brothers. Coyle Hall has been known by many names over the years, but its legacy as one of the most iconic dorms at Notre Dame remains steadfast.
       </p>
-      <p class="mb-4 text-lg" style="position: relative; z-index: 2;">
+      <p class="mb-4 text-lg relative z-[2]">
         Home to generations of proud residents, this brotherhood has long been one of the most tight-knit, spirited, and iconic on campus.
         From legendary events and unmatched camaraderie, to unforgettable haircuts and unwavering support, Coyle Hall isn't just a place for students to reside — it's a community of friendships, traditions, and countless memories that last a lifetime.
         Students come from every major, from every corner of the world and from every background, united by their shared identity as the Crew, and the bonds forged here are unlike any other.
       </p>
-      <p class="mb-2 text-lg" style="position: relative; z-index: 2;">
+      <p class="mb-2 text-lg relative z-[2]">
         The mantra of "All are welcome" has carried through since the community's inception in 1952 as Fisher Hall, and it is even more true now, in the newest (and nicest) dorm on campus.
         The Cadillac, as the dorm is affectionately known, is a place for students to work, relax, study, grow, pray, but above all live at Notre Dame, and we couldn't be more happy to welcome you to our home!
       </p>
@@ -198,13 +195,13 @@ banner:
           </div>
 
           <a href="https://www.mcglinnhallnd.com/" target="_blank" rel="noopener" aria-label="Link to McGlinn Hall website">
-            <div class="absolute right-[23.5%] top-[15%] grid w-[min(320px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-[24px] bg-[var(--primary-color)] px-4 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3" aria-hidden="true">
-              <i class="fa fa-venus ml-1.5 flex h-11 w-11 items-center justify-start text-[1.3rem] text-white/95 max-[540px]:h-[38px] max-[540px]:w-[38px] max-[540px]:text-[1.15rem]"></i>
+            <div class="absolute right-[23.5%] top-[15%] grid w-[min(320px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-[24px] bg-[var(--primary-color)] px-4 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
+              <i class="fa fa-venus ml-1.5 flex h-11 w-11 items-center justify-start text-[1.3rem] text-white/95 max-[540px]:h-[38px] max-[540px]:w-[38px] max-[540px]:text-[1.15rem]" aria-hidden="true"></i>
               <div class="min-w-0">
                 <p class="mb-1 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-white/72">Sister Dorm</p>
                 <h3 class="mb-1.5 text-[1.05rem] font-bold leading-[1.1] text-white max-[540px]:text-[0.98rem]">McGlinn Hall</h3>
                 <div class="flex items-center gap-2 text-[0.9rem]">
-                  <i class="fa fa-arrow-up-right-from-square text-white/82 flex-none self-center leading-none"></i>
+                  <i class="fa fa-arrow-up-right-from-square text-white/82 flex-none self-center leading-none" aria-hidden="true"></i>
                   <p class="m-0 leading-[0.5] text-white/82 max-[540px]:text-[0.84rem]">Home of the Shamrocks</p>
                 </div>
               </div>
@@ -212,8 +209,8 @@ banner:
           </a>
 
           <a href="https://www.mcglinnhallnd.com/" target="_blank" rel="noopener" aria-label="Link to McGlinn Hall website">
-            <div class="absolute bottom-[16%] right-[12%] grid w-[min(320px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-[24px] bg-[var(--primary-color)] px-4 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3" aria-hidden="true">
-              <i class="fa fa-arrow-up-right-from-square ml-1.5 flex h-11 w-11 items-center justify-start text-[1.3rem] text-white/95 max-[540px]:h-[38px] max-[540px]:w-[38px] max-[540px]:text-[1.15rem]"></i>
+            <div class="absolute bottom-[16%] right-[12%] grid w-[min(320px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-[24px] bg-[var(--primary-color)] px-4 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
+              <i class="fa fa-arrow-up-right-from-square ml-1.5 flex h-11 w-11 items-center justify-start text-[1.3rem] text-white/95 max-[540px]:h-[38px] max-[540px]:w-[38px] max-[540px]:text-[1.15rem]" aria-hidden="true"></i>
               <div class="min-w-0">
                 <p class="mb-1 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-white/72">Learn More</p>
                 <h3 class="mb-1.5 text-[1.05rem] font-bold leading-[1.1] text-white max-[540px]:text-[0.98rem]">ND ResLife Info</h3>
@@ -227,8 +224,8 @@ banner:
       <hr class="Divider my-6 fade-in-section opacity-100">
 
           <!-- Instagram Feed -->
-      <section class="fade-in-section" style="margin: 4rem auto 3rem; max-width: 1320px; padding: 0 1.5rem;">
-        <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 2rem;">
+      <section class="fade-in-section mt-16 mb-12 max-w-[1320px] mx-auto px-6">
+        <div class="flex flex-col items-center mb-8">
           <a href="https://www.instagram.com/real_coylehall/" target="_blank" rel="noopener"
             style="display: inline-flex; align-items: center; gap: 0.6rem; color: var(--primary-color); font-family: 'Rubik', sans-serif; font-weight: 700; font-size: clamp(2rem, 5vw, 3.5rem); text-transform: none; letter-spacing: normal; text-decoration: none;">
             @real_coylehall
@@ -238,15 +235,15 @@ banner:
 
       <!-- Instagram feed via Behold.so JSON — feed ID: 9XCk73VEQkyAaVvvrrBh; manage at behold.so (Daniel Burke, dburke6) -->
 
-      <div id="ig-feed-grid">
-        <div id="ig-feed-loading">Loading posts…</div>
+      <div id="ig-feed-grid" class="grid grid-cols-6 gap-7 max-[900px]:grid-cols-3 max-[900px]:gap-5 max-[540px]:grid-cols-2 max-[540px]:gap-4">
+        <div id="ig-feed-loading" class="col-span-full flex items-center justify-center min-h-[220px] opacity-50 text-[0.95rem]">Loading posts…</div>
       </div>
 
 
     </section>
 
     <!-- Photo Ticker -->
-    <!-- Add images to /static/images/ticker/ to populate this strip -->
+    <!-- Add images to /assets/images/ticker/ to populate this strip -->
 
     <hr class="Divider my-6 fade-in-section opacity-100">
 
@@ -254,19 +251,23 @@ banner:
 
 
     <!-- New Crew Section -->
-    <section class="new-crew-section fade-in-section" aria-label="Information for incoming students">
-      <div class="new-crew-inner">
-        <div class="new-crew-text">
-          <span class="new-crew-pill">Incoming Students</span>
-          <h2 class="new-crew-heading">Ready to join the Crew?</h2>
-          <p class="new-crew-body">Move-in day is just the beginning. Find everything you need before you arrive — orientation events, hall traditions, and what life at Coyle actually looks like.</p>
-          <a href="/incoming-students" class="new-crew-btn">
-            New Crew Guide
-            <i class="fa fa-arrow-right" aria-hidden="true"></i>
+    <section
+      class="w-screen relative left-1/2 ml-[-50vw] bg-[var(--primary-color)] pt-20 px-8 pb-[5.5rem] mt-16 fade-in-section"
+      aria-label="Information for incoming students">
+      <div class="flex items-center justify-between gap-12 max-w-[960px] mx-auto max-[768px]:flex-col max-[768px]:text-center">
+        <div class="flex-1 min-w-0">
+          <span class="inline-block bg-white/15 text-white/85 text-[0.78rem] font-bold tracking-[0.1em] uppercase py-1 px-[14px] rounded-full mb-4">Incoming Students</span>
+          <h2 class="text-[clamp(1.75rem,4vw,2.75rem)] font-extrabold text-white mt-0 mb-4 leading-[1.1] [text-wrap:balance]">Ready to join the Crew?</h2>
+          <p class="text-[1.05rem] leading-[1.65] text-white/82 mt-0 mb-8 max-w-[55ch] max-[768px]:max-w-none">Move-in day is just the beginning. Find everything you need before you arrive — orientation events, hall traditions, and what life at Coyle actually looks like.</p>
+          <a href="/incoming-students">
+            <Button class="white">
+              New Crew Guide
+              <i class="fa fa-arrow-right" aria-hidden="true"></i>
+            </Button>
           </a>
         </div>
-        <div class="new-crew-hook" aria-hidden="true">
-          <img src="/images/CoyleHookLogo.png" alt="" width="220" height="220" loading="lazy">
+        <div class="shrink-0 opacity-[0.12] pointer-events-none select-none max-[768px]:hidden" aria-hidden="true">
+          <img src="/images/CoyleHookLogo.png" alt="" width="220" height="220" loading="lazy" class="w-[220px] h-auto">
         </div>
       </div>
     </section>

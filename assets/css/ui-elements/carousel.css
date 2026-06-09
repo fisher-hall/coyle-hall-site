@@ -104,6 +104,15 @@
 
   .Carousel-dot:hover { transform: scale(1.08); }
 
+  .Carousel-dot:focus-visible {
+    outline: 3px solid var(--coyle-dark-green);
+    outline-offset: 3px;
+  }
+
+  :where(.dark) .Carousel-dot:focus-visible {
+    outline-color: var(--coyle-accent-green);
+  }
+
   .Carousel-dot.active,
   .Carousel-dot[aria-current="true"] {
     background: var(--primary-color);

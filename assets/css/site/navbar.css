@@ -331,8 +331,9 @@ body:has(.page-banner-wrapper) .section-sm {
   #nav-menu .nav-dropdown .nav-link .fa-angle-right { display: none !important; }
   .mobile-back-button { display: none !important; }
 
-  /* Desktop dropdown visibility */
-  .nav-dropdown.active > .nav-dropdown-list {
+  /* Desktop dropdown visibility — also show when keyboard focus is inside */
+  .nav-dropdown.active > .nav-dropdown-list,
+  .nav-dropdown:focus-within > .nav-dropdown-list {
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
@@ -815,6 +816,31 @@ body:has(.page-banner-wrapper) .section-sm {
   #nav-toggle:checked + label.hamburger-btn .hb-line:nth-child(1) { top: 23px; transform: rotate(45deg); }
   #nav-toggle:checked + label.hamburger-btn .hb-line:nth-child(2) { opacity: 0; }
   #nav-toggle:checked + label.hamburger-btn .hb-line:nth-child(3) { top: 23px; transform: rotate(-45deg); }
+}
+
+/* ═══════════════════════════════════
+   FOCUS VISIBILITY (keyboard)
+   Theme-aware ring: light/white ring on the dark-green navbar surface.
+   Replaces the implicit removal of focus styling on nav chrome.
+═══════════════════════════════════ */
+.header .navbar .nav-link:focus-visible,
+.floating-navbar .nav-link:focus-visible,
+.nav-dropdown-list .nav-dropdown-item a:focus-visible,
+.nav-dropdown-link:focus-visible,
+.header .navbar [aria-label="search"]:focus-visible,
+.header .navbar .theme-switcher label:focus-visible,
+.header .navbar .theme-switcher input:focus-visible + label,
+label[for="nav-toggle"].hamburger-btn:focus-visible,
+#nav-toggle:focus-visible + label[for="nav-toggle"].hamburger-btn {
+  outline: 3px solid #ffffff !important;
+  outline-offset: 2px !important;
+  border-radius: 12px !important;
+}
+
+/* Dropdown items sit on dark green — accent-green reads clearly there */
+.nav-dropdown-list .nav-dropdown-item a:focus-visible,
+.nav-dropdown-link:focus-visible {
+  outline-color: var(--coyle-accent-green) !important;
 }
 
 /* Extra safeguard: touch-only devices */

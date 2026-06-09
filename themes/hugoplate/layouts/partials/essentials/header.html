@@ -12,6 +12,11 @@
       <input id="nav-toggle" type="checkbox" class="hidden" />
       <label
         for="nav-toggle"
+        role="button"
+        tabindex="0"
+        aria-label="Toggle navigation menu"
+        aria-controls="nav-menu"
+        aria-expanded="false"
         class="order-3 cursor-pointer flex items-center block lg:hidden text-text-dark dark:text-white lg:order-1 hamburger-btn"
       >
         <span class="hb-line"></span>
@@ -39,8 +44,14 @@
               {{ end }}
             {{ end }}
 
+            {{ $submenuID := printf "nav-submenu-%s" (.Name | urlize) }}
             <li class="nav-item nav-dropdown group relative">
               <span
+                role="button"
+                tabindex="0"
+                aria-haspopup="true"
+                aria-expanded="false"
+                aria-controls="{{ $submenuID }}"
                 class="nav-link rounded-xl transition inline-flex px-4 items-center align-middle {{ if $hasActiveChild }}active{{ end }}">
                 {{ .Name | safeHTML}}
                 <!-- Mobile right arrow -->
@@ -49,6 +60,7 @@
                 <i class="fa-solid fa-angle-down ml-2 desktop-arrow"></i>
               </span>
               <ul
+                id="{{ $submenuID }}"
                 class="nav-dropdown-list lg:group-hover:visible lg:group-hover:opacity-100">
                 {{ range .Children }}
                   {{ $childURL := .URL | absLangURL }}
@@ -85,10 +97,10 @@
         {{ end }}
         {{ if site.Params.navigation_button.enable }}
           <li class="mt-4 inline-block lg:hidden">
-            <a
-              class="btn btn-outline-primary btn-sm"
-              href="{{ site.Params.navigation_button.link | relLangURL }}">
-              {{ site.Params.navigation_button.label }}
+            <a href="{{ site.Params.navigation_button.link | relLangURL }}">
+              <Button class="outline-green sm">
+                {{ site.Params.navigation_button.label }}
+              </Button>
             </a>
           </li>
         {{ end }}

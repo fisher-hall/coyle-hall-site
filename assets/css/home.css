@@ -126,7 +126,8 @@ body {
 #banner-parallax {
   position: relative;
   overflow: hidden;
-  background-image: url('/images/BannerImages/HomeBanner.png');
+  /* background-image is set by the {{< home-banner-bg >}} shortcode to a
+     pipeline-processed WebP (see content/english/_index.html). */
   background-position: center calc(50% + var(--home-parallax-bg-y, 0px));
   background-repeat: no-repeat;
   background-size: cover;

@@ -8,6 +8,12 @@
 
   window.CoyleAnim = window.CoyleAnim || {};
 
+  /* Respect the user's reduced-motion preference. */
+  function prefersReducedMotion() {
+    return window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }
+
   /**
    * initWave(canvasId)
    * Animates a canvas with a smooth sine-wave fill using --background-color.
@@ -60,13 +66,25 @@
       ctx.fill();
     }
 
-    function animate() {
+    function renderFrame() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       var base = 10, vert = 6 * Math.sin(time * 0.02), rec = 2 * Math.sin(time * 0.015);
       drawWave([base + rec, (base + rec) * 0.15], [0.6, 0.9], [0.8, 0.6], 1, canvas.height * 0.38 + vert);
+    }
+
+    function animate() {
+      renderFrame();
       time += 0.8;
       animId = requestAnimationFrame(animate);
     }
+
+    /* Reduced motion: draw one static frame, no rAF loop. */
+    if (prefersReducedMotion()) {
+      renderFrame();
+      window.addEventListener('resize', function () { resize(); renderFrame(); });
+      return;
+    }
+
     animate();
 
     window.addEventListener('beforeunload', function () { cancelAnimationFrame(animId); });
@@ -82,6 +100,9 @@
     var multiplier = opts.multiplier !== undefined ? opts.multiplier : -0.12;
     var frame = null;
     var root = document.documentElement;
+
+    /* Reduced motion: leave the layer static — never bind scroll parallax. */
+    if (prefersReducedMotion()) return;
 
     function update() {
       var scrollY = window.scrollY || window.pageYOffset || 0;

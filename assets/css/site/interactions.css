@@ -1,4 +1,37 @@
 /* ═══════════════════════════════════
+   SKIP LINK (keyboard accessibility)
+   Off-screen until focused, then visible top-left above the navbar.
+═══════════════════════════════════ */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  z-index: 10002;
+  padding: 0;
+  background: var(--coyle-dark-green);
+  color: #ffffff;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 0 0 12px 0;
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  left: 8px;
+  top: 8px;
+  width: auto;
+  height: auto;
+  padding: 12px 20px;
+  outline: 3px solid #ffffff;
+  outline-offset: 2px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* ═══════════════════════════════════
    BUTTONS & INTERACTIONS
 ═══════════════════════════════════ */
 .btn, .social-icons a {

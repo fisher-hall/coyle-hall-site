@@ -57,6 +57,12 @@
   outline: none;
 }
 
+/* Visible keyboard focus ring (the input sits on the dark navbar tint) */
+.inline-search-input:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 2px;
+}
+
 /* Hide old search modal */
 .search-modal-overlay,
 #search-modal,

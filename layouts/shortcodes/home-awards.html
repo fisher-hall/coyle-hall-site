@@ -2,7 +2,7 @@
        Both SVGs live in assets/, hence resources.Get. Homepage only. */ -}}
 {{- $coyleCrest := resources.Get "images/CoyleCrestMainOutline.svg" -}}
 {{- $hpcLogo := resources.Get "images/HPCLogo.svg" -}}
-<div class="award-logos-row" style="align-items: center; justify-content: center; gap: 1.5rem; margin-top: 2rem; margin-bottom: 4rem;">
+<div class="flex items-center justify-center gap-6 mt-8 mb-16">
   <img
     src="{{ $coyleCrest.RelPermalink }}"
     alt="Coyle Hall crest"

@@ -22,9 +22,9 @@
     <div class="banner-tint-layer"></div>
     <div class="home-banner-text-overlay"{{ with .Get "textid" }} id="{{ . }}"{{ end }}>
       {{- with .Get "subheading" }}
-      <span class="home-banner-subheading">{{ . }}</span>
+      <span class="home-banner-subheading text-white leading-tight">{{ . }}</span>
       {{- end }}
-      <span class="home-banner-heading">{{ .Get "heading" }}</span>
+      <h1 class="home-banner-heading text-white">{{ .Get "heading" }}</h1>
     </div>
   </div>
 </div>
