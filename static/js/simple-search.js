@@ -1,62 +1,31 @@
-// Simple search functionali  // Load search data
-  fetch('/searchindex.json')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Dynamic search index not found');
-      }
-      return response.json();
-    })
-    .then(data => {
-      searchData = data;
-      console.log('Dynamic search index loaded:', searchData.length, 'items');
-    })
-    .catch(error => {
-      console.error('Error loading dynamic search index:', error);
-      // Fallback to static search index if dynamic one fails
-      fetch('/static-searchindex.json')
-        .then(response => response.json())
-        .then(data => {
-          searchData = data;
-          console.log('Fallback static search index loaded:', searchData.length, 'items');
-        })
-        .catch(fallbackError => {
-          console.error('Error loading fallback search index:', fallbackError);
-        });
-    });
-
-console.log('Simple search script loaded');
+// Simple in-site search. Loads the Hugo-generated search index (relative,
+// same-origin URL) and filters it client-side. No external requests.
 
 document.addEventListener('DOMContentLoaded', function() {
-  console.log('DOM loaded - setting up search');
-  
   // Find search elements
-  const searchButton = document.querySelector('[data-target="search-modal"]') || 
+  const searchButton = document.querySelector('[data-target="search-modal"]') ||
                       document.querySelector('[aria-label="search"]');
   const searchModal = document.getElementById('search-modal');
   const searchInput = document.getElementById('search-input');
   const searchResults = document.getElementById('search-results');
   const closeButton = document.getElementById('close-search');
-  
-  console.log('Search elements:', {
-    button: !!searchButton,
-    modal: !!searchModal,
-    input: !!searchInput,
-    results: !!searchResults
-  });
-  
+
   if (!searchButton || !searchModal) {
-    console.error('Missing search elements');
     return;
   }
-  
+
   let searchData = [];
-  
-  // Load search data
+
+  // Load the search index; fall back to the static snapshot if the
+  // dynamically generated one is unavailable.
   fetch('/searchindex.json')
-    .then(response => response.json())
+    .then(response => {
+      if (!response.ok) throw new Error('search index ' + response.status);
+      return response.json();
+    })
+    .catch(() => fetch('/static-searchindex.json').then(r => r.json()))
     .then(data => {
       searchData = data;
-      console.log('Search data loaded:', searchData.length, 'items');
     })
     .catch(error => {
       console.error('Failed to load search data:', error);
