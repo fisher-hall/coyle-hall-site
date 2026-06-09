@@ -14,6 +14,37 @@
 <!-- theme meta -->
 <meta name="theme-name" content="hugoplate" />
 
+<!-- Accessibility preferences store: applied synchronously so persisted
+     choices (theme/contrast/motion/text/reading) take effect before paint.
+     "System" options defer to the matching OS media query. -->
+<script>
+  (function () {
+    var KEYS = { theme: "theme", contrast: "a11y-contrast", text: "a11y-text", motion: "a11y-motion", line: "a11y-line", letter: "a11y-letter", font: "a11y-font" };
+    var DEF = { theme: "system", contrast: "system", text: "normal", motion: "system", line: "off", letter: "off", font: "off" };
+    function get(p) { try { var v = localStorage.getItem(KEYS[p]); return v === null ? DEF[p] : v; } catch (e) { return DEF[p]; } }
+    function mm(q) { return window.matchMedia && window.matchMedia(q).matches; }
+    function apply() {
+      var d = document.documentElement;
+      var theme = get("theme");
+      d.classList.toggle("dark", theme === "dark" || (theme === "system" && mm("(prefers-color-scheme: dark)")));
+      var contrast = get("contrast");
+      d.classList.toggle("a11y-contrast-high", contrast === "high" || (contrast === "system" && mm("(prefers-contrast: more)")));
+      var motion = get("motion");
+      d.setAttribute("data-motion", (motion === "reduced" || (motion === "system" && mm("(prefers-reduced-motion: reduce)"))) ? "reduced" : "normal");
+      d.setAttribute("data-text-size", get("text"));
+      d.setAttribute("data-line-spacing", get("line"));
+      d.setAttribute("data-letter-spacing", get("letter"));
+      d.setAttribute("data-dyslexia-font", get("font"));
+    }
+    window.__a11y = {
+      get: get, apply: apply,
+      set: function (p, v) { try { localStorage.setItem(KEYS[p], v); } catch (e) {} apply(); document.dispatchEvent(new CustomEvent("a11y:change", { detail: { pref: p, value: v } })); },
+      reset: function () { try { Object.keys(KEYS).forEach(function (p) { localStorage.removeItem(KEYS[p]); }); } catch (e) {} apply(); document.dispatchEvent(new CustomEvent("a11y:change", { detail: { pref: "*" } })); }
+    };
+    apply();
+  })();
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 

@@ -18,6 +18,7 @@
 
 
 <!-- main script -->
+{{ $scripts = $scripts | append (resources.Get "js/a11y-prefs.js") }}
 {{ $scripts = $scripts | append (resources.Get "js/page-animations.js") }}
 {{ $scripts = $scripts | append (resources.Get "js/countdown.js") }}
 {{ $scripts = $scripts | append (resources.Get "js/carousel.js") }}

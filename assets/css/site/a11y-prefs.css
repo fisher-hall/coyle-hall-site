@@ -1,0 +1,262 @@
+/* ═══════════════════════════════════════════════════════════════
+   ACCESSIBILITY PREFERENCES
+   Rendering hooks for the preferences panel. The panel persists raw
+   choices in localStorage; an early inline script (head.html) resolves
+   them to effective state on <html> before paint:
+     .dark                       theme
+     .a11y-contrast-high         contrast (high, or system + prefers-contrast)
+     [data-motion="reduced"]     motion   (reduced, or system + prefers-reduced-motion)
+     [data-text-size]            normal | large | xl
+     [data-line-spacing]         on | off
+     [data-letter-spacing]       on | off
+     [data-dyslexia-font]        on | off
+   Prefer OS/browser settings: "System" options defer to the matching
+   media query and only the no-OS-equivalent extras truly need the panel.
+═══════════════════════════════════════════════════════════════ */
+
+/* OpenDyslexic — self-hosted; the woff2 is only fetched once a glyph
+   actually uses the family (i.e. when the dyslexia-font pref is on). */
+@font-face {
+  font-family: "OpenDyslexic";
+  src: url("/fonts/opendyslexic-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "OpenDyslexic";
+  src: url("/fonts/opendyslexic-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── Text size: scale the root so rem/em-based type grows together ── */
+html[data-text-size="large"] { font-size: 115%; }
+html[data-text-size="xl"]    { font-size: 130%; }
+
+/* ── Reading enhancements ──────────────────────────────────────── */
+html[data-line-spacing="on"] :where(body, p, li, dd, dt, blockquote) {
+  line-height: 1.9 !important;
+}
+html[data-letter-spacing="on"] :where(body, p, li, a, span, h1, h2, h3, h4, h5, h6) {
+  letter-spacing: 0.045em;
+  word-spacing: 0.08em;
+}
+html[data-dyslexia-font="on"] :where(body, p, li, a, span, h1, h2, h3, h4, h5, h6, button, input, textarea, select, label, div, td, th) {
+  font-family: "OpenDyslexic", "Rubik", sans-serif !important;
+}
+
+/* ── Motion: honour reduced motion (manual override OR OS preference) ── */
+html[data-motion="reduced"] *,
+html[data-motion="reduced"] *::before,
+html[data-motion="reduced"] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* ── Focus indicators: always visible for keyboard users ──────────── */
+:focus-visible {
+  outline: 3px solid var(--coyle-light-green);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+.dark :focus-visible { outline-color: var(--coyle-accent-green); }
+
+/* ── High contrast (manual "High", or "System" + prefers-contrast) ── */
+html.a11y-contrast-high {
+  --secondary-text-color: #054d24;
+  --coyle-green-text: #054d24;
+}
+html.a11y-contrast-high body { color: #000; }
+html.a11y-contrast-high.dark body { color: #fff; }
+html.a11y-contrast-high a:not([class]) { text-decoration: underline; }
+html.a11y-contrast-high :focus-visible { outline-width: 4px; outline-color: #000; }
+html.a11y-contrast-high.dark :focus-visible { outline-color: #fff; }
+/* Make card / input borders unmistakable */
+html.a11y-contrast-high :where(input, textarea, select, .Carousel-control, .info-card, .FeatureBlock) {
+  border: 2px solid currentColor !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PREFERENCES PANEL UI
+═══════════════════════════════════════════════════════════════ */
+
+/* Trigger button — circular, blends with the green nav controls */
+.a11y-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  background: var(--coyle-light-green);
+  color: #fff;
+  cursor: pointer;
+  flex: 0 0 auto;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+.a11y-trigger:hover { background: var(--coyle-dark-green); transform: scale(1.06); }
+.a11y-trigger svg { width: 1.05rem; height: 1.05rem; fill: currentColor; display: block; }
+.dark .a11y-trigger { background: var(--coyle-light-green); color: #04240f; }
+
+/* Overlay + dialog */
+.a11y-panel-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.5);
+}
+.a11y-panel-overlay.is-open { display: flex; }
+
+.a11y-panel {
+  width: 100%;
+  max-width: 30rem;
+  max-height: min(85vh, 640px);
+  overflow-y: auto;
+  background: var(--background-color);
+  color: var(--text-color, #222);
+  border-radius: 1.25rem;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.3);
+  padding: 1.5rem;
+}
+.dark .a11y-panel { color: #eee; }
+
+.a11y-panel__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+.a11y-panel__title {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin: 0;
+  color: var(--coyle-dark-green);
+}
+.dark .a11y-panel__title { color: var(--coyle-accent-green); }
+.a11y-panel__title svg { width: 1.3rem; height: 1.3rem; fill: currentColor; }
+
+.a11y-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+.a11y-close:hover { background: rgba(0, 0, 0, 0.08); }
+.dark .a11y-close:hover { background: rgba(255, 255, 255, 0.12); }
+
+.a11y-field { margin-bottom: 1.15rem; }
+.a11y-field:last-child { margin-bottom: 0; }
+.a11y-field__label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.4rem;
+}
+.a11y-field__hint {
+  font-size: 0.75rem;
+  opacity: 0.7;
+  margin: 0.3rem 0 0;
+}
+
+/* Segmented choice group (radio-style buttons) */
+.a11y-seg {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.a11y-seg button {
+  flex: 1 1 auto;
+  min-width: 5rem;
+  padding: 0.45rem 0.6rem;
+  border: 1.5px solid var(--coyle-light-green);
+  border-radius: 0.6rem;
+  background: transparent;
+  color: inherit;
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+.a11y-seg button:hover { background: rgba(10, 132, 61, 0.1); }
+.a11y-seg button[aria-pressed="true"] {
+  background: var(--coyle-light-green);
+  color: #fff;
+  border-color: var(--coyle-light-green);
+}
+
+/* On/off toggle rows */
+.a11y-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.55rem 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+.dark .a11y-toggle { border-top-color: rgba(255, 255, 255, 0.12); }
+.a11y-toggle__text { font-size: 0.9rem; font-weight: 500; }
+.a11y-switch {
+  position: relative;
+  width: 2.6rem;
+  height: 1.45rem;
+  border-radius: 9999px;
+  background: #b9b9b9;
+  border: none;
+  cursor: pointer;
+  flex: 0 0 auto;
+  transition: background-color 0.2s ease;
+}
+.a11y-switch::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 1.15rem;
+  height: 1.15rem;
+  border-radius: 9999px;
+  background: #fff;
+  transition: transform 0.2s ease;
+}
+.a11y-switch[aria-checked="true"] { background: var(--coyle-light-green); }
+.a11y-switch[aria-checked="true"]::after { transform: translateX(1.15rem); }
+
+.a11y-section-title {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.6;
+  margin: 1.4rem 0 0.5rem;
+}
+.a11y-reset {
+  margin-top: 1.4rem;
+  width: 100%;
+  padding: 0.55rem;
+  border: 1.5px solid currentColor;
+  border-radius: 0.6rem;
+  background: transparent;
+  color: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  opacity: 0.8;
+}
+.a11y-reset:hover { opacity: 1; }

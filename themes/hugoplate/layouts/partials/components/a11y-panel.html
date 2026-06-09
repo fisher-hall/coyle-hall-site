@@ -1,0 +1,88 @@
+{{- /* Accessibility preferences: circular trigger + dialog.
+       Behaviour & persistence in assets/js/a11y-prefs.js; styling in
+       assets/css/site/a11y-prefs.css. "System" options defer to the OS;
+       the panel adds the extras the OS can't express. */ -}}
+{{- $icon := `<svg viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M256,112a56,56,0,1,1,56-56A56.06,56.06,0,0,1,256,112Z"/><path d="M432,112.8l-.45.12h0l-.42.13c-1,.28-2,.58-3,.89-18.61,5.46-108.93,30.92-172.56,30.92-59.13,0-141.28-22-167.56-29.47a73.79,73.79,0,0,0-8-2.58c-19-5-32,14.3-32,31.94,0,17.47,15.7,25.79,31.55,31.76v.28l95.22,29.74c9.73,3.73,12.33,7.54,13.6,10.84,4.13,10.59.83,31.56-.34,38.88l-5.8,45L150.05,477.44q-.15.72-.27,1.47l-.23,1.27h0c-2.32,16.15,9.54,31.82,32,31.82,19.6,0,28.25-13.53,32-31.94h0s28-157.57,42-157.57,42.84,157.57,42.84,157.57h0c3.75,18.41,12.4,31.94,32,31.94,22.52,0,34.38-15.74,32-31.94-.21-1.38-.46-2.74-.76-4.06L329,301.27l-5.79-45c-4.19-26.21-.82-34.87.32-36.9a1.09,1.09,0,0,0,.08-.15c1.08-2,6-6.48,17.48-10.79l89.28-31.21a16.9,16.9,0,0,0,1.62-.52c16-6,32-14.3,32-31.93S451,107.81,432,112.8Z"/></svg>` -}}
+
+<button
+  type="button"
+  class="a11y-trigger"
+  data-a11y-open
+  aria-haspopup="dialog"
+  aria-controls="a11y-panel"
+  aria-label="Accessibility settings">
+  {{ $icon | safeHTML }}
+</button>
+
+<div class="a11y-panel-overlay" data-a11y-overlay hidden>
+  <div
+    id="a11y-panel"
+    class="a11y-panel"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="a11y-panel-title">
+    <div class="a11y-panel__head">
+      <h2 class="a11y-panel__title" id="a11y-panel-title">
+        {{ $icon | safeHTML }} Accessibility
+      </h2>
+      <button type="button" class="a11y-close" data-a11y-close aria-label="Close accessibility settings">
+        <i class="fa-solid fa-times" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <p class="a11y-panel__hint" style="margin-top:-0.5rem;margin-bottom:1.1rem;">
+      Theme, contrast and motion follow your device settings by default — change them in your OS for every site, or override them here.
+    </p>
+
+    <div class="a11y-field">
+      <span class="a11y-field__label" id="a11y-theme-label">Theme</span>
+      <div class="a11y-seg" role="group" aria-labelledby="a11y-theme-label" data-a11y-seg="theme">
+        <button type="button" data-value="system">System</button>
+        <button type="button" data-value="light">Light</button>
+        <button type="button" data-value="dark">Dark</button>
+      </div>
+    </div>
+
+    <div class="a11y-field">
+      <span class="a11y-field__label" id="a11y-contrast-label">Contrast</span>
+      <div class="a11y-seg" role="group" aria-labelledby="a11y-contrast-label" data-a11y-seg="contrast">
+        <button type="button" data-value="system">System</button>
+        <button type="button" data-value="normal">Normal</button>
+        <button type="button" data-value="high">High</button>
+      </div>
+    </div>
+
+    <div class="a11y-field">
+      <span class="a11y-field__label" id="a11y-text-label">Text size</span>
+      <div class="a11y-seg" role="group" aria-labelledby="a11y-text-label" data-a11y-seg="text">
+        <button type="button" data-value="normal">Normal</button>
+        <button type="button" data-value="large">Large</button>
+        <button type="button" data-value="xl">Extra large</button>
+      </div>
+    </div>
+
+    <div class="a11y-field">
+      <span class="a11y-field__label" id="a11y-motion-label">Motion</span>
+      <div class="a11y-seg" role="group" aria-labelledby="a11y-motion-label" data-a11y-seg="motion">
+        <button type="button" data-value="system">System</button>
+        <button type="button" data-value="reduced">Reduced</button>
+      </div>
+    </div>
+
+    <p class="a11y-section-title">Reading</p>
+    <div class="a11y-toggle">
+      <span class="a11y-toggle__text">Increased line spacing</span>
+      <button type="button" class="a11y-switch" role="switch" aria-checked="false" data-a11y-toggle="line" aria-label="Increased line spacing"></button>
+    </div>
+    <div class="a11y-toggle">
+      <span class="a11y-toggle__text">Increased letter spacing</span>
+      <button type="button" class="a11y-switch" role="switch" aria-checked="false" data-a11y-toggle="letter" aria-label="Increased letter spacing"></button>
+    </div>
+    <div class="a11y-toggle">
+      <span class="a11y-toggle__text">Dyslexia-friendly font</span>
+      <button type="button" class="a11y-switch" role="switch" aria-checked="false" data-a11y-toggle="font" aria-label="Dyslexia-friendly font"></button>
+    </div>
+
+    <button type="button" class="a11y-reset" data-a11y-reset>Reset to defaults</button>
+  </div>
+</div>

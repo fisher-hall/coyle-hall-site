@@ -33,44 +33,36 @@
     </label>
   </div>
 
-  <!-- theme switcher -->
+  <!-- theme switcher: theme is applied pre-paint by window.__a11y (head.html);
+       this only wires the quick toggle and keeps it synced with the
+       accessibility panel's Theme control via the shared store. -->
   <script>
-    var darkMode = localStorage.getItem("theme") === "dark";
-
-    if (localStorage.getItem("theme") === null) {
-      darkMode = {{if eq site.Params.theme_default "dark"}}true{{else}}false{{end}};
-
-      {{ if eq site.Params.theme_default "system" }}
-      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-        darkMode = true;
-      }
-      {{ end }}
-    }
-
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-
-    // Show theme switcher after applying theme
-    document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("DOMContentLoaded", function () {
       var themeSwitch = document.querySelectorAll("[data-theme-switcher]");
-      var themeSwitcherContainer = document.querySelector('.theme-switcher');
+      var themeSwitcherContainer = document.querySelector(".theme-switcher");
+
+      function sync() {
+        var dark = document.documentElement.classList.contains("dark");
+        [].forEach.call(themeSwitch, function (ts) { ts.checked = dark; });
+      }
+      sync();
 
       [].forEach.call(themeSwitch, function (ts) {
-        ts.checked = darkMode;
-        ts.addEventListener("click", () => {
-          document.documentElement.classList.toggle("dark");
-          localStorage.setItem(
-            "theme",
-            document.documentElement.classList.contains("dark") ? "dark" : "light"
-          );
+        ts.addEventListener("click", function () {
+          var dark = !document.documentElement.classList.contains("dark");
+          if (window.__a11y) {
+            window.__a11y.set("theme", dark ? "dark" : "light");
+          } else {
+            document.documentElement.classList.toggle("dark", dark);
+            try { localStorage.setItem("theme", dark ? "dark" : "light"); } catch (e) {}
+          }
         });
       });
 
-      // Now make the switcher visible after the theme is applied
-      themeSwitcherContainer.classList.remove("invisible");
+      // Stay in sync when the panel (or anything) changes the theme.
+      document.addEventListener("a11y:change", sync);
+
+      if (themeSwitcherContainer) themeSwitcherContainer.classList.remove("invisible");
     });
   </script>
 {{ end }}
