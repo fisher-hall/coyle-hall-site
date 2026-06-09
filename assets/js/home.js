@@ -8,10 +8,18 @@
 (function () {
   'use strict';
 
+  /* Respect the user's reduced-motion preference (mirrors the ticker guard). */
+  function prefersReducedMotion() {
+    return window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }
+
   /* ── Banner parallax ─────────────────────────────────────────── */
   function initHomeParallax() {
     if (!document.getElementById('home-banner-wrapper')) return;
     var root = document.documentElement;
+    /* Reduced motion: leave the banner static — never bind scroll parallax. */
+    if (prefersReducedMotion()) return;
     function update() {
       var scrollY = window.scrollY || window.pageYOffset || 0;
       root.style.setProperty('--home-parallax-bg-y', Math.max(-90, scrollY * -0.12) + 'px');
@@ -105,7 +113,7 @@
       ctx.fill();
     }
 
-    function animate() {
+    function renderFrame() {
       waveTargets.forEach(function (target) {
         var ctx = target.ctx, canvas = target.canvas;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -123,9 +131,25 @@
           getWaveColor(target)
         );
       });
+    }
+
+    function animate() {
+      renderFrame();
       time += 0.8;
       animationId = requestAnimationFrame(animate);
     }
+
+    /* Reduced motion: draw a single static wave frame and stop — no rAF loop.
+       Redraw once on resize so the static wave still fits the canvas. */
+    if (prefersReducedMotion()) {
+      renderFrame();
+      window.addEventListener('resize', function () {
+        resizeCanvases();
+        renderFrame();
+      });
+      return;
+    }
+
     animate();
 
     window.addEventListener('beforeunload', function () {
@@ -162,10 +186,25 @@
             grid.innerHTML = '<p style="opacity:0.5;text-align:center;padding:2rem;">No posts found.</p>';
             return;
           }
+          // Behold's `sizes` entries expose the persistent behold.pictures URL
+          // under `mediaUrl` (NOT `url`). The top-level `mediaUrl` is a short-
+          // lived, hotlink-protected cdninstagram.com URL that 403s/expires —
+          // reading it was why most tiles rendered blank.
+          function pickSize(sizes) {
+            if (!sizes) return '';
+            var pref = ['medium', 'large', 'small', 'full'];
+            for (var i = 0; i < pref.length; i++) {
+              var s = sizes[pref[i]];
+              if (s && (s.mediaUrl || s.url)) return s.mediaUrl || s.url;
+            }
+            return '';
+          }
           posts.slice(0, 6).forEach(function (post) {
-            var imgUrl = post.mediaType === 'VIDEO'
-              ? (post.thumbnailUrl || '')
-              : ((post.sizes && post.sizes.medium && post.sizes.medium.url) || post.mediaUrl || post.thumbnailUrl || '');
+            var imgUrl = pickSize(post.sizes);
+            if (!imgUrl && post.children && post.children.length) {
+              imgUrl = pickSize(post.children[0].sizes) || post.children[0].mediaUrl || '';
+            }
+            if (!imgUrl) imgUrl = post.thumbnailUrl || post.mediaUrl || '';
             if (!imgUrl) return;
             var caption = post.caption || '';
             var typeIcon = post.mediaType === 'VIDEO'
@@ -181,7 +220,8 @@
             a.setAttribute('aria-label', caption || 'View on Instagram');
             a.innerHTML =
               '<div class="ig-post-img-wrap">' +
-                '<img src="' + imgUrl + '" alt="" loading="lazy">' +
+                '<img src="' + imgUrl + '" alt="" loading="lazy" decoding="async" ' +
+                'onerror="this.closest(\'.ig-post\').style.display=\'none\'">' +
                 '<div class="ig-post-overlay">' + typeIcon + '<p>' + caption + '</p></div>' +
               '</div>';
             grid.appendChild(a);
