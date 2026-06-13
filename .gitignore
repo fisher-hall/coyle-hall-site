@@ -16,3 +16,5 @@ hugo_stats.json
 go.sum
 yarn.lock
 graphify-out/
+# Claude Code local worktrees
+.claude/worktrees/
