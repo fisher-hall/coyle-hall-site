@@ -1,0 +1,99 @@
+<!--
+  ═══════════════════════════════════════════════════════════════════════════
+  COYLE HALL — EVENT PAGE TEMPLATE  (copy-paste skeleton)
+  ───────────────────────────────────────────────────────────────────────────
+  Matches the newer event pages (Regatta, Car Smash, Coyle Crunk, Coyle Formal,
+  Family Weekend). To make a new event page:
+
+    1. Copy this file to  content/english/<slug>.html
+    2. Find/replace  EVENT-SLUG  ->  your slug (e.g. "spring-show")
+    3. Fill in every  REPLACE_*  marker.
+    4. Drop a banner image in  assets/images/BannerImages/  and photos in
+       assets/images/<slug>/  when you have them (both are optional — the page
+       scaffolds cleanly while empty).
+
+  Repeated structure lives in shortcodes so pages stay thin:
+    {{< banner >}}           banner image + heading + wave
+    {{< event-countdown >}}  the 4-cell live countdown + heading
+    {{< event-carousel >}}   photo carousel (renders only once the folder has images)
+
+  PER-PAGE DISPLAY FONT: each event page has its own banner font. Import it from
+  Google Fonts in section (1) and apply it via the #EVENT-SLUG-banner-text rule
+  and the reusable ".EVENT-SLUG-display" class (passed to the countdown as
+  fontclass=). Delete the whole <style>/<link> block to use the site default.
+  ═══════════════════════════════════════════════════════════════════════════
+-->
+---
+title: "REPLACE_TITLE"
+url: "/events/EVENT-SLUG"
+aliases:
+  - "/EVENT-SLUG"
+---
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- (1) DISPLAY FONT (optional) — swap REPLACE_FONT for this event's vibe -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=REPLACE_FONT&display=swap" rel="stylesheet">
+<style>
+  #EVENT-SLUG-banner-text .home-banner-heading {
+    font-family: "REPLACE_FONT", serif !important;
+    font-weight: 700 !important;
+    line-height: 0.95 !important;
+    display: inline-block;
+    position: relative;
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.32) !important;
+    font-size: clamp(2.5rem, 11vw, 8rem) !important;
+  }
+
+  .EVENT-SLUG-display {
+    font-family: "REPLACE_FONT", serif !important;
+    font-weight: 700 !important;
+  }
+
+  body .section-sm > .container {
+    max-width: 1600px !important;
+  }
+
+  @media (min-width: 1024px) {
+    body .section-sm > .container .row.justify-center > .lg\:col-10 {
+      flex: 0 0 100% !important;
+      max-width: 100% !important;
+    }
+  }
+</style>
+
+<!-- (2) BANNER — image="/images/BannerImages/REPLACE.png" (in assets/) or "" to scaffold empty -->
+{{< banner image="" heading="REPLACE_TITLE" textid="EVENT-SLUG-banner-text" >}}
+
+<!-- (3) COUNTDOWN — point date at the event start; the inner line is the heading
+        (color a word with an inline span). Delete this block for an undated event. -->
+{{< event-countdown date="2026-01-01T18:00:00" fontclass="EVENT-SLUG-display" >}}
+  Until the <span style="color: var(--secondary-color);">REPLACE_EVENT</span>
+{{< /event-countdown >}}
+
+<!-- (4) HEADLINE -->
+<div class="flex items-center justify-start my-1 fade-in-section" style="position: relative; z-index: 3; margin-top: 3rem;">
+  <h2 class="text-3xl ml-4 mr-4 md:text-4xl text-left font-extrabold flex items-center"
+      style="position: relative; z-index: 4; margin-top: 0; color: var(--primary-color); width: 100%;">
+    REPLACE_HEADLINE
+  </h2>
+</div>
+
+<!-- (5) BODY -->
+<div class="w-full flex flex-col justify-center fade-in-section text-left">
+  <p class="mb-2 ml-4 mr-4 text-lg">REPLACE_BODY_COPY</p>
+</div>
+
+<!-- (6) META ROW — date / location chips (optional) -->
+<div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-10 w-full my-1 fade-in-section" style="margin-top: 3rem; margin-bottom: 1rem;">
+  <h2 class="text-2xl ml-4 mr-4 md:text-3xl font-extrabold flex items-center" style="color: var(--primary-color);">
+    <i class="fa fa-calendar-day" aria-hidden="true"></i>&nbsp; REPLACE_DATE
+  </h2>
+  <h2 class="text-2xl ml-4 mr-4 md:text-3xl font-extrabold flex items-center" style="color: var(--primary-color);">
+    <i class="fa fa-location-dot" aria-hidden="true"></i>&nbsp; REPLACE_LOCATION
+  </h2>
+</div>
+
+<!-- (7) CAROUSEL — renders only once assets/images/EVENT-SLUG/ has photos -->
+{{< event-carousel dir="EVENT-SLUG" alt="REPLACE_TITLE photo" label="REPLACE_TITLE photo carousel" >}}
