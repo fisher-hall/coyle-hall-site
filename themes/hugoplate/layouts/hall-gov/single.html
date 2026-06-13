@@ -40,7 +40,7 @@
                   href="{{ .link | safeURL }}"
                   target="_blank"
                   rel="noopener nofollow">
-                  <span class="sr-only">{{ .title }}</span>
+                  <span class="sr-only">{{ printf "%s %s" (.name | default .title | title) $.Title }}</span>
                   <i class="{{ .icon }}"></i>
                 </a>
               </li>

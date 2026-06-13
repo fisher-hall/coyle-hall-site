@@ -2,7 +2,7 @@
 
 # main menu
 [[main]]
-name = "<i class='fa fa-house'></i>"
+name = "<i class='fa fa-house' aria-hidden='true'></i><span class='sr-only'>Home</span>"
 url = "/"
 weight = 1
 
