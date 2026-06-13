@@ -10,8 +10,8 @@
 
   /* Respect the user's reduced-motion preference (mirrors the ticker guard). */
   function prefersReducedMotion() {
-    return window.matchMedia &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    return document.documentElement.matches('[data-motion="reduced"]') ||
+      (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
   }
 
   /* ── Banner parallax ─────────────────────────────────────────── */
@@ -138,15 +138,29 @@
       time += 0.8;
       animationId = requestAnimationFrame(animate);
     }
+    /* Reduced motion: draw a single static wave frame and stop.
+       Listens for a11y:change to restart or re-stop on pref toggle. */
+    function stopHomeWave() {
+      if (animationId) { cancelAnimationFrame(animationId); animationId = null; }
+    }
+    function startHomeWave() {
+      if (animationId) return;
+      if (prefersReducedMotion()) { renderFrame(); return; }
+      animate();
+    }
 
-    /* Reduced motion: draw a single static wave frame and stop — no rAF loop.
-       Redraw once on resize so the static wave still fits the canvas. */
+    document.addEventListener('a11y:change', function () {
+      if (prefersReducedMotion()) { stopHomeWave(); resizeCanvases(); renderFrame(); }
+      else startHomeWave();
+    });
+
+    window.addEventListener('resize', function () {
+      resizeCanvases();
+      if (prefersReducedMotion()) renderFrame();
+    });
+
     if (prefersReducedMotion()) {
       renderFrame();
-      window.addEventListener('resize', function () {
-        resizeCanvases();
-        renderFrame();
-      });
       return;
     }
 
@@ -246,7 +260,7 @@
     }
   }
 
-  /* ── Photo ticker ────────────────────────────────────────────── */
+  /* ── Photo ticker ──────────────────────────────────────── */
   function initTicker() {
     var track = document.getElementById('ticker-track');
     if (!track) return;
@@ -256,6 +270,8 @@
     var normalSpeed = 0.55;
     var slowSpeed = 0.12;
     var halfWidth = 0;
+    var tickId = null;
+    var running = false;
 
     track.parentElement.addEventListener('mouseenter', function () { targetSpeed = slowSpeed; });
     track.parentElement.addEventListener('mouseleave', function () { targetSpeed = normalSpeed; });
@@ -265,19 +281,63 @@
       pos += speed;
       if (halfWidth && pos >= halfWidth) pos -= halfWidth;
       track.style.transform = 'translateX(-' + pos + 'px)';
-      requestAnimationFrame(tick);
+      if (running) tickId = requestAnimationFrame(tick);
     }
 
-    function init() {
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      halfWidth = track.scrollWidth / 2;
+    function stopTicker() {
+      running = false;
+      if (tickId) { cancelAnimationFrame(tickId); tickId = null; }
+    }
+
+    function startTicker() {
+      if (running || prefersReducedMotion()) return;
+      running = true;
+      if (!halfWidth) halfWidth = track.scrollWidth / 2;
       tick();
+    }
+
+    /* Arrow buttons — injected into ticker-outer, shown only in reduced-motion mode. */
+    var outer = track.parentElement;
+    var prevBtn = document.createElement('button');
+    prevBtn.type = 'button';
+    prevBtn.className = 'ticker-arrow ticker-arrow--prev';
+    prevBtn.setAttribute('aria-label', 'Previous photos');
+    prevBtn.innerHTML = '<i class="fa-solid fa-chevron-left" aria-hidden="true"></i>';
+    var nextBtn = document.createElement('button');
+    nextBtn.type = 'button';
+    nextBtn.className = 'ticker-arrow ticker-arrow--next';
+    nextBtn.setAttribute('aria-label', 'Next photos');
+    nextBtn.innerHTML = '<i class="fa-solid fa-chevron-right" aria-hidden="true"></i>';
+
+    outer.style.position = 'relative';
+    outer.insertBefore(prevBtn, track);
+    outer.appendChild(nextBtn);
+
+    var SCROLL_STEP = 320;
+    prevBtn.addEventListener('click', function () {
+      pos = Math.max(0, pos - SCROLL_STEP);
+      track.style.transform = 'translateX(-' + pos + 'px)';
+    });
+    nextBtn.addEventListener('click', function () {
+      if (halfWidth) pos = (pos + SCROLL_STEP) % halfWidth;
+      track.style.transform = 'translateX(-' + pos + 'px)';
+    });
+
+    /* Respond to a11y pref changes at runtime. */
+    document.addEventListener('a11y:change', function () {
+      if (prefersReducedMotion()) stopTicker();
+      else startTicker();
+    });
+
+    function init() {
+      if (prefersReducedMotion()) return;
+      halfWidth = track.scrollWidth / 2;
+      startTicker();
     }
 
     if (document.readyState === 'complete') init();
     else window.addEventListener('load', init);
   }
-
   function boot() {
     initHomeParallax();
     initHomeWaves();

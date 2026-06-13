@@ -10,8 +10,8 @@
 
   /* Respect the user's reduced-motion preference. */
   function prefersReducedMotion() {
-    return window.matchMedia &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    return document.documentElement.matches('[data-motion="reduced"]') ||
+      (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
   }
 
   /**
@@ -79,15 +79,28 @@
     }
 
     /* Reduced motion: draw one static frame, no rAF loop. */
+    function stopWave() { cancelAnimationFrame(animId); animId = null; }
+    function startWave() {
+      if (animId) return;
+      if (prefersReducedMotion()) { renderFrame(); return; }
+      animate();
+    }
+
+    /* Listen for manual-pref changes from the a11y panel. */
+    document.addEventListener("a11y:change", function () {
+      if (prefersReducedMotion()) { stopWave(); renderFrame(); }
+      else startWave();
+    });
+
     if (prefersReducedMotion()) {
       renderFrame();
-      window.addEventListener('resize', function () { resize(); renderFrame(); });
+      window.addEventListener("resize", function () { resize(); renderFrame(); });
       return;
     }
 
     animate();
 
-    window.addEventListener('beforeunload', function () { cancelAnimationFrame(animId); });
+    window.addEventListener("beforeunload", function () { cancelAnimationFrame(animId); });
   };
 
   /**

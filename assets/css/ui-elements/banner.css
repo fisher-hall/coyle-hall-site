@@ -54,6 +54,7 @@
   font-size: clamp(1.5rem, 3vw, 2.5rem) !important;
   text-transform: uppercase !important;
   text-shadow: 0 3px 10px rgba(0, 0, 0, 0.28) !important;
+  color: #ffffff !important;
 }
 
 .home-banner-heading {
@@ -64,6 +65,7 @@
   letter-spacing: 0.08em !important;
   line-height: 0.95 !important;
   text-shadow: 0 4px 14px rgba(0, 0, 0, 0.32) !important;
+  color: #ffffff !important;
 }
 
 /* ── Inner-page fixed banner + parallax ────────────────────────── */

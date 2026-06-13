@@ -46,7 +46,8 @@
       if (slides.length < 2) return;
       // Respect reduced-motion (OS preference or the accessibility panel):
       // never auto-advance; manual prev/next/dots still work.
-      if (document.documentElement.getAttribute("data-motion") === "reduced") return;
+      if (document.documentElement.getAttribute("data-motion") === "reduced" ||
+          (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches)) return;
       stop();
       autoplayId = window.setInterval(function () {
         render(currentIndex + 1);
@@ -86,6 +87,15 @@
     document.addEventListener("visibilitychange", function () {
       if (document.hidden) stop();
       else start();
+    document.addEventListener("a11y:change", function () {
+      if (document.documentElement.getAttribute("data-motion") === "reduced" ||
+          (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches)) {
+        stop();
+      } else {
+        start();
+      }
+    });
+
     });
 
     render(0);

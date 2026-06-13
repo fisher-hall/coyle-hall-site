@@ -9,6 +9,11 @@
   var store = window.__a11y;
   if (!store) return;
 
+  // Slider step mappings
+  var TEXT_SIZE_STEPS = ['xs', 's', 'default', 'large', 'xl', '2xl', '3xl'];
+  var TEXT_WEIGHT_STEPS = ['light', 'default', 'semibold', 'bold', 'extrabold'];
+  var SLIDER_LABELS = { 'text-size': TEXT_SIZE_STEPS, 'text-weight': TEXT_WEIGHT_STEPS };
+
   document.addEventListener("DOMContentLoaded", function () {
     var overlay = document.querySelector("[data-a11y-overlay]");
     var dialog = overlay && overlay.querySelector(".a11y-panel");
@@ -31,6 +36,26 @@
         var pref = sw.getAttribute("data-a11y-toggle");
         sw.setAttribute("aria-checked", String(store.get(pref) === "on"));
       });
+      // Reflect sliders
+      overlay.querySelectorAll("[data-a11y-slider]").forEach(function (slider) {
+        var pref = slider.getAttribute("data-a11y-slider");
+        var current = store.get(pref);
+        var steps = SLIDER_LABELS[pref];
+        if (steps) {
+          var idx = steps.indexOf(current);
+          if (idx === -1) idx = pref === 'text-size' ? 2 : 1; // default index
+          slider.value = idx;
+          slider.setAttribute("aria-valuetext", steps[idx]);
+        }
+      });
+      // Reflect "Follow System" checkboxes + grey out state
+      overlay.querySelectorAll("[data-a11y-sys]").forEach(function (cb) {
+        var pref = cb.getAttribute("data-a11y-sys");
+        var isSystem = store.get(pref) === "system";
+        cb.checked = isSystem;
+        var field = cb.closest(".a11y-field");
+        if (field) field.setAttribute("data-sys-active", isSystem ? "true" : "false");
+      });
     }
 
     // Segmented choice groups
@@ -39,6 +64,10 @@
       group.querySelectorAll("button[data-value]").forEach(function (b) {
         b.addEventListener("click", function () {
           store.set(pref, b.getAttribute("data-value"));
+          // Un-check the system checkbox for this field when manually choosing
+          var field = group.closest(".a11y-field");
+          var sysCb = field && field.querySelector("[data-a11y-sys]");
+          if (sysCb) sysCb.checked = false;
           reflect();
         });
       });
@@ -49,6 +78,45 @@
       var pref = sw.getAttribute("data-a11y-toggle");
       sw.addEventListener("click", function () {
         store.set(pref, store.get(pref) === "on" ? "off" : "on");
+        reflect();
+      });
+    });
+
+    // Wire sliders
+    overlay.querySelectorAll("[data-a11y-slider]").forEach(function (slider) {
+      var pref = slider.getAttribute("data-a11y-slider");
+      slider.addEventListener("input", function () {
+        var steps = SLIDER_LABELS[pref];
+        var val = steps[parseInt(slider.value, 10)];
+        store.set(pref, val);
+        slider.setAttribute("aria-valuetext", val);
+        // Un-check the system checkbox for this field when manually sliding
+        var field = slider.closest(".a11y-field");
+        var sysCb = field && field.querySelector("[data-a11y-sys]");
+        if (sysCb) sysCb.checked = false;
+        reflect();
+      });
+    });
+
+    // Wire "Follow System" checkboxes
+    overlay.querySelectorAll("[data-a11y-sys]").forEach(function (cb) {
+      var pref = cb.getAttribute("data-a11y-sys");
+      var field = cb.closest(".a11y-field");
+      cb.addEventListener("change", function () {
+        if (cb.checked) {
+          store.set(pref, "system");
+        } else {
+          // Set a concrete value (the current reflected value, not "system")
+          var seg = field && field.querySelector("[data-a11y-seg]");
+          var slider = field && field.querySelector("[data-a11y-slider]");
+          if (seg) {
+            var pressed = seg.querySelector("[aria-pressed=\"true\"]");
+            if (pressed) store.set(pref, pressed.getAttribute("data-value"));
+          } else if (slider) {
+            var steps = SLIDER_LABELS[pref];
+            store.set(pref, steps[parseInt(slider.value, 10)]);
+          }
+        }
         reflect();
       });
     });

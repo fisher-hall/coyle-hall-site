@@ -19,6 +19,8 @@
 @import "ui-elements/section-box.css";
 @import "ui-elements/carousel.css";
 @import "ui-elements/banner.css";
+@import "ui-elements/switch.css";
+@import "ui-elements/checkbox.css";
 
 /* Site chrome */
 @import "site/base.css";

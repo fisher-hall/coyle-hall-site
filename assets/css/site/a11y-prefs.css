@@ -32,8 +32,20 @@
 }
 
 /* ── Text size: scale the root so rem/em-based type grows together ── */
-html[data-text-size="large"] { font-size: 115%; }
-html[data-text-size="xl"]    { font-size: 130%; }
+html[data-text-size="xs"]     { font-size: 80%; }
+html[data-text-size="s"]      { font-size: 90%; }
+/* default = 100% (no rule needed) */
+html[data-text-size="large"]  { font-size: 112%; }
+html[data-text-size="xl"]     { font-size: 125%; }
+html[data-text-size="2xl"]    { font-size: 140%; }
+html[data-text-size="3xl"]    { font-size: 160%; }
+
+/* ── Text weight ────────────────────────────────────────── */
+html[data-text-weight="light"]     body { font-weight: 300 !important; }
+/* default = inherited weight */
+html[data-text-weight="semibold"]  body { font-weight: 600 !important; }
+html[data-text-weight="bold"]      body { font-weight: 700 !important; }
+html[data-text-weight="extrabold"] body { font-weight: 800 !important; }
 
 /* ── Reading enhancements ──────────────────────────────────────── */
 html[data-line-spacing="on"] :where(body, p, li, dd, dt, blockquote) {
@@ -57,6 +69,38 @@ html[data-motion="reduced"] *::after {
   scroll-behavior: auto !important;
 }
 
+/* Reduced motion: stop wave canvas from animating */
+html[data-motion="reduced"] canvas { animation: none !important; }
+
+/* Reduced motion: block all image hover transforms */
+html[data-motion="reduced"] img,
+html[data-motion="reduced"] .interactive-tilt,
+html[data-motion="reduced"] .fade-in-section img {
+  transform: none !important;
+  transition: none !important;
+}
+html[data-motion="reduced"] .interactive-tilt::after { opacity: 0 !important; }
+
+/* Reduced motion: show ticker arrows, pause auto-scroll */
+html[data-motion="reduced"] .ticker-arrow { display: flex !important; }
+html[data-motion="reduced"] .ticker-track { animation-play-state: paused !important; }
+
+/* Mirror rules for OS-level prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  canvas { animation: none !important; }
+
+  img,
+  .interactive-tilt,
+  .fade-in-section img {
+    transform: none !important;
+    transition: none !important;
+  }
+  .interactive-tilt::after { opacity: 0 !important; }
+
+  .ticker-arrow { display: flex !important; }
+  .ticker-track { animation-play-state: paused !important; }
+}
+
 /* ── Focus indicators: always visible for keyboard users ──────────── */
 :focus-visible {
   outline: 3px solid var(--coyle-light-green);
@@ -65,21 +109,80 @@ html[data-motion="reduced"] *::after {
 }
 .dark :focus-visible { outline-color: var(--coyle-accent-green); }
 
-/* ── High contrast (manual "High", or "System" + prefers-contrast) ── */
+/* ── High contrast: always dark mode + accent-green/white palette ── */
 html.a11y-contrast-high {
-  --secondary-text-color: #054d24;
-  --coyle-green-text: #054d24;
+  color-scheme: dark;
 }
-html.a11y-contrast-high body { color: #000; }
-html.a11y-contrast-high.dark body { color: #fff; }
-html.a11y-contrast-high a:not([class]) { text-decoration: underline; }
-html.a11y-contrast-high :focus-visible { outline-width: 4px; outline-color: #000; }
-html.a11y-contrast-high.dark :focus-visible { outline-color: #fff; }
-/* Make card / input borders unmistakable */
-html.a11y-contrast-high :where(input, textarea, select, .Carousel-control, .info-card, .FeatureBlock) {
-  border: 2px solid currentColor !important;
+/* Force dark background */
+html.a11y-contrast-high body {
+  background: #000 !important;
+  color: #fff !important;
 }
-
+/* Override ALL text with white or bright accent green */
+html.a11y-contrast-high :where(p, li, dd, dt, blockquote, span:not([class*="icon"])) {
+  color: #fff !important;
+}
+html.a11y-contrast-high :where(h1, h2, h3, h4, h5, h6) {
+  color: #6ee87a !important; /* brighter accent green */
+}
+/* Links: bright green, always underlined */
+html.a11y-contrast-high a {
+  color: #48bb4e !important;
+  text-decoration: underline !important;
+}
+html.a11y-contrast-high a:hover,
+html.a11y-contrast-high a:focus {
+  color: #6ee87a !important;
+}
+/* Buttons: invert to green-on-black */
+html.a11y-contrast-high :where(button, .btn, [role="button"]) {
+  background: #064121 !important;
+  color: #fff !important;
+  border: 2px solid #48bb4e !important;
+}
+html.a11y-contrast-high :where(button, .btn, [role="button"]):hover {
+  background: #48bb4e !important;
+  color: #000 !important;
+}
+/* Form controls */
+html.a11y-contrast-high :where(input, textarea, select) {
+  background: #0a1a0d !important;
+  color: #fff !important;
+  border: 2px solid #48bb4e !important;
+}
+/* Cards, surfaces */
+html.a11y-contrast-high :where(.info-card, .FeatureBlock, .Carousel-control, [class*="card"], [class*="panel"]) {
+  background: #0a1a0d !important;
+  border: 2px solid #48bb4e !important;
+  color: #fff !important;
+}
+/* Navbar: fully opaque dark */
+html.a11y-contrast-high .navbar,
+html.a11y-contrast-high .floating-navbar {
+  background: #000 !important;
+  border-bottom: 2px solid #48bb4e !important;
+}
+/* Focus: bright white outlines */
+html.a11y-contrast-high :focus-visible {
+  outline: 4px solid #fff !important;
+  outline-offset: 3px !important;
+}
+/* Accessibility panel in high contrast */
+html.a11y-contrast-high .a11y-panel {
+  background: #000 !important;
+  border: 2px solid #48bb4e !important;
+  color: #fff !important;
+}
+html.a11y-contrast-high .a11y-seg button {
+  border-color: #48bb4e !important;
+  color: #fff !important;
+}
+html.a11y-contrast-high .a11y-seg button[aria-pressed="true"] {
+  background: #48bb4e !important;
+  color: #000 !important;
+}
+html.a11y-contrast-high .a11y-switch { background: #333 !important; }
+html.a11y-contrast-high .a11y-switch[aria-checked="true"] { background: #48bb4e !important; }
 /* ═══════════════════════════════════════════════════════════════
    PREFERENCES PANEL UI
 ═══════════════════════════════════════════════════════════════ */
@@ -237,7 +340,7 @@ html.a11y-contrast-high :where(input, textarea, select, .Carousel-control, .info
   transition: transform 0.2s ease;
 }
 .a11y-switch[aria-checked="true"] { background: var(--coyle-light-green); }
-.a11y-switch[aria-checked="true"]::after { transform: translateX(1.15rem); }
+.a11y-switch[aria-checked="true"]::after { transform: translateX(calc(2.6rem - 1.15rem - 4px)); }
 
 .a11y-section-title {
   font-size: 0.72rem;
@@ -260,3 +363,129 @@ html.a11y-contrast-high :where(input, textarea, select, .Carousel-control, .info
   opacity: 0.8;
 }
 .a11y-reset:hover { opacity: 1; }
+
+/* ── Panel animation ────────────────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion="reduced"]) .a11y-panel-overlay.is-open .a11y-panel {
+    animation: a11y-panel-in 0.22s cubic-bezier(0.34,1.56,0.64,1) both;
+  }
+}
+@keyframes a11y-panel-in {
+  from { opacity: 0; transform: scale(0.92) translateY(12px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* ── Panel layout ───────────────────────────────────────────── */
+.a11y-panel {
+  border-radius: 1.75rem;
+}
+.a11y-panel__hint {
+  font-size: 0.78rem;
+  opacity: 0.65;
+  margin-top: -0.25rem;
+  margin-bottom: 0.9rem;
+  line-height: 1.4;
+}
+.a11y-field__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.35rem;
+}
+.a11y-field__label {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.a11y-field__label i { opacity: 0.7; font-size: 0.8em; }
+
+/* ── Sliders ───────────────────────────────────────────────── */
+.a11y-slider-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.a11y-slider-label--sm { font-size: 0.72rem; opacity: 0.6; }
+.a11y-slider-label--lg { font-size: 1.1rem; opacity: 0.6; }
+.a11y-slider {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  background: rgba(0,0,0,0.12);
+  border-radius: 9999px;
+  outline: none;
+  cursor: pointer;
+}
+.dark .a11y-slider { background: rgba(255,255,255,0.15); }
+.a11y-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 9999px;
+  background: var(--coyle-light-green);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+.a11y-slider::-webkit-slider-thumb:hover { transform: scale(1.15); }
+.a11y-slider::-moz-range-thumb {
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 9999px;
+  background: var(--coyle-light-green);
+  border: none;
+  cursor: pointer;
+}
+.a11y-slider-ticks {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.65rem;
+  opacity: 0.5;
+  margin-top: 0.2rem;
+  padding: 0 0.15rem;
+}
+
+/* ── "Follow system" greyed-out state ─────────────────────── */
+.a11y-field[data-sys-active="true"] .a11y-seg,
+.a11y-field[data-sys-active="true"] .a11y-slider-row,
+.a11y-field[data-sys-active="true"] .a11y-slider-ticks {
+  opacity: 0.38;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ── Section title with icon ──────────────────────────────── */
+.a11y-section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.a11y-section-title i { opacity: 0.6; }
+
+/* ── Segmented buttons — rounder ─────────────────────────── */
+.a11y-seg button {
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+}
+.a11y-seg button i { font-size: 0.8em; }
+
+/* ── Reset button ─────────────────────────────────────────── */
+.a11y-reset {
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+/* ── Panel trigger hover (do not blend into navbar) ──────── */
+.a11y-trigger:hover {
+  background: var(--coyle-dark-green) !important;
+  transform: scale(1.08);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}

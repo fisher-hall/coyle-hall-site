@@ -208,9 +208,18 @@ body:has(.page-banner-wrapper) .section-sm {
   border-radius: 4px;
 }
 
+.header .navbar [aria-label="search"] {
+  transition: opacity 0.15s ease, transform 0.15s ease, background-color 0.2s ease !important;
+}
 .header .navbar [aria-label="search"]:hover {
-  background-color: var(--coyle-light-green) !important;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1) !important;
+  opacity: 0.7;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.header .navbar [aria-label="search"]:active {
+  transform: scale(0.92);
+  opacity: 0.6;
+  background: transparent !important;
 }
 
 /* Incoming Students button — special styling */

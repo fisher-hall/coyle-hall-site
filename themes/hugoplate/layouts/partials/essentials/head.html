@@ -19,19 +19,42 @@
      "System" options defer to the matching OS media query. -->
 <script>
   (function () {
-    var KEYS = { theme: "theme", contrast: "a11y-contrast", text: "a11y-text", motion: "a11y-motion", line: "a11y-line", letter: "a11y-letter", font: "a11y-font" };
-    var DEF = { theme: "system", contrast: "system", text: "normal", motion: "system", line: "off", letter: "off", font: "off" };
+    var KEYS = { theme: "theme", contrast: "a11y-contrast", "text-size": "a11y-text-size", "text-weight": "a11y-text-weight", motion: "a11y-motion", line: "a11y-line", letter: "a11y-letter", font: "a11y-font" };
+    var DEF = { theme: "system", contrast: "system", "text-size": "system", "text-weight": "system", motion: "system", line: "off", letter: "off", font: "off" };
     function get(p) { try { var v = localStorage.getItem(KEYS[p]); return v === null ? DEF[p] : v; } catch (e) { return DEF[p]; } }
     function mm(q) { return window.matchMedia && window.matchMedia(q).matches; }
     function apply() {
       var d = document.documentElement;
       var theme = get("theme");
-      d.classList.toggle("dark", theme === "dark" || (theme === "system" && mm("(prefers-color-scheme: dark)")));
+      var themeDark = theme === "dark" || (theme === "system" && mm("(prefers-color-scheme: dark)"));
+      d.classList.toggle("dark", themeDark);
       var contrast = get("contrast");
-      d.classList.toggle("a11y-contrast-high", contrast === "high" || (contrast === "system" && mm("(prefers-contrast: more)")));
+      var effectiveContrast = contrast === "high" || (contrast === "system" && mm("(prefers-contrast: more)"));
+      d.classList.toggle("a11y-contrast-high", effectiveContrast);
+      // High contrast always locks to dark mode
+      if (effectiveContrast) {
+        d.classList.add("dark");
+      } else if (!themeDark) {
+        // Only remove .dark if the theme pref didn't independently set it
+        d.classList.remove("dark");
+      }
       var motion = get("motion");
       d.setAttribute("data-motion", (motion === "reduced" || (motion === "system" && mm("(prefers-reduced-motion: reduce)"))) ? "reduced" : "normal");
-      d.setAttribute("data-text-size", get("text"));
+      // Text size — "system" defers to browser/OS zoom (no attribute needed)
+      var sizePref = get("text-size");
+      var effectiveSize = (sizePref === "system") ? "default" : sizePref;
+      d.removeAttribute("data-text-size");
+      var sizeMap = { "xs": "xs", "s": "s", "large": "large", "xl": "xl", "2xl": "2xl", "3xl": "3xl" };
+      if (effectiveSize !== "default" && sizeMap[effectiveSize]) {
+        d.setAttribute("data-text-size", sizeMap[effectiveSize]);
+      }
+      // Text weight — "system" defers to inherited font weight (no attribute needed)
+      var weightPref = get("text-weight");
+      var effectiveWeight = (weightPref === "system") ? "default" : weightPref;
+      d.removeAttribute("data-text-weight");
+      if (effectiveWeight !== "default") {
+        d.setAttribute("data-text-weight", effectiveWeight);
+      }
       d.setAttribute("data-line-spacing", get("line"));
       d.setAttribute("data-letter-spacing", get("letter"));
       d.setAttribute("data-dyslexia-font", get("font"));
