@@ -88,6 +88,18 @@ weight = 4
 
 [[main]]
 parent = "Events"
+name = "Coyle Crunk"
+url = "/events/crunk"
+weight = 6
+
+[[main]]
+parent = "Events"
+name = "Coyle Formal"
+url = "/events/formal"
+weight = 7
+
+[[main]]
+parent = "Events"
 name = "Parents Weekend"
 url = "/events/parents-weekend"
 weight = 5

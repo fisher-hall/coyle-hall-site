@@ -18,7 +18,7 @@
   {{- $src = (.Resize "1600x webp q82").RelPermalink -}}
 {{- end -}}
 <div class="page-banner-wrapper">
-  <div id="banner-parallax" style="background-image: url('{{ $src }}');">
+  <div id="banner-parallax"{{ with $src }} style="background-image: url('{{ . }}');"{{ end }}>
     <div class="banner-tint-layer"></div>
     <div class="home-banner-text-overlay"{{ with .Get "textid" }} id="{{ . }}"{{ end }}>
       {{- with .Get "subheading" }}

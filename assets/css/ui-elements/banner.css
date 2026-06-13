@@ -79,6 +79,9 @@
   background-position: center calc(50% + var(--page-parallax-bg-y, 0px));
   background-size: cover !important;
   background-repeat: no-repeat !important;
+  /* On-brand fallback for an imageless banner (e.g. a scaffolded event page
+     awaiting its banner image). Fully covered by the image when one is set. */
+  background-color: var(--coyle-dark-green);
   will-change: background-position;
 }
 

@@ -1,0 +1,108 @@
+---
+title: "Coyle Formal"
+url: "/events/formal"
+aliases:
+  - "/formal"
+---
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+<style>
+  /* Elegant high-contrast serif for the Formal banner + accents */
+  #formal-banner-text .home-banner-heading {
+    font-family: "Playfair Display", serif !important;
+    font-weight: 700 !important;
+    font-style: italic;
+    line-height: 0.95 !important;
+    letter-spacing: 0.005em;
+    display: inline-block;
+    position: relative;
+    text-shadow: 0 3px 7px rgba(0, 0, 0, 0.34) !important;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    font-size: clamp(3rem, 11vw, 8rem) !important;
+  }
+
+  .formal-display {
+    font-family: "Playfair Display", serif !important;
+  }
+
+  /* Elegant date plate standing in for the live countdown until a date is set */
+  .formal-date-plate {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    margin: 2.5rem auto 0;
+    padding: 1.75rem 2.75rem;
+    border: 1px solid var(--secondary-color);
+    border-radius: 1rem;
+    max-width: max-content;
+  }
+
+  .formal-date-plate .formal-date-month {
+    font-family: "Playfair Display", serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: clamp(2.5rem, 7vw, 4.5rem);
+    line-height: 1;
+    color: var(--primary-color);
+  }
+
+  .formal-date-plate .formal-date-note {
+    font-size: 1.05rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--secondary-color);
+  }
+
+  body .section-sm > .container {
+    max-width: 1600px !important;
+  }
+
+  @media (min-width: 1024px) {
+    body .section-sm > .container .row.justify-center > .lg\:col-10 {
+      flex: 0 0 100% !important;
+      max-width: 100% !important;
+    }
+  }
+</style>
+
+{{< banner image="" heading="Coyle Formal" textid="formal-banner-text" >}}
+
+<!-- Date plate (no live countdown until a date is confirmed) -->
+<div class="formal-date-plate fade-in-section" style="margin-top: 2.5rem;">
+  <span class="formal-date-month">April 2027</span>
+  <span class="formal-date-note">Date to be determined</span>
+</div>
+
+<div class="flex items-center justify-start my-1 fade-in-section" style="position: relative; z-index: 3; margin-top: 3rem;">
+  <h2 class="text-3xl ml-4 mr-4 md:text-4xl text-left font-extrabold flex items-center"
+      style="position: relative; z-index: 4; margin-top: 0; color: var(--primary-color); width: 100%;">
+    A Classic Notre Dame Night
+  </h2>
+</div>
+
+<!-- Text -->
+<div class="w-full flex flex-col justify-center fade-in-section text-left">
+  <p class="mb-2 ml-4 mr-4 text-lg">
+    In the spring comes a classic Notre Dame dorm tradition: our formal. Usually co-hosted with a
+    women's dorm, the Coyle Formal is the dorm's chance to dress up and enjoy our own fancy night out.
+    </br></br>
+    Held on campus, the formal gives the Crew the opportunity to wear their best suits and ties,
+    bring a date, and share a memorable evening together. Keep an eye on this page — the date and
+    venue will be announced as spring approaches.
+  </p>
+</div>
+
+<div class="flex formal-meta flex-col md:flex-row items-center justify-center gap-4 md:gap-10 w-full my-1 fade-in-section" style="margin-top: 3rem; margin-bottom: 1rem;">
+  <h2 class="text-2xl ml-4 mr-4 md:text-3xl font-extrabold flex items-center" style="color: var(--primary-color);">
+    <i class="fa fa-calendar-day" aria-hidden="true"></i>&nbsp; April 2027 &middot; TBD
+  </h2>
+  <h2 class="text-2xl ml-4 mr-4 md:text-3xl font-extrabold flex items-center" style="color: var(--primary-color);">
+    <i class="fa fa-location-dot" aria-hidden="true"></i>&nbsp; On Campus
+  </h2>
+</div>
+
+{{< event-carousel dir="formal" alt="Coyle Formal photo" label="Coyle Formal photo carousel" >}}
