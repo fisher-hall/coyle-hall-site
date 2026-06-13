@@ -161,7 +161,12 @@
         <a
           class="navbar-brand inline-block py-0"
           href="{{ site.Home.RelPermalink }}">
-          <img src="/images/CoyleHookLogo.png" alt="Coyle Hall Logo" style="max-height: 60px; width: auto;" />
+          {{- $logo := resources.Get "images/CoyleHookLogo.png" -}}
+          {{- with $logo }}{{ $l := .Resize "180x webp q85" }}
+          <img src="{{ $l.RelPermalink }}" alt="Coyle Hall Logo" width="{{ div $l.Width 2 }}" height="{{ div $l.Height 2 }}" style="max-height: 60px; width: auto;" loading="lazy" decoding="async" />
+          {{- else }}
+          <img src="/images/CoyleHookLogo.png" alt="Coyle Hall Logo" style="max-height: 60px; width: auto;" loading="lazy" decoding="async" />
+          {{- end }}
         </a>
       </div>
       {{/*  SOCIAL ICONS  */}}
