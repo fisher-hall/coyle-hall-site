@@ -62,11 +62,8 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 0.25rem;
+    width: 2rem;
     height: 4.5rem;
-    /* The case-insensitive `Button {}` base rule (button.css) bleeds onto
-       native <button>s and adds 1.5rem side padding; under border-box that
-       sets a 48px width floor. Zero it here so `width` actually applies. */
     padding: 0;
     border: 0;
     border-radius: 1rem;
@@ -75,12 +72,17 @@
     cursor: pointer;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.16);
     transform: translateY(-50%);
-    transition: transform 180ms ease, box-shadow 180ms ease;
+    transition: filter 180ms ease, transform 180ms ease, box-shadow 180ms ease;
   }
 
-  .Carousel-control:hover {
-    transform: translateY(-50%) scale(1.08);
-    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.2);
+  /* Match the site buttons: slight tint on hover, scale-down on press */
+  .Carousel-control:hover,
+  .Carousel-control:focus-visible {
+    filter: brightness(1.2);
+  }
+
+  .Carousel-control:active {
+    transform: translateY(-50%) scale(0.95);
   }
 
   .Carousel-control:focus-visible {
