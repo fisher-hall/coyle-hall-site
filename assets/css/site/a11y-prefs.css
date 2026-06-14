@@ -229,13 +229,11 @@ html.a11y-contrast-high .a11y-switch::after { background: #fff !important; }
   color: #fff;
   cursor: pointer;
   flex: 0 0 auto;
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  transition: opacity 0.15s ease, transform 0.15s ease, background-color 0.2s ease;
 }
-.a11y-trigger:hover { background: var(--coyle-dark-green); transform: scale(1.06); }
-.a11y-trigger svg { width: 1.05rem; height: 1.05rem; fill: currentColor; display: block; }
+.a11y-trigger:hover { opacity: 0.7; background: transparent !important; box-shadow: none !important; }
+.a11y-trigger:active { transform: scale(0.92); opacity: 0.6; background: transparent !important; }
 .a11y-trigger i { font-size: 1rem; line-height: 1; color: #fff; }
-.dark .a11y-trigger { background: var(--coyle-light-green); color: #fff; }
-.dark .a11y-trigger i { color: #fff; }
 
 /* Overlay + dialog */
 .a11y-panel-overlay {
@@ -280,7 +278,7 @@ html.a11y-contrast-high .a11y-switch::after { background: #fff !important; }
   color: var(--coyle-dark-green);
 }
 .dark .a11y-panel__title { color: var(--coyle-accent-green); }
-.a11y-panel__title svg { width: 1.3rem; height: 1.3rem; fill: currentColor; }
+.a11y-panel__title i { font-size: 1.3rem; }
 
 .a11y-close {
   display: inline-flex;
@@ -518,9 +516,3 @@ html.a11y-contrast-high .a11y-switch::after { background: #fff !important; }
   gap: 0.4rem;
 }
 
-/* ── Panel trigger hover (do not blend into navbar) ──────── */
-.a11y-trigger:hover {
-  background: var(--coyle-dark-green) !important;
-  transform: scale(1.08);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-}
