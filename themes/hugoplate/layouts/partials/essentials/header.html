@@ -105,25 +105,27 @@
         {{ end }}
       </ul>
 
-      <div class="order-1 ml-auto flex items-center md:order-2 lg:ml-0">
+      <div class="order-1 ml-auto flex items-center gap-2 md:order-2 lg:ml-0">
         {{ with site.Params.search }}
           {{ if .enable }}
             <button
               aria-label="search"
-              class="border-border text-text-dark hover:text-primary
-              dark:border-darkmode-border mr-5 inline-block border-r pr-5
-              text-xl dark:text-white cursor-pointer dark:hover:text-darkmode-primary"
+              class="text-text-dark dark:text-white cursor-pointer"
               data-target="search-modal">
               <i class="fa-solid fa-search"></i>
             </button>
           {{ end }}
         {{ end }}
 
+        <span class="nav-divider" aria-hidden="true"></span>
+
         {{/* accessibility preferences: search > a11y > theme */}}
-        <span class="a11y-trigger-wrap mr-5">{{ partial "components/a11y-panel" . }}</span>
+        {{ partial "components/a11y-panel" . }}
+
+        <span class="nav-divider" aria-hidden="true"></span>
 
         {{/*  {{ partial "components/language-switcher" (dict "Context" . "Class" "mr-5 pl-2 py-1 dark:bg-darkmode-light rounded") }}  */}}
-        {{ partial "components/theme-switcher" (dict "Class" "mr-5") }}
+        {{ partial "components/theme-switcher" (dict "Class" "") }}
 
 
         {{/*  <!-- navigation btn -->

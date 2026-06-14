@@ -224,12 +224,14 @@ html.a11y-contrast-high .a11y-switch::after { background: #fff !important; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  padding: 0;
   width: 2rem;
   height: 2rem;
-  border-radius: 24px;
+  border-radius: 12px;
   color: #fff;
   cursor: pointer;
   flex: 0 0 auto;
+  background: transparent;
   transition: opacity 0.15s ease, transform 0.15s ease, background-color 0.2s ease;
 }
 .a11y-trigger:hover { opacity: 0.7; background: transparent !important; box-shadow: none !important; }

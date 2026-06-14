@@ -181,53 +181,38 @@ body:has(.page-banner-wrapper) .section-sm {
   border-radius: 16px !important;
 }
 
+/* Static dividers between search / a11y / theme — own elements so they don't animate */
+.header .navbar .nav-divider {
+  width: 1px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 2px;
+  flex-shrink: 0;
+  align-self: center;
+}
+
 /* Search + a11y trigger — identical size and centering */
+.header .navbar [aria-label="search"],
 .header .navbar .a11y-trigger {
-  width: 45px !important;
-  height: 45px !important;
-  border-radius: 16px !important;
+  padding: 0 !important;
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 12px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   background: transparent !important;
-  position: relative !important;
+  border: none !important;
 }
-.header .navbar .a11y-trigger i {
+.header .navbar [aria-label="search"] i {
   font-size: 1.2rem !important;
   color: rgba(255, 255, 255, 0.9) !important;
 }
-
-/* Search button */
-.header .navbar [aria-label="search"] {
-  padding: 8px !important;
-  border-radius: 16px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  width: 45px !important;
-  height: 45px !important;
-  transition: background-color 0.2s ease !important;
-  border: none !important;
-  position: relative !important;
-}
-
-/* Vertical dividers after search and a11y trigger */
-.header .navbar [aria-label="search"]::after,
-.header .navbar .a11y-trigger-wrap::after {
-  content: '';
-  position: absolute;
-  right: -4px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 2px;
-  height: 32px;
-  background-color: rgba(255, 255, 255, 0.6);
-  border-radius: 4px;
-}
-.header .navbar .a11y-trigger-wrap {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
+.header .navbar .a11y-trigger i {
+  font-size: 1.35rem !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  padding: 0 !important;
+  line-height: 1 !important;
 }
 
 .header .navbar [aria-label="search"] {
