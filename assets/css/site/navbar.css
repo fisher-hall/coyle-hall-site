@@ -195,8 +195,9 @@ body:has(.page-banner-wrapper) .section-sm {
   position: relative !important;
 }
 
-/* Vertical divider after search button */
-.header .navbar [aria-label="search"]::after {
+/* Vertical dividers after search and a11y trigger */
+.header .navbar [aria-label="search"]::after,
+.header .navbar .a11y-trigger-wrap::after {
   content: '';
   position: absolute;
   right: -4px;
@@ -206,6 +207,11 @@ body:has(.page-banner-wrapper) .section-sm {
   height: 32px;
   background-color: rgba(255, 255, 255, 0.6);
   border-radius: 4px;
+}
+.header .navbar .a11y-trigger-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
 }
 
 .header .navbar [aria-label="search"] {
