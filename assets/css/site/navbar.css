@@ -276,7 +276,7 @@ body:has(.page-banner-wrapper) .section-sm {
 .nav-dropdown-list {
   z-index: 101;
   position: absolute;
-  border-radius: 16px;
+  border-radius: 1.5rem; /* rounded-3xl */
   min-width: 240px;
   background-color: var(--coyle-dark-green) !important;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 4px 10px rgba(0, 0, 0, 0.2) !important;
@@ -303,13 +303,13 @@ body:has(.page-banner-wrapper) .section-sm {
 .floating-navbar .nav-dropdown-list {
   background: var(--coyle-dark-green) !important;
   backdrop-filter: blur(12px) !important;
-  border-radius: 16px !important;
+  border-radius: 1.5rem !important; /* rounded-3xl */
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15) !important;
 }
 
 .dark .floating-navbar .nav-dropdown-list {
   background: var(--coyle-dark-green) !important;
-  border-radius: 16px !important;
+  border-radius: 1.5rem !important; /* rounded-3xl */
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
 }
 
