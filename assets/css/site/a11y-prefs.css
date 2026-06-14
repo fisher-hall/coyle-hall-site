@@ -113,19 +113,25 @@ html[data-motion="reduced"] .ticker-track { animation-play-state: paused !import
 html.a11y-contrast-high {
   color-scheme: dark;
 }
-/* Force dark background */
 html.a11y-contrast-high body {
   background: #000 !important;
   color: #fff !important;
 }
-/* Override ALL text with white or bright accent green */
+/* Body text white */
 html.a11y-contrast-high :where(p, li, dd, dt, blockquote, span:not([class*="icon"])) {
   color: #fff !important;
 }
+/* Headings: accent green — but NOT inside banners (banner text stays white) */
 html.a11y-contrast-high :where(h1, h2, h3, h4, h5, h6) {
-  color: #6ee87a !important; /* brighter accent green */
+  color: #6ee87a !important;
 }
-/* Links: bright green, always underlined */
+html.a11y-contrast-high .home-banner-heading,
+html.a11y-contrast-high .home-banner-subheading,
+html.a11y-contrast-high [id*="banner-text"] :where(h1, h2, h3, h4, h5, h6),
+html.a11y-contrast-high [class*="banner-text"] :where(h1, h2, h3, h4, h5, h6) {
+  color: #ffffff !important;
+}
+/* Links */
 html.a11y-contrast-high a {
   color: #48bb4e !important;
   text-decoration: underline !important;
@@ -134,55 +140,79 @@ html.a11y-contrast-high a:hover,
 html.a11y-contrast-high a:focus {
   color: #6ee87a !important;
 }
-/* Buttons: invert to green-on-black */
-html.a11y-contrast-high :where(button, .btn, [role="button"]) {
-  background: #064121 !important;
+/* Buttons/controls: transparent bg, green border only */
+html.a11y-contrast-high :where(button:not(.ui-switch):not(.a11y-switch), .btn, [role="button"]) {
+  background: transparent !important;
+  color: #fff !important;
+  border: 2px solid #48bb4e !important;
+  box-shadow: none !important;
+}
+html.a11y-contrast-high :where(button:not(.ui-switch):not(.a11y-switch), .btn, [role="button"]):hover,
+html.a11y-contrast-high :where(button:not(.ui-switch):not(.a11y-switch), .btn, [role="button"])[aria-pressed="true"] {
+  background: transparent !important;
+  color: #6ee87a !important;
+  border-color: #6ee87a !important;
+}
+/* Pressed/active seg button: invert but still no bg tint — use subtle outline */
+html.a11y-contrast-high .a11y-seg button[aria-pressed="true"] {
+  background: transparent !important;
+  color: #6ee87a !important;
+  border-color: #6ee87a !important;
+  outline: 2px solid #6ee87a;
+  outline-offset: -2px;
+}
+/* Form controls: no bg tint, just border */
+html.a11y-contrast-high :where(input:not([type="range"]), textarea, select) {
+  background: transparent !important;
   color: #fff !important;
   border: 2px solid #48bb4e !important;
 }
-html.a11y-contrast-high :where(button, .btn, [role="button"]):hover {
-  background: #48bb4e !important;
-  color: #000 !important;
-}
-/* Form controls */
-html.a11y-contrast-high :where(input, textarea, select) {
-  background: #0a1a0d !important;
-  color: #fff !important;
-  border: 2px solid #48bb4e !important;
-}
-/* Cards, surfaces */
+/* Cards / surfaces: no bg tint, border only */
 html.a11y-contrast-high :where(.info-card, .FeatureBlock, .Carousel-control, [class*="card"], [class*="panel"]) {
-  background: #0a1a0d !important;
+  background: transparent !important;
   border: 2px solid #48bb4e !important;
   color: #fff !important;
 }
-/* Navbar: fully opaque dark */
+/* Navbar: fully opaque dark, green border bottom */
 html.a11y-contrast-high .navbar,
 html.a11y-contrast-high .floating-navbar {
   background: #000 !important;
   border-bottom: 2px solid #48bb4e !important;
 }
-/* Focus: bright white outlines */
+/* Nav links in high contrast: NO boxes — just text color change */
+html.a11y-contrast-high .header .navbar .nav-link,
+html.a11y-contrast-high .floating-navbar .nav-link,
+html.a11y-contrast-high .nav-dropdown-link {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: #fff !important;
+}
+html.a11y-contrast-high .header .navbar .nav-link:hover,
+html.a11y-contrast-high .floating-navbar .nav-link:hover,
+html.a11y-contrast-high .nav-dropdown-link:hover {
+  background: transparent !important;
+  box-shadow: none !important;
+  color: #6ee87a !important;
+}
+/* Focus */
 html.a11y-contrast-high :focus-visible {
   outline: 4px solid #fff !important;
   outline-offset: 3px !important;
 }
-/* Accessibility panel in high contrast */
+/* Accessibility panel */
 html.a11y-contrast-high .a11y-panel {
   background: #000 !important;
   border: 2px solid #48bb4e !important;
   color: #fff !important;
 }
-html.a11y-contrast-high .a11y-seg button {
-  border-color: #48bb4e !important;
-  color: #fff !important;
-}
-html.a11y-contrast-high .a11y-seg button[aria-pressed="true"] {
-  background: #48bb4e !important;
-  color: #000 !important;
-}
-html.a11y-contrast-high .a11y-switch { background: #333 !important; }
+/* Switches */
+html.a11y-contrast-high .ui-switch,
+html.a11y-contrast-high .a11y-switch { background: #333 !important; border: 2px solid #48bb4e !important; }
+html.a11y-contrast-high .ui-switch[aria-checked="true"],
 html.a11y-contrast-high .a11y-switch[aria-checked="true"] { background: #48bb4e !important; }
+html.a11y-contrast-high .ui-switch::after,
+html.a11y-contrast-high .a11y-switch::after { background: #fff !important; }
 /* ═══════════════════════════════════════════════════════════════
    PREFERENCES PANEL UI
 ═══════════════════════════════════════════════════════════════ */
@@ -439,13 +469,16 @@ html.a11y-contrast-high .a11y-switch[aria-checked="true"] { background: #48bb4e 
   cursor: pointer;
 }
 .a11y-slider-ticks {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.65rem;
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-auto-flow: column;
+  font-size: 0.62rem;
   opacity: 0.5;
-  margin-top: 0.2rem;
-  padding: 0 0.15rem;
+  margin-top: 0.25rem;
+  /* offset left/right A labels (≈1.1rem) + gap (0.6rem) so ticks align under stops */
+  padding: 0 calc(1.1rem + 0.6rem);
 }
+.a11y-slider-ticks span { text-align: center; }
 
 /* ── "Follow system" greyed-out state ─────────────────────── */
 .a11y-field[data-sys-active="true"] .a11y-seg,

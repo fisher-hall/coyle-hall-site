@@ -818,7 +818,7 @@ body:has(.page-banner-wrapper) .section-sm {
 
   /* Hamburger morph */
   .hamburger-btn { position: relative; width: 48px; height: 48px; padding: 8px; z-index: 10001 !important; }
-  .hamburger-btn .hb-line { position: absolute; left: 12px; right: 12px; height: 3px; background: #fff; border-radius: 16px; transition: transform .45s cubic-bezier(.4,0,.2,1), top .35s cubic-bezier(.4,0,.2,1), opacity .3s ease; }
+  .hamburger-btn .hb-line { display: block; position: absolute; left: 12px; right: 12px; height: 3px; background: #fff; border-radius: 16px; transition: transform .45s cubic-bezier(.4,0,.2,1), top .35s cubic-bezier(.4,0,.2,1), opacity .3s ease; }
   .hamburger-btn .hb-line:nth-child(1) { top: 16px; }
   .hamburger-btn .hb-line:nth-child(2) { top: 23px; }
   .hamburger-btn .hb-line:nth-child(3) { top: 30px; }
@@ -850,6 +850,28 @@ label[for="nav-toggle"].hamburger-btn:focus-visible,
 .nav-dropdown-list .nav-dropdown-item a:focus-visible,
 .nav-dropdown-link:focus-visible {
   outline-color: var(--coyle-accent-green) !important;
+}
+
+/* Suppress persistent mouse-focus glow on search / X button */
+.header .navbar [aria-label="search"]:focus:not(:focus-visible),
+.floating-navbar [aria-label="search"]:focus:not(:focus-visible),
+body.desktop-search-active .header .navbar [aria-label="search"] {
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+/* Search icon: suppress persistent green glow on non-keyboard focus */
+.header .navbar [aria-label="search"]:focus:not(:focus-visible),
+.floating-navbar [aria-label="search"]:focus:not(:focus-visible) {
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+/* Also reset any lingering state from the desktop-search-active class */
+body.desktop-search-active .header .navbar [aria-label="search"] {
+  box-shadow: none !important;
+  outline: none !important;
 }
 
 /* Extra safeguard: touch-only devices */

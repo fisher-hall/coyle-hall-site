@@ -14,6 +14,19 @@
   var TEXT_WEIGHT_STEPS = ['light', 'default', 'semibold', 'bold', 'extrabold'];
   var SLIDER_LABELS = { 'text-size': TEXT_SIZE_STEPS, 'text-weight': TEXT_WEIGHT_STEPS };
 
+  // Fallback values used when unchecking "Follow System" with no seg button pressed
+  var DEFAULT_VALUES = {
+    'theme': 'light',
+    'contrast': 'normal',
+    'motion': 'full',
+    'text-size': 'default',
+    'text-weight': 'default'
+  };
+
+  // Buffer for text-size / text-weight slider changes so the panel doesn't
+  // resize while open. Flushed to the store when the panel closes.
+  var pendingSliderChanges = {};
+
   document.addEventListener("DOMContentLoaded", function () {
     var overlay = document.querySelector("[data-a11y-overlay]");
     var dialog = overlay && overlay.querySelector(".a11y-panel");
@@ -39,7 +52,7 @@
       // Reflect sliders
       overlay.querySelectorAll("[data-a11y-slider]").forEach(function (slider) {
         var pref = slider.getAttribute("data-a11y-slider");
-        var current = store.get(pref);
+        var current = pendingSliderChanges[pref] !== undefined ? pendingSliderChanges[pref] : store.get(pref);
         var steps = SLIDER_LABELS[pref];
         if (steps) {
           var idx = steps.indexOf(current);
@@ -88,13 +101,18 @@
       slider.addEventListener("input", function () {
         var steps = SLIDER_LABELS[pref];
         var val = steps[parseInt(slider.value, 10)];
-        store.set(pref, val);
         slider.setAttribute("aria-valuetext", val);
         // Un-check the system checkbox for this field when manually sliding
         var field = slider.closest(".a11y-field");
         var sysCb = field && field.querySelector("[data-a11y-sys]");
         if (sysCb) sysCb.checked = false;
-        reflect();
+        if (pref === 'text-size' || pref === 'text-weight') {
+          // Buffer: don't apply to DOM while panel is open (prevents panel resize jank)
+          pendingSliderChanges[pref] = val;
+        } else {
+          store.set(pref, val);
+          reflect();
+        }
       });
     });
 
@@ -110,11 +128,14 @@
           var seg = field && field.querySelector("[data-a11y-seg]");
           var slider = field && field.querySelector("[data-a11y-slider]");
           if (seg) {
-            var pressed = seg.querySelector("[aria-pressed=\"true\"]");
-            if (pressed) store.set(pref, pressed.getAttribute("data-value"));
+            var pressed = seg.querySelector('[aria-pressed="true"]');
+            var val = (pressed && pressed.getAttribute("data-value") !== "system")
+              ? pressed.getAttribute("data-value")
+              : (DEFAULT_VALUES[pref] || "normal");
+            store.set(pref, val);
           } else if (slider) {
             var steps = SLIDER_LABELS[pref];
-            store.set(pref, steps[parseInt(slider.value, 10)]);
+            store.set(pref, steps[parseInt(slider.value, 10)] || DEFAULT_VALUES[pref] || "default");
           }
         }
         reflect();
@@ -141,6 +162,11 @@
       if (f.length) f[0].focus();
     }
     function close() {
+      // Flush deferred text-size / text-weight changes now that panel is closing
+      Object.keys(pendingSliderChanges).forEach(function (pref) {
+        store.set(pref, pendingSliderChanges[pref]);
+      });
+      pendingSliderChanges = {};
       overlay.classList.remove("is-open");
       overlay.hidden = true;
       openBtn.setAttribute("aria-expanded", "false");
