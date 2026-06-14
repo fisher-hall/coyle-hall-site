@@ -181,6 +181,22 @@ body:has(.page-banner-wrapper) .section-sm {
   border-radius: 16px !important;
 }
 
+/* Search + a11y trigger — identical size and centering */
+.header .navbar .a11y-trigger {
+  width: 45px !important;
+  height: 45px !important;
+  border-radius: 16px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: transparent !important;
+  position: relative !important;
+}
+.header .navbar .a11y-trigger i {
+  font-size: 1.2rem !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
 /* Search button */
 .header .navbar [aria-label="search"] {
   padding: 8px !important;
@@ -353,6 +369,23 @@ body:has(.page-banner-wrapper) .section-sm {
     visibility: visible !important;
     opacity: 1 !important;
     pointer-events: auto !important;
+  }
+
+  /* Breathing room between the nav trigger and its flyout. The dropdown opens
+     on mouseenter / closes on mouseleave of .nav-dropdown, so a bare gap would
+     be a dead-zone that drops the menu. The ::before fills the gap as an
+     invisible hover bridge (it's a descendant of .nav-dropdown, so the pointer
+     stays "inside" while crossing). */
+  .nav-dropdown > .nav-dropdown-list {
+    margin-top: 0.6rem;
+  }
+  .nav-dropdown > .nav-dropdown-list::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -0.6rem;
+    height: 0.6rem;
   }
 
   .header .navbar .nav-dropdown-list .nav-dropdown-item a,

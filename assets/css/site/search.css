@@ -38,7 +38,7 @@
   font-family: 'Rubik', sans-serif;
   font-weight: 500;
   border: 2px solid rgba(255, 255, 255, 0.9);
-  border-radius: 9999px !important;
+  border-radius: 1.5rem !important; /* rounded-3xl */
   background: transparent;
   color: #ffffff;
   outline: none;
