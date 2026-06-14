@@ -195,8 +195,8 @@ body:has(.page-banner-wrapper) .section-sm {
 .header .navbar [aria-label="search"],
 .header .navbar .a11y-trigger {
   padding: 0 !important;
-  width: 32px !important;
-  height: 32px !important;
+  width: 36px !important;
+  height: 36px !important;
   border-radius: 8px !important;
   display: flex !important;
   align-items: center !important;
@@ -205,11 +205,11 @@ body:has(.page-banner-wrapper) .section-sm {
   border: none !important;
 }
 .header .navbar [aria-label="search"] i {
-  font-size: 1.1rem !important;
+  font-size: 1.25rem !important;
   color: rgba(255, 255, 255, 0.9) !important;
 }
 .header .navbar .a11y-trigger i {
-  font-size: 1.2rem !important;
+  font-size: 1.4rem !important;
   color: rgba(255, 255, 255, 0.9) !important;
   padding: 0 !important;
   line-height: 1 !important;
