@@ -216,6 +216,9 @@ body:has(.page-banner-wrapper) .section-sm {
 }
 
 /* Theme switcher — shrunk to match icon button scale */
+.header .navbar .theme-switcher {
+  padding-left: 6px !important;
+}
 .header .navbar .theme-switcher label {
   height: 12px !important;
   width: 30px !important;
