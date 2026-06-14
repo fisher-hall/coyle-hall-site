@@ -215,22 +215,8 @@ body:has(.page-banner-wrapper) .section-sm {
   line-height: 1 !important;
 }
 
-/* Theme switcher — shrunk to match icon button scale */
 .header .navbar .theme-switcher {
   padding-left: 6px !important;
-}
-.header .navbar .theme-switcher label {
-  height: 12px !important;
-  width: 30px !important;
-}
-.header .navbar .theme-switcher span {
-  height: 19px !important;
-  width: 19px !important;
-  top: -4px !important;
-  left: 0 !important;
-}
-.header .navbar .theme-switcher input:checked + label span {
-  left: 11px !important;
 }
 
 .header .navbar [aria-label="search"] {
