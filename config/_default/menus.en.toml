@@ -100,8 +100,8 @@ weight = 7
 
 [[main]]
 parent = "Events"
-name = "Parents Weekend"
-url = "/events/parents-weekend"
+name = "Family Weekend"
+url = "/events/family-weekend"
 weight = 5
 
 
