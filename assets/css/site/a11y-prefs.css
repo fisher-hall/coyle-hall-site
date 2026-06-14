@@ -72,8 +72,10 @@ html[data-motion="reduced"] *::after {
 /* Reduced motion: stop wave canvas from animating */
 html[data-motion="reduced"] canvas { animation: none !important; }
 
-/* Reduced motion: block all image hover transforms */
-html[data-motion="reduced"] img,
+/* Reduced motion: block all image hover transforms.
+   .ticker-img is excluded so its static decorative tilt (--rot) survives;
+   the ticker's auto-scroll is paused separately below. */
+html[data-motion="reduced"] img:not(.ticker-img),
 html[data-motion="reduced"] .interactive-tilt,
 html[data-motion="reduced"] .fade-in-section img {
   transform: none !important;
@@ -89,7 +91,7 @@ html[data-motion="reduced"] .ticker-track { animation-play-state: paused !import
 @media (prefers-reduced-motion: reduce) {
   canvas { animation: none !important; }
 
-  img,
+  img:not(.ticker-img),
   .interactive-tilt,
   .fade-in-section img {
     transform: none !important;
