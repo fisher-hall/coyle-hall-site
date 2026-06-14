@@ -69,7 +69,10 @@
 
     function getWaveColor(target) {
       if (target.canvas.id === 'wave-canvas-divider') {
-        return isDarkMode() ? '#000000' : '#ffffff';
+        // High contrast forces a black page background regardless of theme,
+        // so the divider must be black too (not white-on-black).
+        var highContrast = document.documentElement.classList.contains('a11y-contrast-high');
+        return (highContrast || isDarkMode()) ? '#000000' : '#ffffff';
       }
       if (target.canvas.id === 'wave-canvas') {
         var gradient = target.ctx.createLinearGradient(0, 0, target.canvas.width, 0);

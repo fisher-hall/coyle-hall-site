@@ -114,6 +114,10 @@ html[data-motion="reduced"] .ticker-track { animation-play-state: paused !import
 /* ── High contrast: always dark mode + accent-green/white palette ── */
 html.a11y-contrast-high {
   color-scheme: dark;
+  /* Page background is black; wave canvases that fill with --background-color
+     (inner-page dividers via page-animations.js) must follow so they don't
+     paint white-on-black. */
+  --background-color: #000 !important;
 }
 html.a11y-contrast-high body {
   background: #000 !important;
@@ -130,7 +134,10 @@ html.a11y-contrast-high :where(h1, h2, h3, h4, h5, h6) {
 html.a11y-contrast-high .home-banner-heading,
 html.a11y-contrast-high .home-banner-subheading,
 html.a11y-contrast-high [id*="banner-text"] :where(h1, h2, h3, h4, h5, h6),
-html.a11y-contrast-high [class*="banner-text"] :where(h1, h2, h3, h4, h5, h6) {
+html.a11y-contrast-high [class*="banner-text"] :where(h1, h2, h3, h4, h5, h6),
+/* Headings on brand-green surfaces stay white (no green-on-green) */
+html.a11y-contrast-high .home-top-banner__inner :where(h1, h2, h3, h4, h5, h6),
+html.a11y-contrast-high .hc-brand-surface :where(h1, h2, h3, h4, h5, h6) {
   color: #ffffff !important;
 }
 /* Links */
@@ -142,19 +149,30 @@ html.a11y-contrast-high a:hover,
 html.a11y-contrast-high a:focus {
   color: #6ee87a !important;
 }
-/* Buttons/controls: transparent bg, green border only */
-html.a11y-contrast-high :where(button:not(.ui-switch):not(.a11y-switch), .btn, [role="button"]) {
+/* Buttons/controls: transparent bg, green border only.
+   Icon-only / shapeless buttons (close X, a11y trigger, search) are excluded —
+   they have no background or shape, so an outline box looks wrong. */
+html.a11y-contrast-high :where(button:not(.ui-switch):not(.a11y-switch):not(.a11y-close):not(.a11y-trigger):not([aria-label="search"]), .btn, [role="button"]) {
   background: transparent !important;
   color: #fff !important;
   border: 2px solid #48bb4e !important;
   box-shadow: none !important;
 }
-html.a11y-contrast-high :where(button:not(.ui-switch):not(.a11y-switch), .btn, [role="button"]):hover,
-html.a11y-contrast-high :where(button:not(.ui-switch):not(.a11y-switch), .btn, [role="button"])[aria-pressed="true"] {
+html.a11y-contrast-high :where(button:not(.ui-switch):not(.a11y-switch):not(.a11y-close):not(.a11y-trigger):not([aria-label="search"]), .btn, [role="button"]):hover,
+html.a11y-contrast-high :where(button:not(.ui-switch):not(.a11y-switch):not(.a11y-close):not(.a11y-trigger):not([aria-label="search"]), .btn, [role="button"])[aria-pressed="true"] {
   background: transparent !important;
   color: #6ee87a !important;
   border-color: #6ee87a !important;
 }
+/* Icon-only buttons keep just their icon — no box */
+html.a11y-contrast-high :where(.a11y-close, .a11y-trigger, [aria-label="search"]) {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: #fff !important;
+}
+/* Social/icon links don't need the link underline */
+html.a11y-contrast-high .social-icons a { text-decoration: none !important; }
 /* Pressed/active seg button: invert but still no bg tint — use subtle outline */
 html.a11y-contrast-high .a11y-seg button[aria-pressed="true"] {
   background: transparent !important;
@@ -169,8 +187,11 @@ html.a11y-contrast-high :where(input:not([type="range"]), textarea, select) {
   color: #fff !important;
   border: 2px solid #48bb4e !important;
 }
-/* Cards / surfaces: no bg tint, border only */
-html.a11y-contrast-high :where(.info-card, .FeatureBlock, .Carousel-control, [class*="card"], [class*="panel"]) {
+/* Cards / surfaces: no bg tint, border only.
+   The :not([class*="__"]) guard keeps the border on the card/panel container
+   itself but off its BEM sub-parts (e.g. .a11y-panel__head / __title), which
+   are just layout/heading wrappers, not bordered surfaces. */
+html.a11y-contrast-high :where(.info-card, .FeatureBlock, .Carousel-control, [class*="card"]:not([class*="__"]), [class*="panel"]:not([class*="__"])) {
   background: transparent !important;
   border: 2px solid #48bb4e !important;
   color: #fff !important;
