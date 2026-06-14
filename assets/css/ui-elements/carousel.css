@@ -66,8 +66,8 @@
     height: 4.5rem;
     border: 0;
     border-radius: 1rem;
-    background: var(--coyle-dark-green);
-    color: #fff;
+    background: #fff;
+    color: var(--coyle-dark-green);
     cursor: pointer;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.16);
     transform: translateY(-50%);
