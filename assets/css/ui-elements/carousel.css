@@ -62,12 +62,16 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 1rem;
+    width: 0.25rem;
     height: 4.5rem;
+    /* The case-insensitive `Button {}` base rule (button.css) bleeds onto
+       native <button>s and adds 1.5rem side padding; under border-box that
+       sets a 48px width floor. Zero it here so `width` actually applies. */
+    padding: 0;
     border: 0;
     border-radius: 1rem;
-    background: #fff;
-    color: var(--coyle-dark-green);
+    background: var(--coyle-dark-green);
+    color: #fff;
     cursor: pointer;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.16);
     transform: translateY(-50%);
