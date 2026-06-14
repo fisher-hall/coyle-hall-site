@@ -233,7 +233,9 @@ html.a11y-contrast-high .a11y-switch::after { background: #fff !important; }
 }
 .a11y-trigger:hover { background: var(--coyle-dark-green); transform: scale(1.06); }
 .a11y-trigger svg { width: 1.05rem; height: 1.05rem; fill: currentColor; display: block; }
-.dark .a11y-trigger { background: var(--coyle-light-green); color: #04240f; }
+.a11y-trigger i { font-size: 1rem; line-height: 1; color: #fff; }
+.dark .a11y-trigger { background: var(--coyle-light-green); color: #fff; }
+.dark .a11y-trigger i { color: #fff; }
 
 /* Overlay + dialog */
 .a11y-panel-overlay {
