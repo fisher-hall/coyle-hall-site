@@ -65,8 +65,9 @@ body:has(.regatta-bottom-graphic) .footer-wrapper .footer::before {
   }
 }
 
-.regatta-carousel-section {
-  margin: 5rem 0 2rem;
+.regatta-display {
+  font-family: "aquavit", sans-serif !important;
+  font-weight: 1000 !important;
 }
 
 .regatta-bottom-graphic {
@@ -114,31 +115,9 @@ body:has(.regatta-bottom-graphic) .footer-wrapper .footer::before {
 {{< banner image="/images/BannerImages/RegattaBanner.png" subheading="The" heading="Regatta" textid="incoming-banner-text" >}}
 
 <!-- Countdown Section -->
-<div data-countdown data-target-date="2027-04-10T12:00:00">
-  <div class="my-8" style="margin-top: 2rem;">
-    <div class="CountdownGrid CountdownGrid--display max-w-none" style="font-family: 'aquavit', sans-serif; font-weight: 1000;">
-      <div class="CountdownBlock">
-        <span class="CountdownBlock-number" data-unit="days">00</span>
-        <span class="CountdownBlock-label">Days</span>
-      </div>
-      <div class="CountdownBlock">
-        <span class="CountdownBlock-number" data-unit="hours">00</span>
-        <span class="CountdownBlock-label">Hours</span>
-      </div>
-      <div class="CountdownBlock">
-        <span class="CountdownBlock-number" data-unit="mins">00</span>
-        <span class="CountdownBlock-label">Minutes</span>
-      </div>
-      <div class="CountdownBlock">
-        <span class="CountdownBlock-number" data-unit="secs">00</span>
-        <span class="CountdownBlock-label">Seconds</span>
-      </div>
-    </div>
-    <h2 class="text-7xl text-center font-extrabold mb-6 mt-8 fade-in-section" style="color: var(--primary-color); font-family: 'aquavit', sans-serif; font-weight: 1000;">
-        Ya Gotta <span style="color: var(--secondary-color);">Regatta</span>
-    </h2>
-  </div>
-</div>
+{{< event-countdown date="2027-04-10T12:00:00" fontclass="regatta-display" >}}
+  Ya Gotta <span style="color: var(--secondary-color);">Regatta</span>
+{{< /event-countdown >}}
 
 <div class="flex items-center justify-start my-1 fade-in-section" style="position: relative; z-index: 3; margin-top: 3rem;">
     <h2 class="text-3xl ml-4 mr-4 md:text-4xl text-left font-extrabold fade-in-section flex items-center"
@@ -222,22 +201,7 @@ body:has(.regatta-bottom-graphic) .footer-wrapper .footer::before {
 </div>
 
 
-<section class="regatta-carousel-section fade-in-section">
-  <div class="flex items-center justify-start my-1" style="position: relative; z-index: 3; margin-top: 4rem;">
-  </div>
-  <div class="Carousel" aria-label="Regatta photo carousel">
-    <div class="Carousel-track">
-      {{< carousel-slides dir="regatta" alt="Regatta photo" >}}
-    </div>
-    <button class="Carousel-control Carousel-control--prev" type="button" aria-label="Previous slide">
-      <i class="fa fa-chevron-left"></i>
-    </button>
-    <button class="Carousel-control Carousel-control--next" type="button" aria-label="Next slide">
-      <i class="fa fa-chevron-right"></i>
-    </button>
-  </div>
-  <div class="Carousel-dots" aria-label="Carousel pagination"></div>
-</section>
+{{< event-carousel dir="regatta" alt="Regatta photo" label="Regatta photo carousel" >}}
 
 <div class="regatta-bottom-graphic">
   <img src="/images/regatta/RegattaWebGraphic.svg" alt="" role="presentation">

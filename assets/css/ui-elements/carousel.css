@@ -14,6 +14,12 @@
 
 @layer components {
 
+  /* Section wrapper emitted by the {{< event-carousel >}} shortcode — gives the
+     carousel consistent vertical breathing room on every event page. */
+  .event-carousel-section {
+    margin: 5rem 0 2rem;
+  }
+
   .Carousel {
     position: relative;
     overflow: hidden;
@@ -56,7 +62,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 2rem;
+    width: 1rem;
     height: 4.5rem;
     border: 0;
     border-radius: 1rem;
