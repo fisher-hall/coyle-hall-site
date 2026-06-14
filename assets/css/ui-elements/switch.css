@@ -32,8 +32,10 @@
   background: var(--coyle-light-green);
 }
 .ui-switch[aria-checked="true"]::after {
-  transform: translateX(calc(2.75rem - (1.5rem - 6px) - 6px));
+  transform: translateX(1.25rem);
 }
+/* High contrast: account for 2px border reducing inner track */
+html.a11y-contrast-high .ui-switch { box-sizing: border-box; }
 /* High contrast */
 html.a11y-contrast-high .ui-switch { background: #333 !important; border: 2px solid #48bb4e !important; }
 html.a11y-contrast-high .ui-switch[aria-checked="true"] { background: #48bb4e !important; }
