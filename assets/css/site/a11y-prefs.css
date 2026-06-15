@@ -204,14 +204,16 @@ html.a11y-contrast-high .floating-navbar {
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
 }
-/* Nav links in high contrast: NO boxes — just text color change */
+/* Nav links in high contrast: NO boxes, NO underline — just text color change */
 html.a11y-contrast-high .header .navbar .nav-link,
 html.a11y-contrast-high .floating-navbar .nav-link,
-html.a11y-contrast-high .nav-dropdown-link {
+html.a11y-contrast-high .nav-dropdown-link,
+html.a11y-contrast-high .navbar-brand {
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
   color: #fff !important;
+  text-decoration: none !important;
 }
 html.a11y-contrast-high .header .navbar .nav-link:hover,
 html.a11y-contrast-high .floating-navbar .nav-link:hover,
@@ -219,6 +221,7 @@ html.a11y-contrast-high .nav-dropdown-link:hover {
   background: transparent !important;
   box-shadow: none !important;
   color: #6ee87a !important;
+  text-decoration: none !important;
 }
 /* Focus */
 html.a11y-contrast-high :focus-visible {
@@ -238,12 +241,76 @@ html.a11y-contrast-high .ui-switch[aria-checked="true"],
 html.a11y-contrast-high .a11y-switch[aria-checked="true"] { background: #48bb4e !important; }
 html.a11y-contrast-high .ui-switch::after,
 html.a11y-contrast-high .a11y-switch::after { background: #fff !important; }
+/* Fast Facts tiles: black bg, thick accent border, all text white */
+html.a11y-contrast-high .fast-facts-inner > div:not([class*="col-span"]),
+html.a11y-contrast-high .fast-facts-inner > a > div {
+  background: #000 !important;
+  border: 3px solid #48bb4e !important;
+}
+html.a11y-contrast-high .fast-facts-inner > div:not([class*="col-span"]) :where(h1, h2, h3),
+html.a11y-contrast-high .fast-facts-inner > a > div :where(h1, h2, h3) {
+  color: #fff !important;
+}
+
 /* Fast Facts: hide watermark icons on small screens in HC mode */
 @media (max-width: 540px) {
   html.a11y-contrast-high .fast-facts-inner > div:not([class*="col-span"]) > i:first-child,
   html.a11y-contrast-high .fast-facts-inner > a > div > i:first-child {
     display: none !important;
   }
+}
+
+/* New Crew Guide button: solid white fill with dark green text */
+html.a11y-contrast-high .hc-brand-surface Button.white,
+html.a11y-contrast-high .hc-brand-surface button.white {
+  background: #fff !important;
+  color: var(--coyle-dark-green) !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+html.a11y-contrast-high .hc-brand-surface Button.white:hover,
+html.a11y-contrast-high .hc-brand-surface button.white:hover {
+  background: #e6e6e6 !important;
+  color: var(--coyle-dark-green) !important;
+}
+
+/* Instagram section: remove gradient, black bg, thick accent border */
+html.a11y-contrast-high .ig-section {
+  background: #000 !important;
+  border: 3px solid #48bb4e !important;
+}
+
+/* Instagram @real_coylehall handle: white, no underline */
+html.a11y-contrast-high .hc-brand-surface a:where([href*="instagram"]) {
+  color: #fff !important;
+  text-decoration: none !important;
+}
+
+/* Navbar: dyslexia font — override the high-specificity 'Rubik !important' in navbar.css */
+html[data-dyslexia-font="on"] .header .navbar a,
+html[data-dyslexia-font="on"] .header .navbar span:not(.sr-only),
+html[data-dyslexia-font="on"] .header .navbar button,
+html[data-dyslexia-font="on"] .header .navbar li,
+html[data-dyslexia-font="on"] .nav-dropdown-list .nav-dropdown-item a {
+  font-family: "OpenDyslexic", "Rubik", sans-serif !important;
+}
+
+/* Navbar: letter-spacing — navbar.css doesn't set this but add !important for safety */
+html[data-letter-spacing="on"] .header .navbar a,
+html[data-letter-spacing="on"] .header .navbar span:not(.sr-only),
+html[data-letter-spacing="on"] .header .navbar button,
+html[data-letter-spacing="on"] .nav-dropdown-list .nav-dropdown-item a {
+  letter-spacing: 0.045em !important;
+  word-spacing: 0.08em !important;
+}
+
+/* Navbar: always black, never transitions to green */
+html.a11y-contrast-high body .floating-navbar,
+html.a11y-contrast-high body.scrolled-navbar .floating-navbar,
+html.a11y-contrast-high body:not(.has-banner) .floating-navbar {
+  background: #000 !important;
+  background-color: #000 !important;
+  transition: none !important;
 }
 /* ═══════════════════════════════════════════════════════════════
    PREFERENCES PANEL UI
