@@ -196,11 +196,13 @@ html.a11y-contrast-high :where(.info-card, .FeatureBlock, .Carousel-control, [cl
   border: 2px solid #48bb4e !important;
   color: #fff !important;
 }
-/* Navbar: fully opaque dark, green border bottom */
+/* Navbar: fully opaque black, accent border all sides */
 html.a11y-contrast-high .navbar,
 html.a11y-contrast-high .floating-navbar {
   background: #000 !important;
-  border-bottom: 2px solid #48bb4e !important;
+  border: 2px solid #48bb4e !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
 }
 /* Nav links in high contrast: NO boxes — just text color change */
 html.a11y-contrast-high .header .navbar .nav-link,
@@ -236,6 +238,13 @@ html.a11y-contrast-high .ui-switch[aria-checked="true"],
 html.a11y-contrast-high .a11y-switch[aria-checked="true"] { background: #48bb4e !important; }
 html.a11y-contrast-high .ui-switch::after,
 html.a11y-contrast-high .a11y-switch::after { background: #fff !important; }
+/* Fast Facts: hide watermark icons on small screens in HC mode */
+@media (max-width: 540px) {
+  html.a11y-contrast-high .fast-facts-inner > div:not([class*="col-span"]) > i:first-child,
+  html.a11y-contrast-high .fast-facts-inner > a > div > i:first-child {
+    display: none !important;
+  }
+}
 /* ═══════════════════════════════════════════════════════════════
    PREFERENCES PANEL UI
 ═══════════════════════════════════════════════════════════════ */
@@ -538,5 +547,106 @@ html.a11y-contrast-high .a11y-switch::after { background: #fff !important; }
   align-items: center;
   justify-content: center;
   gap: 0.4rem;
+}
+
+/* ── Mobile scale-up (≤640px) ─────────────────────────────── */
+@media (max-width: 640px) {
+  .a11y-panel-overlay {
+    padding: 0.5rem;
+    align-items: flex-end;
+  }
+
+  .a11y-panel {
+    max-width: 100%;
+    max-height: min(88vh, 780px);
+    padding: 1.5rem 1.25rem 1.75rem;
+    border-radius: 1.5rem 1.5rem 1rem 1rem;
+  }
+
+  .a11y-panel__title {
+    font-size: 1.45rem;
+  }
+
+  .a11y-close {
+    width: 2.6rem;
+    height: 2.6rem;
+    font-size: 1.3rem;
+  }
+
+  .a11y-panel__head {
+    margin-bottom: 1.1rem;
+  }
+
+  .a11y-section-title {
+    font-size: 0.82rem;
+    margin: 1.2rem 0 0.6rem;
+  }
+
+  .a11y-field {
+    margin-bottom: 1.3rem;
+  }
+
+  .a11y-field__label {
+    font-size: 1rem;
+  }
+
+  .a11y-field__hint,
+  .a11y-panel__hint {
+    font-size: 0.85rem;
+  }
+
+  .a11y-seg button {
+    font-size: 0.95rem;
+    padding: 0.6rem 0.85rem;
+    min-width: 5.5rem;
+  }
+
+  .a11y-toggle {
+    padding: 0.7rem 0;
+  }
+
+  .a11y-toggle__text {
+    font-size: 1rem;
+  }
+
+  /* Bigger toggle switch */
+  .ui-switch {
+    width: 3.25rem;
+    height: 1.75rem;
+  }
+  .ui-switch::after {
+    top: 3px;
+    left: 3px;
+    width: calc(1.75rem - 6px);
+    height: calc(1.75rem - 6px);
+  }
+  .ui-switch[aria-checked="true"]::after {
+    transform: translateX(1.5rem);
+  }
+
+  /* Bigger slider */
+  .a11y-slider {
+    height: 5px;
+  }
+  .a11y-slider::-webkit-slider-thumb {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+  .a11y-slider::-moz-range-thumb {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+  .a11y-slider-label--sm { font-size: 0.82rem; }
+  .a11y-slider-label--lg { font-size: 1.25rem; }
+  .a11y-slider-ticks {
+    font-size: 0.7rem;
+    padding: 0 calc(1.4rem + 0.6rem);
+  }
+
+  .a11y-reset {
+    font-size: 0.95rem;
+    padding: 0.75rem;
+    margin-top: 1.25rem;
+  }
 }
 

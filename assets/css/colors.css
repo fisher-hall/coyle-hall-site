@@ -60,7 +60,7 @@
   --secondary-text-color: var(--coyle-accent-green);
   --light-color:         var(--coyle-light-green);
   --highlight-color:     var(--coyle-light-green);
-  --coyle-navbar-tint:   rgba(6, 65, 33, 0.7);
+  --coyle-navbar-tint:   var(--coyle-dark-green);
   --background-color:    #000000;
   --button-text-white:   #000000;
   --coyle-grad-light: var(--button-grad-light-dm);

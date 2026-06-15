@@ -333,8 +333,8 @@
     });
 
     function init() {
-      if (prefersReducedMotion()) return;
       halfWidth = track.scrollWidth / 2;
+      if (prefersReducedMotion()) return;
       startTicker();
     }
 

@@ -18,6 +18,7 @@ nav.floating-navbar,
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
   z-index: 10000 !important;
+  flex-wrap: nowrap !important;
   transition: background-color 0.35s ease, backdrop-filter 0.35s ease, box-shadow 0.35s ease !important;
 }
 
@@ -26,9 +27,9 @@ body.scrolled-navbar .floating-navbar,
 body.scrolled-navbar nav.floating-navbar,
 body.scrolled-navbar .navbar.floating-navbar {
   background-color: var(--coyle-navbar-tint) !important;
-  backdrop-filter: blur(16px) !important;
-  -webkit-backdrop-filter: blur(16px) !important;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45) !important;
 }
 
 /* Pages without banner: navbar background always visible */
@@ -36,9 +37,9 @@ body:not(:has(#banner-parallax)):not(:has(#home-banner-wrapper)) .floating-navba
 body:not(:has(#banner-parallax)):not(:has(#home-banner-wrapper)) nav.floating-navbar,
 body:not(:has(#banner-parallax)):not(:has(#home-banner-wrapper)) .navbar.floating-navbar {
   background-color: var(--coyle-navbar-tint) !important;
-  backdrop-filter: blur(16px) !important;
-  -webkit-backdrop-filter: blur(16px) !important;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45) !important;
 }
 
 /* Navbar always uses white (dark) logo */
@@ -197,6 +198,7 @@ body:has(.page-banner-wrapper) .section-sm {
   padding: 0 !important;
   width: 36px !important;
   height: 36px !important;
+  flex-shrink: 0 !important;
   border-radius: 8px !important;
   display: flex !important;
   align-items: center !important;
@@ -207,11 +209,11 @@ body:has(.page-banner-wrapper) .section-sm {
   color: rgba(255, 255, 255, 0.9) !important;
 }
 .header .navbar [aria-label="search"] i {
-  font-size: 1.25rem !important;
+  font-size: 20px !important;
   color: inherit !important;
 }
 .header .navbar .a11y-trigger i {
-  font-size: 1.4rem !important;
+  font-size: 22px !important;
   color: inherit !important;
   padding: 0 !important;
   line-height: 1 !important;
@@ -221,9 +223,22 @@ body:has(.page-banner-wrapper) .section-sm {
 .header .navbar .theme-switcher {
   padding-left: 6px !important;
   height: 36px !important;
+  flex-shrink: 0 !important;
   display: inline-flex !important;
   align-items: center !important;
   align-self: center !important;
+}
+
+/* Right controls group + hamburger must never shrink; logo absorbs any slack */
+.header .navbar > div:has([aria-label="search"]) {
+  flex-shrink: 0 !important;
+}
+.header .navbar .hamburger-btn {
+  flex-shrink: 0 !important;
+}
+.header .navbar > div:has(.navbar-brand) {
+  min-width: 0;
+  overflow: hidden;
 }
 
 .header .navbar [aria-label="search"] {

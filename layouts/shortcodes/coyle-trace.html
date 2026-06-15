@@ -3,7 +3,7 @@
        Facts section. */ -}}
 {{- $trace := replaceRE "fill: #0c8442;" "fill: currentColor;" (readFile "static/images/CoyleHallTrace.svg") -}}
 {{- with $trace -}}
-<div class="w-full text-[var(--secondary-color)] [&_svg]:block [&_svg]:h-auto [&_svg]:w-full [&_svg]:opacity-95 [&_svg]:pointer-events-none [&_svg]:transition-none" aria-hidden="true">
+<div class="w-full text-[var(--primary-color)] [&_svg]:block [&_svg]:h-auto [&_svg]:w-full [&_svg]:opacity-95 [&_svg]:pointer-events-none [&_svg]:transition-none" aria-hidden="true">
   {{ . | safeHTML }}
 </div>
 {{- end -}}

@@ -82,25 +82,8 @@ banner:
       1952 • 2025
     </p>
 
-    <div class="flex items-center justify-start my-1 fade-in-section pl-16 relative z-[3] mb-4 mt-20">
-      <h2 class="text-2xl md:text-4xl text-left font-extrabold mb-6 fade-in-section flex items-center text-black dark:text-white relative z-[4] mt-0">
-        <span class="relative inline-block">
-          <i class="text-7xl fa fa-quote-left text-[var(--light-color)] absolute left-[-2rem] top-1/2 -translate-y-1/2 z-[1]"></i>
-          <i class="text-7xl fa fa-quote-right text-[var(--light-color)] absolute right-[-2rem] top-1/2 -translate-y-1/2 z-[1]"></i>
-          <span class="relative z-[2]">
-            All Are Welcome in This Place
-          </span>
-        </span>
-      </h2>
-    </div>
-    <div class="w-full flex flex-col justify-center fade-in-section px-4 pl-16 text-left">
-      <i class="fa fa-anchor absolute top-5/6 right-1 text-9xl fade-in-section text-[var(--light-color)] z-[2]"
-        style="transform: translateY(30%) translateX(2%) scale(1.85) rotate(30deg);"
-        aria-hidden="true">
-      </i>
-    </div>
     <!-- Text -->
-    <div class="w-5/6 flex flex-col justify-center fade-in-section px-4 pl-16 text-left">
+    <div class="w-auto flex flex-col justify-center fade-in-section pt-8 md:px-12 px-8 text-left">
       <p class="mb-4 text-lg relative z-[2]">
         Crew. Fishermen. Green Wave. Brothers. Coyle Hall has been known by many names over the years, but its legacy as one of the most iconic dorms at Notre Dame remains steadfast.
       </p>
@@ -121,7 +104,7 @@ banner:
       aria-label="Information for incoming students">
       <div class="hc-brand-surface flex flex-col md:flex-row md:items-center gap-2 md:gap-6 w-full max-w-[1300px] mx-auto rounded-3xl px-6 md:px-6 py-8 text-center bg-[linear-gradient(90deg,var(--coyle-dark-green)_0%,var(--coyle-light-green)_100%)]">
         <h2 class="font-extrabold text-white md:pl-4 m-0 leading-[1.1] [text-wrap:balance] md:whitespace-nowrap text-[clamp(1.75rem,4vw,2.5rem)]">New Crew</h2>
-        <p class="leading-[1.65] m-0 md:flex-1 mx-auto max-w-[55ch] md:max-w-none text-[clamp(0.95rem,2vw,1.05rem)] text-white">We can't wait to welcome you! Check out our guide for everything you need to know.</p>
+        <p class="leading-[1.65] m-0 md:flex-1 mx-auto max-w-[55ch] md:max-w-none text-[clamp(0.95rem,2vw,1.05rem)] text-white">We can't wait to welcome you! Be sure to check out all of our incoming student resources:</p>
         <div class="shrink-0 flex justify-center md:ml-auto md:pr-2 mt-3 md:mt-0">
           <a href="/incoming-students">
             <Button class="white">
@@ -143,108 +126,129 @@ banner:
 
       <!-- Coyle Hall Trace with fun-facts overlay -->
       <div class="fade-in-section relative flex w-full justify-center mb-8">
-        <div class="relative w-[min(1100px,100%)] max-w-full px-4 max-[900px]:grid max-[900px]:grid-cols-2 max-[900px]:gap-3.5" aria-hidden="false">
-          {{< coyle-trace >}}
+        <div class="fast-facts-inner relative md:w-[min(1100px,80%)] w-[min(1100px,95%)] max-w-full px-4" aria-hidden="false">
+          <div class="max-[900px]:hidden col-span-2">{{< coyle-trace >}}</div>
 
-          <div class="absolute left-1/2 top-[1%] grid w-[min(305px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-[24px] bg-[linear-gradient(90deg,var(--coyle-dark-green)_0%,var(--coyle-light-green)_100%)] px-2 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
-            <i class="ml-1 fa fa-location-dot flex h-11 w-11 items-center justify-start text-[3rem] text-white/95 max-[540px]:h-[38px] max-[540px]:w-[38px]" aria-hidden="true"></i>
+          <div class="absolute top-[28%] left-[80%] grid w-[min(305px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-3xl bg-[linear-gradient(90deg,var(--coyle-dark-green)_0%,var(--coyle-light-green)_100%)] px-2 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
+            <i class="ml-2 fa fa-location-dot flex self-center h-11 w-11 items-center justify-start text-5xl text-white max-[541px]:opacity-30" aria-hidden="true"></i>
             <div class="min-w-0 pl-4">
-              <p class="mb-1 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-white/72">Location</p>
-              <h3 class="mb-1.5 text-[1.05rem] font-bold leading-[1.1] text-white max-[540px]:text-[0.98rem]">South Quad</h3>
-              <p class="m-0 text-[0.9rem] leading-[1.35] text-white/82 max-[540px]:text-[0.84rem]">The longest quad in America</p>
+              <p class="text-sm font-bold uppercase tracking-widest text-white/72">Location</p>
+              <h3 class="mb-1 text-3xl font-bold text-white max-[540px]:text-2xl">South Quad</h3>
+              <p class="m-0 text-sm text-white/82 max-[580px]:text-sm">
+                <span class="max-[580px]:hidden inline">The longest quad in America</span> <span class="max-[580px]:inline hidden">Longest in America</span>
+              </p>
             </div>
           </div>
 
-          <div class="absolute right-[1.5%] top-[17%] grid w-[min(305px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-[24px] bg-[linear-gradient(90deg,var(--coyle-dark-green)_0%,var(--coyle-light-green)_100%)] px-2 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
-            <i class="ml-1 fa fa-people-roof flex h-11 w-11 items-center justify-start text-[3rem] text-white/95 max-[540px]:h-[38px] max-[540px]:w-[38px]" aria-hidden="true"></i>
+          <div class="absolute top-[-1%] left-[50%] -translate-x-1/2 grid w-[min(305px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-3xl bg-[linear-gradient(90deg,var(--coyle-dark-green)_0%,var(--coyle-light-green)_100%)] px-2 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
+            <i class="ml-2 fa fa-people-roof flex self-center h-11 w-11 items-center justify-start text-5xl text-white max-[541px]:opacity-30" aria-hidden="true"></i>
             <div class="min-w-0 pl-4">
-              <p class="mb-1 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-white/72">Population</p>
-              <h3 class="mb-1.5 text-[1.05rem] font-bold leading-[1.1] text-white max-[540px]:text-[0.98rem]">262 Residents</h3>
-              <p class="m-0 text-[0.9rem] leading-[1.35] text-white/82 max-[540px]:text-[0.84rem]">From every grade and major</p>
+              <p class="text-sm font-bold uppercase tracking-widest text-white/72">Population</p>
+              <h3 class="mb-1 text-3xl font-bold text-white max-[540px]:text-2xl">258 Students</h3>
+              <p class="m-0 text-sm text-white/82 max-[580px]:text-sm">
+                <span class="max-[580px]:hidden inline">From every</span> <span class="max-[580px]:inline hidden">Every</span> grade and major
+              </p>           
             </div>
           </div>
 
-          <div class="absolute right-0 top-[47%] grid w-[min(305px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-[24px] bg-[linear-gradient(90deg,var(--coyle-dark-green)_0%,var(--coyle-light-green)_100%)] px-2 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
-            <i class="ml-1 fa fa-sailboat flex h-11 w-11 items-center justify-start text-[3rem] text-white/95 max-[540px]:h-[38px] max-[540px]:w-[38px]" aria-hidden="true"></i>
-            <div class="min-w-0 pl-4">
-              <p class="mb-1 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-white/72">Dorm Mascot</p>
-              <h3 class="mb-1.5 text-[1.05rem] font-bold leading-[1.1] text-white max-[540px]:text-[0.98rem]">The Crew</h3>
-              <p class="m-0 text-[0.9rem] leading-[1.35] text-white/82 max-[540px]:text-[0.84rem]">A legacy built on the water</p>
+          <div class="absolute top-[5%] right-[67%] grid w-[min(305px,32vw)] min-h-[108px] grid-cols-[60px_1fr] items-center gap-2 rounded-3xl bg-[linear-gradient(90deg,var(--coyle-dark-green)_0%,var(--coyle-light-green)_100%)] px-2 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[48px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
+            <img src="/images/PaddlesCrossedWhiteTransparent.svg" alt="" aria-hidden="true" class="ml-3 self-center h-12 w-12 max-[540px]:h-[36px] max-[540px]:w-[36px] max-[541px]:opacity-30 object-contain flex-shrink-0">
+            <div class="min-w-0 pl-2">
+              <p class="text-sm font-bold uppercase tracking-widest text-white/72">Dorm Mascot</p>
+              <h3 class="mb-1 text-3xl font-bold text-white max-[540px]:text-2xl">The Crew</h3>
+              <p class="m-0 text-sm text-white/82 max-[580px]:text-sm">
+                <span class="max-[580px]:hidden inline">A legacy built</span> <span class="max-[580px]:inline hidden">Built</span> on the water
+              </p>
             </div>
           </div>
 
-          <div class="absolute bottom-0 left-1/2 grid w-[min(305px,32vw)] min-h-[108px] -translate-x-1/2 translate-y-[45%] grid-cols-[44px_1fr] items-center gap-3.5 rounded-[24px] bg-[linear-gradient(90deg,var(--coyle-dark-green)_0%,var(--coyle-light-green)_100%)] px-2 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
-            <i class="ml-1 fa fa-church flex h-11 w-11 items-center justify-start text-[3rem] text-white/95 max-[540px]:h-[38px] max-[540px]:w-[38px]" aria-hidden="true"></i>
+          <div class="absolute top-[51%] left-[80%] grid w-[min(305px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-3xl bg-[linear-gradient(90deg,var(--coyle-dark-green)_0%,var(--coyle-light-green)_100%)] px-2 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
+            <i class="ml-2 fa fa-church flex self-center h-11 w-11 items-center justify-start text-5xl text-white max-[541px]:opacity-30" aria-hidden="true"></i>
             <div class="min-w-0 pl-4">
-              <p class="mb-1 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-white/72">Chapel</p>
-              <h3 class="mb-1.5 text-[1.05rem] font-bold leading-[1.1] text-white max-[540px]:text-[0.98rem]">St. Paul</h3>
-              <p class="m-0 text-[0.9rem] leading-[1.35] text-white/82 max-[540px]:text-[0.84rem]">Named for the old Fisher Hall</p>
+              <p class="text-sm font-bold uppercase tracking-widest text-white/72">Chapel</p>
+              <h3 class="mb-1 text-3xl font-bold text-white max-[540px]:text-2xl">St. Paul</h3>
+              <p class="m-0 text-sm text-white/82 max-[580px]:text-sm">
+                  <span class="max-[580px]:hidden inline">Named after the old</span> <span class="max-[580px]:inline hidden">Named for</span> Fisher Hall
+                </p>
             </div>
           </div>
 
-          <div class="absolute left-0 top-[47%] grid w-[min(305px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-[24px] bg-[linear-gradient(90deg,var(--coyle-dark-green)_0%,var(--coyle-light-green)_100%)] px-2 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
-            <i class="ml-1 fa fa-fan flex h-11 w-11 items-center justify-start text-[3rem] text-white/95 max-[540px]:h-[38px] max-[540px]:w-[38px]" aria-hidden="true"></i>
+          <div class="absolute top-[51%] right-[80%] grid w-[min(305px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-3xl bg-[linear-gradient(90deg,var(--coyle-dark-green)_0%,var(--coyle-light-green)_100%)] px-2 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
+            <i class="ml-2 fa fa-fan flex self-center h-11 w-11 items-center justify-start text-5xl text-white max-[541px]:opacity-30" aria-hidden="true"></i>
             <div class="min-w-0 pl-4">
-              <p class="mb-1 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-white/72">Amenities</p>
-              <div class="flex items-center gap-2">
-                <i class="fa fa-check text-white/95 text-[1.05rem] flex-none self-center translate-y-[-3px] leading-none" aria-hidden="true"></i>
-                <h3 class="mb-1.5 text-[1.05rem] font-bold leading-[1] text-white max-[540px]:text-[0.98rem]">Air Conditioned</h3>
-              </div>
-              <p class="m-0 text-[0.9rem] leading-[1.35] text-white/82 max-[540px]:text-[0.84rem]">Cool and comfy</p>
+              <p class="text-sm font-bold uppercase tracking-widest text-white/72">Amenities</p>
+              <h3 class="mb-1 text-3xl font-bold text-white max-[540px]:text-2xl">Has A/C  ✔</h3>
+              <p class="m-0 text-sm text-white/82 max-[580px]:text-sm">Cool and comfy</p>
             </div>
           </div>
 
-          <div class="absolute left-[1.5%] top-[17%] grid w-[min(305px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-[24px] bg-[linear-gradient(90deg,var(--coyle-dark-green)_0%,var(--coyle-light-green)_100%)] px-2 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
-            <i class="ml-1 fa fa-building flex h-11 w-11 items-center justify-start text-[3rem] text-white/95 max-[540px]:h-[38px] max-[540px]:w-[38px]" aria-hidden="true"></i>
+          <div class="absolute top-[28%] right-[80%] grid w-[min(305px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-3xl bg-[linear-gradient(90deg,var(--coyle-dark-green)_0%,var(--coyle-light-green)_100%)] px-2 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
+            <i class="ml-2 fa fa-building flex self-center h-11 w-11 items-center justify-start text-5xl text-white max-[541px]:opacity-30" aria-hidden="true"></i>
             <div class="min-w-0 pl-4">
-              <p class="mb-1 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-white/72">Building Structure</p>
-              <h3 class="mb-1.5 text-[1.05rem] font-bold leading-[1.1] text-white max-[540px]:text-[0.98rem]">3 Floors</h3>
-              <p class="m-0 text-[0.9rem] leading-[1.35] text-white/82 max-[540px]:text-[0.84rem]">8 sections + a basement</p>
+              <p class="text-sm font-bold uppercase tracking-widest text-white/72">The Building</p>
+              <h3 class="mb-1 text-3xl font-bold text-white max-[540px]:text-2xl">3 Floors</h3>
+              <p class="m-0 text-sm text-white/82 max-[580px]:text-sm">8 sections + a basement</p>
             </div>
           </div>
 
-          <div class="absolute left-[19.5%] top-[13%] grid w-[min(305px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-[24px] bg-[linear-gradient(90deg,var(--coyle-dark-green)_0%,var(--coyle-light-green)_100%)] px-2 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
-            <i class="ml-1 fa fa-palette flex h-11 w-11 items-center justify-start text-[3rem] text-white/95 max-[540px]:h-[38px] max-[540px]:w-[38px]" aria-hidden="true"></i>
+          <div class="absolute top-[5%] left-[67%] grid w-[min(305px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-3xl bg-[linear-gradient(90deg,var(--coyle-dark-green)_0%,var(--coyle-light-green)_100%)] px-2 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
+            <i class="ml-2 fa fa-palette flex self-center h-11 w-11 items-center justify-start text-5xl text-white max-[541px]:opacity-30" aria-hidden="true"></i>
             <div class="min-w-0 pl-4">
-              <p class="mb-1 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-white/72">Dorm Colors</p>
-              <h3 class="mb-1.5 text-[1.05rem] font-bold leading-[1.1] text-white max-[540px]:text-[0.98rem]">Green & White</h3>
-              <p class="m-0 text-[0.9rem] leading-[1.35] text-white/82 max-[540px]:text-[0.84rem]">Traditional, bold, and vibrant</p>
+              <p class="text-sm font-bold uppercase tracking-widest text-white/72">Dorm Colors</p>
+              <h3 class="mb-1 text-3xl font-bold text-white max-[540px]:text-2xl">Green + White</h3>
+              <p class="m-0 text-sm text-white/82 max-[580px]:text-sm">Traditional and iconic</p>
             </div>
           </div>
 
           <a href="https://www.mcglinnhallnd.com/" target="_blank" rel="noopener" aria-label="Link to McGlinn Hall website">
-            <div class="absolute right-[23.5%] top-[15%] grid w-[min(305px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-[24px] bg-[linear-gradient(90deg,var(--coyle-dark-green)_0%,var(--coyle-light-green)_100%)] px-2 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[90<PASSWORD>]:max-w-none max:[9<PASSWORD>]:min-h-<PASSWORD> max:[9<PASSWORD>]:translate-x-<PASSWORD> max:[9<PASSWORD>]:translate-y-<PASSWORD> max:[54<PASSWORD>]:grid-cols-[38px_1fr] max:[54<PASSWORD>]:px-[14px] max:[54<PASSWORD>]:py-3">
-              <i class="ml-2 fa fa-venus flex h-11 w-11 items-center justify-start text-[3rem] text-white/95 max:[54<PASSWORD>]:h->[38px] max:[54<PASSWORD>]:w->[38px]" aria-hidden="true"></i>
+            <div class="absolute top-[75%] right-[67%] grid w-[min(305px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-3xl bg-[linear-gradient(90deg,var(--coyle-dark-green)_0%,var(--coyle-light-green)_100%)] px-2 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
+              <i class="ml-2 fa fa-venus flex self-center h-11 w-11 items-center justify-start text-5xl text-white max-[541px]:opacity-30" aria-hidden="true"></i>
               <div class="min-w-0 pl-4">
-                <p class="mb-1 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-white/72">Sister Dorm</p>
-                <h3 class="mb-1.5 text-[1.05rem] font-bold leading-[1.1] text-white max-[540px]:text-[0.98rem]">McGlinn Hall</h3>
-                <div class="flex items-center gap-2 text-[0.9rem]">
-                  <i class="fa fa-arrow-up-right-from-square text-white/82 flex-none self-center leading-none" aria-hidden="true"></i>
-                  <p class="m-0 leading-[0.5] text-white/82 max-[540px]:text-[0.84rem]">Home of the Shamrocks</p>
-                </div>
+                <p class="text-sm font-bold uppercase tracking-widest text-white/72">Sister Dorm</p>
+                <h3 class="mb-1 text-3xl font-bold text-white max-[540px]:text-2xl">McGlinn Hall</h3>
+                <p class="m-0 text-sm text-white/82 max-[580px]:text-sm">
+                  <i class="fa fa-arrow-up-right-from-square mr-0.5 relative -top-[1px]" aria-hidden="true"></i>
+                  <span class="max-[580px]:hidden inline">Home to the</span> <span class="max-[580px]:inline hidden">The</span> Shamrocks
+                </p>
               </div>
             </div>
           </a>
 
-          <a href="https://www.mcglinnhallnd.com/" target="_blank" rel="noopener" aria-label="Link to McGlinn Hall website">
-            <div class="absolute bottom-[16%] right-[12%] grid w-[min(305px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-[24px] bg-[linear-gradient(90deg,var(--coyle-dark-green)_0%,var(--coyle-light-green)_100%)] px-2 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
-              <i class="ml-2 fa fa-arrow-up-right-from-square flex h-11 w-11 items-center justify-start text-[3rem] text-white/95 max-[540px]:h-[38px] max-[540px]:w-[38px]" aria-hidden="true"></i>
+          <a href="https://carrollhall.nd.edu/" target="_blank" rel="noopener" aria-label="Link to Carroll Hall website">
+            <div class="absolute top-[75%] right-[5%] grid w-[min(305px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-3xl bg-[linear-gradient(90deg,var(--coyle-dark-green)_0%,var(--coyle-light-green)_100%)] px-2 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
+              <i class="ml-2 fa fa-mars flex self-center h-11 w-11 items-center justify-start text-5xl text-white max-[541px]:opacity-30" aria-hidden="true"></i>
               <div class="min-w-0 pl-4">
-                <p class="mb-1 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-white/72">Learn More</p>
-                <h3 class="mb-1.5 text-[1.05rem] font-bold leading-[1.1] text-white max-[540px]:text-[0.98rem]">ND ResLife Info</h3>
-                <p class="m-0 text-[0.9rem] leading-[1.35] text-white/82 max-[540px]:text-[0.84rem]">Visit for more info</p>
+                <p class="text-sm font-bold uppercase tracking-widest text-white/72">Brother Dorm</p>
+                <h3 class="mb-1 text-3xl font-bold text-white max-[540px]:text-2xl">Carroll Hall</h3>
+                <p class="m-0 text-sm text-white/82 max-[580px]:text-sm">
+                  <i class="fa fa-arrow-up-right-from-square mr-0.5 relative -top-[1px]" aria-hidden="true"></i>
+                  <span class="max-[580px]:hidden inline">Home to the</span> <span class="max-[580px]:inline hidden">The</span> Vermin
+                </p>
               </div>
             </div>
           </a>
+
+          <a href="https://residentiallife.nd.edu/" target="_blank" rel="noopener" aria-label="Link to ND ResLife website">
+            <div class="absolute top-[80%] left-[50%] -translate-x-1/2 grid w-[min(305px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-3xl bg-[linear-gradient(90deg,var(--coyle-dark-green)_0%,var(--coyle-light-green)_100%)] px-2 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
+              <i class="ml-3 mt-2 fa fa-arrow-up-right-from-square flex self-center h-11 w-11 items-center justify-start text-4xl text-white max-[541px]:opacity-30" aria-hidden="true"></i>
+              <div class="min-w-0 pl-4">
+                <p class="text-sm font-bold uppercase tracking-widest text-white/72">Learn More</p>
+                <h3 class="mb-1 text-3xl font-bold text-white max-[540px]:text-2xl">ND ResLife</h3>
+                <p class="m-0 text-sm text-white/82 max-[580px]:text-sm">Visit for more info</p>
+              </div>
+            </div>
+          </a>
+
+          <div class="min-[901px]:hidden col-span-2 mt-4">{{< coyle-trace >}}</div>
         </div>
       </div>
 
           <!-- Instagram Feed -->
-      <div class="max-w-[1400px] rounded-[2rem] bg-[linear-gradient(90deg,var(--coyle-dark-green)_0%,var(--coyle-light-green)_100%)] px-6 py-8 my-8 md:mx-auto mx-4">
+      <div class="max-w-[1400px] rounded-[2rem] bg-[linear-gradient(90deg,var(--coyle-dark-green)_0%,var(--coyle-light-green)_100%)] px-6 py-8 lg:mt-20 mb-6 2xl:mx-auto mx-4">
       <section class="fade-in-section max-w-[1320px] mx-auto">
         <div class="flex flex-col items-center mb-8">
           <a href="https://www.instagram.com/real_coylehall/" target="_blank" rel="noopener"
-            style="display: inline-flex; align-items: center; gap: 0.6rem; color: #ffffff; font-family: 'Rubik', sans-serif; font-weight: 700; font-size: clamp(2rem, 5vw, 3.5rem); text-transform: none; letter-spacing: normal; text-decoration: none;">
+            style="display: inline-flex; align-items: center; gap: 0.6rem; color: #ffffff; font-family: 'Rubik', sans-serif; font-weight: 700; font-size: clamp(2.5rem, 5vw, 3.5rem); text-transform: none; letter-spacing: normal; text-decoration: none;">
             @real_coylehall
             <i class="fa-brands fa-instagram" style="font-size: 1em; color: #ffffff;"></i>
           </a>
