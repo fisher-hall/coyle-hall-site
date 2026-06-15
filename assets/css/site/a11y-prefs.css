@@ -149,6 +149,11 @@ html.a11y-contrast-high a:hover,
 html.a11y-contrast-high a:focus {
   color: #6ee87a !important;
 }
+/* Don't underline links that are just wrapping a button */
+html.a11y-contrast-high a:has(> Button),
+html.a11y-contrast-high a:has(> button) {
+  text-decoration: none !important;
+}
 /* Buttons/controls: transparent bg, green border only.
    Icon-only / shapeless buttons (close X, a11y trigger, search) are excluded —
    they have no background or shape, so an outline box looks wrong. */
@@ -312,6 +317,40 @@ html.a11y-contrast-high body:not(.has-banner) .floating-navbar {
   background-color: #000 !important;
   transition: none !important;
 }
+/* Dropdown menus: black bg, accent border in HC */
+html.a11y-contrast-high .nav-dropdown-list,
+html.a11y-contrast-high .floating-navbar .nav-dropdown-list {
+  background: #000 !important;
+  border: 2px solid #48bb4e !important;
+}
+
+/* Active nav tab: replace green fill with accent border outline */
+html.a11y-contrast-high .header .navbar .nav-link.active,
+html.a11y-contrast-high .header .navbar .nav-link[aria-current="page"],
+html.a11y-contrast-high .header .navbar a.active,
+html.a11y-contrast-high .header .navbar a[aria-current="page"],
+html.a11y-contrast-high .floating-navbar .nav-link.active,
+html.a11y-contrast-high .floating-navbar .nav-link[aria-current="page"],
+html.a11y-contrast-high .nav-dropdown-toggle.active,
+html.a11y-contrast-high .nav-dropdown-list .nav-dropdown-item a.active {
+  background: transparent !important;
+  border: 2px solid #48bb4e !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+
+/* New Crew banner: black bg, accent border, accent green heading, white body */
+html.a11y-contrast-high .new-crew-banner {
+  background: #000 !important;
+  border: 3px solid #48bb4e !important;
+}
+html.a11y-contrast-high .new-crew-banner :where(h1, h2, h3, h4, h5, h6) {
+  color: #6ee87a !important;
+}
+html.a11y-contrast-high .new-crew-banner p {
+  color: #fff !important;
+}
+
 /* ═══════════════════════════════════════════════════════════════
    PREFERENCES PANEL UI
 ═══════════════════════════════════════════════════════════════ */

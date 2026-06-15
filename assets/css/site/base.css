@@ -99,6 +99,51 @@ mark.bg-yellow-300 {
   box-decoration-break: clone;
 }
 
+/* ── Gradient icons (faith page + any future use) ── */
+.icon-gradient {
+  background: linear-gradient(135deg, var(--coyle-dark-green) 0%, var(--coyle-light-green) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* High contrast: solid accent-green instead of gradient (gradient disappears with forced colors) */
+html.a11y-contrast-high .icon-gradient {
+  background: none !important;
+  -webkit-text-fill-color: #6ee87a !important;
+  color: #6ee87a !important;
+}
+
+/* ── Faith page item grid ── */
+.faith-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.faith-item__icon {
+  font-size: 4rem;
+  line-height: 1;
+  margin-bottom: 0.75rem;
+}
+.faith-item__title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem;
+  color: inherit;
+}
+.faith-item__time {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--secondary-color);
+  margin: 0 0 0.5rem;
+}
+.faith-item__desc {
+  font-size: 1.05rem;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
 /* Profile cards */
 :not(.dark) .bg-light.rounded-2xl.p-8.text-center {
   background-color: #EFEEEE !important;
