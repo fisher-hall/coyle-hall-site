@@ -11,13 +11,6 @@ html, body {
 body {
   margin-bottom: 0 !important;
   padding-bottom: 0 !important;
-  display: flex;
-  flex-direction: column;
-}
-
-main {
-  flex: 1;
-  padding-top: 100px !important;
 }
 
 footer {
@@ -25,18 +18,6 @@ footer {
   background-color: transparent;
   color: #fff;
   border-radius: 0 !important;
-}
-
-.bg-custom-light {
-  background-color: var(--color-custom-light) !important;
-}
-
-.border-custom-gray {
-  border-color: var(--color-lightmode-gray) !important;
-}
-
-.dark .border-custom-gray {
-  border-color: var(--color-darkmode-gray) !important;
 }
 
 /* ═══════════════════════════════════
@@ -112,36 +93,6 @@ html.a11y-contrast-high .icon-gradient {
   background: none !important;
   -webkit-text-fill-color: #6ee87a !important;
   color: #6ee87a !important;
-}
-
-/* ── Faith page item grid ── */
-.faith-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-.faith-item__icon {
-  font-size: 4rem;
-  line-height: 1;
-  margin-bottom: 0.75rem;
-}
-.faith-item__title {
-  font-size: 2rem;
-  font-weight: 700;
-  margin: 0 0 0.25rem;
-  color: inherit;
-}
-.faith-item__time {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--secondary-color);
-  margin: 0 0 0.5rem;
-}
-.faith-item__desc {
-  font-size: 1.05rem;
-  max-width: 300px;
-  margin: 0 auto;
 }
 
 /* Profile cards */

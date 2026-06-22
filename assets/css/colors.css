@@ -15,7 +15,7 @@
   --button-grad-light-lm:      #0d7a3c;  /* gradient button light stop */
   --button-grad-dark-dm:    #075c2a;  /* dark mode dark stop  */
   --button-grad-light-dm:   #11a84e;  /* dark mode light stop */
-  --coyle-accent-green:  rgb(72, 187, 78);
+  --coyle-accent-green:  #11a84e;/*rgb(72, 187, 78);*/
   --coyle-banner-tint:   rgba(10, 132, 61, 0.5);
   --coyle-navbar-tint:   var(--coyle-dark-green);
 
@@ -26,6 +26,7 @@
 
   /* ── Neutrals ─────────────────────────────────────────────── */
   --color-custom-light:   #cccccc;
+  --color-extra-light:   #d3d3d3;
   --search-highlight:     #076e34;   /* <mark> search-result highlight (AA: white text ≈5.3:1) */
   --color-darkmode-gray:  #B4AFB5;
   --color-lightmode-gray: #444444;
@@ -41,11 +42,14 @@
   --coyle-grad-light: var(--button-grad-light-lm);
   --coyle-grad-dark: var(--button-grad-dark-lm);
   --background-color: #ffffff;
+  --page-wave-color: var(--coyle-light-green);
+  --always-white: #ffffff;
+
 
   /* ── Component interaction tokens ────────────────────────── */
   --button-tint:       rgba(255, 255, 255, 0.18);
   --button-hover-tint: rgba(255, 255, 255, 0.18);
-  --button-text-white: #ffffff;
+  --button-dynamic-white: #ffffff;
 
   /* ── Layout tokens ────────────────────────────────────────── */
   --page-banner-height: clamp(400px, 50vh, 600px);
@@ -62,7 +66,8 @@
   --highlight-color:     var(--coyle-light-green);
   --coyle-navbar-tint:   var(--coyle-dark-green);
   --background-color:    #000000;
-  --button-text-white:   #000000;
+  --page-wave-color:     var(--coyle-accent-green);
+  --button-dynamic-white:   #000000;
   --coyle-grad-light: var(--button-grad-light-dm);
   --coyle-grad-dark: var(--button-grad-dark-dm);
 }

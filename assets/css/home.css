@@ -176,25 +176,6 @@ body > *:first-child {
 }
 
 /* Wave animation */
-.wave-container {
-  position: relative;
-  margin-top: -70px;
-  left: 0;
-  width: 100%;
-  height: 80px;
-  overflow: hidden;
-  z-index: 3;
-}
-
-.wave-canvas {
-  display: block;
-  bottom: 0 !important;
-  height: 100% !important;
-  transform: translateZ(0);
-  box-shadow: none !important;
-  filter: none !important;
-}
-
 .banner-divider-wave {
   position: absolute;
   left: 0;
@@ -245,12 +226,6 @@ body > *:first-child {
   box-shadow: none !important;
   scale: 1 !important;
   filter: none !important;
-}
-
-.award-divider-svg {
-  display: block;
-  flex: 0 0 auto;
-  overflow: visible;
 }
 
 .award-divider-line {
@@ -380,6 +355,12 @@ body > *:first-child {
     translate: none !important;
   }
 }
+/* ── Fast Facts tiles — solid primary green background ──────────── */
+.fast-facts-inner > div:not([class*="col-span"]),
+.fast-facts-inner > a > div {
+  background: var(--primary-color) !important;
+}
+
 /* ── Fast Facts tiles — text brightness ──────────────────────────── */
 /* Label row (72% opacity) and description row (82% opacity) are nudged
    toward full white so they read clearly on the green gradient. */

@@ -51,11 +51,11 @@ html[data-text-weight="extrabold"] body { font-weight: 800 !important; }
 html[data-line-spacing="on"] :where(body, p, li, dd, dt, blockquote) {
   line-height: 1.9 !important;
 }
-html[data-letter-spacing="on"] :where(body, p, li, a, span, h1, h2, h3, h4, h5, h6) {
+html[data-letter-spacing="on"] :where(body, p, li, a, span, h1, h2, h3, h4, h5, h6, figcaption) {
   letter-spacing: 0.045em;
   word-spacing: 0.08em;
 }
-html[data-dyslexia-font="on"] :where(body, p, li, a, span, h1, h2, h3, h4, h5, h6, button, input, textarea, select, label, div, td, th) {
+html[data-dyslexia-font="on"] :where(body, p, li, a, span, h1, h2, h3, h4, h5, h6, button, input, textarea, select, label, div, td, th, figcaption) {
   font-family: "OpenDyslexic", "Rubik", sans-serif !important;
 }
 
@@ -127,6 +127,9 @@ html.a11y-contrast-high body {
 html.a11y-contrast-high :where(p, li, dd, dt, blockquote, span:not([class*="icon"])) {
   color: #fff !important;
 }
+html.a11y-contrast-high figcaption {
+  color: #6ee87a !important;
+}
 /* Headings: accent green — but NOT inside banners (banner text stays white) */
 html.a11y-contrast-high :where(h1, h2, h3, h4, h5, h6) {
   color: #6ee87a !important;
@@ -154,20 +157,18 @@ html.a11y-contrast-high a:has(> Button),
 html.a11y-contrast-high a:has(> button) {
   text-decoration: none !important;
 }
-/* Buttons/controls: transparent bg, green border only.
-   Icon-only / shapeless buttons (close X, a11y trigger, search) are excluded —
-   they have no background or shape, so an outline box looks wrong. */
+/* Buttons/controls: white outline with white text in high contrast */
 html.a11y-contrast-high :where(button:not(.ui-switch):not(.a11y-switch):not(.a11y-close):not(.a11y-trigger):not([aria-label="search"]), .btn, [role="button"]) {
   background: transparent !important;
   color: #fff !important;
-  border: 2px solid #48bb4e !important;
+  border: 2px solid #fff !important;
   box-shadow: none !important;
 }
 html.a11y-contrast-high :where(button:not(.ui-switch):not(.a11y-switch):not(.a11y-close):not(.a11y-trigger):not([aria-label="search"]), .btn, [role="button"]):hover,
 html.a11y-contrast-high :where(button:not(.ui-switch):not(.a11y-switch):not(.a11y-close):not(.a11y-trigger):not([aria-label="search"]), .btn, [role="button"])[aria-pressed="true"] {
-  background: transparent !important;
-  color: #6ee87a !important;
-  border-color: #6ee87a !important;
+  background: #fff !important;
+  color: #000 !important;
+  border-color: #fff !important;
 }
 /* Icon-only buttons keep just their icon — no box */
 html.a11y-contrast-high :where(.a11y-close, .a11y-trigger, [aria-label="search"]) {
@@ -192,22 +193,18 @@ html.a11y-contrast-high :where(input:not([type="range"]), textarea, select) {
   color: #fff !important;
   border: 2px solid #48bb4e !important;
 }
-/* Cards / surfaces: no bg tint, border only.
-   The :not([class*="__"]) guard keeps the border on the card/panel container
-   itself but off its BEM sub-parts (e.g. .a11y-panel__head / __title), which
-   are just layout/heading wrappers, not bordered surfaces. */
-html.a11y-contrast-high :where(.info-card, .FeatureBlock, .Carousel-control, [class*="card"]:not([class*="__"]), [class*="panel"]:not([class*="__"])) {
-  background: transparent !important;
-  border: 2px solid #48bb4e !important;
+/* Cards / surfaces: flatten to black bg, white text — no border */
+html.a11y-contrast-high :where(.info-card, .FeatureBlock, .Carousel-control) {
+  background: #000 !important;
   color: #fff !important;
 }
-/* Navbar: fully opaque black, accent border all sides */
+/* Navbar: fully opaque black with same accent border as dropdowns */
 html.a11y-contrast-high .navbar,
 html.a11y-contrast-high .floating-navbar {
   background: #000 !important;
-  border: 2px solid #48bb4e !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
+  border: 2px solid #48bb4e !important;
 }
 /* Nav links in high contrast: NO boxes, NO underline — just text color change */
 html.a11y-contrast-high .header .navbar .nav-link,
@@ -315,6 +312,7 @@ html.a11y-contrast-high body.scrolled-navbar .floating-navbar,
 html.a11y-contrast-high body:not(.has-banner) .floating-navbar {
   background: #000 !important;
   background-color: #000 !important;
+  border: 2px solid #48bb4e !important;
   transition: none !important;
 }
 /* Dropdown menus: black bg, accent border in HC */

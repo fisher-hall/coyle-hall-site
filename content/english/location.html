@@ -1,10 +1,10 @@
 ---
 title: "Location"
 ---
-{{< banner image="/images/Banners/LocationBannerImg.png" heading="LOCATION" >}}
+{{< banner image="/images/BannerImages/LocationBanner.png" heading="LOCATION" >}}
 
 <h2 class="text-5xl text-center font-extrabold mb-6 fade-in-section" style="color: var(--primary-color);">
-  A Legacy That Echoes <span style="color: var(--secondary-color);">From Quad To Quad.</span>
+  A community of <span style="color: var(--secondary-color);">Activity</span>
 </h2>
 
 <!--Section 1  */}}-->
@@ -43,76 +43,55 @@ title: "Location"
 
 <div class="flex flex-col md:flex-row gap-4 md:gap-10 px-4 mt-4 items-center justify-center fade-in-section">
         <a href="https://maps.apple/p/RVj84WKt.uAYXj" target="_blank" rel="noopener">
-          <Button class="default">
+          <Button class="outline-green">
             View on Apple Maps
             <i class="fa fa-arrow-up-right-from-square" aria-hidden="true"></i>
           </Button>
         </a>
         <a href="https://maps.app.goo.gl/yhjRR4ChHHDsa6V69" target="_blank" rel="noopener">
-          <Button class="default">
+          <Button class="outline-green">
             View On Google Maps
             <i class="fa fa-arrow-up-right-from-square" aria-hidden="true"></i>
           </Button>
         </a>
         <a href="https://campusmail.nd.edu/campus-zip-4-directory/" target="_blank" rel="noopener">
-          <Button class="default">
+          <Button class="outline-green">
             Notre Dame Mail System
             <i class="fa fa-arrow-up-right-from-square" aria-hidden="true"></i>
           </Button>
         </a>
 </div>
 
-<div class="flex items-center justify-center my-1 fade-in-section" style="position: relative; margin-bottom: 1rem; margin-top: 5rem;">
-  <h2 class="text-5xl md:text-7xl text-left font-extrabold mb-6 fade-in-section flex items-center text-black dark:text-white"
-      style="position: relative; margin-top: 0; z-index: 2;">
-    <span style="position: relative; display: inline-block;">
-      <span style="position: relative;">
-        What's Nearby
-      </span>
-    </span>
+<div class="flex items-center justify-center my-1 relative mb-4 mt-20 fade-in-section">
+  <h2 class="text-5xl md:text-7xl text-left font-extrabold mb-6 fade-in-section flex items-center text-black dark:text-white relative mt-0 z-[2]">
+    What's Nearby
   </h2>
-    <i class="fa fa-signs-post absolute text-center top-1/2 text-9xl fade-in-section text-[var(--nd-light)] dark:text-[var(--primary-color)]"
-      style="transform: translateY(-60%) scale(1); z-index: 1;"
-    >
-    </i>
-    <style>
-    @media (max-width: 767px) {
-      .fa-signs-post {
-        transform: translateX(-110%) translateY(-60%) scale(1) !important;
-      }
-    }
-    @media (min-width: 768px) {
-      .fa-signs-post {
-        transform: translateX(-160%) translateY(-60%) scale(1) !important;
-      }
-    }
-    </style>
+  <i class="fa fa-signs-post absolute text-center top-1/2 text-9xl fade-in-section text-[var(--nd-light)] dark:text-[var(--primary-color)] z-[1] max-[767px]:[transform:translateX(-110%)_translateY(-60%)] min-[768px]:[transform:translateX(-160%)_translateY(-60%)]" aria-hidden="true"></i>
 </div>
 
 <div class="mx-auto relative grid md:grid-cols-3 sm:grid-cols-2 gap-15 gap-y-15 w-full my-8 fade-in-section">
-<div class="w-full rounded-3xl relative flex items-start justify-center p-3" style="background-color: var(--primary-color);">    <span class="text-center text-xl z-10 pointer-events-none text-white">
-      <span style="display: inline-block; margin-top: 1rem; margin-bottom: 1rem;">
-        <span class="font-bold text-3xl location-card-heading" >
+<div class="bg-[linear-gradient(90deg,var(--coyle-grad-dark)_0%,var(--coyle-grad-light)_100%)] w-full rounded-3xl relative flex items-start justify-center p-3">
+    <span class="text-center text-xl z-10 pointer-events-none text-white inline-block mt-4 mb-4">
+        <span class="font-bold text-3xl location-card-heading">
           <i class="fa fa-utensils"></i>
             &nbsp;&nbsp;Dining
         </span>
         <br>
         <span class="card-location-name">North Dining Hall</span>
         <br>
-        <span class="card-location-time">8 min <i class="fa fa-person-walking"></i></span>
+        <span class="text-[var(--color-extra-light)]">8 min <i class="fa fa-person-walking"></i></span>
         <br>
         <span class="card-location-name">South Dining Hall</span>
         <br>
-        <span class="card-location-time">30 sec <i class="fa fa-person-walking"></i></span>
+        <span class="text-[var(--color-extra-light)]">30 sec <i class="fa fa-person-walking"></i></span>
         <br>
         <span class="card-location-name">Rohr's Restaurant</span>
         <br>
-        <span class="card-location-time">1 min <i class="fa fa-person-walking"></i></span>
-      </span>
+        <span class="text-[var(--color-extra-light)]">1 min <i class="fa fa-person-walking"></i></span>
     </span>
   </div>
-  <div class="bg-[var(--primary-color)] w-full rounded-3xl relative flex items-start justify-center p-3">
-    <span class="text-center text-xl z-10 pointer-events-none text-white" style="display: inline-block; margin-top: 1rem; margin-bottom: 1rem;">
+  <div class="bg-[linear-gradient(90deg,var(--coyle-grad-dark)_0%,var(--coyle-grad-light)_100%)] w-full rounded-3xl relative flex items-start justify-center p-3">
+    <span class="text-center text-xl z-10 pointer-events-none text-white inline-block mt-4 mb-4">
       <span class="font-bold text-3xl location-card-heading">
         <i class="fa fa-landmark-dome"></i>
           &nbsp;Landmarks
@@ -120,19 +99,19 @@ title: "Location"
         <br>
         <span class="card-location-name">The Golden Dome</span>
         <br>
-        <span class="card-location-time">6 min <i class="fa fa-person-walking"></i></span>
+        <span class="text-[var(--color-extra-light)]">6 min <i class="fa fa-person-walking"></i></span>
         <br>
         <span class="card-location-name">The Lakes</span>
         <br>
-        <span class="card-location-time">4 min <i class="fa fa-person-walking"></i></span>
+        <span class="text-[var(--color-extra-light)]">4 min <i class="fa fa-person-walking"></i></span>
         <br>
         <span class="card-location-name">St. Joseph Beach</span>
         <br>
-        <span class="card-location-time">14 min <i class="fa fa-person-walking"></i></span>
+        <span class="text-[var(--color-extra-light)]">14 min <i class="fa fa-person-walking"></i></span>
       </span>
   </div>
-  <div class="bg-[var(--primary-color)] w-full rounded-3xl relative flex items-start justify-center p-3">
-    <span class="text-center text-xl z-10 pointer-events-none text-white" style="display: inline-block; margin-top: 1rem; margin-bottom: 1rem;">
+  <div class="bg-[linear-gradient(90deg,var(--coyle-grad-dark)_0%,var(--coyle-grad-light)_100%)] w-full rounded-3xl relative flex items-start justify-center p-3">
+    <span class="text-center text-xl z-10 pointer-events-none text-white inline-block mt-4 mb-4">
       <span class="font-bold text-3xl location-card-heading">
         <i class="fa fa-cross"></i>
           &nbsp;Religious
@@ -140,19 +119,19 @@ title: "Location"
         <br>
         <span class="card-location-name">The Basilica</span>
         <br>
-        <span class="card-location-time">5 min <i class="fa fa-person-walking"></i></span>
+        <span class="text-[var(--color-extra-light)]">5 min <i class="fa fa-person-walking"></i></span>
         <br>
         <span class="card-location-name">The Grotto</span>
         <br>
-        <span class="card-location-time">6 min <i class="fa fa-person-walking"></i></span>
+        <span class="text-[var(--color-extra-light)]">6 min <i class="fa fa-person-walking"></i></span>
         <br>
         <span class="card-location-name">Log Chapel</span>
         <br>
-        <span class="card-location-time">3 min <i class="fa fa-person-walking"></i></span>
+        <span class="text-[var(--color-extra-light)]">3 min <i class="fa fa-person-walking"></i></span>
     </span>
   </div>
-  <div class="bg-[var(--primary-color)] w-full rounded-3xl relative flex items-start justify-center p-3">
-    <span class="text-center text-xl z-10 pointer-events-none text-white" style="display: inline-block; margin-top: 1rem; margin-bottom: 1rem;">
+  <div class="bg-[linear-gradient(90deg,var(--coyle-grad-dark)_0%,var(--coyle-grad-light)_100%)] w-full rounded-3xl relative flex items-start justify-center p-3">
+    <span class="text-center text-xl z-10 pointer-events-none text-white inline-block mt-4 mb-4">
       <span class="font-bold text-3xl location-card-heading">
         <i class="fa fa-book"></i>
           &nbsp;Academic
@@ -160,39 +139,39 @@ title: "Location"
         <br>
         <span class="card-location-name">Hesburgh Library</span>
         <br>
-        <span class="card-location-time">9 min <i class="fa fa-person-walking"></i></span>
+        <span class="text-[var(--color-extra-light)]">9 min <i class="fa fa-person-walking"></i></span>
         <br>
         <span class="card-location-name">Debartolo Hall</span>
         <br>
-        <span class="card-location-time">7 min <i class="fa fa-person-walking"></i></span>
+        <span class="text-[var(--color-extra-light)]">7 min <i class="fa fa-person-walking"></i></span>
         <br>
         <span class="card-location-name">Jordan Science Hall</span>
         <br>
-        <span class="card-location-time">11 min <i class="fa fa-person-walking"></i></span>
+        <span class="text-[var(--color-extra-light)]">11 min <i class="fa fa-person-walking"></i></span>
     </span>
   </div>
-  <div class="bg-[var(--primary-color)] w-full rounded-3xl relative flex items-start justify-center p-3">
-    <span class="text-center text-xl z-10 pointer-events-none text-white" style="display: inline-block; margin-top: 1rem; margin-bottom: 1rem;">
+  <div class="bg-[linear-gradient(90deg,var(--coyle-grad-dark)_0%,var(--coyle-grad-light)_100%)] w-full rounded-3xl relative flex items-start justify-center p-3">
+    <span class="text-center text-xl z-10 pointer-events-none text-white inline-block mt-4 mb-4">
       <span class="font-bold text-3xl location-card-heading">
-        <i class="fa fa-book"></i>
-          &nbsp;Academic
+        <i class="fa fa-boxes-packing"></i>
+          &nbsp;Essentials
         </span>
         <br>
         <span class="card-location-name">Univ Health Services</span>
         <br>
-        <span class="card-location-time">8 min <i class="fa fa-person-walking"></i></span>
+        <span class="text-[var(--color-extra-light)]">8 min <i class="fa fa-person-walking"></i></span>
         <br>
         <span class="card-location-name">St. Michael's Laundry</span>
         <br>
-        <span class="card-location-time">21 min <i class="fa fa-person-walking"></i></span>
+        <span class="text-[var(--color-extra-light)]">21 min <i class="fa fa-person-walking"></i></span>
         <br>
         <span class="card-location-name">Trader Joe's</span>
         <br>
-        <span class="card-location-time">22 min <i class="fa fa-person-walking"></i></span>
+        <span class="text-[var(--color-extra-light)]">22 min <i class="fa fa-person-walking"></i></span>
     </span>
   </div>
-  <div class="bg-[var(--primary-color)] w-full rounded-3xl relative flex items-start justify-center p-3">
-    <span class="text-center text-xl z-10 pointer-events-none text-white" style="display: inline-block; margin-top: 1rem; margin-bottom: 1rem;">
+  <div class="bg-[linear-gradient(90deg,var(--coyle-grad-dark)_0%,var(--coyle-grad-light)_100%)] w-full rounded-3xl relative flex items-start justify-center p-3">
+    <span class="text-center text-xl z-10 pointer-events-none text-white inline-block mt-4 mb-4">
       <span class="font-bold text-3xl location-card-heading">
         <i class="fa fa-football"></i>
           &nbsp;Athletic
@@ -200,19 +179,19 @@ title: "Location"
         <br>
         <span class="card-location-name">ND Stadium</span>
         <br>
-        <span class="card-location-time">9 min <i class="fa fa-person-walking"></i></span>
+        <span class="text-[var(--color-extra-light)]">9 min <i class="fa fa-person-walking"></i></span>
         <br>
         <span class="card-location-name">Purcell Pavilion</span>
         <br>
-        <span class="card-location-time">10 min <i class="fa fa-person-walking"></i></span>
+        <span class="text-[var(--color-extra-light)]">10 min <i class="fa fa-person-walking"></i></span>
         <br>
         <span class="card-location-name">Compton Ice Arena</span>
         <br>
-        <span class="card-location-time">16 min <i class="fa fa-person-walking"></i></span>
+        <span class="text-[var(--color-extra-light)]">16 min <i class="fa fa-person-walking"></i></span>
     </span>
   </div>
-  <div class="bg-[var(--primary-color)] w-full rounded-3xl relative flex items-start justify-center p-3">
-    <span class="text-center text-xl z-10 pointer-events-none text-white" style="display: inline-block; margin-top: 1rem; margin-bottom: 1rem;">
+  <div class="bg-[linear-gradient(90deg,var(--coyle-grad-dark)_0%,var(--coyle-grad-light)_100%)] w-full rounded-3xl relative flex items-start justify-center p-3">
+    <span class="text-center text-xl z-10 pointer-events-none text-white inline-block mt-4 mb-4">
       <span class="font-bold text-3xl location-card-heading">
         <i class="fa-solid fa-dumbbell"></i>
           &nbsp;RecSports
@@ -220,19 +199,19 @@ title: "Location"
         <br>
         <span class="card-location-name">Smith Center</span>
         <br>
-        <span class="card-location-time">8 min <i class="fa fa-person-walking"></i></span>
+        <span class="text-[var(--color-extra-light)]">8 min <i class="fa fa-person-walking"></i></span>
         <br>
         <span class="card-location-name">Joyce North Dome</span>
         <br>
-        <span class="card-location-time">9 min <i class="fa fa-person-walking"></i></span>
+        <span class="text-[var(--color-extra-light)]">9 min <i class="fa fa-person-walking"></i></span>
         <br>
         <span class="card-location-name">Rockne Memorial</span>
         <br>
-        <span class="card-location-time">1 min <i class="fa fa-person-walking"></i></span>
+        <span class="text-[var(--color-extra-light)]">1 min <i class="fa fa-person-walking"></i></span>
     </span>
   </div>
-  <div class="bg-[var(--primary-color)] w-full rounded-3xl relative flex items-start justify-center p-3">
-    <span class="text-center text-xl z-10 pointer-events-none text-white" style="display: inline-block; margin-top: 1rem; margin-bottom: 1rem;">
+  <div class="bg-[linear-gradient(90deg,var(--coyle-grad-dark)_0%,var(--coyle-grad-light)_100%)] w-full rounded-3xl relative flex items-start justify-center p-3">
+    <span class="text-center text-xl z-10 pointer-events-none text-white inline-block mt-4 mb-4">
       <span class="font-bold text-3xl location-card-heading">
         <i class="fa fa-circle-info"></i>
           &nbsp;Centers
@@ -240,19 +219,19 @@ title: "Location"
         <br>
         <span class="card-location-name">LaFortune St Ctr</span>
         <br>
-        <span class="card-location-time">7 min <i class="fa fa-person-walking"></i></span>
+        <span class="text-[var(--color-extra-light)]">7 min <i class="fa fa-person-walking"></i></span>
         <br>
         <span class="card-location-name">Duncan St Ctr</span>
         <br>
-        <span class="card-location-time">8 min <i class="fa fa-person-walking"></i></span>
+        <span class="text-[var(--color-extra-light)]">8 min <i class="fa fa-person-walking"></i></span>
         <br>
         <span class="card-location-name">Eck Vistor Center</span>
         <br>
-        <span class="card-location-time">7 min <i class="fa fa-person-walking"></i></span>
+        <span class="text-[var(--color-extra-light)]">7 min <i class="fa fa-person-walking"></i></span>
     </span>
   </div>
-  <div class="bg-[var(--primary-color)] w-full rounded-3xl relative flex items-start justify-center p-3">
-    <span class="text-center text-xl z-10 pointer-events-none text-white" style="display: inline-block; margin-top: 1rem; margin-bottom: 1rem;">
+  <div class="bg-[linear-gradient(90deg,var(--coyle-grad-dark)_0%,var(--coyle-grad-light)_100%)] w-full rounded-3xl relative flex items-start justify-center p-3">
+    <span class="text-center text-xl z-10 pointer-events-none text-white inline-block mt-4 mb-4">
       <span class="font-bold text-3xl location-card-heading">
         <i class="fa fa-cart-shopping"></i>
           &nbsp;Retail
@@ -260,19 +239,19 @@ title: "Location"
         <br>
         <span class="card-location-name">Eddy Street Commons</span>
         <br>
-        <span class="card-location-time">15 min <i class="fa fa-person-walking"></i></span>
+        <span class="text-[var(--color-extra-light)]">15 min <i class="fa fa-person-walking"></i></span>
         <br>
         <span class="card-location-name">Hammes Bookstore</span>
         <br>
-        <span class="card-location-time">6 min <i class="fa fa-person-walking"></i></span>
+        <span class="text-[var(--color-extra-light)]">6 min <i class="fa fa-person-walking"></i></span>
         <br>
         <span class="card-location-name">University Park Mall</span>
         <br>
-        <span class="card-location-time">14 min <i class="fa fa-car"></i></span>
+        <span class="text-[var(--color-extra-light)]">14 min <i class="fa fa-car"></i></span>
     </span>
   </div>
-  <div class="bg-[var(--primary-color)] w-full rounded-3xl relative flex items-start justify-center p-3">
-    <span class="text-center text-xl z-10 pointer-events-none text-white" style="display: inline-block; margin-top: 1rem; margin-bottom: 1rem;">
+  <div class="bg-[linear-gradient(90deg,var(--coyle-grad-dark)_0%,var(--coyle-grad-light)_100%)] w-full rounded-3xl relative flex items-start justify-center p-3">
+    <span class="text-center text-xl z-10 pointer-events-none text-white inline-block mt-4 mb-4">
       <span class="font-bold text-3xl location-card-heading">
         <i class="fa fa-tree-city"></i>
           &nbsp;Downtown
@@ -280,19 +259,19 @@ title: "Location"
         <br>
         <span class="card-location-name">Howard Park</span>
         <br>
-        <span class="card-location-time">10 min <i class="fa fa-car"></i></span>
+        <span class="text-[var(--color-extra-light)]">10 min <i class="fa fa-car"></i></span>
         <br>
         <span class="card-location-name">Four Winds Field</span>
         <br>
-        <span class="card-location-time">11 min <i class="fa fa-car"></i></span>
+        <span class="text-[var(--color-extra-light)]">11 min <i class="fa fa-car"></i></span>
         <br>
         <span class="card-location-name">Morris P.A.C.</span>
         <br>
-        <span class="card-location-time">8 min <i class="fa fa-car"></i></span>
+        <span class="text-[var(--color-extra-light)]">8 min <i class="fa fa-car"></i></span>
     </span>
   </div>
-  <div class="bg-[var(--primary-color)] w-full rounded-3xl relative flex items-start justify-center p-3">
-    <span class="text-center text-xl z-10 pointer-events-none text-white" style="display: inline-block; margin-top: 1rem; margin-bottom: 1rem;">
+  <div class="bg-[linear-gradient(90deg,var(--coyle-grad-dark)_0%,var(--coyle-grad-light)_100%)] w-full rounded-3xl relative flex items-start justify-center p-3">
+    <span class="text-center text-xl z-10 pointer-events-none text-white inline-block mt-4 mb-4">
       <span class="font-bold text-3xl location-card-heading">
         <i class="fa fa-graduation-cap"></i>
           &nbsp;Colleges
@@ -300,19 +279,19 @@ title: "Location"
         <br>
         <span class="card-location-name">Holy Cross College</span>
         <br>
-        <span class="card-location-time">21 min <i class="fa fa-person-walking"></i></span>
+        <span class="text-[var(--color-extra-light)]">21 min <i class="fa fa-person-walking"></i></span>
         <br>
         <span class="card-location-name">St. Mary's College</span>
         <br>
-        <span class="card-location-time">28 min <i class="fa fa-person-walking"></i></span>
+        <span class="text-[var(--color-extra-light)]">28 min <i class="fa fa-person-walking"></i></span>
         <br>
         <span class="card-location-name">IU South Bend</span>
         <br>
-        <span class="card-location-time">13 min <i class="fa fa-car"></i></span>
+        <span class="text-[var(--color-extra-light)]">13 min <i class="fa fa-car"></i></span>
     </span>
   </div>
-  <div class="bg-[var(--primary-color)] w-full rounded-3xl relative flex items-start justify-center p-3">
-    <span class="text-center text-xl z-10 pointer-events-none text-white" style="display: inline-block; margin-top: 1rem; margin-bottom: 1rem;">
+  <div class="bg-[linear-gradient(90deg,var(--coyle-grad-dark)_0%,var(--coyle-grad-light)_100%)] w-full rounded-3xl relative flex items-start justify-center p-3">
+    <span class="text-center text-xl z-10 pointer-events-none text-white inline-block mt-4 mb-4">
       <span class="font-bold text-3xl location-card-heading">
         <i class="fa fa-route"></i>
           &nbsp;Transit
@@ -320,20 +299,20 @@ title: "Location"
         <br>
         <span class="card-location-name">South Bend Airport</span>
         <br>
-        <span class="card-location-time">18 min <i class="fa fa-car"></i></span>
+        <span class="text-[var(--color-extra-light)]">18 min <i class="fa fa-car"></i></span>
         <br>
         <span class="card-location-name">South Shore Train</span>
         <br>
-        <span class="card-location-time">17 min <i class="fa fa-car"></i></span>
+        <span class="text-[var(--color-extra-light)]">17 min <i class="fa fa-car"></i></span>
         <br>
         <span class="card-location-name">Amtrack Train</span>
         <br>
-        <span class="card-location-time">13 min <i class="fa fa-car"></i></span>
+        <span class="text-[var(--color-extra-light)]">13 min <i class="fa fa-car"></i></span>
     </span>
   </div>
 </div>
 
-<div class="flex items-center justify-center my-1 fade-in-section" style="position: relative; margin-bottom: 1rem; margin-top: 5rem;">
+<div class="flex items-center justify-center my-1 relative mb-4 mt-20 fade-in-section">
   <p class="text-2xl text-center font-extrabold mb-6 fade-in-section flex items-center"
       style="position: relative; margin-top: 0;">
     <span style="position: relative; display: inline-block;">

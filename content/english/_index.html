@@ -27,8 +27,8 @@ banner:
 
     <div id="home-content-layer">
       <!-- Animated Waves at top of scrolling content -->
-      <div class="wave-container">
-        <canvas id="wave-canvas" class="wave-canvas" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;"></canvas>
+      <div class="relative -mt-[70px] left-0 w-full h-20 overflow-hidden z-[3]">
+        <canvas id="wave-canvas" class="block absolute bottom-0 left-0 w-full h-full [transform:translateZ(0)] shadow-none filter-none"></canvas>
       </div>
 
       <section class="home-top-banner overflow-visible fade-in-section" aria-label="Homepage announcement">
@@ -56,7 +56,7 @@ banner:
 
         <!-- Divider Wave -->
         <div class="banner-divider-wave" aria-hidden="true">
-          <canvas id="wave-canvas-divider" class="wave-canvas" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;"></canvas>
+          <canvas id="wave-canvas-divider" class="block absolute bottom-0 left-0 w-full h-full [transform:translateZ(0)] shadow-none filter-none"></canvas>
         </div>
       </section>
 
@@ -102,7 +102,7 @@ banner:
    <section
       class="py-4 px-4 mt-4 sm:px-6 fade-in-section flex justify-center"
       aria-label="Information for incoming students">
-      <div class="hc-brand-surface flex flex-col md:flex-row md:items-center gap-2 md:gap-6 w-full max-w-[1300px] mx-auto rounded-3xl px-6 md:px-6 py-8 text-center bg-[linear-gradient(90deg,var(--coyle-dark-green)_0%,var(--coyle-light-green)_100%)]">
+      <div class="hc-brand-surface new-crew-banner flex flex-col md:flex-row md:items-center gap-2 md:gap-6 w-full max-w-[1300px] mx-auto rounded-3xl px-6 md:px-6 py-8 text-center bg-[linear-gradient(90deg,var(--coyle-grad-dark)_0%,var(--coyle-grad-light)_100%)]">
         <h2 class="font-extrabold text-white md:pl-4 m-0 leading-[1.1] [text-wrap:balance] md:whitespace-nowrap text-[clamp(1.75rem,4vw,2.5rem)]">New Crew</h2>
         <p class="leading-[1.65] m-0 md:flex-1 mx-auto max-w-[55ch] md:max-w-none text-[clamp(0.95rem,2vw,1.05rem)] text-white">We can't wait to welcome you! Be sure to check out all of our incoming student resources:</p>
         <div class="shrink-0 flex justify-center md:ml-auto md:pr-2 mt-3 md:mt-0">
@@ -129,7 +129,7 @@ banner:
         <div class="fast-facts-inner relative md:w-[min(1100px,80%)] w-[min(1100px,95%)] max-w-full px-4" aria-hidden="false">
           <div class="max-[900px]:hidden col-span-2">{{< coyle-trace >}}</div>
 
-          <div class="absolute top-[28%] left-[80%] grid w-[min(305px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-3xl bg-[linear-gradient(90deg,var(--coyle-dark-green)_0%,var(--coyle-light-green)_100%)] px-2 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
+          <div class="absolute top-[28%] left-[80%] grid w-[min(305px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-3xl bg-[linear-gradient(90deg,var(--coyle-grad-dark)_0%,var(--coyle-grad-light)_100%)] px-2 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
             <i class="ml-2 fa fa-location-dot flex self-center h-11 w-11 items-center justify-start text-5xl text-white max-[541px]:opacity-30" aria-hidden="true"></i>
             <div class="min-w-0 pl-4">
               <p class="text-sm font-bold uppercase tracking-widest text-white/72">Location</p>
@@ -140,7 +140,7 @@ banner:
             </div>
           </div>
 
-          <div class="absolute top-[-1%] left-[50%] -translate-x-1/2 grid w-[min(305px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-3xl bg-[linear-gradient(90deg,var(--coyle-dark-green)_0%,var(--coyle-light-green)_100%)] px-2 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
+          <div class="absolute top-[-1%] left-[50%] -translate-x-1/2 grid w-[min(305px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-3xl bg-[linear-gradient(90deg,var(--coyle-grad-dark)_0%,var(--coyle-grad-light)_100%)] px-2 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
             <i class="ml-2 fa fa-people-roof flex self-center h-11 w-11 items-center justify-start text-5xl text-white max-[541px]:opacity-30" aria-hidden="true"></i>
             <div class="min-w-0 pl-4">
               <p class="text-sm font-bold uppercase tracking-widest text-white/72">Population</p>
@@ -151,7 +151,7 @@ banner:
             </div>
           </div>
 
-          <div class="absolute top-[5%] right-[67%] grid w-[min(305px,32vw)] min-h-[108px] grid-cols-[60px_1fr] items-center gap-2 rounded-3xl bg-[linear-gradient(90deg,var(--coyle-dark-green)_0%,var(--coyle-light-green)_100%)] px-2 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[48px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
+          <div class="absolute top-[5%] right-[67%] grid w-[min(305px,32vw)] min-h-[108px] grid-cols-[60px_1fr] items-center gap-2 rounded-3xl bg-[linear-gradient(90deg,var(--coyle-grad-dark)_0%,var(--coyle-grad-light)_100%)] px-2 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[48px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
             <img src="/images/PaddlesCrossedWhiteTransparent.svg" alt="" aria-hidden="true" class="ml-3 self-center h-12 w-12 max-[540px]:h-[36px] max-[540px]:w-[36px] max-[541px]:opacity-30 object-contain flex-shrink-0">
             <div class="min-w-0 pl-2">
               <p class="text-sm font-bold uppercase tracking-widest text-white/72">Dorm Mascot</p>
@@ -162,7 +162,7 @@ banner:
             </div>
           </div>
 
-          <div class="absolute top-[51%] left-[80%] grid w-[min(305px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-3xl bg-[linear-gradient(90deg,var(--coyle-dark-green)_0%,var(--coyle-light-green)_100%)] px-2 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
+          <div class="absolute top-[51%] left-[80%] grid w-[min(305px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-3xl bg-[linear-gradient(90deg,var(--coyle-grad-dark)_0%,var(--coyle-grad-light)_100%)] px-2 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
             <i class="ml-2 fa fa-church flex self-center h-11 w-11 items-center justify-start text-5xl text-white max-[541px]:opacity-30" aria-hidden="true"></i>
             <div class="min-w-0 pl-4">
               <p class="text-sm font-bold uppercase tracking-widest text-white/72">Chapel</p>
@@ -173,7 +173,7 @@ banner:
             </div>
           </div>
 
-          <div class="absolute top-[51%] right-[80%] grid w-[min(305px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-3xl bg-[linear-gradient(90deg,var(--coyle-dark-green)_0%,var(--coyle-light-green)_100%)] px-2 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
+          <div class="absolute top-[51%] right-[80%] grid w-[min(305px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-3xl bg-[linear-gradient(90deg,var(--coyle-grad-dark)_0%,var(--coyle-grad-light)_100%)] px-2 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
             <i class="ml-2 fa fa-fan flex self-center h-11 w-11 items-center justify-start text-5xl text-white max-[541px]:opacity-30" aria-hidden="true"></i>
             <div class="min-w-0 pl-4">
               <p class="text-sm font-bold uppercase tracking-widest text-white/72">Amenities</p>
@@ -182,7 +182,7 @@ banner:
             </div>
           </div>
 
-          <div class="absolute top-[28%] right-[80%] grid w-[min(305px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-3xl bg-[linear-gradient(90deg,var(--coyle-dark-green)_0%,var(--coyle-light-green)_100%)] px-2 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
+          <div class="absolute top-[28%] right-[80%] grid w-[min(305px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-3xl bg-[linear-gradient(90deg,var(--coyle-grad-dark)_0%,var(--coyle-grad-light)_100%)] px-2 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
             <i class="ml-2 fa fa-building flex self-center h-11 w-11 items-center justify-start text-5xl text-white max-[541px]:opacity-30" aria-hidden="true"></i>
             <div class="min-w-0 pl-4">
               <p class="text-sm font-bold uppercase tracking-widest text-white/72">The Building</p>
@@ -191,7 +191,7 @@ banner:
             </div>
           </div>
 
-          <div class="absolute top-[5%] left-[67%] grid w-[min(305px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-3xl bg-[linear-gradient(90deg,var(--coyle-dark-green)_0%,var(--coyle-light-green)_100%)] px-2 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
+          <div class="absolute top-[5%] left-[67%] grid w-[min(305px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-3xl bg-[linear-gradient(90deg,var(--coyle-grad-dark)_0%,var(--coyle-grad-light)_100%)] px-2 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
             <i class="ml-2 fa fa-palette flex self-center h-11 w-11 items-center justify-start text-5xl text-white max-[541px]:opacity-30" aria-hidden="true"></i>
             <div class="min-w-0 pl-4">
               <p class="text-sm font-bold uppercase tracking-widest text-white/72">Dorm Colors</p>
@@ -201,7 +201,7 @@ banner:
           </div>
 
           <a href="https://www.mcglinnhallnd.com/" target="_blank" rel="noopener" aria-label="Link to McGlinn Hall website">
-            <div class="absolute top-[75%] right-[67%] grid w-[min(305px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-3xl bg-[linear-gradient(90deg,var(--coyle-dark-green)_0%,var(--coyle-light-green)_100%)] px-2 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
+            <div class="absolute top-[75%] right-[67%] grid w-[min(305px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-3xl bg-[linear-gradient(90deg,var(--coyle-grad-dark)_0%,var(--coyle-grad-light)_100%)] px-2 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
               <i class="ml-2 fa fa-venus flex self-center h-11 w-11 items-center justify-start text-5xl text-white max-[541px]:opacity-30" aria-hidden="true"></i>
               <div class="min-w-0 pl-4">
                 <p class="text-sm font-bold uppercase tracking-widest text-white/72">Sister Dorm</p>
@@ -215,7 +215,7 @@ banner:
           </a>
 
           <a href="https://carrollhall.nd.edu/" target="_blank" rel="noopener" aria-label="Link to Carroll Hall website">
-            <div class="absolute top-[75%] right-[5%] grid w-[min(305px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-3xl bg-[linear-gradient(90deg,var(--coyle-dark-green)_0%,var(--coyle-light-green)_100%)] px-2 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
+            <div class="absolute top-[75%] right-[5%] grid w-[min(305px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-3xl bg-[linear-gradient(90deg,var(--coyle-grad-dark)_0%,var(--coyle-grad-light)_100%)] px-2 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
               <i class="ml-2 fa fa-mars flex self-center h-11 w-11 items-center justify-start text-5xl text-white max-[541px]:opacity-30" aria-hidden="true"></i>
               <div class="min-w-0 pl-4">
                 <p class="text-sm font-bold uppercase tracking-widest text-white/72">Brother Dorm</p>
@@ -229,7 +229,7 @@ banner:
           </a>
 
           <a href="https://residentiallife.nd.edu/" target="_blank" rel="noopener" aria-label="Link to ND ResLife website">
-            <div class="absolute top-[80%] left-[50%] -translate-x-1/2 grid w-[min(305px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-3xl bg-[linear-gradient(90deg,var(--coyle-dark-green)_0%,var(--coyle-light-green)_100%)] px-2 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
+            <div class="absolute top-[80%] left-[50%] -translate-x-1/2 grid w-[min(305px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-3xl bg-[linear-gradient(90deg,var(--coyle-grad-dark)_0%,var(--coyle-grad-light)_100%)] px-2 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
               <i class="ml-3 mt-2 fa fa-arrow-up-right-from-square flex self-center h-11 w-11 items-center justify-start text-4xl text-white max-[541px]:opacity-30" aria-hidden="true"></i>
               <div class="min-w-0 pl-4">
                 <p class="text-sm font-bold uppercase tracking-widest text-white/72">Learn More</p>
@@ -244,7 +244,7 @@ banner:
       </div>
 
           <!-- Instagram Feed -->
-      <div class="hc-brand-surface ig-section max-w-[1400px] rounded-[2rem] bg-[linear-gradient(90deg,var(--coyle-dark-green)_0%,var(--coyle-light-green)_100%)] px-6 py-8 lg:mt-20 mb-6 2xl:mx-auto mx-4">
+      <div class="hc-brand-surface ig-section max-w-[1400px] rounded-[2rem] bg-[linear-gradient(90deg,var(--coyle-grad-dark)_0%,var(--coyle-grad-light)_100%)] px-6 py-8 lg:mt-20 mb-6 2xl:mx-auto mx-4">
       <section class="fade-in-section max-w-[1320px] mx-auto">
         <div class="flex flex-col items-center mb-8">
           <a href="https://www.instagram.com/real_coylehall/" target="_blank" rel="noopener"

@@ -72,7 +72,7 @@
   /* ─── default ─────────────────────────────────────────────── */
   Button.default {
     background: var(--primary-color);
-    color: var(--button-text-white);
+    color: var(--always-white);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
   }
   Button.default:hover,
@@ -82,7 +82,7 @@
   /* ─── light ────────────────────────────────────────────── */
   Button.light {
     background: var(--secondary-color);
-    color: var(--button-text-white);
+    color: var(--button-dynamic-white);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
   }
   Button.light:hover,
@@ -92,7 +92,7 @@
   /* ─── gradient ─────────────────────────────────────────────── */
   Button.gradient {
     background: linear-gradient(var(--Button-angle), var(--button-grad-dark-lm), var(--button-grad-light-lm));
-    color: var(--button-text-white);
+    color: var(--button-dynamic-white);
     box-shadow: 0 2px 8px rgba(6, 65, 33, 0.22);
     overflow: hidden;
   }
@@ -150,7 +150,7 @@
   Button.outline-green:hover,
   Button.outline-green:focus-visible {
     background: var(--primary-color);
-    color: var(--button-text-white);
+    color: var(--always-white);
   }
 
 
@@ -163,7 +163,7 @@
   Button.outline-light:hover,
   Button.outline-light:focus-visible {
     background: var(--contrast-green);
-    color: var(--button-text-white);
+    color: var(--button-dynamic-white);
   }
 
 
