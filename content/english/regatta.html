@@ -22,10 +22,6 @@ aliases:
   font-size: clamp(5rem, 13vw, 11.5rem) !important;
 }
 
-body .section-sm > .container {
-  max-width: 1600px !important;
-}
-
 body:has(.regatta-bottom-graphic) {
   overflow-x: clip;
 }
@@ -43,13 +39,6 @@ body:has(.regatta-bottom-graphic) footer {
 
 body:has(.regatta-bottom-graphic) .footer-wrapper .footer::before {
   display: none;
-}
-
-@media (min-width: 1024px) {
-  body .section-sm > .container .row.justify-center > .lg\:col-10 {
-    flex: 0 0 100% !important;
-    max-width: 100% !important;
-  }
 }
 
 .regatta-meta {

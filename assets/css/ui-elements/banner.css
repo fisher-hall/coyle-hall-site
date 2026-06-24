@@ -196,6 +196,18 @@ body:has(.page-banner-wrapper) main {
   display: none;
 }
 
+/* Event pages: widen content column to full width */
+body:has(.page-banner-wrapper) .section-sm > .container {
+  max-width: 1600px !important;
+}
+
+@media (min-width: 1024px) {
+  body:has(.page-banner-wrapper) .section-sm > .container .row.justify-center > .lg\:col-10 {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+}
+
 @media (max-width: 768px) {
   #banner-parallax {
     display: flex !important;

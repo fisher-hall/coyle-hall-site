@@ -123,9 +123,18 @@ html.a11y-contrast-high body {
   background: #000 !important;
   color: #fff !important;
 }
-/* Body text white */
-html.a11y-contrast-high :where(p, li, dd, dt, blockquote, span:not([class*="icon"])) {
+/* Body text white — no :where() so specificity is real and wins */
+html.a11y-contrast-high p,
+html.a11y-contrast-high li,
+html.a11y-contrast-high dd,
+html.a11y-contrast-high dt,
+html.a11y-contrast-high blockquote,
+html.a11y-contrast-high span:not([class*="icon"]) {
   color: #fff !important;
+}
+/* Spans inside headings inherit the heading green */
+html.a11y-contrast-high :where(h1, h2, h3, h4, h5, h6) span:not([class*="icon"]) {
+  color: inherit !important;
 }
 html.a11y-contrast-high figcaption {
   color: #6ee87a !important;
