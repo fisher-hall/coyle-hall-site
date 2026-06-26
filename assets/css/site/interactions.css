@@ -136,9 +136,16 @@ footer button {
   }
 }
 
-.fade-in-section img:hover {
+.fade-in-section img:not(.no-tilt):hover {
   transform: scale(1.05);
   box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+}
+
+.no-tilt,
+.no-tilt:hover {
+  transform: none !important;
+  transition: none !important;
+  box-shadow: none !important;
 }
 
 

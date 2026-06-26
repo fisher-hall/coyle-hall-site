@@ -82,6 +82,7 @@ mark.bg-yellow-300 {
 
 /* ── Gradient icons (faith page + any future use) ── */
 .icon-gradient {
+  display: inline-block;
   background: linear-gradient(135deg, var(--coyle-dark-green) 0%, var(--coyle-light-green) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

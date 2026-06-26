@@ -235,12 +235,24 @@
             a.target = '_blank';
             a.rel = 'noopener';
             a.setAttribute('aria-label', caption || 'View on Instagram');
-            a.innerHTML =
-              '<div class="ig-post-img-wrap">' +
-                '<img src="' + imgUrl + '" alt="" loading="lazy" decoding="async" ' +
-                'onerror="this.closest(\'.ig-post\').style.display=\'none\'">' +
-                '<div class="ig-post-overlay">' + typeIcon + '<p>' + caption + '</p></div>' +
-              '</div>';
+
+            var wrap = document.createElement('div');
+            wrap.className = 'ig-post-img-wrap';
+            var img = document.createElement('img');
+            img.src = imgUrl;
+            img.alt = '';
+            img.loading = 'lazy';
+            img.decoding = 'async';
+            img.onerror = function () { a.style.display = 'none'; };
+            var overlay = document.createElement('div');
+            overlay.className = 'ig-post-overlay';
+            overlay.innerHTML = typeIcon;
+            var p = document.createElement('p');
+            p.textContent = caption;
+            overlay.appendChild(p);
+            wrap.appendChild(img);
+            wrap.appendChild(overlay);
+            a.appendChild(wrap);
             grid.appendChild(a);
           });
         })
