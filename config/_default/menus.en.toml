@@ -42,13 +42,19 @@ weight = 1
 
 [[main]]
 parent = "About"
-name = "Location"
+name = "Location Info"
 url = "/location"
 weight = 3
 
 [[main]]
 parent = "About"
-name = "Building Info"
+name = "St. Adalbert's"
+url = "/st-adalberts"
+weight = 4
+
+[[main]]
+parent = "About"
+name = "Building Details"
 url = "/building"
 weight = 2
 

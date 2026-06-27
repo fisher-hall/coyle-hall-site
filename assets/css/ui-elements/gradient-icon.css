@@ -27,3 +27,15 @@ g-icon.fa::before {
   padding: 0.15em !important;
   margin: -0.15em !important;
 }
+
+/* Windows forced-colors (High Contrast Mode): gradient is invisible, use ButtonText */
+@media (forced-colors: active) {
+  g-icon.fa::before {
+    background-image: none !important;
+    -webkit-background-clip: unset !important;
+    background-clip: unset !important;
+    color: ButtonText !important;
+    -webkit-text-fill-color: ButtonText !important;
+    forced-color-adjust: auto;
+  }
+}

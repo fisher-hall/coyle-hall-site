@@ -346,6 +346,37 @@ html.a11y-contrast-high .nav-dropdown-list .nav-dropdown-item a.active {
   box-shadow: none !important;
 }
 
+/* Carousel dots: inactive = white outline, active = green filled */
+html.a11y-contrast-high .Carousel-dot {
+  border: 2px solid #fff !important;
+}
+html.a11y-contrast-high .Carousel-dot.active,
+html.a11y-contrast-high .Carousel-dot[aria-current="true"] {
+  background: #6ee87a !important;
+  border-color: #6ee87a !important;
+}
+
+/* Faith page item titles: white instead of accent green */
+html.a11y-contrast-high .faith-page h3 {
+  color: #fff !important;
+}
+
+/* Gradient cards: drop gradient fill, show accent border instead */
+html.a11y-contrast-high .faith-priest-card,
+html.a11y-contrast-high .st-adalberts-about-card {
+  background: #000 !important;
+  border: 3px solid #48bb4e !important;
+}
+
+/* Gradient icons: drop the gradient, render solid white */
+html.a11y-contrast-high g-icon.fa::before {
+  background-image: none !important;
+  -webkit-background-clip: unset !important;
+  background-clip: unset !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+
 /* New Crew banner: black bg, accent border, accent green heading, white body */
 html.a11y-contrast-high .new-crew-banner {
   background: #000 !important;
