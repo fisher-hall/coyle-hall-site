@@ -1,0 +1,42 @@
+# Past Hall Staff
+# Organized by academic year (most recent first).
+# When staff changes, move the outgoing members here.
+#
+# Fields:
+#   name:   (required) Full name
+#   title:  (required) Role
+#   image:  (optional) Path to headshot
+
+years:
+  - year: "2025–2026"
+    members:
+      - name: "Joey Quinones"
+        title: "Rector"
+        image: "/images/headshots/joeyquinones.jpg"
+      - name: "Fr. Greg Haake, C.S.C."
+        title: "Priest in Residence"
+        image: "/images/headshots/frgreg.jpg"
+      - name: "CT Holst"
+        title: "Assistant Rector"
+        image: "/images/headshots/ctholst.jpg"
+      - name: "James Wyatt"
+        title: "Assistant Rector"
+        image: "/images/headshots/jameswyatt.jpg"
+      - name: "Ryan Lally"
+        title: "Resident Assistant"
+        image: "/images/headshots/ryanlally.jpg"
+      - name: "Andrew Sjurset"
+        title: "Resident Assistant"
+        image: "/images/headshots/andrewsjurset.jpg"
+      - name: "Daniel Strickler"
+        title: "Resident Assistant"
+        image: "/images/headshots/danielstrickler.jpg"
+      - name: "John Frederickson"
+        title: "Resident Assistant"
+        image: "/images/headshots/johnfrederickson.jpg"
+      - name: "Martin Soros"
+        title: "Resident Assistant"
+        image: "/images/headshots/martinsoros.jpg"
+      - name: "Wesley Buonerba"
+        title: "Resident Assistant"
+        image: "/images/headshots/wesleybuonerba.jpg"

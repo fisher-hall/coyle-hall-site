@@ -1,0 +1,21 @@
+# Past Hall Government
+# Organized by academic year (most recent first).
+# When a new government takes office, move the outgoing members here.
+#
+# Fields:
+#   name:   (required) Full name
+#   title:  (required) Role
+#   image:  (optional) Path to headshot
+
+years:
+  - year: "2025–2026"
+    members:
+      - name: "Aidan Sachs"
+        title: "Hall President"
+        image: "/images/headshots/aidansachs.jpg"
+      - name: "Tommie Phillips"
+        title: "Hall VP - Fall"
+        image: "/images/headshots/tommiephillips.jpg"
+      - name: "Zach Taylor"
+        title: "Hall VP - Spring"
+        image: "/images/headshots/zachtaylor.jpg"

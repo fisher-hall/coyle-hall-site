@@ -1,0 +1,110 @@
+# Hall Staff data
+#
+# rector / priest — featured full-width bio cards at the top of the page
+# members         — standard card grid (ARs + RAs)
+#
+# Member fields:
+#   name, role, image, email  — required
+#   hometown, major, minor, studying, hobbies, favoritepart, section  — optional; omit to hide
+#   studying: use instead of major for graduate students
+
+rector:
+  name: "Joey Quinones"
+  image: "/images/headshots/joeyquinones.jpg"
+  email: "jquinon3@nd.edu"
+  bio: |
+    Joey Quinones is the Rector of Coyle Hall. Originally from Southern California,
+    he graduated with a B.S.
+    in Mechanical Engineering and a minor in Theology in 2018, and in 2020, he graduated from
+    the ACE program with a M.Ed. after teaching in Tulsa for two years. 
+    In 2021, he graduated from Notre Dame with a M.S. in Entrepreneurship through the ESTEEM program, while serving as an AR in Baumer Hall.
+    He then became Rector of Fisher Hall the following year.
+
+
+    To Joey, being a rector means being welcomed into the life of another person,
+    and to him, there is no greater privilege. 
+    In addition to being a rector, Joey is an Assistant Coach of the
+    Women's and Men's Boxing Clubs and works part-time for the McDonald Center for Student Well-being.
+
+priest:
+  name: "Fr. Greg Haake, C.S.C."
+  image: "/images/headshots/frgreg.jpg"
+  email: "ghaake@nd.edu"
+  website: "https://romancelanguages.nd.edu/people/gregory-haake/"
+  bio: >-
+    Fr. Greg is the priest in residence of Coyle Hall. 
+    Originally from Kansas City, MO, he now lives on the first floor of the dorm, 
+    and organizes various faith-based events, including all sacrament opportunities in Coyle.
+    In addition to his duties in Coyle, Fr. Greg is also the University's Vice President for 
+    Mission Engagement and Church Affairs, as well as an Associate Professor of French in the 
+    Department of Romance Languages and Literatures.
+    Ordained a priest in 2007, he received both a B.A. and an M.Div. from the University of 
+    Notre Dame and joined the faculty in 2015. He enjoys reading, watching movies, and is an avid Kansas City Chiefs fan. 
+    His favorite part of Coyle Hall is all of the students, of course!
+
+members:
+  - name: "CT Holst"
+    role: "Assistant Rector"
+    image: "/images/headshots/ctholst.jpg"
+    email: "ctholst@nd.edu"
+    hometown: "Tucson, AZ"
+    studying: "Law Graduate Student"
+    section: "4th Floor"
+
+  - name: "James Wyatt"
+    role: "Assistant Rector"
+    image: "/images/headshots/jameswyatt.jpg"
+    email: "jwyatt3@nd.edu"
+    hometown: "Binghamton, NY"
+    studying: "Law Graduate Student"
+    section: "2nd Floor"
+
+  - name: "Ryan Lally"
+    role: "Resident Assistant"
+    image: "/images/headshots/ryanlally.jpg"
+    email: "rlally@nd.edu"
+    hometown: "St. Louis, MO"
+    major:
+      - Classics
+      - Spanish
+    section: "1st Floor"
+
+  - name: "Andrew Sjurset"
+    role: "Resident Assistant"
+    image: "/images/headshots/andrewsjurset.jpg"
+    email: "asjurset@nd.edu"
+    hometown: "Lorton, VA"
+    major: "Chemical Engineering"
+    section: "2A"
+
+  - name: "Daniel Strickler"
+    role: "Resident Assistant"
+    image: "/images/headshots/danielstrickler.jpg"
+    email: "dstrick2@nd.edu"
+    hometown: "Frisco, TX"
+    major: "Finance and Economics"
+    section: "2B"
+
+  - name: "John Frederickson"
+    role: "Resident Assistant"
+    image: "/images/headshots/johnfrederickson.jpg"
+    email: "jfreder2@nd.edu"
+    hometown: "Peoria, IL"
+    major: "Civil Engineering"
+    section: "3A"
+
+  - name: "Martin Soros"
+    role: "Resident Assistant"
+    image: "/images/headshots/martinsoros.jpg"
+    email: "msoros@nd.edu"
+    hometown: "Bethesda, MD"
+    major: "Civil Engineering"
+    section: "3B"
+
+  - name: "Wesley Buonerba"
+    role: "Resident Assistant"
+    image: "/images/headshots/wesleybuonerba.jpg"
+    email: "wbuonerb@nd.edu"
+    hometown: "Plymouth, MI"
+    major: "Architecture"
+    section: "4th Floor"

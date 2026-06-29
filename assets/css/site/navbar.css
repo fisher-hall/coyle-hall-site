@@ -145,7 +145,7 @@ body:has(.page-banner-wrapper) .section-sm {
 .floating-navbar .nav-link:hover {
   background: color-mix(in srgb, var(--coyle-light-green) 85%, #ffffff) !important;
   color: #fff !important;
-  border-radius: 16px !important;
+  border-radius: 1rem !important;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1) !important;
   transform: translateY(-1px) !important;
   transition: all 0.2s ease !important;
@@ -163,7 +163,7 @@ body:has(.page-banner-wrapper) .section-sm {
   background: var(--coyle-light-green) !important;
   color: #fff !important;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1) !important;
-  border-radius: 12px !important;
+  border-radius: 1rem !important;
 }
 
 /* Dropdown toggle active state */
@@ -171,7 +171,7 @@ body:has(.page-banner-wrapper) .section-sm {
 .nav-dropdown-toggle[aria-current="page"] {
   background: var(--coyle-light-green) !important;
   color: #fff !important;
-  border-radius: 16px !important;
+  border-radius: 1rem !important;
 }
 
 /* Dropdown submenu active state */
@@ -179,7 +179,7 @@ body:has(.page-banner-wrapper) .section-sm {
 .nav-dropdown-list .nav-dropdown-item a[aria-current="page"] {
   background: var(--coyle-light-green) !important;
   color: #fff !important;
-  border-radius: 16px !important;
+  border-radius: 1rem !important;
 }
 
 /* Static dividers between search / a11y / theme — own elements so they don't animate */
@@ -264,14 +264,14 @@ body:has(.page-banner-wrapper) .section-sm {
 .header .navbar a[href="/incoming-students"]:not(.active):not([aria-current="page"]):not(:hover) {
   background: #FFFFFF !important;
   color: var(--coyle-dark-green) !important;
-  border-radius: 16px !important;
+  border-radius: 1rem !important;
 }
 
 .header .navbar a[href="/incoming-students"].active,
 .header .navbar a[href="/incoming-students"][aria-current="page"] {
   background: var(--coyle-light-green) !important;
   color: #fff !important;
-  border-radius: 16px !important;
+  border-radius: 1rem !important;
 }
 
 .header .navbar a.nav-link.incoming-students:not(.active):hover,
@@ -279,7 +279,7 @@ body:has(.page-banner-wrapper) .section-sm {
 .header .navbar a[href="/incoming-students"]:hover {
   background: color-mix(in srgb, var(--coyle-light-green) 85%, #ffffff) !important;
   color: #fff !important;
-  border-radius: 16px !important;
+  border-radius: 1rem !important;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1) !important;
 }
 
@@ -308,7 +308,7 @@ body:has(.page-banner-wrapper) .section-sm {
   background: color-mix(in srgb, var(--coyle-light-green) 85%, #ffffff) !important;
   color: #fff !important;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1) !important;
-  border-radius: 16px !important;
+  border-radius: 1rem !important;
 }
 
 .floating-navbar .nav-dropdown-list {
@@ -568,19 +568,21 @@ body:has(.page-banner-wrapper) .section-sm {
   #nav-toggle:checked ~ #nav-menu .nav-item:nth-child(7) .nav-link { transition-delay: .35s; }
   #nav-toggle:checked ~ #nav-menu .nav-item:nth-child(8) .nav-link { transition-delay: .40s; }
 
-  #nav-menu .nav-item .nav-link:hover { background: color-mix(in srgb, var(--coyle-light-green) 85%, #ffffff) !important; color: #fff !important; }
-  #nav-menu .nav-item .nav-link.active { background: var(--coyle-light-green) !important; color: #fff !important; outline: none !important; }
+  #nav-menu .nav-item .nav-link:hover { background: color-mix(in srgb, var(--coyle-light-green) 85%, #ffffff) !important; color: #fff !important; border-radius: 1rem !important; }
+  #nav-menu .nav-item .nav-link.active { background: var(--coyle-light-green) !important; color: #fff !important; outline: none !important; border-radius: 1rem !important; }
 
   /* Incoming Students (NEW CREW) — white bg, dark green text */
   #nav-menu .nav-item .nav-link.incoming-students:not(.active) {
     background: #ffffff !important;
     color: var(--coyle-dark-green) !important;
     box-shadow: 0 0 0 4px rgba(255,255,255,0.15) inset;
+    border-radius: 1rem !important;
   }
 
   #nav-menu .nav-item .nav-link.incoming-students:not(.active):hover {
     background: color-mix(in srgb, var(--coyle-light-green) 85%, #ffffff) !important;
     color: #ffffff !important;
+    border-radius: 1rem !important;
   }
 
   /* NEW CREW button (btn-outline-primary) */
@@ -594,7 +596,7 @@ body:has(.page-banner-wrapper) .section-sm {
     background-color: white !important;
     border: none !important;
     padding: 12px 16px !important;
-    border-radius: 16px !important;
+    border-radius: 1rem !important;
     font-weight: 800 !important;
     font-size: 3rem !important;
     line-height: 1.05 !important;
@@ -718,11 +720,13 @@ body:has(.page-banner-wrapper) .section-sm {
     background: var(--coyle-light-green) !important;
     color: #fff !important;
     outline: none !important;
+    border-radius: 1rem !important;
   }
 
   .nav-dropdown-list .nav-dropdown-item a:hover {
     background: var(--coyle-light-green) !important;
     color: #fff !important;
+    border-radius: 1rem !important;
   }
 
   /* Back button */
@@ -743,7 +747,7 @@ body:has(.page-banner-wrapper) .section-sm {
     padding: 6px 3px !important;
     cursor: pointer !important;
     z-index: 10001 !important;
-    border-radius: 16px !important;
+    border-radius: 1rem !important;
     transition: background-color .25s ease, color .25s ease !important;
     width: 80vw !important;
     min-width: 220px !important;
@@ -795,6 +799,7 @@ body:has(.page-banner-wrapper) .section-sm {
     background: #ffffff !important;
     -webkit-text-fill-color: var(--coyle-dark-green) !important;
     box-shadow: 0 0 0 4px rgba(255,255,255,0.15) inset;
+    border-radius: 1rem !important;
   }
 
   #nav-menu .nav-item .nav-link.active,
@@ -803,6 +808,7 @@ body:has(.page-banner-wrapper) .section-sm {
     background: var(--coyle-light-green) !important;
     color: #ffffff !important;
     -webkit-text-fill-color: #ffffff !important;
+    border-radius: 1rem !important;
   }
 
   .nav-dropdown-list .nav-dropdown-item a:not(.active),
@@ -893,7 +899,7 @@ label[for="nav-toggle"].hamburger-btn:focus-visible,
 #nav-toggle:focus-visible + label[for="nav-toggle"].hamburger-btn {
   outline: 3px solid #ffffff !important;
   outline-offset: 2px !important;
-  border-radius: 12px !important;
+  border-radius: 1rem !important;
 }
 
 /* Dropdown items sit on dark green — accent-green reads clearly there */
