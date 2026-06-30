@@ -16,13 +16,13 @@ rector:
     Joey Quinones is the Rector of Coyle Hall. Originally from Southern California,
     he graduated with a B.S.
     in Mechanical Engineering and a minor in Theology in 2018, and in 2020, he graduated from
-    the ACE program with a M.Ed. after teaching in Tulsa for two years. 
+    the ACE program with a M.Ed. after teaching in Tulsa for two years.
     In 2021, he graduated from Notre Dame with a M.S. in Entrepreneurship through the ESTEEM program, while serving as an AR in Baumer Hall.
     He then became Rector of Fisher Hall the following year.
 
 
     To Joey, being a rector means being welcomed into the life of another person,
-    and to him, there is no greater privilege. 
+    and to him, there is no greater privilege.
     In addition to being a rector, Joey is an Assistant Coach of the
     Women's and Men's Boxing Clubs and works part-time for the McDonald Center for Student Well-being.
 
@@ -32,79 +32,125 @@ priest:
   email: "ghaake@nd.edu"
   website: "https://romancelanguages.nd.edu/people/gregory-haake/"
   bio: >-
-    Fr. Greg is the priest in residence of Coyle Hall. 
-    Originally from Kansas City, MO, he now lives on the first floor of the dorm, 
+    Fr. Greg is the priest in residence of Coyle Hall.
+    Originally from Kansas City, MO, he now lives on the first floor of the dorm,
     and organizes various faith-based events, including all sacrament opportunities in Coyle.
-    In addition to his duties in Coyle, Fr. Greg is also the University's Vice President for 
-    Mission Engagement and Church Affairs, as well as an Associate Professor of French in the 
+    In addition to his duties in Coyle, Fr. Greg is also the University's Vice President for
+    Mission Engagement and Church Affairs, as well as an Associate Professor of French in the
     Department of Romance Languages and Literatures.
-    Ordained a priest in 2007, he received both a B.A. and an M.Div. from the University of 
-    Notre Dame and joined the faculty in 2015. He enjoys reading, watching movies, and is an avid Kansas City Chiefs fan. 
+    Ordained a priest in 2007, he received both a B.A. and an M.Div. from the University of
+    Notre Dame and joined the faculty in 2015. He enjoys reading, watching movies, and is an avid Kansas City Chiefs fan.
     His favorite part of Coyle Hall is all of the students, of course!
 
 members:
-  - name: "CT Holst"
+  - name: "Bryce Bustamante"
     role: "Assistant Rector"
-    image: "/images/headshots/ctholst.jpg"
-    email: "ctholst@nd.edu"
-    hometown: "Tucson, AZ"
-    studying: "Law Graduate Student"
-    section: "4th Floor"
+    section: "3rd Floor"
+    image: "/images/headshots/hall-staff/26-27/brycebustamante.jpg"
+    email: "bbustam2@nd.edu"
+    hometown: "Phoenix, AZ"
+    studying: "Second Year Law Student"
+    hobbies: "Traveling, Visiting MLB Ballparks, Musical Theatre"
+    favoritepart: "The community (and Joey's ice cream!)"
 
-  - name: "James Wyatt"
+  - name: "Harrison Schmitt"
     role: "Assistant Rector"
-    image: "/images/headshots/jameswyatt.jpg"
-    email: "jwyatt3@nd.edu"
-    hometown: "Binghamton, NY"
-    studying: "Law Graduate Student"
     section: "2nd Floor"
+    image: "/images/headshots/hall-staff/26-27/harrisonschmitt.jpg"
+    email: "hschmit3@nd.edu"
+    hometown: "Denver, CO"
+    studying: "ESTEEM Grad Student"
+    hobbies: "Video games, DnD, learning chess, played college football at Benedictine College"
+    favoritepart: "Making new traditions on top of the old Fisher dorm traditions"
 
-  - name: "Ryan Lally"
+  - name: "Bartosz Karol Chramiec"
+    smallname: true
     role: "Resident Assistant"
-    image: "/images/headshots/ryanlally.jpg"
-    email: "rlally@nd.edu"
-    hometown: "St. Louis, MO"
-    major:
-      - Classics
-      - Spanish
-    section: "1st Floor"
-
-  - name: "Andrew Sjurset"
-    role: "Resident Assistant"
-    image: "/images/headshots/andrewsjurset.jpg"
-    email: "asjurset@nd.edu"
-    hometown: "Lorton, VA"
-    major: "Chemical Engineering"
-    section: "2A"
-
-  - name: "Daniel Strickler"
-    role: "Resident Assistant"
-    image: "/images/headshots/danielstrickler.jpg"
-    email: "dstrick2@nd.edu"
-    hometown: "Frisco, TX"
-    major: "Finance and Economics"
-    section: "2B"
-
-  - name: "John Frederickson"
-    role: "Resident Assistant"
-    image: "/images/headshots/johnfrederickson.jpg"
-    email: "jfreder2@nd.edu"
-    hometown: "Peoria, IL"
-    major: "Civil Engineering"
-    section: "3A"
-
-  - name: "Martin Soros"
-    role: "Resident Assistant"
-    image: "/images/headshots/martinsoros.jpg"
-    email: "msoros@nd.edu"
-    hometown: "Bethesda, MD"
-    major: "Civil Engineering"
     section: "3B"
+    image: "/images/headshots/hall-staff/26-27/bartoszchramiec.jpg"
+    email: "bchramie@nd.edu"
+    hometown: "Burbank, IL"
+    major:
+      - History
+      - Music
+    hobbies: "Sending emails"
+    favoritepart: "St. Paul's Chapel"
+
+  - name: "JohnLuke Eicher"
+    role: "Resident Assistant"
+    section: "3A"
+    image: "/images/headshots/hall-staff/26-27/johnlukeeicher.jpg"
+    email: "jeicher@nd.edu"
+    hometown: "Cleveland, OH"
+    major:
+      - Theology
+      - Accounting
+    minor: "Italian"
+    hobbies: "Watching the Irish, MLB, playing piano, reading, flags"
+    favoritepart: "The people"
+
+  - name: "Joseph Muraski"
+    role: "Resident Assistant"
+    section: "2B"
+    image: "/images/headshots/hall-staff/26-27/josephmuraski.png"
+    email: "jmuraski@nd.edu"
+    hometown: "Keller, TX"
+    major: "Mechanical Engineering"
+    minor: "Theology"
+    hobbies: "Hiking, Fishing, Lacrosse, General tinkering, Climbing, Dancing, LEGO"
+    favoritepart: "The camaraderie from things like ice cream mass, the Regatta, and other dorm events"
+
+  - name: "Matthew Williams"
+    role: "Resident Assistant"
+    section: "3C"
+    image: "/images/headshots/hall-staff/26-27/matthewwilliams.jpg"
+    email: "mcwilli11@nd.edu"
+    major:
+      - International Economics
+      - Chinese
+    hobbies: "Videography, Weightlifting"
+    favoritepart: "The Dining Hall table"
 
   - name: "Wesley Buonerba"
     role: "Resident Assistant"
-    image: "/images/headshots/wesleybuonerba.jpg"
+    section: "2A"
+    image: "/images/headshots/hall-staff/26-27/wesleybuonerba.jpg"
     email: "wbuonerb@nd.edu"
     hometown: "Plymouth, MI"
-    major: "Architecture"
-    section: "4th Floor"
+    major:
+      - Architecture
+      - Theology
+    hobbies: "Running, swimming, hiking, painting, reading"
+    favoritepart: "The Regatta is pretty special, but nothing beats roller skating in Stepan at the CRUNK!"
+
+  - name: "Jack Kelleher"
+    role: "Resident Assistant"
+    section: "2C"
+    image: "/images/headshots/jackkelleher.jpg"
+    hometown: "Hingham, MA"
+    email: "skelleh2@nd.edu"
+    major:
+      - Finance
+      - PLS
+    hobbies: "Rowing, Jesus, Boston Sports, Having fun with friends"
+    favoritepart: "Being able to spend so much time with such influential and inspirational people"
+
+  - name: "Zach Wrobel"
+    role: "Resident Assistant"
+    section: "1B"
+    image: "/images/headshots/hall-staff/26-27/zachwrobel.jpeg"
+    hometown: "Houston, TX"
+    email: "zwrobel@nd.edu"
+    major:
+      - Neuroscience & Behavior
+    hobbies: "Running"
+
+  - name: "Zax Quirk"
+    role: "Resident Assistant"
+    section: "1C"
+    image: "/images/headshots/hall-staff/26-27/zaxquirk.jpeg"
+    hometown: "Louisville, KY"
+    email: "zquirk@nd.edu"
+    major:
+      - Civil Engineering
+    hobbies: "Running"

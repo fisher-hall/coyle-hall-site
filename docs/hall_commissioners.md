@@ -11,10 +11,23 @@ The banner image path and heading are variables at the very top of the layout:
 {{- $bannerHeading := "Commissioners" -}}
 ```
 
+The page has a **coming-soon toggle** near the top of the layout:
+
+```go-html-template
+{{- $comingSoon := true -}}
+```
+
+- `true` — hides the commissioner cards and shows a "Coming Soon" placeholder with the image placeholder and a short message. The Past Commissioners accordion is still visible.
+- `false` — shows the full commissioner card grid as normal.
+
+Flip this flag at the start of each new year while commissioners are being selected, then set it back to `false` once the YAML is populated.
+
+---
+
 The page has two sections:
 
-1. **Current commissioners** — driven by `data/hall-commissioners/commissioners.yaml`. Cards render in the order listed in that file.
-2. **Past commissioners** — a collapsible accordion at the bottom, driven by `data/hall-commissioners/past.yaml`, organized by year.
+1. **Current commissioners** — driven by `data/hall-commissioners/commissioners.yaml`. Cards render in the order listed in that file. Hidden when `$comingSoon` is `true`.
+2. **Past commissioners** — a collapsible accordion at the bottom, driven by `data/hall-commissioners/past.yaml`, organized by year. Always visible regardless of `$comingSoon`.
 
 ---
 

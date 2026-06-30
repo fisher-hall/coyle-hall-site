@@ -84,7 +84,8 @@
     @media (max-width: 1280px) { .page-content-wave { margin-top: -66px; } }
     @media (max-width: 1024px) { .page-content-wave { margin-top: -56px; } }
     @media (max-width: 768px)  { .page-content-wave { margin-top: -46px; } }
-    .cc-card img, .cc-card img:hover { transform: none !important; box-shadow: none !important; cursor: default !important; }
+    .cc-card img, .cc-card img:hover,
+    #past-body img, #past-body img:hover { transform: none !important; box-shadow: none !important; cursor: default !important; }
   </style>
 
   {{- $staff := index hugo.Data "hall-staff" "staff" -}}
@@ -138,7 +139,7 @@
             </div>
             <div class="cc-bio" aria-hidden="true">
               <div><div class="px-6 pt-1 pb-5">
-                <div class="font-primary text-base text-white/90 leading-relaxed mb-4 [&>p]:mb-3 [&>p:last-child]:mb-0">{{ .bio | markdownify }}</div>
+                <div class="font-primary text-base text-center text-white/90 leading-relaxed mb-4 [&>p]:mb-3 [&>p:last-child]:mb-0">{{ .bio | markdownify }}</div>
                 {{ with .email }}
                   <div class="flex justify-center">
                     <a href="mailto:{{ . }}">
@@ -197,7 +198,7 @@
             </div>
             <div class="cc-bio" aria-hidden="true">
               <div><div class="px-6 pt-1 pb-5">
-                <div class="font-primary text-base text-white/90 leading-relaxed mb-4 [&>p]:mb-3 [&>p:last-child]:mb-0">{{ .bio | markdownify }}</div>
+                <div class="font-primary text-base text-center text-white/90 leading-relaxed mb-4 [&>p]:mb-3 [&>p:last-child]:mb-0">{{ .bio | markdownify }}</div>
                 {{ with .email }}
                   <div class="flex justify-center">
                     <a href="mailto:{{ . }}">
@@ -282,14 +283,14 @@
 
             <div class="flex items-center justify-between gap-2 pl-6 pr-4 py-3">
               <div class="min-w-0">
-                <p class="font-primary font-bold text-xl text-white m-0 overflow-hidden text-ellipsis whitespace-nowrap">{{ .name }}</p>
+                <p class="font-primary font-bold text-white m-0 overflow-hidden text-ellipsis whitespace-nowrap {{ if .smallname }}min-[1300px]:text-lg min-[1300px]:my-0 text-md my-0.5{{ else }}text-xl{{ end }}">{{ .name }}</p>
                 {{ with .role }}
                   <p class="font-primary font-medium text-lg text-white/80 m-0 mt-0.5 overflow-hidden text-ellipsis whitespace-nowrap">{{ . }}</p>
                 {{ end }}
               </div>
               {{ if $hasBio }}
                 <button
-                  class="cc-bio-btn shrink-0 w-[30px] h-[30px] rounded-full border-2 border-white bg-transparent text-white flex items-center justify-center p-0 mr-2 text-[0.625rem] cursor-pointer transition-all duration-150 hover:bg-white hover:text-[var(--coyle-dark-green)] hover:border-white aria-expanded:rotate-45 aria-expanded:bg-white/20 aria-expanded:border-white aria-expanded:hover:bg-white/30 aria-expanded:hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--coyle-accent-green)]"
+                  class="cc-bio-btn shrink-0 w-[30px] h-[30px] rounded-full border-2 border-white bg-transparent text-white flex items-center justify-center p-0 text-[0.625rem] cursor-pointer transition-all duration-150 hover:bg-white hover:text-[var(--coyle-dark-green)] hover:border-white aria-expanded:rotate-45 aria-expanded:bg-white/20 aria-expanded:border-white aria-expanded:hover:bg-white/30 aria-expanded:hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--coyle-accent-green)]"
                   aria-expanded="false"
                   aria-label="Learn more about {{ .name }}"
                   type="button"

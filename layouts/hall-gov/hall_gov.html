@@ -1,7 +1,7 @@
 {{ define "main" }}
   {{/* ── Banner ─────────────────────────────────────────────────────── */}}
   {{- $bannerImg     := "/images/BannerImages/LakeBanner.png" -}}
-  {{- $bannerHeading := "Government" -}}
+  {{- $bannerHeading := "Hall Gov" -}}
   {{- $bannerSrc     := $bannerImg -}}
   {{- with resources.Get (strings.TrimPrefix "/" $bannerImg) -}}
     {{- $bannerSrc = (.Resize "1600x webp q82").RelPermalink -}}
@@ -80,12 +80,13 @@
     @media (forced-colors: active) {
       .cc-card { forced-color-adjust: none; background: #000 !important; outline: 2px solid var(--primary-color); }
     }
-    .home-banner-heading { font-size: clamp(2rem, 7.5vw, 5.5rem) !important; }
+
     .page-content-wave { margin-top: -70px; }
     @media (max-width: 1280px) { .page-content-wave { margin-top: -66px; } }
     @media (max-width: 1024px) { .page-content-wave { margin-top: -56px; } }
     @media (max-width: 768px)  { .page-content-wave { margin-top: -46px; } }
-    .cc-card img, .cc-card img:hover { transform: none !important; box-shadow: none !important; cursor: default !important; }
+    .cc-card img, .cc-card img:hover,
+    #past-body img, #past-body img:hover { transform: none !important; box-shadow: none !important; cursor: default !important; }
   </style>
 
   <section class="section">
@@ -246,7 +247,7 @@
               {{ range .years }}
                 <div class="mt-7">
                   <h3 class="font-primary text-2xl font-bold tracking-[0.1em] uppercase text-[var(--primary-color)] m-0 mb-4 pb-2.5 text-center">{{ .year }}</h3>
-                  <div class="grid grid-cols-1 min-[400px]:grid-cols-3 max-w-lg mx-auto gap-6 lg:gap-10">
+                  <div class="grid grid-cols-1 min-[400px]:grid-cols-3 max-w-xl mx-auto gap-6 lg:gap-10">
                     {{ range .members }}
                       {{- $thumb := "" -}}
                       {{- with .image -}}
