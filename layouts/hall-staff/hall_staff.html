@@ -88,7 +88,7 @@
     #past-body img, #past-body img:hover { transform: none !important; box-shadow: none !important; cursor: default !important; }
   </style>
 
-  {{- $staff := index hugo.Data "hall-staff" "staff" -}}
+  {{- $staff := index site.Data "hall-staff" "staff" -}}
 
   <div style="height: 4rem;"></div>
   <section class="section" style="padding-top: 6rem;">
@@ -365,7 +365,7 @@
       </div>
 
       {{/* Past Staff — driven by data/hall-staff/past.yaml */}}
-      {{ with index hugo.Data "hall-staff" "past" }}
+      {{ with index site.Data "hall-staff" "past" }}
         {{ if .years }}
           <div class="mt-16 pt-10">
 
