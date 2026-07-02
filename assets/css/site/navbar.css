@@ -82,7 +82,7 @@ body:not(:has(#banner-parallax)):not(:has(#home-banner-wrapper)) .navbar.floatin
 
 .header .navbar [aria-label="search"] i,
 label[for="nav-toggle"] i {
-  font-size: 1.2rem !important;
+  font-size: 1.13rem !important;
 }
 
 .header .navbar-brand,
@@ -140,15 +140,16 @@ body:has(.page-banner-wrapper) .section-sm {
   padding: 12px 16px !important;
 }
 
-/* Hover state for nav links */
+/* Hover state for nav links — tint only */
 .header .navbar .nav-link:hover,
 .floating-navbar .nav-link:hover {
-  background: color-mix(in srgb, var(--coyle-light-green) 85%, #ffffff) !important;
-  color: #fff !important;
-  border-radius: 1rem !important;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1) !important;
-  transform: translateY(-1px) !important;
-  transition: all 0.2s ease !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  color: rgba(255, 255, 255, 0.65) !important;
+  box-shadow: none !important;
+  transform: none !important;
+  border-radius: 0 !important;
+  text-decoration: none !important;
 }
 
 /* Active page link state */
@@ -160,26 +161,37 @@ body:has(.page-banner-wrapper) .section-sm {
 .floating-navbar .nav-link[aria-current="page"],
 .floating-navbar a.active,
 .floating-navbar a[aria-current="page"] {
-  background: var(--coyle-light-green) !important;
+  background-color: transparent !important;
+  background-image: none !important;
   color: #fff !important;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1) !important;
-  border-radius: 1rem !important;
+  font-size: 1.13rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.03em !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  text-decoration: none !important;
 }
 
 /* Dropdown toggle active state */
 .nav-dropdown-toggle.active,
 .nav-dropdown-toggle[aria-current="page"] {
-  background: var(--coyle-light-green) !important;
+  background-color: transparent !important;
   color: #fff !important;
-  border-radius: 1rem !important;
+  border-radius: 0 !important;
+  text-decoration: none !important;
 }
 
 /* Dropdown submenu active state */
 .nav-dropdown-list .nav-dropdown-item a.active,
 .nav-dropdown-list .nav-dropdown-item a[aria-current="page"] {
-  background: var(--coyle-light-green) !important;
+  background-color: transparent !important;
+  background-image: none !important;
   color: #fff !important;
-  border-radius: 1rem !important;
+  font-size: 1.13rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.03em !important;
+  border-radius: 0 !important;
+  text-decoration: none !important;
 }
 
 /* Static dividers between search / a11y / theme — own elements so they don't animate */
@@ -206,7 +218,7 @@ body:has(.page-banner-wrapper) .section-sm {
   align-self: center !important;
   background: transparent !important;
   border: none !important;
-  color: rgba(255, 255, 255, 0.9) !important;
+  color: #ffffff !important;
 }
 .header .navbar [aria-label="search"] i {
   font-size: 20px !important;
@@ -241,6 +253,25 @@ body:has(.page-banner-wrapper) .section-sm {
   overflow: hidden;
 }
 
+/* Mobile: absolutely center the logo between hamburger and controls */
+@media (max-width: 1023px) {
+  .header .navbar > div:has(.navbar-brand) {
+    position: absolute !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    overflow: visible !important;
+    flex-shrink: 0 !important;
+    pointer-events: auto !important;
+  }
+}
+
+/* Small mobile: nudge logo left so it doesn't crowd the right controls */
+@media (max-width: 430px) {
+  .header .navbar > div:has(.navbar-brand) {
+    left: calc(50% - 40px) !important;
+  }
+}
+
 .header .navbar [aria-label="search"] {
   transition: opacity 0.15s ease, transform 0.15s ease, background-color 0.2s ease !important;
 }
@@ -255,32 +286,20 @@ body:has(.page-banner-wrapper) .section-sm {
   background: transparent !important;
 }
 
-/* Incoming Students button — special styling */
-.header .navbar a.nav-link.incoming-students:not(.active):not([aria-current="page"]),
-.header .navbar a[href*="incoming-students"]:not(.active):not([aria-current="page"]) {
-  color: var(--coyle-light-green) !important;
-}
-
-.header .navbar a[href="/incoming-students"]:not(.active):not([aria-current="page"]):not(:hover) {
-  background: #FFFFFF !important;
-  color: var(--coyle-dark-green) !important;
-  border-radius: 1rem !important;
-}
-
-.header .navbar a[href="/incoming-students"].active,
-.header .navbar a[href="/incoming-students"][aria-current="page"] {
-  background: var(--coyle-light-green) !important;
+/* Incoming Students button — no box */
+.header .navbar a.nav-link.incoming-students,
+.header .navbar a[href*="incoming-students"] {
+  background: transparent !important;
   color: #fff !important;
-  border-radius: 1rem !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
 }
 
-.header .navbar a.nav-link.incoming-students:not(.active):hover,
-.header .navbar a[href*="incoming-students"]:not(.active):hover,
-.header .navbar a[href="/incoming-students"]:hover {
-  background: color-mix(in srgb, var(--coyle-light-green) 85%, #ffffff) !important;
+.header .navbar a.nav-link.incoming-students:hover,
+.header .navbar a[href*="incoming-students"]:hover {
   color: #fff !important;
-  border-radius: 1rem !important;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1) !important;
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
 /* Dropdown list */
@@ -302,13 +321,14 @@ body:has(.page-banner-wrapper) .section-sm {
   color: #fff !important;
 }
 
-/* Dropdown item hover */
+/* Dropdown item hover — tint only */
 .nav-dropdown-list .nav-dropdown-item a:hover,
 .nav-dropdown-list .nav-dropdown-item:hover a {
-  background: color-mix(in srgb, var(--coyle-light-green) 85%, #ffffff) !important;
-  color: #fff !important;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1) !important;
-  border-radius: 1rem !important;
+  background: transparent !important;
+  color: rgba(255, 255, 255, 0.65) !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  text-decoration: none !important;
 }
 
 .floating-navbar .nav-dropdown-list {
@@ -342,6 +362,7 @@ body:has(.page-banner-wrapper) .section-sm {
 
   #nav-menu {
     display: flex !important;
+    align-items: baseline !important;
     position: static !important;
     width: auto !important;
     height: auto !important;
@@ -407,13 +428,14 @@ body:has(.page-banner-wrapper) .section-sm {
 
   .nav-dropdown-list .nav-dropdown-item a:hover,
   .nav-dropdown-list .nav-dropdown-item:hover a {
-    background: color-mix(in srgb, var(--coyle-light-green) 85%, #ffffff) !important;
-    color: #fff !important;
+    background: transparent !important;
+    color: rgba(255, 255, 255, 0.65) !important;
+    text-decoration: none !important;
   }
 
   .header .navbar *:not(i) {
     font-family: 'Rubik', sans-serif !important;
-    font-weight: 600 !important;
+    font-weight: 550 !important;
     font-size: 1.1rem !important;
   }
 
@@ -426,7 +448,9 @@ body:has(.page-banner-wrapper) .section-sm {
   /* Search: center over navbar — opacity/transition set via JS after reflow */
   .inline-search-container {
     position: absolute;
-    left: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
     margin: 0;
     z-index: 10002;
   }
@@ -455,10 +479,12 @@ body:has(.page-banner-wrapper) .section-sm {
     display: flex !important;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    text-align: left !important;
+    padding-left: 2.5rem;
     opacity: 0;
     visibility: hidden;
-    transform: translate3d(100vw, 0, 0);
+    transform: translate3d(-200vw, 0, 0);
     pointer-events: none;
     overflow-y: auto;
     will-change: transform, opacity;
@@ -541,20 +567,20 @@ body:has(.page-banner-wrapper) .section-sm {
     color: #ffffff !important;
     font-size: 1.9rem !important;
     line-height: 1.1;
-    font-weight: 700;
+    font-weight: 550;
     font-family: 'Rubik', sans-serif !important;
     padding: 12px 16px !important;
     border: none !important;
     background: transparent !important;
     width: auto !important;
-    text-align: center !important;
+    text-align: left !important;
     display: inline-block !important;
     border-radius: 0 !important;
     margin: 10px 0 !important;
     opacity: 0;
     transform: translateY(300px);
     will-change: opacity, transform;
-    transition: opacity .5s ease, transform .6s cubic-bezier(.4,0,.2,1), background-color .25s ease, color .25s ease;
+    transition: opacity .5s ease, transform .6s cubic-bezier(.4,0,.2,1);
   }
 
   /* Staggered link entrance animation */
@@ -568,43 +594,39 @@ body:has(.page-banner-wrapper) .section-sm {
   #nav-toggle:checked ~ #nav-menu .nav-item:nth-child(7) .nav-link { transition-delay: .35s; }
   #nav-toggle:checked ~ #nav-menu .nav-item:nth-child(8) .nav-link { transition-delay: .40s; }
 
-  #nav-menu .nav-item .nav-link:hover { background: color-mix(in srgb, var(--coyle-light-green) 85%, #ffffff) !important; color: #fff !important; border-radius: 1rem !important; }
-  #nav-menu .nav-item .nav-link.active { background: var(--coyle-light-green) !important; color: #fff !important; outline: none !important; border-radius: 1rem !important; }
+  #nav-menu .nav-item .nav-link:hover { background: transparent !important; }
+  #nav-menu .nav-item .nav-link.active { background: transparent !important; color: #fff !important; outline: none !important; border-radius: 0 !important; text-decoration: none !important; }
 
-  /* Incoming Students (NEW CREW) — white bg, dark green text */
-  #nav-menu .nav-item .nav-link.incoming-students:not(.active) {
-    background: #ffffff !important;
-    color: var(--coyle-dark-green) !important;
-    box-shadow: 0 0 0 4px rgba(255,255,255,0.15) inset;
-    border-radius: 1rem !important;
-  }
-
-  #nav-menu .nav-item .nav-link.incoming-students:not(.active):hover {
-    background: color-mix(in srgb, var(--coyle-light-green) 85%, #ffffff) !important;
+  /* Incoming Students (NEW CREW) — no box, no permanent underline */
+  #nav-menu .nav-item .nav-link.incoming-students {
+    background: transparent !important;
     color: #ffffff !important;
-    border-radius: 1rem !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    text-decoration: none !important;
   }
 
-  /* NEW CREW button (btn-outline-primary) */
+  #nav-menu .nav-item .nav-link.incoming-students.active {
+    color: #fff !important;
+  }
+
+  /* NEW CREW button (btn-outline-primary) — no box */
   #nav-menu .btn,
   #nav-menu .btn-outline-primary,
   #nav-menu .nav-item .btn,
   #nav-menu li .btn-outline-primary,
   #nav-menu .nav-item .btn-outline-primary {
-    color: var(--coyle-dark-green) !important;
-    background: #ffffff !important;
-    background-color: white !important;
+    color: #ffffff !important;
+    background: transparent !important;
     border: none !important;
     padding: 12px 16px !important;
-    border-radius: 1rem !important;
-    font-weight: 800 !important;
+    border-radius: 0 !important;
+    font-weight: 550 !important;
     font-size: 3rem !important;
     line-height: 1.05 !important;
     margin: 16px 0 !important;
     display: inline-block !important;
     width: auto !important;
-    text-decoration: none !important;
-    transition: background-color .25s ease, box-shadow .25s ease !important;
     letter-spacing: .5px !important;
   }
 
@@ -615,7 +637,7 @@ body:has(.page-banner-wrapper) .section-sm {
   #nav-menu .btn-outline-primary:hover,
   #nav-menu .btn.active,
   #nav-menu .btn-outline-primary.active,
-  #nav-menu .btn-outline-primary.active:hover { background: #ffffff !important; color: var(--primary-color) !important; }
+  #nav-menu .btn-outline-primary.active:hover { background: transparent !important; color: #ffffff !important; }
 
   /* Hide chevron svg, show Font Awesome angle-right */
   #nav-menu .nav-dropdown .nav-link svg { display: none !important; }
@@ -673,9 +695,9 @@ body:has(.page-banner-wrapper) .section-sm {
     border-radius: 0 !important;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     flex-direction: column !important;
-    align-items: center !important;
+    align-items: flex-start !important;
     padding-top: 140px !important;
-    padding-left: 34px !important;
+    padding-left: 2.5rem !important;
     padding-right: 34px !important;
     padding-bottom: 34px !important;
     transform: none !important;
@@ -691,19 +713,19 @@ body:has(.page-banner-wrapper) .section-sm {
     width: 100%;
     margin: 0;
     display: flex !important;
-    justify-content: center !important;
+    justify-content: flex-start !important;
   }
 
   .nav-dropdown-list {
     display: flex !important;
     flex-direction: column !important;
-    align-items: center !important;
+    align-items: flex-start !important;
   }
 
   .nav-dropdown-list .nav-dropdown-item a {
     color: #ffffff !important;
     font-size: 1.9rem !important;
-    font-weight: 700 !important;
+    font-weight: 550 !important;
     font-family: 'Rubik', sans-serif !important;
     padding: 12px 16px !important;
     display: block !important;
@@ -711,51 +733,52 @@ body:has(.page-banner-wrapper) .section-sm {
     margin: 10px 0 !important;
     background: transparent !important;
     border: none !important;
-    text-align: center !important;
-    transition: background-color .25s ease, color .25s ease !important;
+    text-align: left !important;
     line-height: 1.1;
   }
 
   .nav-dropdown-list .nav-dropdown-item a.active {
-    background: var(--coyle-light-green) !important;
+    background-color: transparent !important;
+    background-image: none !important;
     color: #fff !important;
+    font-size: 2rem !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.03em !important;
     outline: none !important;
-    border-radius: 1rem !important;
+    border-radius: 0 !important;
+    text-decoration: none !important;
   }
 
   .nav-dropdown-list .nav-dropdown-item a:hover {
-    background: var(--coyle-light-green) !important;
-    color: #fff !important;
-    border-radius: 1rem !important;
+    background: transparent !important;
   }
 
   /* Back button */
   .mobile-back-button {
     position: absolute !important;
     top: 24px !important;
-    left: 50% !important;
-    transform: translate(-50%, 100%) !important;
+    left: 2.5rem !important;
+    transform: translateY(100%) !important;
     right: auto !important;
     background: rgba(255,255,255,0.12) !important;
     color: #fff !important;
     font-size: 2rem !important;
-    font-weight: 600 !important;
+    font-weight: 550 !important;
     display: inline-flex !important;
     align-items: center !important;
-    justify-content: center !important;
+    justify-content: flex-start !important;
     gap: 2px !important;
-    padding: 6px 3px !important;
+    padding: 6px 18px !important;
     cursor: pointer !important;
     z-index: 10001 !important;
     border-radius: 1rem !important;
-    transition: background-color .25s ease, color .25s ease !important;
-    width: 80vw !important;
-    min-width: 220px !important;
+    width: auto !important;
+    min-width: 120px !important;
     max-width: 340px !important;
     height: 60px !important;
     align-self: flex-start !important;
     flex-shrink: 1 !important;
-    text-align: center !important;
+    text-align: left !important;
     margin-bottom: 0 !important;
     border: none !important;
     box-sizing: border-box !important;
@@ -795,20 +818,23 @@ body:has(.page-banner-wrapper) .section-sm {
   #nav-menu .nav-item .nav-link.incoming-students:not(.active):hover,
   #nav-menu .nav-item .nav-link.incoming-students:not(.active):focus,
   #nav-menu .nav-item .nav-link.incoming-students:not(.active):active {
-    color: var(--coyle-dark-green) !important;
-    background: #ffffff !important;
-    -webkit-text-fill-color: var(--coyle-dark-green) !important;
-    box-shadow: 0 0 0 4px rgba(255,255,255,0.15) inset;
-    border-radius: 1rem !important;
+    color: #ffffff !important;
+    background: transparent !important;
+    -webkit-text-fill-color: #ffffff !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
   }
 
   #nav-menu .nav-item .nav-link.active,
-  #nav-menu .nav-item .nav-link.incoming-students.active,
-  .nav-dropdown-list .nav-dropdown-item a.active {
-    background: var(--coyle-light-green) !important;
+  #nav-menu .nav-item .nav-link.incoming-students.active {
+    background: transparent !important;
     color: #ffffff !important;
     -webkit-text-fill-color: #ffffff !important;
-    border-radius: 1rem !important;
+    font-size: 2rem !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.03em !important;
+    border-radius: 0 !important;
+    text-decoration: none !important;
   }
 
   .nav-dropdown-list .nav-dropdown-item a:not(.active),

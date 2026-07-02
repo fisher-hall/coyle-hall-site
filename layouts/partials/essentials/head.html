@@ -1,0 +1,154 @@
+<meta charset="utf-8" />
+
+<!-- responsive meta -->
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=5" />
+
+<!-- meta open graph for rich url -->
+<meta property="og:title" content="Coyle Hall" />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="images/favicon.png" />
+<meta property="og:url" content="https://www.coylehallnd.com">
+
+<!-- theme meta -->
+<meta name="theme-name" content="hugoplate" />
+
+<!-- Accessibility preferences store: applied synchronously so persisted
+     choices (theme/contrast/motion/text/reading) take effect before paint.
+     "System" options defer to the matching OS media query. -->
+<script>
+  (function () {
+    var KEYS = { theme: "theme", contrast: "a11y-contrast", "text-size": "a11y-text-size", "text-weight": "a11y-text-weight", motion: "a11y-motion", line: "a11y-line", letter: "a11y-letter", font: "a11y-font" };
+    var DEF = { theme: "system", contrast: "system", "text-size": "system", "text-weight": "system", motion: "system", line: "off", letter: "off", font: "off" };
+    function get(p) { try { var v = localStorage.getItem(KEYS[p]); return v === null ? DEF[p] : v; } catch (e) { return DEF[p]; } }
+    function mm(q) { return window.matchMedia && window.matchMedia(q).matches; }
+    function apply() {
+      var d = document.documentElement;
+      var theme = get("theme");
+      var themeDark = theme === "dark" || (theme === "system" && mm("(prefers-color-scheme: dark)"));
+      d.classList.toggle("dark", themeDark);
+      var contrast = get("contrast");
+      var effectiveContrast = contrast === "high" || (contrast === "system" && mm("(prefers-contrast: more)"));
+      d.classList.toggle("a11y-contrast-high", effectiveContrast);
+      // High contrast always locks to dark mode
+      if (effectiveContrast) {
+        d.classList.add("dark");
+      } else if (!themeDark) {
+        // Only remove .dark if the theme pref didn't independently set it
+        d.classList.remove("dark");
+      }
+      var motion = get("motion");
+      d.setAttribute("data-motion", (motion === "reduced" || (motion === "system" && mm("(prefers-reduced-motion: reduce)"))) ? "reduced" : "normal");
+      // Text size — "system" defers to browser/OS zoom (no attribute needed)
+      var sizePref = get("text-size");
+      var effectiveSize = (sizePref === "system") ? "default" : sizePref;
+      d.removeAttribute("data-text-size");
+      var sizeMap = { "xs": "xs", "s": "s", "large": "large", "xl": "xl", "2xl": "2xl", "3xl": "3xl" };
+      if (effectiveSize !== "default" && sizeMap[effectiveSize]) {
+        d.setAttribute("data-text-size", sizeMap[effectiveSize]);
+      }
+      // Text weight — "system" defers to inherited font weight (no attribute needed)
+      var weightPref = get("text-weight");
+      var effectiveWeight = (weightPref === "system") ? "default" : weightPref;
+      d.removeAttribute("data-text-weight");
+      if (effectiveWeight !== "default") {
+        d.setAttribute("data-text-weight", effectiveWeight);
+      }
+      d.setAttribute("data-line-spacing", get("line"));
+      d.setAttribute("data-letter-spacing", get("letter"));
+      d.setAttribute("data-dyslexia-font", get("font"));
+    }
+    window.__a11y = {
+      get: get, apply: apply,
+      set: function (p, v) { try { localStorage.setItem(KEYS[p], v); } catch (e) {} apply(); document.dispatchEvent(new CustomEvent("a11y:change", { detail: { pref: p, value: v } })); },
+      reset: function () { try { Object.keys(KEYS).forEach(function (p) { localStorage.removeItem(KEYS[p]); }); } catch (e) {} apply(); document.dispatchEvent(new CustomEvent("a11y:change", { detail: { pref: "*" } })); }
+    };
+    apply();
+  })();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- Rubik Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<!-- Alfa Slab One Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
+<!-- Graduate Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Graduate&display=swap" rel="stylesheet">
+
+{{ if .IsHome }}
+  {{ with resources.Get "images/BannerImages/HomeBanner.png" }}
+    {{ $hb := .Resize "1920x webp q80" }}
+    <link rel="preload" as="image" href="{{ $hb.RelPermalink }}" fetchpriority="high">
+  {{ end }}
+{{ end }}
+
+<style>
+  body, .header, .navbar, .nav-link, .navbar-brand {
+    font-family: 'Rubik', Arial, 'Liberation Sans', 'Nimbus Sans Narrow', sans-serif;
+  }
+</style>
+
+
+<!-- favicon -->
+{{ partialCached "favicon" . }}
+
+
+<!-- manifest -->
+{{ partialCached "manifest" . }}
+
+
+<!-- site verifications -->
+{{ partialCached "site-verifications.html" . }}
+
+
+<!-- opengraph and twitter card -->
+{{ partial "basic-seo.html" . }}
+
+
+<!-- custom script -->
+{{ partialCached "custom-script.html" . }}
+
+
+<!-- google analytics -->
+{{ if and site.Config.Services.GoogleAnalytics.ID (ne site.Config.Services.GoogleAnalytics.ID "G-MEASUREMENT_ID") }}
+  {{ template "_internal/google_analytics.html" . }}
+{{ end }}
+
+
+<!-- google tag manager -->
+{{ partialCached "gtm.html" . }}
+
+
+<!-- cloudflare web analytics (production only) -->
+{{ if and hugo.IsProduction site.Params.cloudflare_analytics_token }}
+  <script
+    defer
+    src="https://static.cloudflareinsights.com/beacon.min.js"
+    {{ printf `data-cf-beacon='{"token": %s}'` (site.Params.cloudflare_analytics_token | jsonify) | safeHTMLAttr }}></script>
+{{ end }}
+
+
+<!-- search index -->
+{{ partial "search-index.html" . }}
+
+
+<!-- matomo analytics -->
+{{/* {{ partialCached "matomo-analytics.html" . }} */}}
+
+<!--  Baidu analytics -->
+{{/* {{ partialCached "baidu-analytics.html" . }} */}}
+
+<!-- Plausible Analytics -->
+{{/* {{ partialCached "plausible-analytics.html" . }} */}}
+
+<!-- Counter Analytics -->
+{{/* {{ partialCached "counter-analytics.html" . }} */}}
+
+<!-- Crisp Chat -->
+{{/* {{ partialCached "crisp-chat.html" . }} */}}
+
+<!-- Mermaid -->
+{{ partial "mermaid/assets/js" . }}

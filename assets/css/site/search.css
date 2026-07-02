@@ -6,9 +6,8 @@
   align-items: center;
   justify-content: center;
   opacity: 1;
-  transform: scale(1);
   padding: 0;
-  margin: 0 1rem;
+  margin: 0;
   order: 1;
 }
 
@@ -57,10 +56,9 @@
   outline: none;
 }
 
-/* Visible keyboard focus ring (the input sits on the dark navbar tint) */
+/* No focus ring on search input — it sits on a dark navbar with a visible border */
 .inline-search-input:focus-visible {
-  outline: 3px solid #ffffff;
-  outline-offset: 2px;
+  outline: none !important;
 }
 
 /* Hide old search modal */

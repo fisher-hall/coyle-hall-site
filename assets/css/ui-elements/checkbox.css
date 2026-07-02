@@ -17,35 +17,27 @@
   -webkit-appearance: none;
   width: 1.1rem;
   height: 1.1rem;
-  border: 2px solid var(--coyle-light-green);
+  border: 2px solid var(--primary-color);
   border-radius: 4px;
   background: transparent;
   cursor: pointer;
   flex-shrink: 0;
   transition: background-color 0.15s ease, border-color 0.15s ease;
-  position: relative;
 }
 .ui-checkbox input[type="checkbox"]:checked {
-  background: var(--coyle-light-green);
-  border-color: var(--coyle-light-green);
-}
-.ui-checkbox input[type="checkbox"]:checked::after {
-  content: "";
-  position: absolute;
-  top: 1px;
-  left: 4px;
-  width: 4px;
-  height: 8px;
-  border: 2px solid #fff;
-  border-top: none;
-  border-left: none;
-  transform: rotate(45deg);
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  /* SVG checkmark — works on replaced elements unlike ::after */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpolyline points='2,8 6,13 14,3' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 0.7rem;
 }
 .ui-checkbox input[type="checkbox"]:focus-visible {
-  outline: 2px solid var(--coyle-light-green);
+  outline: 2px solid var(--primary-color);
   outline-offset: 2px;
 }
-.dark .ui-checkbox input[type="checkbox"] { border-color: var(--coyle-accent-green); }
-.dark .ui-checkbox input[type="checkbox"]:checked { background: var(--coyle-accent-green); border-color: var(--coyle-accent-green); }
+.dark .ui-checkbox input[type="checkbox"] { border-color: var(--primary-color); }
+.dark .ui-checkbox input[type="checkbox"]:checked { background-color: var(--primary-color); border-color: var(--primary-color); }
 html.a11y-contrast-high .ui-checkbox input[type="checkbox"] { border-color: #48bb4e !important; }
-html.a11y-contrast-high .ui-checkbox input[type="checkbox"]:checked { background: #48bb4e !important; }
+html.a11y-contrast-high .ui-checkbox input[type="checkbox"]:checked { background-color: #48bb4e !important; border-color: #48bb4e !important; }

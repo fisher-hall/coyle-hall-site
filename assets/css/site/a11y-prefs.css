@@ -188,13 +188,19 @@ html.a11y-contrast-high :where(.a11y-close, .a11y-trigger, [aria-label="search"]
 }
 /* Social/icon links don't need the link underline */
 html.a11y-contrast-high .social-icons a { text-decoration: none !important; }
-/* Pressed/active seg button: invert but still no bg tint — use subtle outline */
-html.a11y-contrast-high .a11y-seg button[aria-pressed="true"] {
+/* Seg buttons in HC: all get white outline by default */
+html.a11y-contrast-high .a11y-seg button {
   background: transparent !important;
-  color: #6ee87a !important;
-  border-color: #6ee87a !important;
-  outline: 2px solid #6ee87a;
-  outline-offset: -2px;
+  color: #fff !important;
+  border: 1.5px solid #fff !important;
+  box-shadow: none !important;
+}
+/* Selected seg button in HC: white filled */
+html.a11y-contrast-high .a11y-seg button[aria-pressed="true"] {
+  background: #fff !important;
+  color: #000 !important;
+  border-color: #fff !important;
+  outline: none !important;
 }
 /* Form controls: no bg tint, just border */
 html.a11y-contrast-high :where(input:not([type="range"]), textarea, select) {
@@ -331,7 +337,7 @@ html.a11y-contrast-high .floating-navbar .nav-dropdown-list {
   border: 2px solid #48bb4e !important;
 }
 
-/* Active nav tab: replace green fill with accent border outline */
+/* Active nav tab: bright green outline in high contrast */
 html.a11y-contrast-high .header .navbar .nav-link.active,
 html.a11y-contrast-high .header .navbar .nav-link[aria-current="page"],
 html.a11y-contrast-high .header .navbar a.active,
@@ -339,11 +345,17 @@ html.a11y-contrast-high .header .navbar a[aria-current="page"],
 html.a11y-contrast-high .floating-navbar .nav-link.active,
 html.a11y-contrast-high .floating-navbar .nav-link[aria-current="page"],
 html.a11y-contrast-high .nav-dropdown-toggle.active,
-html.a11y-contrast-high .nav-dropdown-list .nav-dropdown-item a.active {
+html.a11y-contrast-high .nav-dropdown-list .nav-dropdown-item a.active,
+html.a11y-contrast-high #nav-menu .nav-item .nav-link.active,
+html.a11y-contrast-high #nav-menu .nav-item .nav-link.incoming-students {
   background: transparent !important;
-  border: 2px solid #48bb4e !important;
+  border: none !important;
   color: #fff !important;
   box-shadow: none !important;
+  outline: 3px solid #6ee87a !important;
+  outline-offset: 3px !important;
+  border-radius: 6px !important;
+  text-decoration: none !important;
 }
 
 /* Carousel dots: inactive = white outline, active = green filled */
@@ -408,8 +420,8 @@ html.a11y-contrast-high .new-crew-banner p {
   background: transparent;
   transition: opacity 0.15s ease, transform 0.15s ease, background-color 0.2s ease;
 }
-.a11y-trigger:hover { opacity: 0.7; background: transparent !important; box-shadow: none !important; }
-.a11y-trigger:active { transform: scale(0.92); opacity: 0.6; background: transparent !important; }
+.a11y-trigger:hover { opacity: 1; background: transparent !important; box-shadow: none !important; }
+.a11y-trigger:active { transform: scale(0.92); opacity: 1; background: transparent !important; }
 .a11y-trigger i { font-size: 1rem; line-height: 1; color: #fff; }
 
 /* Overlay + dialog */
@@ -432,9 +444,10 @@ html.a11y-contrast-high .new-crew-banner p {
   overflow-y: auto;
   background: var(--background-color);
   color: var(--text-color, #222);
-  border-radius: 1.25rem;
+  border-radius: 2rem;
   box-shadow: 0 18px 50px rgba(0, 0, 0, 0.3);
   padding: 1.5rem;
+  line-height: 1.9;
 }
 .dark .a11y-panel { color: #eee; }
 
@@ -452,23 +465,27 @@ html.a11y-contrast-high .new-crew-banner p {
   font-weight: 700;
   font-size: 1.25rem;
   margin: 0;
-  color: var(--coyle-dark-green);
+  color: var(--primary-color);
 }
-.dark .a11y-panel__title { color: var(--coyle-accent-green); }
+.dark .a11y-panel__title { color: var(--primary-color); }
 .a11y-panel__title i { font-size: 1.3rem; }
 
 .a11y-close {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2rem;
-  height: 2rem;
+  width: 2.1rem;
+  height: 2.1rem;
+  padding: 0;
   border-radius: 9999px;
   background: transparent;
+  border: none;
   color: inherit;
   cursor: pointer;
-  font-size: 1.1rem;
+  font-size: 1rem;
   line-height: 1;
+  flex-shrink: 0;
+  transition: background 0.15s ease;
 }
 .a11y-close:hover { background: rgba(0, 0, 0, 0.08); }
 .dark .a11y-close:hover { background: rgba(255, 255, 255, 0.12); }
@@ -489,15 +506,14 @@ html.a11y-contrast-high .new-crew-banner p {
 
 /* Segmented choice group (radio-style buttons) */
 .a11y-seg {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 0.4rem;
 }
 .a11y-seg button {
-  flex: 1 1 auto;
-  min-width: 5rem;
+  width: 100%;
   padding: 0.45rem 0.6rem;
-  border: 1.5px solid var(--coyle-light-green);
+  border: 1.5px solid var(--primary-color);
   border-radius: 0.6rem;
   background: transparent;
   color: inherit;
@@ -508,9 +524,9 @@ html.a11y-contrast-high .new-crew-banner p {
 }
 .a11y-seg button:hover { background: rgba(10, 132, 61, 0.1); }
 .a11y-seg button[aria-pressed="true"] {
-  background: var(--coyle-light-green);
+  background: var(--primary-color);
   color: #fff;
-  border-color: var(--coyle-light-green);
+  border-color: var(--primary-color);
 }
 
 /* On/off toggle rows */
@@ -560,16 +576,10 @@ html.a11y-contrast-high .new-crew-banner p {
   margin-top: 1.4rem;
   width: 100%;
   padding: 0.55rem;
-  border: 1.5px solid currentColor;
-  border-radius: 0.6rem;
-  background: transparent;
-  color: inherit;
   font-size: 0.82rem;
   font-weight: 600;
   cursor: pointer;
-  opacity: 0.8;
 }
-.a11y-reset:hover { opacity: 1; }
 
 /* ── Panel animation ────────────────────────────────────────── */
 @media (prefers-reduced-motion: no-preference) {
@@ -584,7 +594,7 @@ html.a11y-contrast-high .new-crew-banner p {
 
 /* ── Panel layout ───────────────────────────────────────────── */
 .a11y-panel {
-  border-radius: 1.75rem;
+  border-radius: 2rem;
 }
 .a11y-panel__hint {
   font-size: 0.78rem;
@@ -674,7 +684,7 @@ html.a11y-contrast-high .new-crew-banner p {
 }
 .a11y-section-title i { opacity: 0.6; }
 
-/* ── Segmented buttons — rounder ─────────────────────────── */
+/* ── Segmented buttons — match site button radius ────────── */
 .a11y-seg button {
   border-radius: 0.75rem;
   display: flex;
@@ -684,13 +694,23 @@ html.a11y-contrast-high .new-crew-banner p {
 }
 .a11y-seg button i { font-size: 0.8em; }
 
-/* ── Reset button ─────────────────────────────────────────── */
+/* ── Reset button — outline-green style ──────────────────── */
 .a11y-reset {
   border-radius: 0.75rem;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.4rem;
+  border: none;
+  background: transparent;
+  color: var(--primary-color);
+  box-shadow: inset 0 0 0 2.5px var(--primary-color), 0 1px 4px rgba(0, 0, 0, 0.08);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.a11y-reset:hover {
+  background: var(--primary-color);
+  color: #fff;
+  opacity: 1;
 }
 
 /* ── Mobile scale-up (≤640px) ─────────────────────────────── */
@@ -704,7 +724,7 @@ html.a11y-contrast-high .new-crew-banner p {
     max-width: 100%;
     max-height: min(88vh, 780px);
     padding: 1.5rem 1.25rem 1.75rem;
-    border-radius: 1.5rem 1.5rem 1rem 1rem;
+    border-radius: 2rem 2rem 0 0;
   }
 
   .a11y-panel__title {
@@ -753,19 +773,20 @@ html.a11y-contrast-high .new-crew-banner p {
     font-size: 1rem;
   }
 
-  /* Bigger toggle switch */
+  /* Bigger toggle switch on mobile — same px pattern, scaled up */
   .ui-switch {
-    width: 3.25rem;
-    height: 1.75rem;
+    width: 52px;
+    height: 30px;
   }
   .ui-switch::after {
-    top: 3px;
-    left: 3px;
-    width: calc(1.75rem - 6px);
-    height: calc(1.75rem - 6px);
+    width: 22px;
+    height: 22px;
+    left: 4px;
+    top: 4px;
   }
   .ui-switch[aria-checked="true"]::after {
-    transform: translateX(1.5rem);
+    /* travel = 52 - 22 - 8 = 22px */
+    transform: translateX(22px);
   }
 
   /* Bigger slider */

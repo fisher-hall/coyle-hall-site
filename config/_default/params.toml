@@ -24,10 +24,12 @@ contact_form_action = "#" # contact form works with [https://airform.io/] or [ht
 # google tag manager, see https://developers.google.com/tag-manager/
 google_tag_manager = "" # example: G-XXXXXXXXXX
 google_adsense = ""     # example: ca-pub-xxxxxxxxxxxxxxxx
+# Cloudflare Web Analytics (privacy-friendly, no cookies), see https://dash.cloudflare.com -> Web Analytics
+cloudflare_analytics_token = "e9e908bc63c842aea6fe159f8fb50b93" # paste the token from the Cloudflare snippet; leave empty to disable
 # custom script on header, example: custom_script= "<script>console.log(\"Hello World\")</script>"
 custom_script = ""
 # copyright
-copyright = "© 2025 | [Coyle Hall - University of Notre Dame](https://nd.edu) | [Zeon Studio](https://zeon.studio)"
+copyright = "© 2026 | [Coyle Hall - University of Notre Dame](https://nd.edu) | [Zeon Studio](https://zeon.studio)"
 
 # Preloader
 # preloader module: https://github.com/gethugothemes/hugo-modules/tree/master/components/preloader

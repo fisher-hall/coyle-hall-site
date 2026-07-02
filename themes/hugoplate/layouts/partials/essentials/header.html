@@ -1,13 +1,6 @@
 <div class="header-wrapper">
   <header class="header floating-header">
     <nav class="navbar floating-navbar rounded-3xl px-6 py-3">
-      <!-- logo -->
-      <div class="order-0">
-        <!-- navbar brand/logo -->
-        <a class="navbar-brand block" href="{{ site.Home.RelPermalink }}" aria-label="Coyle Hall — home">
-          {{ partial "logo" }}
-        </a>
-      </div>
       <!-- navbar toggler -->
       <input id="nav-toggle" type="checkbox" class="hidden" />
       <label
@@ -16,13 +9,21 @@
         aria-label="Toggle navigation menu"
         aria-controls="nav-menu"
         aria-expanded="false"
-        class="order-3 cursor-pointer flex items-center block lg:hidden text-text-dark dark:text-white lg:order-1 hamburger-btn"
+        class="order-0 cursor-pointer flex items-center block lg:hidden text-text-dark dark:text-white hamburger-btn"
       >
         <span class="hb-line"></span>
         <span class="hb-line"></span>
         <span class="hb-line"></span>
       </label>
       <!-- /navbar toggler -->
+
+      <!-- logo -->
+      <div class="order-1 lg:order-0">
+        <!-- navbar brand/logo -->
+        <a class="navbar-brand block" href="{{ site.Home.RelPermalink }}" aria-label="Coyle Hall — home">
+          {{ partial "logo" }}
+        </a>
+      </div>
 
       <!-- main navbar -->
       <ul
@@ -35,10 +36,11 @@
           {{ $pageURL:= $currentPage.Permalink | absLangURL }}
           {{ $active := or (eq $menuURL $pageURL) (eq (strings.TrimSuffix "/" $menuURL) (strings.TrimSuffix "/" $pageURL)) (eq $menuURL (strings.TrimSuffix "/" $pageURL)) (eq (strings.TrimSuffix "/" $menuURL) $pageURL) }}
           {{ if .HasChildren }}
-            {{ $hasActiveChild := false }}
+            {{ $hasActiveChild := $active }}
             {{ range .Children }}
               {{ $childURL := .URL | absLangURL }}
-              {{ if or (eq $childURL ($currentPage.Permalink | absLangURL)) (eq (strings.TrimSuffix "/" $childURL) (strings.TrimSuffix "/" ($currentPage.Permalink | absLangURL))) (eq $childURL (strings.TrimSuffix "/" ($currentPage.Permalink | absLangURL))) (eq (strings.TrimSuffix "/" $childURL) ($currentPage.Permalink | absLangURL)) }}
+              {{ $childURLTrimmed := strings.TrimSuffix "/" $childURL }}
+              {{ if or (eq $childURL $pageURL) (eq $childURLTrimmed (strings.TrimSuffix "/" $pageURL)) (strings.HasPrefix $pageURL (printf "%s/" $childURLTrimmed)) }}
                 {{ $hasActiveChild = true }}
               {{ end }}
             {{ end }}
@@ -52,7 +54,7 @@
                 aria-expanded="false"
                 aria-controls="{{ $submenuID }}"
                 class="nav-link rounded-xl transition inline-flex px-4 items-center align-middle {{ if $hasActiveChild }}active{{ end }}">
-                {{ .Name | safeHTML}}
+                <span class="nav-link-text">{{ .Name | safeHTML}}</span>
                 <!-- Mobile right arrow -->
                 <i class="fa-solid fa-angle-right mobile-arrow" aria-hidden="true"></i>
                 <!-- Desktop down arrow -->
@@ -105,7 +107,7 @@
         {{ end }}
       </ul>
 
-      <div class="order-1 ml-auto flex items-center gap-1 md:order-2 lg:ml-0">
+      <div class="order-2 ml-auto flex items-center gap-1 lg:ml-0">
         {{ with site.Params.search }}
           {{ if .enable }}
             <button

@@ -48,8 +48,28 @@ For technical issues with the website or suggestions for improvements, please co
 
 ---
 
+## Release Notes
+
+### Version 2.0.0 — July 2026
+
+Site-wide summer redesign:
+
+- Redesigned homepage with Fast Facts, New Crew call-to-action, and photo ticker
+- New accessibility preferences panel — theme, high contrast, text size and weight, reduced motion, spacing, and dyslexia-friendly font options
+- Rebuilt Hall Staff, Hall Government, and Commissioners pages; added Welcome Weekend co-chairs
+- New event pages: Family Weekend, Coyle Crunk, Formal, Car Smash, Regatta, and St. Adalbert's
+- Navbar overhaul with integrated search and accessibility controls
+- Privacy-friendly visitor analytics (no cookies, no personal data collected)
+- Faster page loads through image optimization
+
+### Version 1.0.0 — July 2025
+
+Original site launch.
+
+---
+
 ##### © 2025 <a href="https://residentiallife.nd.edu/undergraduate/halls/coyle-community-in-zahm-hall/" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">Coyle Hall - University of Notre Dame</a>
 
-*Updated: August 2025*
+*Version 2.0.0 — Updated July 2026*
 
-*Changelog available on [GitHub](https://github.com/fisher-hall/coyle-hall-site?tab=readme-ov-file)*
+*Full changelog available on [GitHub](https://github.com/fisher-hall/coyle-hall-site?tab=readme-ov-file#release-notes)*

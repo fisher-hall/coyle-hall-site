@@ -1,42 +1,55 @@
 /* ═══════════════════════════════════════════════════════════════
-   SWITCH — themed toggle switch (replaces inline styles in a11y panel)
+   SWITCH — themed toggle switch
    Usage: <button class="ui-switch" role="switch" aria-checked="false">
+   Pattern mirrors the standard checkbox+slider approach but uses
+   aria-checked on the button and ::after for the thumb.
+   All values in px so thumb centering is exact.
 ════════════════════════════════════════════════════════════════= */
 .ui-switch {
   position: relative;
-  width: 2.75rem;
-  height: 1.5rem;
+  display: inline-block;
+  width: 46px;
+  height: 26px;
   border-radius: 9999px;
-  background: #c4c4c4;
+  background: #ccc;
   border: none;
+  padding: 0;
   cursor: pointer;
   flex: 0 0 auto;
-  transition: background-color 0.2s ease;
+  transition: background 0.25s ease;
   -webkit-appearance: none;
   appearance: none;
 }
 .dark .ui-switch { background: #555; }
+
+/* Thumb */
 .ui-switch::after {
   content: "";
   position: absolute;
-  top: 3px;
-  left: 3px;
-  width: calc(1.5rem - 6px);
-  height: calc(1.5rem - 6px);
-  border-radius: 9999px;
+  width: 18px;
+  height: 18px;
+  left: 4px;
+  top: 4px;
   background: #fff;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.25);
-  transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1);
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  transition: transform 0.25s ease;
 }
+
+/* Checked state */
 .ui-switch[aria-checked="true"] {
   background: var(--coyle-light-green);
 }
 .ui-switch[aria-checked="true"]::after {
-  transform: translateX(1.25rem);
+  /* travel = switch_width - thumb_width - left_offset * 2 = 46 - 18 - 8 = 20px */
+  transform: translateX(20px);
 }
-/* High contrast: account for 2px border reducing inner track */
-html.a11y-contrast-high .ui-switch { box-sizing: border-box; }
+
 /* High contrast */
-html.a11y-contrast-high .ui-switch { background: #333 !important; border: 2px solid #48bb4e !important; }
+html.a11y-contrast-high .ui-switch {
+  box-sizing: border-box;
+  background: #333 !important;
+  border: 2px solid #48bb4e !important;
+}
 html.a11y-contrast-high .ui-switch[aria-checked="true"] { background: #48bb4e !important; }
 html.a11y-contrast-high .ui-switch::after { background: #fff !important; }
