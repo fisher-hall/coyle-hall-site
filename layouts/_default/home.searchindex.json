@@ -25,31 +25,6 @@
     {{- $description := $clean -}}
     {{- $content := $clean -}}
 
-    {{- if or (eq .Section "hall-staff") (eq .Section "hall-gov") (eq .Section "hall-commissioners") -}}
-      {{- /* Front-matter "params:" blocks are merged into the top-level Params
-             map by Hugo, not nested under a "params" key — .Params.params.* is
-             always nil. Read the fields directly off .Params. */ -}}
-      {{- $hometown := .Params.hometown | default "" -}}
-      {{- $major := .Params.major | default .Params.studying | default "" -}}
-      {{- $hobbies := .Params.hobbies | default "" -}}
-      {{- $favoritepart := .Params.favoritepart | default "" -}}
-      {{- $section := .Params.section | default "" -}}
-
-      {{- $title = printf "%s - %s" .Title (.Params.description | default "") -}}
-      {{- $description = printf "%s of Coyle Hall" (.Params.description | default "") -}}
-
-      {{- $contentParts := slice .Title -}}
-      {{- if $hometown -}}{{- $contentParts = $contentParts | append (printf "from %s" $hometown) -}}{{- end -}}
-      {{- if $major -}}{{- $contentParts = $contentParts | append (printf "Studies %s" $major) -}}{{- end -}}
-      {{- if .Params.description -}}{{- $contentParts = $contentParts | append .Params.description -}}{{- end -}}
-      {{- if $hobbies -}}{{- $contentParts = $contentParts | append (printf "Hobbies: %s" $hobbies) -}}{{- end -}}
-      {{- if $favoritepart -}}{{- $contentParts = $contentParts | append (printf "Favorite part: %s" $favoritepart) -}}{{- end -}}
-      {{- if $section -}}{{- $contentParts = $contentParts | append (printf "Section: %s" $section) -}}{{- end -}}
-      {{- if $clean -}}{{- $contentParts = $contentParts | append $clean -}}{{- end -}}
-
-      {{- $content = delimit $contentParts ". " -}}
-    {{- end -}}
-
     {
       "title": {{ $title | jsonify }},
       "description": {{ ($description | truncate 200) | jsonify }},
@@ -59,11 +34,85 @@
   {{- end -}}
 {{- end -}}
 
-{{- /* Hall commissioners are managed entirely as data (data/hall-commissioners/
-       commissioners.yaml) and rendered onto a single list page — they have no
-       individual Hugo Page, so the range over .Site.Pages above can never see
-       them. Emit a synthetic entry per commissioner, linking to the list page
-       they actually appear on. */ -}}
+{{- /* Hall staff, hall gov, and hall commissioners are all managed as data
+       (data/<section>/*.yaml) and rendered as cards on a single list page —
+       they have no individual Hugo Page, so the range over .Site.Pages above
+       can never see them. Emit a synthetic entry per current member, linking
+       to the #member-<slug> anchor their card renders with on the list page
+       (see the hall-staff/hall-gov/hall-commissioners layouts). */ -}}
+
+{{- $staffURL := "" -}}
+{{- with .Site.GetPage "hall-staff" -}}{{- $staffURL = .RelPermalink -}}{{- end -}}
+{{- $staff := index site.Data "hall-staff" "staff" -}}
+{{- range slice $staff.rector $staff.priest -}}
+  {{- if . -}}
+    {{- if not $first -}},{{- end -}}
+    {{- $first = false -}}
+    {{- $contentParts := slice .name -}}
+    {{- with .bio -}}{{- $contentParts = $contentParts | append . -}}{{- end -}}
+    {{- $content := delimit $contentParts ". " -}}
+    {
+      "title": {{ .name | jsonify }},
+      "description": {{ printf "%s of Coyle Hall" .name | jsonify }},
+      "url": {{ printf "%s#member-%s" $staffURL (anchorize .name) | jsonify }},
+      "content": {{ $content | jsonify }}
+    }
+  {{- end -}}
+{{- end -}}
+{{- range $staff.members -}}
+  {{- if not $first -}},{{- end -}}
+  {{- $first = false -}}
+
+  {{- $majorVal := "" -}}
+  {{- with .major -}}
+    {{- if reflect.IsSlice . -}}{{- $majorVal = delimit . ", " -}}{{- else -}}{{- $majorVal = . -}}{{- end -}}
+  {{- end -}}
+
+  {{- $contentParts := slice .name -}}
+  {{- with .role -}}{{- $contentParts = $contentParts | append . -}}{{- end -}}
+  {{- with .hometown -}}{{- $contentParts = $contentParts | append (printf "from %s" .) -}}{{- end -}}
+  {{- if $majorVal -}}{{- $contentParts = $contentParts | append (printf "Studies %s" $majorVal) -}}{{- end -}}
+  {{- with .studying -}}{{- $contentParts = $contentParts | append . -}}{{- end -}}
+  {{- with .hobbies -}}{{- $contentParts = $contentParts | append (printf "Hobbies: %s" .) -}}{{- end -}}
+  {{- with .favoritepart -}}{{- $contentParts = $contentParts | append (printf "Favorite part: %s" .) -}}{{- end -}}
+  {{- with .section -}}{{- $contentParts = $contentParts | append (printf "Section: %s" .) -}}{{- end -}}
+  {{- $content := delimit $contentParts ". " -}}
+
+  {
+    "title": {{ printf "%s - %s" .name (.role | default "Hall Staff") | jsonify }},
+    "description": {{ printf "%s of Coyle Hall" (.role | default "Hall Staff") | jsonify }},
+    "url": {{ printf "%s#member-%s" $staffURL (anchorize .name) | jsonify }},
+    "content": {{ $content | jsonify }}
+  }
+{{- end -}}
+
+{{- $govURL := "" -}}
+{{- with .Site.GetPage "hall-gov" -}}{{- $govURL = .RelPermalink -}}{{- end -}}
+{{- range (index site.Data "hall-gov" "government").members -}}
+  {{- if not $first -}},{{- end -}}
+  {{- $first = false -}}
+
+  {{- $majorVal := "" -}}
+  {{- with .major -}}
+    {{- if reflect.IsSlice . -}}{{- $majorVal = delimit . ", " -}}{{- else -}}{{- $majorVal = . -}}{{- end -}}
+  {{- end -}}
+
+  {{- $contentParts := slice .name -}}
+  {{- with .role -}}{{- $contentParts = $contentParts | append . -}}{{- end -}}
+  {{- with .hometown -}}{{- $contentParts = $contentParts | append (printf "from %s" .) -}}{{- end -}}
+  {{- if $majorVal -}}{{- $contentParts = $contentParts | append (printf "Studies %s" $majorVal) -}}{{- end -}}
+  {{- with .hobbies -}}{{- $contentParts = $contentParts | append (printf "Hobbies: %s" .) -}}{{- end -}}
+  {{- with .favoritepart -}}{{- $contentParts = $contentParts | append (printf "Favorite part: %s" .) -}}{{- end -}}
+  {{- $content := delimit $contentParts ". " -}}
+
+  {
+    "title": {{ printf "%s - %s" .name (.role | default "Hall Government") | jsonify }},
+    "description": {{ printf "%s of Coyle Hall" (.role | default "Hall Government") | jsonify }},
+    "url": {{ printf "%s#member-%s" $govURL (anchorize .name) | jsonify }},
+    "content": {{ $content | jsonify }}
+  }
+{{- end -}}
+
 {{- $commissionersURL := "" -}}
 {{- with .Site.GetPage "hall-commissioners" -}}{{- $commissionersURL = .RelPermalink -}}{{- end -}}
 {{- range (index site.Data "hall-commissioners" "commissioners").commissioners -}}
@@ -86,7 +135,7 @@
   {
     "title": {{ printf "%s - %s" .name (.role | default "Commissioner") | jsonify }},
     "description": {{ printf "%s of Coyle Hall" (.role | default "Commissioner") | jsonify }},
-    "url": {{ $commissionersURL | jsonify }},
+    "url": {{ printf "%s#member-%s" $commissionersURL (anchorize .name) | jsonify }},
     "content": {{ $content | jsonify }}
   }
 {{- end -}}

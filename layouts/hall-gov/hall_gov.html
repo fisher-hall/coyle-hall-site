@@ -87,13 +87,13 @@
     @media (max-width: 768px)  { .page-content-wave { margin-top: -46px; } }
     .cc-card img, .cc-card img:hover,
     #past-body img, #past-body img:hover { transform: none !important; box-shadow: none !important; cursor: default !important; }
-    .past-highlight {
+    .profile-highlight {
       outline: 3px solid var(--coyle-accent-green, var(--primary-color));
       outline-offset: 6px;
       border-radius: 1rem;
       transition: outline-color 300ms ease;
     }
-    @media (prefers-reduced-motion: reduce) { .past-highlight { transition: none; } }
+    @media (prefers-reduced-motion: reduce) { .profile-highlight { transition: none; } }
   </style>
 
   <div style="height: 4rem;"></div>
@@ -147,7 +147,7 @@
 
           {{- $hasBio := or .hometown $majorVal $minorVal .hobbies .favoritepart .email -}}
 
-          <div class="cc-card rounded-[2rem] overflow-hidden" style="background: linear-gradient(to top right, var(--coyle-grad-dark), var(--coyle-grad-light))">
+          <div id="member-{{ anchorize .name }}" tabindex="-1" class="cc-card rounded-[2rem] overflow-hidden scroll-mt-28" style="background: linear-gradient(to top right, var(--coyle-grad-dark), var(--coyle-grad-light))">
 
             <div class="p-4 pb-0">
               <div class="relative aspect-square rounded-[1.38rem] overflow-hidden bg-black/20">
