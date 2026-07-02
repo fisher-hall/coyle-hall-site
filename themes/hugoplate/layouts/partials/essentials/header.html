@@ -36,7 +36,7 @@
           {{ $pageURL:= $currentPage.Permalink | absLangURL }}
           {{ $active := or (eq $menuURL $pageURL) (eq (strings.TrimSuffix "/" $menuURL) (strings.TrimSuffix "/" $pageURL)) (eq $menuURL (strings.TrimSuffix "/" $pageURL)) (eq (strings.TrimSuffix "/" $menuURL) $pageURL) }}
           {{ if .HasChildren }}
-            {{ $hasActiveChild := $active }}
+            {{ $hasActiveChild := and $active (ne .URL "") }}
             {{ range .Children }}
               {{ $childURL := .URL | absLangURL }}
               {{ $childURLTrimmed := strings.TrimSuffix "/" $childURL }}

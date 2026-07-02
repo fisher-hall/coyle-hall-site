@@ -140,6 +140,16 @@ body:has(.page-banner-wrapper) .section-sm {
   padding: 12px 16px !important;
 }
 
+/* Explicit (non-inherited) base weight so the a11y text-weight preference,
+   which forces font-weight on <body> with !important, can't collapse the
+   active/inactive contrast — a direct declaration always wins over an
+   inherited one regardless of the ancestor's !important. */
+.header .navbar .nav-link,
+.floating-navbar .nav-link,
+.nav-dropdown-list .nav-dropdown-item a {
+  font-weight: 550 !important;
+}
+
 /* Hover state for nav links — tint only */
 .header .navbar .nav-link:hover,
 .floating-navbar .nav-link:hover {
@@ -525,6 +535,10 @@ body:has(.page-banner-wrapper) .section-sm {
     margin: 0 !important;
     border-radius: 0 !important;
     background: var(--coyle-dark-green) !important;
+    /* #nav-menu's own transform (for its slide-in) makes it the containing
+       block for fixed-position descendants like .nav-dropdown-list, so an
+       off-screen (closed) submenu overlay can overflow it horizontally. */
+    overflow: hidden !important;
   }
 
   body.mobile-menu-open #nav-menu,
@@ -581,6 +595,14 @@ body:has(.page-banner-wrapper) .section-sm {
     transform: translateY(300px);
     will-change: opacity, transform;
     transition: opacity .5s ease, transform .6s cubic-bezier(.4,0,.2,1);
+  }
+
+  /* Search / a11y / theme icon group: hide while the mobile menu is open */
+  .order-2 { transition: opacity .2s ease; }
+  #nav-toggle:checked ~ .order-2 {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
   }
 
   /* Staggered link entrance animation */
@@ -654,11 +676,11 @@ body:has(.page-banner-wrapper) .section-sm {
     backdrop-filter: blur(10px) !important;
     z-index: 10000 !important;
     padding: 120px 34px 34px !important;
-    transform: translateX(40px) scale(.98) !important;
+    transform: translateX(56px) scale(.92) !important;
     opacity: 0 !important;
     visibility: hidden !important;
-    transition: transform .35s cubic-bezier(.4,0,.2,1), opacity .35s cubic-bezier(.4,0,.2,1) !important;
-    display: none !important;
+    transition: transform .22s cubic-bezier(.16,1,.3,1), opacity .16s ease, visibility 0s linear .22s !important;
+    display: flex !important;
     flex-direction: column !important;
     border-radius: 0 !important;
     box-shadow: none !important;
@@ -672,11 +694,14 @@ body:has(.page-banner-wrapper) .section-sm {
     visibility: visible !important;
     display: flex !important;
     pointer-events: auto !important;
+    transition: transform .22s cubic-bezier(.16,1,.3,1), opacity .16s ease !important;
   }
 
-  /* Main menu stays visible when submenu opens */
+  /* Main menu stays visible when submenu opens.
+     No transform here: a transform on this ancestor would make it the
+     containing block for the fixed-position .nav-dropdown-list overlays,
+     causing them to overflow #nav-menu horizontally instead of the viewport. */
   #nav-menu.submenu-open {
-    transform: translateX(0);
     opacity: 1;
   }
 
@@ -696,12 +721,11 @@ body:has(.page-banner-wrapper) .section-sm {
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     flex-direction: column !important;
     align-items: flex-start !important;
+    justify-content: center !important;
     padding-top: 140px !important;
     padding-left: 2.5rem !important;
     padding-right: 34px !important;
     padding-bottom: 34px !important;
-    transform: none !important;
-    transition: none !important;
   }
 
   /* Disable hover-driven dropdown on mobile */
@@ -728,7 +752,8 @@ body:has(.page-banner-wrapper) .section-sm {
     font-weight: 550 !important;
     font-family: 'Rubik', sans-serif !important;
     padding: 12px 16px !important;
-    display: block !important;
+    display: flex !important;
+    align-items: center !important;
     border-radius: 0 !important;
     margin: 10px 0 !important;
     background: transparent !important;
@@ -753,17 +778,15 @@ body:has(.page-banner-wrapper) .section-sm {
     background: transparent !important;
   }
 
-  /* Back button */
+  /* Back button — flows as the first item in the centered submenu list,
+     sitting directly above the links instead of pinned near the top. */
   .mobile-back-button {
-    position: absolute !important;
-    top: 24px !important;
-    left: 2.5rem !important;
-    transform: translateY(100%) !important;
-    right: auto !important;
+    position: static !important;
     background: rgba(255,255,255,0.12) !important;
     color: #fff !important;
     font-size: 2rem !important;
     font-weight: 550 !important;
+    line-height: 1 !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: flex-start !important;
@@ -771,7 +794,7 @@ body:has(.page-banner-wrapper) .section-sm {
     padding: 6px 18px !important;
     cursor: pointer !important;
     z-index: 10001 !important;
-    border-radius: 1rem !important;
+    border-radius: 1.5rem !important;
     width: auto !important;
     min-width: 120px !important;
     max-width: 340px !important;
@@ -779,15 +802,20 @@ body:has(.page-banner-wrapper) .section-sm {
     align-self: flex-start !important;
     flex-shrink: 1 !important;
     text-align: left !important;
-    margin-bottom: 0 !important;
+    margin: 0 0 24px 0 !important;
     border: none !important;
     box-sizing: border-box !important;
     box-shadow: none !important;
     font-family: 'Rubik', sans-serif !important;
+    transition: transform 0.15s ease, background 0.2s ease !important;
   }
 
   .mobile-back-button:hover {
     background: rgba(255,255,255,0.12) !important;
+  }
+
+  .mobile-back-button:active {
+    transform: scale(0.98) !important;
   }
 
   .mobile-back-button svg {
@@ -868,7 +896,7 @@ body:has(.page-banner-wrapper) .section-sm {
     -webkit-backdrop-filter: blur(16px);
     border-radius: 24px;
     padding: 1rem 1rem;
-    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.22);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
   }
 
   body.mobile-search-active #mobile-search-bar {
@@ -879,6 +907,7 @@ body:has(.page-banner-wrapper) .section-sm {
   }
 
   .inline-search-container {
+    position: relative;
     flex: 1;
     width: 100%;
   }

@@ -59,12 +59,6 @@ url = "/building"
 weight = 2
 
 [[main]]
-parent = "Events"
-name = "Traditions"
-url = "/events/traditions"
-weight = 0
-
-[[main]]
 name = "Faith"
 url = "/faith"
 weight = 6

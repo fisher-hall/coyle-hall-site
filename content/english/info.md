@@ -68,7 +68,7 @@ Original site launch.
 
 ---
 
-##### © 2025 <a href="https://residentiallife.nd.edu/undergraduate/halls/coyle-community-in-zahm-hall/" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">Coyle Hall - University of Notre Dame</a>
+##### © 2026 <a href="https://residentiallife.nd.edu/undergraduate/halls/coyle-community-in-zahm-hall/" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">Coyle Hall - University of Notre Dame</a>
 
 *Version 2.0.0 — Updated July 2026*
 
