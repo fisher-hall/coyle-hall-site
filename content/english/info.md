@@ -38,7 +38,7 @@ The website is actively maintained by Coyle Hall residents and staff. Content up
 For technical issues with the website or suggestions for improvements, please contact Web Commissioners Dan Burke and Will Griffin, or file an issue on Github.
 
 <div style="display: flex; gap: 1.5rem; margin: 1.5rem 0; flex-wrap: wrap;">
-  <a href="mailto:dburke6@nd.edu,wgriffi3@nd.edu?subject=Coyle%20Hall%20Website%20Feedback">
+  <a href="mailto:dburke6@nd.edu?subject=Coyle%20Hall%20Website%20Feedback">
     <Button class="default">Send an Email <i class="fas fa-envelope"></i></Button>
   </a>
   <a href="https://github.com/fisher-hall/coyle-hall-site/issues" target="_blank" rel="noopener">
@@ -48,28 +48,56 @@ For technical issues with the website or suggestions for improvements, please co
 
 ---
 
-## Release Notes
+# Privacy Policy
 
-### Version 2.0.0 — July 2026
+This website is a static site built with Hugo and hosted on GitHub Pages.
 
-Site-wide summer redesign:
+## Information We Collect
 
-- Redesigned homepage with Fast Facts, New Crew call-to-action, and photo ticker
-- New accessibility preferences panel — theme, high contrast, text size and weight, reduced motion, spacing, and dyslexia-friendly font options
-- Rebuilt Hall Staff, Hall Government, and Commissioners pages; added Welcome Weekend co-chairs
-- New event pages: Family Weekend, Coyle Crunk, Formal, Car Smash, Regatta, and St. Adalbert's
-- Navbar overhaul with integrated search and accessibility controls
-- Privacy-friendly visitor analytics (no cookies, no personal data collected)
-- Faster page loads through image optimization
+We do not directly collect, store, or sell personal information from visitors.
 
-### Version 1.0.0 — July 2025
+The site does not use user accounts, forms, cookies for tracking, or advertising services. It does use Cloudflare Web Analytics, a cookieless analytics service that reports aggregated visit statistics without tracking individual visitors across sites.
 
-Original site launch.
+## Third-Party Services
+
+### GitHub Pages
+
+This website is hosted by GitHub Pages, a service provided by GitHub, Inc. GitHub may collect standard server and technical information such as IP addresses, browser information, and request logs as part of hosting and security operations.
+
+For more information, see GitHub’s Privacy Statement:
+https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement
+
+### Cloudflare Web Analytics
+
+This website uses Cloudflare Web Analytics to measure site traffic. This service is cookieless and does not use any persistent identifiers or track visitors across websites.
+
+For more information, see Cloudflare's Privacy Policy:
+https://www.cloudflare.com/privacypolicy/
+
+### Behold Instagram Integration
+
+This website uses Behold to display Instagram content. When Instagram content is loaded, Behold and related third-party services may process technical information necessary to deliver embedded media.
+
+For more information, see:
+- https://behold.so/legal/privacy-policy
+- https://privacycenter.instagram.com/policy
+
+## Cookies
+
+This website does not intentionally use cookies for tracking or advertising purposes. However, third-party services used to display embedded content may use cookies as part of their normal functionality.
+
+## Changes to This Policy
+
+This Privacy Policy may be updated from time to time. Any changes will be posted on this page with an updated revision date.
+
+## Contact
+
+If you have questions about this Privacy Policy, you may contact the site owner through the appropriate contact method listed on this website.
 
 ---
 
-##### © 2026 <a href="https://residentiallife.nd.edu/undergraduate/halls/coyle-community-in-zahm-hall/" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">Coyle Hall - University of Notre Dame</a>
+##### © 2025-2026 <a href="https://residentiallife.nd.edu/undergraduate/halls/coyle-community-in-zahm-hall/" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">Coyle Hall - University of Notre Dame</a>
 
-*Version 2.0.0 — Updated July 2026*
+*Last Updated: May 2026*
 
 *Full changelog available on [GitHub](https://github.com/fisher-hall/coyle-hall-site?tab=readme-ov-file#release-notes)*
