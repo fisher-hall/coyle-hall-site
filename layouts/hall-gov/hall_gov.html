@@ -94,7 +94,7 @@
     <div class="max-w-7xl mx-auto px-4">
 
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-5 items-start">
-        {{ range (index hugo.Data "hall-gov" "government").members }}
+        {{ range (index site.Data "hall-gov" "government").members }}
 
           {{- $img := "/images/ImagePlaceholder.jpg" -}}
           {{- with .image -}}
@@ -228,7 +228,7 @@
       </div>
 
       {{/* Past Government — driven by data/hall-gov/past.yaml */}}
-      {{ with index hugo.Data "hall-gov" "past" }}
+      {{ with index site.Data "hall-gov" "past" }}
         {{ if .years }}
           <div class="mt-16 pt-10">
 

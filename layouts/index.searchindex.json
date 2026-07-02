@@ -25,7 +25,7 @@
     {{- $description := $clean -}}
     {{- $content := $clean -}}
 
-    {{- if or (eq .Section "hall-staff") (eq .Section "hall-gov") (eq .Section "hall-commissioners") -}}
+    {{- if and .Params.description (or (eq .Section "hall-staff") (eq .Section "hall-gov") (eq .Section "hall-commissioners")) -}}
       {{- $hometown := .Params.params.hometown | default "" -}}
       {{- $major := .Params.params.major | default .Params.params.studying | default "" -}}
       {{- $hobbies := .Params.params.hobbies | default "" -}}

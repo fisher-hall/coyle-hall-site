@@ -18,3 +18,5 @@ yarn.lock
 graphify-out/
 # Claude Code local worktrees
 .claude/worktrees/
+# Pinned local Hugo binary (see scripts/setupHugo.js)
+.tools/
