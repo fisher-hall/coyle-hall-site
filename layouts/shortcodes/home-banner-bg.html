@@ -1,0 +1,9 @@
+{{- /* Sets the homepage parallax banner background to a pipeline-processed
+       WebP. The source (HomeBanner.png, ~8.8MB) lives in assets/ so Hugo can
+       resize it; the resize spec here MUST match the preload in
+       partials/essentials/head.html so the preload hits the same URL. */ -}}
+{{- $src := resources.Get "images/BannerImages/HomeBanner.png" -}}
+{{- with $src -}}
+  {{- $img := .Resize "1920x webp q80" -}}
+  <style>#banner-parallax{background-image:url('{{ $img.RelPermalink }}');}</style>
+{{- end -}}

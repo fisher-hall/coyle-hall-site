@@ -1,0 +1,166 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-06T00:00:00Z",
+  "title": "Design System: Coyle Hall",
+  "extensions": {
+    "colorMeta": {
+      "coyle-dark-green": {
+        "role": "primary",
+        "displayName": "Deep Forest Green",
+        "canonical": "#064121",
+        "tonalRamp": ["#010d07", "#021a0d", "#032814", "#043519", "#064121", "#0a5c2e", "#0A8A3F", "#12b357", "#53f55c", "#a8e8b0"]
+      },
+      "coyle-light-green": {
+        "role": "primary-interactive",
+        "displayName": "Coyle Green",
+        "canonical": "#0A8A3F",
+        "tonalRamp": ["#021a0d", "#043519", "#064121", "#085130", "#0A8A3F", "#0da84d", "#14c45d", "#4dd87d", "#90e9ac", "#d0f6de"]
+      },
+      "coyle-accent": {
+        "role": "primary-dark-mode",
+        "displayName": "Bright Crew Green",
+        "canonical": "#53f55c",
+        "tonalRamp": ["#0d2610", "#1a4d1c", "#257328", "#2e9034", "#53f55c", "#6acc6f", "#8dd990", "#b2e9b4", "#d3f4d4", "#edfaee"]
+      },
+      "nd-blue": {
+        "role": "tertiary",
+        "displayName": "Notre Dame Blue",
+        "canonical": "#0c2340",
+        "tonalRamp": ["#040c18", "#071524", "#0a1d34", "#0c2340", "#123060", "#1a4285", "#2559a8", "#5585c4", "#99b6da", "#cddaeb"]
+      },
+      "nd-gold": {
+        "role": "tertiary",
+        "displayName": "Notre Dame Gold",
+        "canonical": "#ae9142",
+        "tonalRamp": ["#2b2410", "#574820", "#7d6a2f", "#ae9142", "#c4a84e", "#d4bc70", "#e2ce97", "#eddfb8", "#f6efd5", "#fcf8ee"]
+      },
+      "surface-white": {
+        "role": "neutral",
+        "displayName": "Surface White",
+        "canonical": "#ffffff",
+        "tonalRamp": ["#1a1a1a", "#333333", "#555555", "#777777", "#999999", "#bbbbbb", "#cccccc", "#e0e0e0", "#f0f0f0", "#ffffff"]
+      },
+      "surface-dark": {
+        "role": "neutral-dark",
+        "displayName": "Surface Dark",
+        "canonical": "#000000",
+        "tonalRamp": ["#000000", "#111111", "#1c1c1c", "#2a2a2a", "#3a3a3a", "#555555", "#777777", "#999999", "#cccccc", "#ffffff"]
+      },
+      "ink-primary": {
+        "role": "neutral",
+        "displayName": "Ink Primary",
+        "canonical": "#444444",
+        "tonalRamp": ["#111111", "#222222", "#333333", "#444444", "#666666", "#888888", "#aaaaaa", "#cccccc", "#e0e0e0", "#f5f5f5"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Banner Display", "purpose": "Hero headings over full-width parallax imagery only. Alfa Slab One, uppercase, wide tracking. Never at content-section level." },
+      "subheading": { "displayName": "Banner Subheading", "purpose": "Supporting text directly beneath display headings in the banner layer. Same typeface, smaller scale." },
+      "headline": { "displayName": "Page Headline", "purpose": "First h1 of a content page, below the banner. Rubik Extra Bold." },
+      "title": { "displayName": "Section Title", "purpose": "H2 section headings within content. Named sections like 'Building a Legacy'." },
+      "body": { "displayName": "Body", "purpose": "All paragraph text. Cap at 65-75ch." },
+      "label": { "displayName": "Label / Nav", "purpose": "Navigation links, captions, stat labels, UI affordance text." }
+    },
+    "shadows": [
+      { "name": "interactive-lift", "value": "0 4px 8px rgba(0,0,0,0.1)", "purpose": "Hover state for buttons, nav links, social icons. Confirms interactivity. Never at rest." },
+      { "name": "dropdown", "value": "0 8px 25px rgba(0,0,0,0.3), 0 4px 10px rgba(0,0,0,0.2)", "purpose": "Nav dropdown menus. Two-layer shadow grounds the floating layer." },
+      { "name": "panel", "value": "0 8px 32px rgba(0,0,0,0.3)", "purpose": "Search results panel, large floating surfaces." },
+      { "name": "navbar-scroll", "value": "0 6px 24px rgba(0,0,0,0.2)", "purpose": "Floating navbar after scroll. Applied with green backdrop-filter blur." }
+    ],
+    "motion": [
+      { "name": "ease-standard", "value": "cubic-bezier(0.4, 0, 0.2, 1)", "purpose": "Default easing for nav transitions and mobile menu slide." },
+      { "name": "ease-out-snappy", "value": "cubic-bezier(0.25, 1, 0.5, 1)", "purpose": "Interactive tilt hover scale. Feels immediate and confident." },
+      { "name": "fade-in-section", "value": "opacity 0.8s ease, transform 0.8s ease", "purpose": "Scroll-triggered section reveals. translateY(40px) → 0. Must be suppressed under prefers-reduced-motion." },
+      { "name": "nav-hover", "value": "all 0.2s ease", "purpose": "Nav link hover color and background transitions." },
+      { "name": "mobile-menu-slide", "value": "transform 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.4s cubic-bezier(0.4,0,0.2,1)", "purpose": "Mobile fullscreen nav slide in from right." },
+      { "name": "stagger-base-delay", "value": "0.05s per child", "purpose": "Mobile nav link staggered entrance. Each nth-child adds 0.05s delay." }
+    ],
+    "breakpoints": [
+      { "name": "md", "value": "768px", "purpose": "Mobile layout adjustments: banner height, main padding, banner strip." },
+      { "name": "lg", "value": "1024px", "purpose": "Desktop nav: hamburger hidden, inline nav shown, dropdown hover enabled." }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Default CTA. Dark green at rest, Coyle Green on hover, slight scale lift. Warm and tactile.",
+      "html": "<button class=\"ds-btn-primary\">Join the Crew</button>",
+      "css": ".ds-btn-primary { background: #064121; color: #ffffff; padding: 12px 24px; border-radius: 16px; border: none; font-family: Rubik, sans-serif; font-weight: 600; font-size: 1rem; cursor: pointer; box-shadow: none; transition: background 0.2s ease, transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out; } .ds-btn-primary:hover { background: #0A8A3F; transform: scale(1.05); box-shadow: 0 4px 8px rgba(0,0,0,0.1); } .ds-btn-primary:focus-visible { outline: 3px solid #53f55c; outline-offset: 3px; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "White background, dark green text. Used for the Incoming Students / New Crew CTA on dark navbar surfaces.",
+      "html": "<button class=\"ds-btn-ghost\">New Crew</button>",
+      "css": ".ds-btn-ghost { background: #ffffff; color: #064121; padding: 12px 24px; border-radius: 16px; border: none; font-family: Rubik, sans-serif; font-weight: 800; font-size: 1rem; cursor: pointer; box-shadow: none; transition: background 0.2s ease, transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out; } .ds-btn-ghost:hover { background: #0A8A3F; color: #ffffff; transform: scale(1.05); box-shadow: 0 4px 8px rgba(0,0,0,0.1); } .ds-btn-ghost:focus-visible { outline: 3px solid #53f55c; outline-offset: 3px; }"
+    },
+    {
+      "name": "Nav Link",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Floating navbar link. Transparent at rest, Coyle Green on hover/active, 16px pill radius.",
+      "html": "<a class=\"ds-nav-link\" href=\"#\">Traditions</a>",
+      "css": ".ds-nav-link { display: inline-block; padding: 12px 16px; border-radius: 16px; color: rgba(255,255,255,0.9); font-family: Rubik, sans-serif; font-weight: 600; font-size: 1.1rem; text-decoration: none; background: transparent; transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease; } .ds-nav-link:hover { background: #0A8A3F; color: #ffffff; border-radius: 16px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transform: translateY(-1px); } .ds-nav-link.ds-nav-link--active { background: #0A8A3F; color: #ffffff; border-radius: 12px; } .ds-nav-link:focus-visible { outline: 3px solid #53f55c; outline-offset: 2px; }"
+    },
+    {
+      "name": "Search Input",
+      "kind": "input",
+      "refersTo": "search-input",
+      "description": "Ghost search field used inside the floating navbar. Transparent background, white border, icon left-aligned.",
+      "html": "<div class=\"ds-search-wrap\"><span class=\"ds-search-icon\">&#128269;</span><input class=\"ds-search-input\" type=\"search\" placeholder=\"Search Coyle...\" /></div>",
+      "css": ".ds-search-wrap { position: relative; display: flex; align-items: center; } .ds-search-icon { position: absolute; left: 20px; color: rgba(255,255,255,0.7); font-size: 1.1rem; pointer-events: none; } .ds-search-input { flex: 1; width: 100%; padding: 8px 20px 8px 50px; font-size: 1.1rem; font-family: Rubik, sans-serif; font-weight: 500; border: 2px solid rgba(255,255,255,0.9); border-radius: 16px; background: transparent; color: #ffffff; outline: none; transition: border-color 0.2s ease; } .ds-search-input::placeholder { color: rgba(255,255,255,0.6); } .ds-search-input:focus { border-color: rgba(255,255,255,1); }"
+    },
+    {
+      "name": "Content Card / Image Block",
+      "kind": "card",
+      "refersTo": "content-card",
+      "description": "Photo + text alternating layout blocks. Image has rounded corners and interactive tilt on hover.",
+      "html": "<div class=\"ds-content-card\"><img class=\"ds-content-card__img\" src=\"\" alt=\"\" /><div class=\"ds-content-card__body\"><h2 class=\"ds-content-card__title\">Building a Legacy</h2><p class=\"ds-content-card__text\">Card body text goes here.</p></div></div>",
+      "css": ".ds-content-card { display: flex; flex-direction: column; gap: 24px; max-width: 64rem; margin: 0 auto; } @media (min-width: 768px) { .ds-content-card { flex-direction: row; align-items: center; } } .ds-content-card__img { border-radius: 16px; width: 100%; max-width: 36rem; object-fit: cover; box-shadow: 0 10px 24px rgba(0,0,0,0.12), 0 4px 8px rgba(0,0,0,0.08); transition: transform 0.25s cubic-bezier(0.25,1,0.5,1), box-shadow 0.25s ease-out; } .ds-content-card__img:hover { transform: scale(1.03); } .ds-content-card__title { font-family: Rubik, sans-serif; font-size: 1.875rem; font-weight: 700; color: #064121; margin-bottom: 16px; } .ds-content-card__text { font-family: Rubik, sans-serif; font-size: 1rem; font-weight: 500; line-height: 1.65; color: #444444; max-width: 65ch; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Brotherhood Hall",
+    "overview": "Coyle Hall's visual system carries the weight of a place that has been lived in and loved. This isn't a new building introducing itself — it's a community with 70 years of history moving into a new home. The design conveys permanence without stiffness, pride without performance. Every surface should feel like something earned rather than branded.\n\nThe palette is deep and committed: Coyle green dominates. The typography pairs a slab display face — wide, uppercase, institutional — with the friendly utility of Rubik at every other size. Motion is purposeful: parallax banners, staggered nav entrances, and fade-in sections that build toward the content rather than distracting from it. Interactions feel warm and tactile — a button press feels like a handshake, not a tap on glass.\n\nThis system explicitly rejects the generic university web template aesthetic: interchangeable layouts, corporate neutrals, stock imagery in card grids. It also rejects the social-media-ified hall site that looks like a feed. Coyle Hall has a specific identity. The site should be unmistakably this hall.",
+    "keyCharacteristics": [
+      "Deep Coyle green is the dominant surface color, not an accent",
+      "Alfa Slab One owns the banner/hero layer; Rubik owns everything else",
+      "Rounded pill shapes (16px radius) for all interactive elements",
+      "Parallax banners with green tint overlay establish each page's identity",
+      "Shadows appear on state (hover, elevation) only — default surface is flat",
+      "Wave canvas transitions bridge banner and content layer on inner pages",
+      "Dark mode inverts background to black, shifts greens lighter; identity holds in both"
+    ],
+    "rules": [
+      { "name": "The Green-Is-The-Brand Rule", "body": "Do not introduce a new accent color unless it is ND Gold or ND Blue in a co-branding context. The system has one accent family: green. Its depth is the identity.", "section": "colors" },
+      { "name": "The No-Warm-Neutral Rule", "body": "The body background is white (#ffffff) in light mode and black (#000000) in dark mode. Do not replace with beige, cream, paper, or warm near-whites.", "section": "colors" },
+      { "name": "The Slab-Only-Over-Images Rule", "body": "Alfa Slab One appears exclusively in the banner layer — over full-width photography with the green tint overlay. Never use it as a content section heading, card title, or inline heading.", "section": "typography" },
+      { "name": "The No-Third-Typeface Rule", "body": "The system uses exactly two typefaces. Do not add a third, even for a 'special section.'", "section": "typography" },
+      { "name": "The Flat-At-Rest Rule", "body": "No element carries a shadow in its default, non-hovered state unless it is a floating layer (dropdown, panel, modal). State triggers shadow; rest earns flatness.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do use #064121 (Deep Forest Green) as the primary identity surface for navbars, overlays, and dropdown menus.",
+      "Do use #0A8A3F (Coyle Green) for hover states, active links, CTA buttons, and interactive indicators.",
+      "Do keep Alfa Slab One exclusively for banner/hero headings over full-width imagery with the green tint layer.",
+      "Do honor prefers-reduced-motion on all animations — content must be visible without the transition firing.",
+      "Do verify #444 body text on white background passes WCAG AA (4.5:1) before switching to any lighter gray.",
+      "Do use border-radius 16px as the universal interactive element radius.",
+      "Do let photography and green palette carry warmth — never use beige or cream backgrounds."
+    ],
+    "donts": [
+      "Don't build the site to look like a generic ND department page: muted neutrals, interchangeable card grids, corporate spacing.",
+      "Don't introduce social-media-style layouts — card feeds, infinite scroll, Instagram-grid composition.",
+      "Don't use gradient text (background-clip: text). Use solid color; emphasis via weight or size.",
+      "Don't add a third typeface. The system has two: Alfa Slab One (banners) and Rubik (everything else).",
+      "Don't add a colored side-stripe border to cards, callouts, or list items as a decorative accent.",
+      "Don't use ND Gold (#ae9142) or ND Blue (#0c2340) as UI accent colors outside co-branding contexts.",
+      "Don't soften the body background to cream, sand, or any warm near-white.",
+      "Don't add section eyebrows ('ABOUT', 'PROCESS') as a default scaffold.",
+      "Don't animate layout properties (width, height, margin, padding) — only transform and opacity.",
+      "Don't show shadow at rest on buttons or nav links — shadow is a state response only."
+    ]
+  }
+}

@@ -3,7 +3,13 @@
 
   <a href="{{ .RelPermalink }}">
   {{ if $image }}
-  <img src="{{ $image }}" class="mx-auto mb-6 rounded-2xl w-[230px] h-[230px]" loading="lazy" />
+    {{ $res := resources.Get (strings.TrimPrefix "/" $image) }}
+    {{ if $res }}
+      {{ $t := $res.Resize "400x webp q80" }}
+      <img src="{{ $t.RelPermalink }}" width="{{ $t.Width }}" height="{{ $t.Height }}" alt="{{ .Title }}" class="mx-auto mb-6 rounded-2xl w-[230px] h-[230px]" loading="lazy" decoding="async" />
+    {{ else }}
+      <img src="{{ $image }}" alt="{{ .Title }}" class="mx-auto mb-6 rounded-2xl w-[230px] h-[230px]" loading="lazy" />
+    {{ end }}
   {{ else if .Params.Email }}
     <img
       class="mx-auto mb-6 rounded-2xl"
@@ -25,7 +31,7 @@
     {{ range .Params.social }}
       <li>
         <a href="{{ .link | safeURL }}" target="_blank" rel="noopener nofollow">
-          <span class="sr-only">{{ .title }}</span>
+          <span class="sr-only">{{ .name | default .title | title }}</span>
           <i class="{{ .icon }}"></i>
         </a>
       </li>

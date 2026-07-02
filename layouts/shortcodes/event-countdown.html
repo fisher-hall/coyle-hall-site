@@ -1,0 +1,36 @@
+{{- /* Reusable live countdown for event pages — the block that was repeated
+       inline across Car Smash / Crunk / Formal. Wired by assets/js/countdown.js
+       via [data-countdown] + [data-target-date], updating the four
+       [data-unit] cells. The heading below the grid is the shortcode's inner
+       content (HTML allowed), so callers can color a word with an inline span.
+       Params:
+         date      (required) ISO target, e.g. "2026-11-06T18:00:00"
+         fontclass (optional) class applied to the numbers + heading for a
+                   per-page display font (e.g. the page's banner-font class). */ -}}
+{{- $date := .Get "date" -}}
+{{- $fontclass := .Get "fontclass" | default "" -}}
+<div data-countdown data-target-date="{{ $date }}">
+  <div class="my-8" style="margin-top: 2rem;">
+    <div class="CountdownGrid CountdownGrid--display max-w-none {{ $fontclass }}">
+      <div class="CountdownBlock">
+        <span class="CountdownBlock-number" data-unit="days">00</span>
+        <span class="CountdownBlock-label">Days</span>
+      </div>
+      <div class="CountdownBlock">
+        <span class="CountdownBlock-number" data-unit="hours">00</span>
+        <span class="CountdownBlock-label">Hours</span>
+      </div>
+      <div class="CountdownBlock">
+        <span class="CountdownBlock-number" data-unit="mins">00</span>
+        <span class="CountdownBlock-label">Minutes</span>
+      </div>
+      <div class="CountdownBlock">
+        <span class="CountdownBlock-number" data-unit="secs">00</span>
+        <span class="CountdownBlock-label">Seconds</span>
+      </div>
+    </div>
+    {{- with .Inner }}
+    <h2 class="text-7xl text-center font-extrabold mb-6 mt-8 fade-in-section {{ $fontclass }}" style="color: var(--primary-color);">{{ . | safeHTML }}</h2>
+    {{- end }}
+  </div>
+</div>

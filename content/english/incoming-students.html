@@ -1,340 +1,53 @@
 ---
 title: "Incoming Students"
+aliases:
+  - /new-crew
 ---
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-  /* Remove all top spacing for incoming students page */
-  body .section:first-of-type,
-  body .section-sm:first-of-type {
-    margin-top: 0 !important;
-    padding-top: 0 !important;
-  }
-  
-  /* Make incoming banner full width at all screen sizes */
-  #incoming-banner-wrapper {
-    width: 100vw !important;
-    position: relative !important;
-    left: 50% !important;
-    right: 50% !important;
-    margin-left: -50vw !important;
-    margin-right: -50vw !important;
-    padding: 0 0px !important;
-    box-sizing: border-box !important;
-    z-index: 1 !important;
-  }
-  
-  /* Mobile padding for banner */
-  @media (max-width: 768px) {
-    #incoming-banner-wrapper {
-      padding: 0 2px !important;
-    }
-  }
-  
-  #banner-parallax {
-    position: relative;
-    overflow: hidden;
-    height: 50vh;
-    max-height: 600px;
-    min-height: 400px;
-    margin-top: 0 !important;
-    border-radius: 0 !important;
-  }
-
-    .incoming-parallax-layer {
-        position: absolute;
-        inset: -10% 0;
-        background-image: url('/images/BannerImages/HomeBanner.png');
-        background-position: center center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        transform: translate3d(0, var(--incoming-parallax-y, 0px), 0) scale(1.03);
-        will-change: transform;
-        pointer-events: none;
-        z-index: 0;
-    }
-
-  @media (max-width: 768px) {
-    #banner-parallax {
-      display: flex !important;
-      justify-content: center !important;
-      align-items: center !important;
-    }
-
-        .incoming-parallax-layer {
-            inset: -6% 0;
-        }
-
-    .banner-tint-layer {
-      position: absolute !important;
-      top: 0;
-      left: 0;
-      width: 100% !important;
-      height: 100% !important;
-    }
-
-    .home-banner-text-overlay {
-      position: relative !important;
-      z-index: 10 !important;
-      width: 100% !important;
-      text-align: center !important;
-    }
-  }
-
-#incoming-banner-img {
-  position: absolute !important;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60%;
-  height: auto;
-  object-fit: cover;
-  will-change: transform;
-  /* Wave Animation for incoming students page */
-  .wave-container {
-    position: absolute;
-    top: 400px;
-    left: 0;
-    width: 100%;
-    height: 60px;
-    overflow: hidden;
-    z-index: 10;
-  }
-  
-  /* Ensure tint layer is below waves */
-  .banner-tint-layer {
-    z-index: 1 !important;
-  }
-}
-</style>
-
-<!-- Banner -->
-<div id="incoming-banner-wrapper" class="relative">
-  <div id="banner-parallax" class="relative overflow-hidden">
-        <div class="incoming-parallax-layer" aria-hidden="true"></div>
-    <!-- Tint Layer -->
-    <div class="banner-tint-layer"></div>
-    
-    <!-- Text Overlay -->
-    <div class="home-banner-text-overlay" id="incoming-banner-text">
-        <span class="home-banner-subheading">WELCOME</span>
-        <span class="home-banner-heading">NEW CREW</span>
-    </div>
-  </div>
-</div>
-
-<!-- Animated Waves positioned after banner -->
-<div class="wave-container" style="position: relative; margin-top: -20px; z-index: 10; width: 100vw; left: 50%; margin-left: -50vw;">
-  <canvas id="incoming-wave-canvas" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 60px;"></canvas>
-</div>
-
-
-<script>
-let incomingParallaxFrame = null;
-
-function updateIncomingParallax() {
-  const banner = document.getElementById("banner-parallax");
-  if (!banner) return;
-
-    const root = document.documentElement;
-  const scrollY = window.scrollY || window.pageYOffset;
-  const bannerRect = banner.getBoundingClientRect();
-
-    if (bannerRect.bottom <= 0 || bannerRect.top >= window.innerHeight) return;
-
-    const offset = Math.max(-140, scrollY * -0.18);
-    root.style.setProperty("--incoming-parallax-y", `${offset}px`);
-}
-
-function queueIncomingParallax() {
-    if (incomingParallaxFrame !== null) return;
-
-    incomingParallaxFrame = window.requestAnimationFrame(() => {
-        updateIncomingParallax();
-        incomingParallaxFrame = null;
-    });
-}
-
-document.addEventListener("DOMContentLoaded", updateIncomingParallax);
-window.addEventListener("scroll", queueIncomingParallax, { passive: true });
-window.addEventListener("resize", queueIncomingParallax, { passive: true });
-</script>
-
-<!-- Wave Animation Script for Incoming Students -->
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const canvas = document.getElementById('incoming-wave-canvas');
-    if (!canvas) return; // Exit if canvas doesn't exist
-    
-    const ctx = canvas.getContext('2d');
-    let animationId;
-    
-    function resizeCanvas() {
-      const rect = canvas.getBoundingClientRect();
-      canvas.width = rect.width;
-      canvas.height = rect.height;
-    }
-    
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-    
-    // Get CSS color variables
-    function getCSSColor(variable) {
-      return getComputedStyle(document.documentElement).getPropertyValue(variable).trim();
-    }
-    
-    let time = 0;
-    
-    function drawWave(amplitudes, frequencies, speeds, opacity, yOffset, color) {
-      ctx.globalAlpha = opacity;
-      ctx.fillStyle = color || getCSSColor('--background-color') || '#f8f9fa';
-      
-      ctx.beginPath();
-      ctx.moveTo(0, canvas.height);
-      
-      let points = [];
-      
-      // Calculate wave points with higher resolution
-      for (let x = 0; x <= canvas.width; x += 0.5) {
-        let y = yOffset;
-        
-        // Stack multiple sine waves for natural randomness
-        for (let i = 0; i < amplitudes.length; i++) {
-          y += amplitudes[i] * Math.sin((x * frequencies[i] + time * speeds[i]) * Math.PI / 180);
-        }
-        
-        points.push({x, y});
-      }
-      
-      // Draw smooth curves using quadratic curves
-      ctx.lineTo(points[0].x, points[0].y);
-      
-      for (let i = 1; i < points.length - 1; i++) {
-        const current = points[i];
-        const next = points[i + 1];
-        const controlX = current.x;
-        const controlY = current.y;
-        const endX = (current.x + next.x) / 2;
-        const endY = (current.y + next.y) / 2;
-        
-        ctx.quadraticCurveTo(controlX, controlY, endX, endY);
-      }
-      
-      // Complete the last segment
-      if (points.length > 1) {
-        const last = points[points.length - 1];
-        ctx.lineTo(last.x, last.y);
-      }
-      
-      ctx.lineTo(canvas.width, canvas.height);
-      ctx.lineTo(0, canvas.height);
-      ctx.closePath();
-      ctx.fill();
-    }
-    
-    function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
-      // Draw wave with ocean-like effects (similar to homepage)
-      const baseAmplitude = 10;
-      const verticalMovement = 6 * Math.sin(time * 0.02);
-      const recessionEffect = 2 * Math.sin(time * 0.015);
-      const dynamicAmplitude = baseAmplitude + recessionEffect;
-      
-      drawWave(
-        [dynamicAmplitude, dynamicAmplitude * 0.15], 
-        [0.6, 0.9], 
-        [0.8, 0.6], 
-        1, 
-        canvas.height * 0.38 + verticalMovement
-      );
-      
-      time += 0.8;
-      animationId = requestAnimationFrame(animate);
-    }
-    
-    animate();
-    
-    // Clean up on page unload
-    window.addEventListener('beforeunload', () => {
-      if (animationId) {
-        cancelAnimationFrame(animationId);
-      }
-    });
-  });
-</script>
-
-<!-- Fade-in effect -->
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-    const faders = document.querySelectorAll('.fade-in-section');
-    const appearOptions = {
-        threshold: 0.2,
-        rootMargin: "0px 0px -40px 0px"
-    };
-
-    const appearOnScroll = new IntersectionObserver(function(entries, observer) {
-        entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-        }
-        });
-    }, appearOptions);
-
-    faders.forEach(fader => {
-        appearOnScroll.observe(fader);
-    });
-    });
-</script>
+{{< banner image="/images/BannerImages/HomeBanner.png" subheading="WELCOME" heading="NEW CREW" >}}
 
 <!-- Countdown Section -->
-<div id="countdown-section" data-target-date="2026-08-21T09:00:00">
-  <div class="row text-center my-8" style="margin-top: 2rem;">
-    <div class="col-6 col-md-3 text-center">
-        <div class="countdown-block">
-        <span id="countdown-days" class="stats-number">00</span>
-        <div class="stats-description">Days</div>
-        </div>
+<div data-countdown data-target-date="2026-08-21T09:00:00" class="max-w-6xl mx-auto">
+  <div class="my-8" style="margin-top: 2rem;">
+    <div class="CountdownGrid CountdownGrid--display max-w-none" style="font-weight: 700;">
+      <div class="CountdownBlock">
+        <span class="CountdownBlock-number" data-unit="days">00</span>
+        <span class="CountdownBlock-label">Days</span>
+      </div>
+      <div class="CountdownBlock">
+        <span class="CountdownBlock-number" data-unit="hours">00</span>
+        <span class="CountdownBlock-label">Hours</span>
+      </div>
+      <div class="CountdownBlock">
+        <span class="CountdownBlock-number" data-unit="mins">00</span>
+        <span class="CountdownBlock-label">Minutes</span>
+      </div>
+      <div class="CountdownBlock">
+        <span class="CountdownBlock-number" data-unit="secs">00</span>
+        <span class="CountdownBlock-label">Seconds</span>
+      </div>
     </div>
-    <div class="col-6 col-md-3 text-center">
-        <div class="countdown-block">
-        <span id="countdown-hours" class="stats-number">00</span>
-        <div class="stats-description">Hours</div>
-        </div>
-    </div>
-    <div class="col-6 col-md-3 text-center">
-        <div class="countdown-block">
-        <span id="countdown-mins" class="stats-number">00</span>
-        <div class="stats-description">Minutes</div>
-        </div>
-    </div>
-    <div class="col-6 col-md-3 text-center">
-        <div class="countdown-block">
-        <span id="countdown-secs" class="stats-number">00</span>
-        <div class="stats-description">Seconds</div>
-        </div>
-    </div>
-    <h1 class="text-5xl text-center font-extrabold mb-6 fade-in-section" style="color: var(--primary-color);">
+    <h2 class="text-5xl text-center font-extrabold mb-6 mt-8 fade-in-section" style="color: var(--primary-color);">
         Until Welcome Weekend
-    </h1>
+    </h2>
   </div>
-  <hr id="countdown-divider" class="my-6 fade-in-section border-custom-gray" style="height: 1px; border: none; background: linear-gradient(to right, transparent, var(--color-lightmode-gray) 20%, var(--color-lightmode-gray) 80%, transparent);">
-</div>
+  <hr id="countdown-divider" class="Divider my-14 fade-in-section opacity-100">
 </div>
 
-<div class="flex items-center justify-start my-1 fade-in-section" style="position: relative; z-index: 3; margin-top: 3rem;">
-    <h1 class="text-4xl ml-4 mr-4 md:text-5xl text-left font-extrabold mb-6 fade-in-section flex items-center"
+
+<div class="mx-auto flex items-center justify-start my-1 lg:px-4 fade-in-section" style="position: relative; z-index: 3;">
+    <h2 class="text-4xl md:text-5xl text-left font-extrabold mb-6 fade-in-section flex items-center"
         style="position: relative; z-index: 4; margin-top: 0; color: var(--primary-color);">
         <span style="position: relative; display: inline-block;">
-          <span style="position: relative; z-index: 2;">
+        <span style="position: relative; z-index: 2;">
             Welcome Incoming Students!
-          </span>
         </span>
-    </h1>
-    </div>
-    <!-- Text -->
-    <div class="w-full flex flex-col justify-center fade-in-section text-left;">
-      <p class="mb-2 ml-4 mr-4 text-lg">
+        </span>
+    </h2>
+</div>
+<!-- Text -->
+<div class=" lg:px-4 mx-auto flex flex-col justify-center fade-in-section text-left;">
+    <p class="text-lg">
         Congrats! You've been chosen to become part of the best dorm on campus. 
         We couldn't be more excited to welcome you to your new home, and we hope you're looking forward to it as much as we are.
         This isn’t just where you’ll live—it’s where you’ll grow, laugh, make unforgettable memories, and find a community that truly feels like home.
@@ -346,189 +59,197 @@ window.addEventListener("resize", queueIncomingParallax, { passive: true });
         Below, you'll find room information, packing lists, and other important details to help you make the most of your time in Coyle.
         Additionally, take some time to reach out to your roomate(s) and get to know them (you will be living together after all).
         Hopefully, you'll become good friends!
-      </p>
-    </div>
+    </p>
 </div>
 
-<div class="flex flex-col md:flex-row gap-4 md:gap-6 mt-4 items-center justify-center fade-in-section" style="margin-top: 4rem; margin-bottom: 3rem;">
-        <a href="/building#first-year-double" class="btn btn-primary text-center" style="background-color: var(--secondary-color); border-color: var(--secondary-color);">
-            Freshman Room Guide
-            <i class="fa fa-arrow-right pl-2"></i>
-        </a>
-        <a href="https://residentiallife.nd.edu/undergraduate/room-information-and-policies/faqs-for-new-residents/" class="btn btn-primary text-center" target="_blank" rel="noopener">
-            Residential Life FAQs
-            <i class="fa fa-arrow-up-right-from-square pl-2"></i>
-        </a>
-        <a href="https://residentiallife.nd.edu/undergraduate/room-information-and-policies/hall-floorplans/" class="btn btn-primary text-center" target="_blank" rel="noopener">
-            Dorm Floor Plans
-            <i class="fa fa-arrow-up-right-from-square pl-2"></i>
-        </a>
-        <a href="https://welcomeweekend.nd.edu/" class="btn btn-primary text-center" target="_blank" rel="noopener">
-            Welcome Weekend Updates
-            <i class="fa fa-arrow-up-right-from-square pl-2"></i>
-        </a>
+<!-- Welcome Weekend Co-Chairs -->
+{{< welcome-cochairs >}}
+
+<div class="flex flex-col md:flex-row gap-4 md:gap-6 mt-10 mb-16 items-center justify-center fade-in-section max-w-6xl mx-auto">
+  <a href="/building#first-year-double">
+    <Button class="default">
+      Coyle Hall Room Guide
+      <i class="fa fa-arrow-right" aria-hidden="true"></i>
+    </Button>
+  </a>
+  <a href="https://residentiallife.nd.edu/undergraduate/room-information-and-policies/faqs-for-new-residents/" target="_blank" rel="noopener">
+    <Button class="outline-green">
+      Residential Life FAQs
+      <i class="fa fa-arrow-up-right-from-square" aria-hidden="true"></i>
+    </Button>
+  </a>
+  <a href="https://residentiallife.nd.edu/undergraduate/room-information-and-policies/hall-floorplans/" target="_blank" rel="noopener">
+    <Button class="outline-green">
+      Floor Plans
+      <i class="fa fa-arrow-up-right-from-square" aria-hidden="true"></i>
+    </Button>
+  </a>
+  <a href="https://welcomeweekend.nd.edu/" target="_blank" rel="noopener">
+    <Button class="outline-green">
+      Welcome Weekend
+      <i class="fa fa-arrow-up-right-from-square" aria-hidden="true"></i>
+    </Button>
+  </a>
 </div>
 
 <!-- Divider -->
-<hr class="my-6 fade-in-section border-custom-gray" style="height: 1px; border: none; background: linear-gradient(to right, transparent, var(--color-lightmode-gray) 20%, var(--color-lightmode-gray) 80%, transparent);">
+<hr class="Divider my-14 mx-auto fade-in-section opacity-100">
 
 <!--  What's in a room  -->
-<div class="flex items-center justify-center my-1 fade-in-section" style="position: relative; z-index: 3; margin-bottom: 4rem; margin-top: 2rem;">
-    <h2 class="text-3xl md:text-4xl text-left font-extrabold mb-6 fade-in-section flex items-center text-black dark:text-white"
-        style="position: relative; z-index: 4; margin-top: 0;">
-    <span style="position: relative; display: inline-block;">
-        <span style="position: relative; z-index: 2;">
-        Each Room Comes With:
-        </span>
+<h2 class="text-4xl md:text-5xl font-extrabold my-6 fade-in-section flex justify-center text-center"
+    style="color: var(--primary-color);">
+    <span style="position: relative; z-index: 2;">
+        What's in a Room
     </span>
+</h2>
+<!-- Text -->
+<div class="w-full justify-center fade-in-section text-center;">
+    <p class="text-lg text-center">
+       All first-year students are placed in standard size doubles (non-deluxe), or accesible singles/doubles if they have an accommodation. 
+       Transfer students may be placed in any type of room, though it is usually a standard double or single. 
+       All rooms have windows, sinks, A/C and a standard set of furniture. Accesible rooms may have private bathrooms as well as accesible furniture. 
+       Check out standard room furnishings below:
+    </p>
+</div>
+
+<div class="flex items-center justify-center my-10 fade-in-section max-w-6xl mx-auto" style="position: relative; z-index: 3;">
+    <h2 class="text-2xl md:text-3xl text-left font-extrabold mt-6 mb-10 fade-in-section flex items-center text-black dark:text-white" style="position: relative; display: inline-block; z-index: 2;">
+        Rooms Come With:
     </h2>
 </div>
 
 <!-- Items in room-->
-<div class="mx-auto relative grid md:grid-cols-4 sm:grid-cols-2 gap-15 gap-y-20 w-full my-8 fade-in-section z-index: 3">
+<div class="mx-auto relative grid md:grid-cols-4 grid-cols-2 gap-15 gap-y-20 w-full my-8 fade-in-section z-index: 3 max-w-6xl">
     <div>
-        <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-bed text-7xl text-[var(--primary-color)]"
-                style="transform: translateY(-60%) scale(1);
-            "></i>
+        <h3 class="relative flex items-center text-center justify-center h-10">
+            <g-icon class="fa fa-bed text-7xl"
+                style="transform: translateY(-60%) scale(1);"></g-icon>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
             Bed & Mattress
             </span>
-        </h1>
-        <div class="relative flex items-center justify-center text-xl pt-5 text-center">
+        </h3>
+        <p class="relative flex items-center justify-center text-xl pt-5 text-center">
             1 Each Per Person
-        </div>
+        </p>
     </div>
 
     <div>
-        <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-shirt text-7xl text-[var(--primary-color)]"
-                style="transform: translateY(-60%) scale(1);
-            "></i>
-            <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
-            Closet
-            </span>
-        </h1>
-        <div class="relative flex items-center justify-center text-xl pt-5 text-center">
-            1 Per Person
-        </div>
-    </div>
-
-     <div>
-        <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-chair text-7xl text-[var(--primary-color)]"
-                style="transform: translateY(-60%) scale(1);
-            "></i>
-            <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
-            Desk, Light, & Chair
-            </span>
-        </h1>
-        <div class="relative flex items-center justify-center text-xl pt-5 text-center">
-            1 Each Per Person
-        </div>
-    </div>
-
-    <div>
-        <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-align-justify text-7xl text-[var(--primary-color)]"
-                style="transform: translateY(-60%) scale(1);
-            "></i>
+        <h3 class="relative flex items-center text-center justify-center h-10">
+            <g-icon class="fa fa-align-justify text-7xl"
+                style="transform: translateY(-60%) scale(1);"></g-icon>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
             Ladder
             </span>
-        </h1>
-        <div class="relative flex items-center justify-center text-xl pt-5 text-center">
+        </h3>
+        <p class="relative flex items-center justify-center text-xl pt-5 text-center">
             As Needed
-        </div>
+        </p>
+    </div>
+
+    <div>
+        <h3 class="relative flex items-center text-center justify-center h-10">
+            <g-icon class="fa fa-shirt text-7xl"
+                style="transform: translateY(-60%) scale(1);"></g-icon>
+            <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
+            Closet
+            </span>
+        </h3>
+        <p class="relative flex items-center justify-center text-xl pt-5 text-center">
+            1 Per Person
+        </p>
+    </div>
+
+    <div>
+        <h3 class="relative flex items-center text-center justify-center h-10">
+            <g-icon class="fa fa-inbox text-7xl"
+                style="transform: translateY(-60%) scale(1);"></g-icon>
+            <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
+            2 Drawers
+            </span>
+        </h3>
+        <p class="relative flex items-center justify-center text-xl pt-5 text-center">
+            1 Set Per Person
+        </p>
+    </div>
+
+     <div>
+        <h3 class="relative flex items-center text-center justify-center h-10">
+            <g-icon class="fa fa-chair text-7xl"
+                style="transform: translateY(-60%) scale(1);"></g-icon>
+            <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
+            Desk & Chair
+            </span>
+        </h3>
+        <p class="relative flex items-center justify-center text-xl pt-5 text-center">
+            1 Each Per Person
+        </p>
     </div>
     
     <div>
-        <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-faucet-drip text-7xl text-[var(--primary-color)]"
-                style="transform: translateY(-60%) scale(1);
-            "></i>
+        <h3 class="relative flex items-center text-center justify-center h-10">
+            <g-icon class="fa fa-faucet-drip text-7xl"
+                style="transform: translateY(-60%) scale(1);"></g-icon>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
-            Sink & Cabinet
+            Sink
             </span>
-        </h1>
-        <div class="relative flex items-center justify-center text-xl pt-5 text-center">
+        </h3>
+        <p class="relative flex items-center justify-center text-xl pt-5 text-center">
             1 Per Room
-        </div>
+        </p>
     </div>
 
     <div>
-        <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-image-portrait text-7xl text-[var(--primary-color)]"
-                style="transform: translateY(-60%) scale(1);
-            "></i>
+        <h3 class="relative flex items-center text-center justify-center h-10">
+            <g-icon class="fa fa-image-portrait text-7xl"
+                style="transform: translateY(-60%) scale(1);"></g-icon>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
-            Mirror & Cabinet
+            Mirror Cabinet
             </span>
-        </h1>
-        <div class="relative flex items-center justify-center text-xl pt-5 text-center">
+        </h3>
+        <p class="relative flex items-center justify-center text-xl pt-5 text-center">
             1 Each Per Room
-        </div>
+        </p>
     </div>
 
     <div>
-        <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-trash-can text-7xl text-[var(--primary-color)]"
-                style="transform: translateY(-60%) scale(1);
-            "></i>
+        <h3 class="relative flex items-center text-center justify-center h-10">
+            <g-icon class="fa fa-trash text-7xl"
+                style="transform: translateY(-60%) scale(1);"></g-icon>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
-            Trash Bin
+            Trash & Recyle
             </span>
-        </h1>
-        <div class="relative flex items-center justify-center text-xl pt-5 text-center">
-            1 Per Room
-        </div>
-    </div>
-
-    <div>
-        <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-recycle text-7xl text-[var(--primary-color)]"
-                style="transform: translateY(-60%) scale(1);
-            "></i>
-            <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
-            Recycling Bin
-            </span>
-        </h1>
-        <div class="relative flex items-center justify-center text-xl pt-5 text-center">
-            1 Per Room
-        </div>
+        </h3>
+        <p class="relative flex items-center justify-center text-xl pt-5 text-center">
+            2 Bins Per Room
+        </p>
     </div>
 </div>
 
-<div class="relative flex items-center justify-center text-md pt-5 text-center fade-in-section">
-    Beds can be lofted (using closet and desk), raised (you must provide risers), bunked, or just placed. 
-    Fourth floor rooms, due to the different roof shape, aren't tall enough to loft both beds. Ladders are available for each high bed if needed.
+<p class="relative flex items-center justify-center text-md pt-5 text-center fade-in-section max-w-6xl mx-auto">
+    Beds can be lofted, raised, bunked, or just placed. Ladders are available for each high bed if needed.
     <br>
-    Sinks are on a two shelf cabinet with a medicine cabinet and mirror above.
-</div>
+    Sinks are on a cabinet with shelves below and a medicine cabinet and mirror above.
+</p>
 
-<hr class="mt-6 fade-in-section border-custom-gray" style="height: 1px; border: none; background: linear-gradient(to right, transparent, var(--color-lightmode-gray) 20%, var(--color-lightmode-gray) 80%, transparent);">
+<hr class="Divider my-14 mx-auto fade-in-section opacity-100">
 
-<div class="flex items-center justify-center my-1 fade-in-section" style="position: relative; z-index: 3; margin-bottom: 0rem; margin-top: 2rem;">
-    <h2 class="text-4xl md:text-5xl text-left font-extrabold mb-6 fade-in-section flex items-center text-black dark:text-white"
-        style="position: relative; z-index: 4; margin-top: 0;">
-    <span style="position: relative; display: inline-block;">
-        <span style="position: relative; z-index: 2; color: var(--primary-color);">
+<h2 class="text-4xl md:text-5xl font-extrabold my-6 fade-in-section flex justify-center text-center"
+    style="color: var(--primary-color);">
+    <span style="position: relative; z-index: 2;">
         Things to Bring, Pack, or Buy
-        </span>
     </span>
-    </h2>
-</div>
+</h2>
 
-<div class="relative flex items-center justify-center text-lg pt-5 text-center fade-in-section">
-    This is an incomplete list, but here are some common items to consider having in your room. 
+<p class="relative flex items-center justify-center text-lg pt-5 text-center fade-in-section max-w-6xl mx-auto">
+    This is an incomplete list, but here are some common items to consider having in your room.
     You'll want to coordinate with your roommate, especially with bigger items, so you don't end up bringing two of everything.
     <br><br>
-    There are plenty of stores in the South Bend area, including Target, Costco, and Walmart, if you'd rather buy stuff after move-in. 
+    There are plenty of stores in the South Bend area, including Target, Costco, and Walmart, if you'd rather buy stuff after move-in.
     Feel free to have items delivered to your room, but they must arrive after move-in or they won't be accepted.
-</div>
+</p>
 
-<div class="flex items-center justify-center my-1 fade-in-section" style="position: relative; z-index: 3; margin-bottom: 5rem; margin-top: 3rem;">
-    <h2 class="text-2xl md:text-3xl text-left font-extrabold mb-6 fade-in-section flex items-center text-black dark:text-white"
+<div class="flex items-center justify-center my-1 fade-in-section max-w-6xl mx-auto" style="position: relative; z-index: 3; margin-bottom: 5rem; margin-top: 3rem;">
+    <h2 class="text-3xl text-left font-extrabold mb-6 fade-in-section flex items-center text-black dark:text-white"
         style="position: relative; z-index: 4; margin-top: 0;">
     <span style="position: relative; display: inline-block;">
         <span style="position: relative; z-index: 2;">
@@ -538,236 +259,220 @@ window.addEventListener("resize", queueIncomingParallax, { passive: true });
     </h2>
 </div>
 
-<div class="mx-auto relative grid md:grid-cols-4 sm:grid-cols-2 gap-15 gap-y-25 w-full my-8 fade-in-section z-index: 3">
+<div class="mx-auto relative grid md:grid-cols-4 grid-cols-2 gap-15 gap-y-25 w-full my-8 fade-in-section z-index: 3 bring-grid max-w-6xl">
     
     <div>
-        <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-bed text-7xl text-[var(--primary-color)]"
-                style="transform: translateY(-60%) scale(1);
-            "></i>
+        <h3 class="relative flex items-center text-center justify-center h-10">
+            <g-icon class="fa fa-bed text-7xl"
+                style="transform: translateY(-60%) scale(1);"></g-icon>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
             Pillow & Sheets
             </span>
-        </h1>
-        <div class="relative flex items-center justify-center text-xl pt-5 text-center">
+        </h3>
+        <p class="relative flex items-center justify-center text-xl pt-5 text-center">
             Twin XL Size, <br>2 sets is nice
-        </div>
+        </p>
     </div>
 
         <div>
-        <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-fan text-7xl text-[var(--primary-color)]"
-                style="transform: translateY(-60%) scale(1);
-            "></i>
+        <h3 class="relative flex items-center text-center justify-center h-10">
+            <g-icon class="fa fa-fan text-7xl"
+                style="transform: translateY(-60%) scale(1);"></g-icon>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
             Fans
             </span>
-        </h1>
-        <div class="relative flex items-center justify-center text-xl pt-5 text-center">
+        </h3>
+        <p class="relative flex items-center justify-center text-xl pt-5 text-center">
             Box & Oscillating Fans Are Common
-        </div>
+        </p>
     </div>
 
     <div>
-        <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-pump-soap text-7xl text-[var(--primary-color)]"
-                style="transform: translateY(-60%) scale(1);
-            "></i>
+        <h3 class="relative flex items-center text-center justify-center h-10">
+            <g-icon class="fa fa-pump-soap text-7xl"
+                style="transform: translateY(-60%) scale(1);"></g-icon>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
             Toiletries
             </span>
             
-        </h1>
-        <div class="relative flex items-center justify-center text-xl pt-5 text-center">
-            Toothpaste, Soap, Deodorant, etc.
-        </div>
+        </h3>
+        <p class="relative flex items-center justify-center text-xl pt-5 text-center">
+            Soap, Shaving, Deodorant, etc.
+        </p>
     </div>
 
     <div>
-        <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-basket-shopping text-7xl text-[var(--primary-color)]"
-                style="transform: translateY(-60%) scale(1);
-            "></i>
+        <h3 class="relative flex items-center text-center justify-center h-10">
+            <g-icon class="fa fa-basket-shopping text-7xl"
+                style="transform: translateY(-60%) scale(1);"></g-icon>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
             Shower Caddy
             </span>
-        </h1>
-        <div class="relative flex items-center justify-center text-xl pt-5 text-center">
+        </h3>
+        <p class="relative flex items-center justify-center text-xl pt-5 text-center">
             For Carrying Shower Supplies
-        </div>
+        </p>
     </div>
 
     <div>
-        <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-jug-detergent text-7xl text-[var(--primary-color)]"
-                style="transform: translateY(-60%) scale(1);
-            "></i>
+        <h3 class="relative flex items-center text-center justify-center h-10">
+            <g-icon class="fa fa-jug-detergent text-7xl"
+                style="transform: translateY(-60%) scale(1);"></g-icon>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
             Laundry Supplies
             </span>
-        </h1>
-        <div class="relative flex items-center justify-center text-xl pt-5 text-center">
+        </h3>
+        <p class="relative flex items-center justify-center text-xl pt-5 text-center">
             Bag, Detergent, Softener, etc
-        </div>
+        </p>
     </div>
 
     <div>
-        <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-prescription-bottle text-7xl text-[var(--primary-color)]"
-                style="transform: translateY(-60%) scale(1);
-            "></i>
+        <h3 class="relative flex items-center text-center justify-center h-10">
+            <g-icon class="fa fa-prescription-bottle text-7xl"
+                style="transform: translateY(-60%) scale(1);"></g-icon>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
             Medication
             </span>
-        </h1>
-        <div class="relative flex items-center justify-center text-xl pt-5 text-center">
+        </h3>
+        <p class="relative flex items-center justify-center text-xl pt-5 text-center">
             Over The Counter & Prescription
-        </div>
+        </p>
     </div>
 
     <div>
-        <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-user-tie text-7xl text-[var(--primary-color)]"
-                style="transform: translateY(-60%) scale(1);
-            "></i>
+        <h3 class="relative flex items-center text-center justify-center h-10">
+            <g-icon class="fa fa-user-tie text-7xl"
+                style="transform: translateY(-60%) scale(1);"></g-icon>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
             Clothing
             </span>
-        </h1>
-        <div class="relative flex items-center justify-center text-xl pt-5 text-center">
+        </h3>
+        <p class="relative flex items-center justify-center text-xl pt-5 text-center">
             Casual & Formal (Bring a Suit)
-        </div>
+        </p>
     </div>
 
     <div>
-        <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-shirt text-7xl text-[var(--primary-color)]"
-                style="transform: translateY(-60%) scale(1);
-            "></i>
+        <h3 class="relative flex items-center text-center justify-center h-10">
+            <g-icon class="fa fa-shirt text-7xl"
+                style="transform: translateY(-60%) scale(1);"></g-icon>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
             Hangers
             </span>
-        </h1>
-        <div class="relative flex items-center justify-center text-xl pt-5 text-center">
+        </h3>
+        <p class="relative flex items-center justify-center text-xl pt-5 text-center">
             Closet Organizers Are Helpful Too
-        </div>
+        </p>
     </div>
 
     <div>
-        <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-shoe-prints text-7xl text-[var(--primary-color)]"
-                style="transform: translateY(-60%) scale(1);
-            "></i>
+        <h3 class="relative flex items-center text-center justify-center h-10">
+            <g-icon class="fa fa-shoe-prints text-7xl"
+                style="transform: translateY(-60%) scale(1);"></g-icon>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
             Shoes
             </span>
-        </h1>
-        <div class="relative flex items-center justify-center text-xl pt-5 text-center">
-            Casual, Athletic, Formal, Boots, etc.
-        </div>
+        </h3>
+        <p class="relative flex items-center justify-center text-xl pt-5 text-center">
+            Casual, Athletic, Formal, & Boots!
+        </p>
     </div>
 
     <div>
-        <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-shower text-7xl text-[var(--primary-color)]"
-                style="transform: translateY(-60%) scale(1);
-            "></i>
+        <h3 class="relative flex items-center text-center justify-center h-10">
+            <g-icon class="fa fa-shower text-7xl"
+                style="transform: translateY(-60%) scale(1);"></g-icon>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
             Shower Shoes
             </span>
-        </h1>
-        <div class="relative flex items-center justify-center text-xl pt-5 text-center">
-            These Are Incredibly Important!
-        </div>
+        </h3>
+        <p class="relative flex items-center justify-center text-xl pt-5 text-center">
+            Incredibly Important!
+        </p>
     </div>
 
     <div>
-        <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-laptop text-7xl text-[var(--primary-color)]"
-                style="transform: translateY(-60%) scale(1);
-            "></i>
+        <h3 class="relative flex items-center text-center justify-center h-10">
+            <g-icon class="fa fa-laptop text-7xl"
+                style="transform: translateY(-60%) scale(1);"></g-icon>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
             Laptop
             </span>
-        </h1>
-        <div class="relative flex items-center justify-center text-xl pt-5 text-center">
+        </h3>
+        <p class="relative flex items-center justify-center text-xl pt-5 text-center">
             Many Students Also Use Tablets
-        </div>
+        </p>
     </div>
 
     <div>
-        <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-plug text-7xl text-[var(--primary-color)]"
-                style="transform: translateY(-60%) scale(1);
-            "></i>
+        <h3 class="relative flex items-center text-center justify-center h-10">
+            <g-icon class="fa fa-plug text-7xl"
+                style="transform: translateY(-60%) scale(1);"></g-icon>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
             Extension Cords
             </span>
-        </h1>
-        <div class="relative flex items-center justify-center text-xl pt-5 text-center">
-            Outlets Are Plentiful, But Tucked Away
-        </div>
+        </h3>
+        <p class="relative flex items-center justify-center text-xl pt-5 text-center">
+            Lots of Outlets, Tucked Away
+        </p>
     </div>
 
     <div>
-        <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-charging-station text-7xl text-[var(--primary-color)]"
-                style="transform: translateY(-60%) scale(1);
-            "></i>
+        <h3 class="relative flex items-center text-center justify-center h-10">
+            <g-icon class="fa fa-charging-station text-7xl"
+                style="transform: translateY(-60%) scale(1);"></g-icon>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
             Power Strips
             </span>
-        </h1>
-        <div class="relative flex items-center justify-center text-xl pt-5 text-center">
+        </h3>
+        <p class="relative flex items-center justify-center text-xl pt-5 text-center">
             Make Sure It Has Surge Protection
-        </div>
+        </p>
     </div>
 
     <div>
-        <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-scroll text-7xl text-[var(--primary-color)]"
-                style="transform: translateY(-60%) scale(1);
-            "></i>
+        <h3 class="relative flex items-center text-center justify-center h-10">
+            <g-icon class="fa fa-scroll text-7xl"
+                style="transform: translateY(-60%) scale(1);"></g-icon>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
             Towels
             </span>
-        </h1>
-        <div class="relative flex items-center justify-center text-xl pt-5 text-center">
+        </h3>
+        <p class="relative flex items-center justify-center text-xl pt-5 text-center">
             Full-Size, Hand, & Washcloths
-        </div>
+        </p>
     </div>
 
     <div>
-        <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-pen-ruler text-7xl text-[var(--primary-color)]"
-                style="transform: translateY(-60%) scale(1);
-            "></i>
+        <h3 class="relative flex items-center text-center justify-center h-10">
+            <g-icon class="fa fa-pen-ruler text-7xl"
+                style="transform: translateY(-60%) scale(1);"></g-icon>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
             School Supplies
             </span>
-        </h1>
-        <div class="relative flex items-center justify-center text-xl pt-5 text-center">
+        </h3>
+        <p class="relative flex items-center justify-center text-xl pt-5 text-center">
             Pens, Notebooks, Calculator, etc.
-        </div>
+        </p>
     </div>
 
     <div>
-        <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-id-card text-7xl text-[var(--primary-color)]"
-                style="transform: translateY(-60%) scale(1);
-            "></i>
+        <h3 class="relative flex items-center text-center justify-center h-10">
+            <g-icon class="fa fa-id-card text-7xl"
+                style="transform: translateY(-60%) scale(1);"></g-icon>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
             ID/License
             </span>
-        </h1>
-        <div class="relative flex items-center justify-center text-xl pt-5 text-center">
-        Leave Important Docs at Home
-        </div>
+        </h3>
+        <p class="relative flex items-center justify-center text-xl pt-5 text-center">
+        + Any Neccessary Documentation
+        </p>
     </div>
 </div>
 
-<div class="flex items-center justify-center my-1 fade-in-section" style="position: relative; z-index: 3; margin-bottom: 5rem; margin-top: 3rem;">
-    <h2 class="text-2xl md:text-3xl text-left font-extrabold mb-6 fade-in-section flex items-center"
+<div class="flex items-center justify-center my-1 fade-in-section max-w-6xl mx-auto" style="position: relative; z-index: 3; margin-bottom: 5rem; margin-top: 3rem;">
+    <h2 class="text-3xl text-left font-extrabold mb-6 fade-in-section flex items-center"
         style="position: relative; z-index: 4; margin-top: 0;">
     <span style="position: relative; display: inline-block;">
         <span style="position: relative; z-index: 2;">
@@ -777,155 +482,100 @@ window.addEventListener("resize", queueIncomingParallax, { passive: true });
     </h2>
 </div>
 
-<div class="mx-auto relative grid md:grid-cols-4 sm:grid-cols-2 gap-15 gap-y-25 w-full my-8 fade-in-section z-index: 3">
+<div class="mx-auto relative grid md:grid-cols-4 grid-cols-2 gap-15 gap-y-25 w-full my-8 fade-in-section z-index: 3 max-w-6xl">
     
     <div>
-        <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-door-closed text-7xl text-[var(--primary-color)]"
-                style="transform: translateY(-60%) scale(1);
-            "></i>
+        <h3 class="relative flex items-center text-center justify-center h-10">
+            <g-icon class="fa fa-toilet-portable text-7xl"
+                style="transform: translateY(-60%) scale(1);"></g-icon>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
             Minifridge
             </span>
-        </h1>
-        <div class="relative flex items-center justify-center text-xl pt-5 text-center">
+        </h3>
+        <p class="relative flex items-center justify-center text-xl pt-5 text-center">
             No Bigger Than 5 cu. ft
-        </div>
+        </p>
     </div>
 
         <div>
-        <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-rug text-7xl text-[var(--primary-color)]"
-                style="transform: translateY(-60%) scale(1);
-            "></i>
+        <h3 class="relative flex items-center text-center justify-center h-10">
+            <g-icon class="fa fa-rug text-7xl"
+                style="transform: translateY(-60%) scale(1);"></g-icon>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
             Rug(s)
             </span>
-        </h1>
-        <div class="relative flex items-center justify-center text-xl pt-5 text-center">
+        </h3>
+        <p class="relative flex items-center justify-center text-xl pt-5 text-center">
             Better Than Tile, Sizes Vary
-        </div>
+        </p>
     </div>
 
     <div>
-        <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-tv text-7xl text-[var(--primary-color)]"
-                style="transform: translateY(-60%) scale(1);
-            "></i>
+        <h3 class="relative flex items-center text-center justify-center h-10">
+            <g-icon class="fa fa-tv text-7xl"
+                style="transform: translateY(-60%) scale(1);"></g-icon>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
             Television
             </span>
             
-        </h1>
-        <div class="relative flex items-center justify-center text-xl pt-5 text-center">
+        </h3>
+        <p class="relative flex items-center justify-center text-xl pt-5 text-center">
             Streaming Works Great
-        </div>
+        </p>
     </div>
 
     <div>
-        <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-couch text-7xl text-[var(--primary-color)]"
-                style="transform: translateY(-60%) scale(1);
-            "></i>
+        <h3 class="relative flex items-center text-center justify-center h-10">
+            <g-icon class="fa fa-couch text-7xl"
+                style="transform: translateY(-60%) scale(1);"></g-icon>
             <span class="absolute top-1/2 text-2xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
             Couch/Futon
             </span>
-        </h1>
-        <div class="relative flex items-center justify-center text-xl pt-5 text-center">
+        </h3>
+        <p class="relative flex items-center justify-center text-xl pt-5 text-center">
             Comfy & Handy For Guests
-        </div>
+        </p>
     </div>
 </div>
 
-<div class="flex items-center justify-center my-1 fade-in-section" style="position: relative; z-index: 3; margin-bottom: 3rem; margin-top: 3rem;">
-    <h2 class="text-2xl md:text-3xl text-left font-extrabold mb-6 fade-in-section flex items-center"
+<div class="flex items-center justify-center my-1 fade-in-section max-w-6xl mx-auto" style="position: relative; z-index: 3; margin-top: 3rem;">
+    <h2 class="text-3xl text-left font-extrabold mb-4 fade-in-section flex items-center"
         style="position: relative; z-index: 4; margin-top: 0;">
     <span style="position: relative; display: inline-block;">
         <span style="position: relative; z-index: 2;">
-        What You Can't Bring
+        What's Not Allowed
         </span>
     </span>
     </h2>
 </div>
 
-<div class="mx-auto relative grid lg:grid-cols-6 md:grid-cols-3 sm:grid-cols-3 gap-15 gap-y-25 w-full my-8 fade-in-section z-index: 3">
-
-    <div>
-        <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-ban text-5xl text-[var(--primary-color)]"
-                style="transform: translateY(-60%) scale(1);
-            "></i>
-            <span class="absolute top-1/2 text-xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
-            Microwaves
-            </span>
-        </h1>
-    </div>
-
-    <div>
-        <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-ban text-5xl text-[var(--primary-color)]"
-                style="transform: translateY(-60%) scale(1);
-            "></i>
-            <span class="absolute top-1/2 text-xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
-            A/C Units
-            </span>
-            
-        </h1>
-    </div>
-
-    <div>
-        <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-ban text-5xl text-[var(--primary-color)]"
-                style="transform: translateY(-60%) scale(1);
-            "></i>
-            <span class="absolute top-1/2 text-xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
-            Large Fridges
-            </span>
-        </h1>
-    </div>
-
-    <div>
-        <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-ban text-5xl text-[var(--primary-color)]"
-                style="transform: translateY(-60%) scale(1);
-            "></i>
-            <span class="absolute top-1/2 text-xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
-            Open Candles
-            </span>
-        </h1>
-    </div>
-
-    <div>
-        <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-ban text-5xl text-[var(--primary-color)]"
-                style="transform: translateY(-60%) scale(1);
-            "></i>
-            <span class="absolute top-1/2 text-xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
-            Appliances
-            </span>
-        </h1>
-    </div>
-
-    <div>
-        <h1 class="relative flex items-center text-center justify-center h-10">
-            <i class="fa fa-ban text-5xl text-[var(--primary-color)]"
-                style="transform: translateY(-60%) scale(1);
-            "></i>
-            <span class="absolute top-1/2 text-xl font-bold z-10 pointer-events-none" style="white-space:nowrap; transform: translateY(20%);">
-            Drugs/Weapons
-            </span>
-        </h1>
-    </div>
-
+<div class="flex justify-center w-full mx-auto mt-8 fade-in-section">
+  <div class="hidden md:grid items-center gap-16 px-4" style="grid-template-columns: 1fr auto 1fr;">
+    <h4 class="flex flex-col items-end text-right gap-1 whitespace-nowrap">
+        <span>Microwaves</span>
+        <span>A/C Units</span>
+        <span>Large Fridges</span>
+        <span>Humidifiers</span>
+    </h4>
+    <g-icon class="fa fa-ban text-7xl" style="transform: scale(2);"></g-icon>
+    <h4 class="flex flex-col items-start text-left gap-1 whitespace-nowrap">
+        <span>Lighted Candles</span>
+        <span>Appliances</span>
+        <span>Illegal Drugs</span>
+        <span>Weapons</span>
+    </h4>
+  </div>
+  <div class="flex md:hidden flex-col items-center gap-6 px-4">
+    <g-icon class="fa fa-ban text-7xl" style="transform: scale(1.5);"></g-icon>
+    <h4 class="flex flex-col items-center text-center text-2xl gap-2">
+        <span>Microwaves</span>
+        <span>A/C Units</span>
+        <span>Large Fridges</span>
+        <span>Humidifiers</span>
+        <span>Lighted Candles</span>
+        <span>Appliances</span>
+        <span>Illegal Drugs</span>
+        <span>Weapons</span>
+    </h4>
+  </div>
 </div>
-
-<!--
-    What to Bring
-    blurb
-    Shareable Items
-    Icons
-    Packing List
-    bullets -->
-    
-
-<script src="/regatta-Countdown.js"></script>

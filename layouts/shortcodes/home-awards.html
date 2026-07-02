@@ -1,0 +1,34 @@
+{{- /* Hall-of-the-Year award logos row: Coyle crest × HPC logo.
+       Both SVGs live in assets/, hence resources.Get. Homepage only. */ -}}
+{{- $coyleCrest := resources.Get "images/CoyleCrestMainOutline.svg" -}}
+{{- $hpcLogo := resources.Get "images/HPCLogo.svg" -}}
+<div class="flex items-center justify-center gap-6 mt-8 mb-16">
+  <img
+    src="{{ $coyleCrest.RelPermalink }}"
+    alt="Coyle Hall crest"
+    class="no-hover-effects"
+    style="display: block; width: auto; height: 72px; max-width: none; object-fit: contain; box-shadow: none !important; transform: none !important; transition: none !important;" />
+  <svg
+    aria-hidden="true"
+    class="block flex-none overflow-visible"
+    width="18"
+    height="18"
+    viewBox="0 0 18 18"
+    xmlns="http://www.w3.org/2000/svg">
+    <line
+      class="award-divider-line award-divider-line--a"
+      x1="2" y1="2" x2="16" y2="16"
+      stroke="white" stroke-width="4" stroke-linecap="round" />
+    <line
+      class="award-divider-line award-divider-line--b"
+      x1="16" y1="2" x2="2" y2="16"
+      stroke="white" stroke-width="4" stroke-linecap="round" />
+  </svg>
+  <a href="https://hpc.nd.edu/" target="_blank" rel="noopener">
+    <img
+      src="{{ $hpcLogo.RelPermalink }}"
+      alt="Hall Presidents Council logo"
+      class="no-hover-effects"
+      style="display: block; width: auto; height: 72px; max-width: none; object-fit: contain; box-shadow: none !important; transform: none !important; transition: none !important;" />
+  </a>
+</div>

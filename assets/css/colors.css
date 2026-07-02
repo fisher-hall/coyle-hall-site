@@ -1,0 +1,73 @@
+/* ═══════════════════════════════════════════════════════════════
+   COYLE HALL — COLOR TOKENS
+   Single source of truth for all CSS custom properties.
+   Imported by custom.css before any other rules.
+═══════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Coyle greens ─────────────────────────────────────────── */
+  --coyle-dark-green:    #064121;
+  --coyle-dark-fade:     rgb(6, 65, 33);
+  --coyle-light-green:   #0a843d;
+  --coyle-green-text:    #076e34;   /* a11y: green text that clears WCAG AA (≥4.5:1) on white and light-gray cards */
+  --coyle-gradient-end:  #0B6832;   /* button / banner gradient stop */
+  --button-grad-dark-lm:       #074d28;  /* gradient button dark stop  */
+  --button-grad-light-lm:      #0d7a3c;  /* gradient button light stop */
+  --button-grad-dark-dm:    #075c2a;  /* dark mode dark stop  */
+  --button-grad-light-dm:   #11a84e;  /* dark mode light stop */
+  --coyle-accent-green:  #16da64;/*rgb(72, 187, 78);*/
+  --coyle-banner-tint:   rgba(10, 132, 61, 0.5);
+  --coyle-navbar-tint:   var(--coyle-dark-green);
+
+  /* ── Notre Dame ───────────────────────────────────────────── */
+  --nd-blue:   #0c2340;
+  --nd-gold:   rgb(174, 145, 66);
+  --nd-light:  #5faf81;
+
+  /* ── Neutrals ─────────────────────────────────────────────── */
+  --color-custom-light:   #cccccc;
+  --color-extra-light:   #d3d3d3;
+  --search-highlight:     #076e34;   /* <mark> search-result highlight (AA: white text ≈5.3:1) */
+  --color-darkmode-gray:  #B4AFB5;
+  --color-lightmode-gray: #444444;
+
+  /* ── Semantic aliases (override in .dark below) ───────────── */
+  --primary-color:    var(--coyle-dark-green);
+  --secondary-color:  var(--coyle-light-green);
+  /* Text-specific green: darker than --secondary-color so green copy on white /
+     light surfaces meets WCAG AA. Dark mode overrides below. */
+  --secondary-text-color: var(--coyle-green-text);
+  --light-color:      var(--nd-light);
+  --highlight-color:  var(--coyle-light-green);
+  --coyle-grad-light: var(--button-grad-light-lm);
+  --coyle-grad-dark: var(--button-grad-dark-lm);
+  --background-color: #ffffff;
+  --page-wave-color: var(--coyle-light-green);
+  --always-white: #ffffff;
+
+
+  /* ── Component interaction tokens ────────────────────────── */
+  --button-tint:       rgba(255, 255, 255, 0.18);
+  --button-hover-tint: rgba(255, 255, 255, 0.18);
+  --button-dynamic-white: #ffffff;
+
+  /* ── Layout tokens ────────────────────────────────────────── */
+  --page-banner-height: clamp(400px, 50vh, 600px);
+}
+
+/* Dark mode overrides */
+.dark {
+  --primary-color:       var(--coyle-light-green);
+  --secondary-color:     var(--coyle-accent-green);
+  /* Dark mode: green text sits on dark surfaces, so the brighter accent green is
+     correct and high-contrast (~8.5:1 on black). */
+  --secondary-text-color: var(--coyle-accent-green);
+  --light-color:         var(--coyle-light-green);
+  --highlight-color:     var(--coyle-light-green);
+  --coyle-navbar-tint:   var(--coyle-dark-green);
+  --background-color:    #000000;
+  --page-wave-color:     var(--coyle-accent-green);
+  --button-dynamic-white:   #000000;
+  --coyle-grad-light: var(--button-grad-light-dm);
+  --coyle-grad-dark: var(--button-grad-dark-dm);
+}

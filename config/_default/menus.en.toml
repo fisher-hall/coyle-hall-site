@@ -2,7 +2,7 @@
 
 # main menu
 [[main]]
-name = "<i class='fa fa-house'></i>"
+name = "<i class='fa fa-house' aria-hidden='true'></i><span class='sr-only'>Home</span>"
 url = "/"
 weight = 1
 
@@ -42,21 +42,21 @@ weight = 1
 
 [[main]]
 parent = "About"
-name = "Location"
+name = "Location Info"
 url = "/location"
 weight = 3
 
 [[main]]
 parent = "About"
-name = "Building Info"
-url = "/building"
-weight = 2
+name = "St. Adalbert's"
+url = "/st-adalberts"
+weight = 4
 
 [[main]]
-parent = "Events"
-name = "Traditions"
-url = "/events/traditions"
-weight = 1
+parent = "About"
+name = "Building Details"
+url = "/building"
+weight = 2
 
 [[main]]
 name = "Faith"
@@ -68,29 +68,41 @@ name = "Events"
 url = "/events"
 weight = 5
 
-[[main]]
-parent = "Events"
-name = "IronRA"
-url = "/events/ironra"
-weight = 3
+# [[main]]
+# parent = "Events"
+# name = "IronRA"
+# url = "/events/ironra"
+# weight = 3
 
 [[main]]
 parent = "Events"
 name = "The Regatta"
 url = "/events/regatta"
-weight = 2
+weight = 4
 
 [[main]]
 parent = "Events"
 name = "Car Smash"
 url = "/events/car-smash"
-weight = 4
+weight = 2
 
 [[main]]
 parent = "Events"
-name = "Parents Weekend"
-url = "/events/parents-weekend"
+name = "Coyle Crunk"
+url = "/events/crunk"
+weight = 1
+
+[[main]]
+parent = "Events"
+name = "Coyle Formal"
+url = "/events/formal"
 weight = 5
+
+[[main]]
+parent = "Events"
+name = "Family Weekend"
+url = "/events/family-weekend"
+weight = 3
 
 
 [[main]]

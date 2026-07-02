@@ -1,0 +1,107 @@
+
+/* ═══════════════════════════════════
+   RESET & LAYOUT
+═══════════════════════════════════ */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+body {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+footer {
+  margin-top: auto;
+  background-color: transparent;
+  color: #fff;
+  border-radius: 0 !important;
+}
+
+/* ═══════════════════════════════════
+   TYPOGRAPHY
+═══════════════════════════════════ */
+
+/* Inside @layer base so Tailwind utility classes (font-bold, font-extrabold, etc.)
+   in @layer utilities can still override these per-element defaults. */
+@layer base {
+  h1 {
+    font-family: 'Rubik', sans-serif;
+    font-weight: 800;
+  }
+
+  h2 {
+    font-family: 'Rubik', sans-serif;
+    font-weight: 700;
+  }
+
+  h3, h4, h5, h6 {
+    font-family: 'Rubik', sans-serif;
+    font-weight: 600;
+  }
+
+  body, p {
+    font-family: 'Rubik', sans-serif;
+    font-weight: 500;
+  }
+}
+
+/* Text selection highlighting */
+::selection {
+  background-color: var(--highlight-color);
+  color: white;
+}
+
+::-moz-selection {
+  background-color: var(--highlight-color);
+  color: white;
+}
+
+/* Green highlighting for search results */
+mark {
+  background-color: var(--search-highlight);
+  color: white;
+  padding: 0.08em 0.3em;
+  margin: 0 0.08em;
+  border-radius: 10rem;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+mark.bg-yellow-300 {
+  background: #fff !important;
+  color: var(--coyle-light-green) !important;
+  border-radius: 0.75em;
+  padding: 0.08em 0.3em;
+  margin: 0 0.08em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* ── Gradient icons (faith page + any future use) ── */
+.icon-gradient {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--coyle-dark-green) 0%, var(--coyle-light-green) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* High contrast: solid accent-green instead of gradient (gradient disappears with forced colors) */
+html.a11y-contrast-high .icon-gradient {
+  background: none !important;
+  -webkit-text-fill-color: #6ee87a !important;
+  color: #6ee87a !important;
+}
+
+/* Profile cards */
+:not(.dark) .bg-light.rounded-2xl.p-8.text-center {
+  background-color: #EFEEEE !important;
+}
+
+.dark .bg-light.rounded-2xl.p-8.text-center {
+  background-color: #222222 !important;
+}
+

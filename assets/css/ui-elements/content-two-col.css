@@ -1,0 +1,35 @@
+/* ═══════════════════════════════════════════════════════════════
+   CONTENT TWO-COL — text + media side-by-side layout
+   Usage:
+     <div class="ContentRow">
+       <div class="ContentRow-text">…</div>
+       <div class="ContentRow-media"><img …></div>
+     </div>
+     <!-- Reversed (media left, text right) -->
+     <div class="ContentRow ContentRow--reverse">…</div>
+═══════════════════════════════════════════════════════════════ */
+
+@layer components {
+
+  .ContentRow {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+  }
+
+  .ContentRow--reverse { flex-direction: row-reverse; }
+
+  .ContentRow-text,
+  .ContentRow-media {
+    flex: 1;
+    min-width: 0;
+  }
+
+  @media (max-width: 767px) {
+    .ContentRow,
+    .ContentRow--reverse {
+      flex-direction: column;
+    }
+  }
+
+}

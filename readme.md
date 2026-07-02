@@ -123,3 +123,24 @@ For specific page editing, use these guides:
 - [Hall Commissioners](https://github.com/fisher-hall/coyle-hall-site/blob/main/docs/hall_commissioners.md)
 - [Incoming Students](https://github.com/fisher-hall/coyle-hall-site/blob/main/docs/incoming_students.md)
 
+<hr>
+
+## Release Notes
+
+### v2.0.0 — July 2026
+
+Site-wide summer redesign.
+
+- **Redesigned homepage** — new banner, Fast Facts tiles, New Crew call-to-action, and rotating photo ticker
+- **Accessibility preferences panel** — site-wide controls for theme, high contrast, text size and weight, reduced motion, line/letter spacing, and a dyslexia-friendly font, persisted across visits
+- **Revamped leadership pages** — Hall Staff, Hall Government, and Hall Commissioners rebuilt on a shared design; added Welcome Weekend co-chairs
+- **Event pages** — Family Weekend, Coyle Crunk, Formal, Car Smash, and Regatta rebuilt on a shared event template; new St. Adalbert's page with photo carousels
+- **Navbar overhaul** — integrated search, accessibility, and theme controls with refreshed dropdowns and hover states
+- **Visitor analytics** — privacy-friendly Cloudflare Web Analytics (no cookies, no personal data collected)
+- **Performance** — images piped through Hugo's WebP pipeline (homepage banner 8.8 MB → ~275 KB); ~64 MB of orphaned images removed
+- **Maintainer docs** — full handoff documentation in [`docs/`](docs/README.md), including the annual year-rollover checklist
+
+### v1.0.0 — July 2025
+
+Original site launch: Hugo + Hugoplate + TailwindCSS, covering hall staff, hall government, traditions, history, and incoming-student information.
+

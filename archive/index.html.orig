@@ -1,0 +1,1186 @@
+{{ define "main" }}
+  
+  
+  {{ with .Params.banner }}
+    <style>
+      :root {
+        --home-banner-height: clamp(400px, 50vh, 600px);
+        --home-wave-overlap: 2px;
+      }
+
+      .home-banner-text-overlay, #home-banner-text {
+        width: 100% !important;
+        text-align: center !important;
+      }
+
+      .banner-tint-layer {
+        width: 100% !important;
+      }
+      /* Remove all top spacing for home page */
+      body .section:first-of-type,
+      body .section-sm:first-of-type {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+      }
+      
+      /* Remove body padding on homepage */
+      body {
+        padding-top: 0 !important;
+      }
+      
+      /* Make home banner full width at all screen sizes */
+      #home-banner-wrapper {
+        width: 100vw !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 50% !important;
+        right: 50% !important;
+        margin-left: -50vw !important;
+        margin-right: -50vw !important;
+        padding: 0 0px !important;
+        box-sizing: border-box !important;
+        margin-top: 0 !important;
+        height: var(--home-banner-height) !important;
+        overflow: visible !important;
+        z-index: 0 !important;
+      }
+
+      #home-banner-wrapper::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -3px;
+        height: 4px;
+        background: var(--background-color);
+        pointer-events: none;
+        z-index: 3;
+      }
+      
+      /* Mobile padding for banner */
+      @media (max-width: 768px) {
+        :root {
+          --home-banner-height: clamp(340px, 46vh, 500px);
+          --home-wave-overlap: 8px;
+        }
+
+        #home-banner-wrapper {
+          width: 100vw !important;
+          padding: 0 !important;
+          margin-left: -50vw !important;
+          margin-right: -50vw !important;
+          left: 50% !important;
+          right: 50% !important;
+        }
+      }
+
+      @media (max-width: 768px) {
+        #banner-parallax {
+          display: flex !important;
+          justify-content: center !important;
+          align-items: center !important;
+        }
+
+        .banner-tint-layer {
+          position: absolute !important;
+          top: 0;
+          left: 0;
+          width: 100% !important;
+          height: 100% !important;
+        }
+
+        .home-banner-text-overlay {
+          position: relative !important;
+          z-index: 10 !important;
+          width: 100% !important;
+          text-align: center !important;
+        }
+      }
+
+      header, .navbar {
+        margin-bottom: 0 !important;
+        padding-top: 12px !important;
+        padding-bottom: 12px !important;
+      }
+
+      body > *:first-child {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+      }
+      
+      #banner-parallax {
+          position: relative;
+          overflow: hidden;
+          background-image: url('/images/BannerImages/HomeBanner.png');
+          background-position: center calc(50% + var(--home-parallax-bg-y, 0px));
+          background-repeat: no-repeat;
+          background-size: cover;
+          height: var(--home-banner-height);
+          max-height: none;
+          min-height: 0;
+          margin: 0 !important;
+          will-change: background-position;
+      }
+
+      #home-banner-text {
+        --home-banner-text-x: 0px;
+        transform: translate3d(var(--home-banner-text-x), var(--home-parallax-text-y, 0px), 0) !important;
+        will-change: transform;
+      }
+
+      #home-content-layer {
+        position: relative;
+        z-index: 2;
+        margin-top: calc(var(--home-banner-height) - var(--home-wave-overlap));
+        padding-top: var(--home-wave-overlap);
+        background: var(--background-color);
+      }
+
+      #home-banner-img {
+        position: absolute !important;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60%;
+        height: auto;
+        object-fit: cover;
+        will-change: transform;
+      }
+
+      @media (max-width: 768px) {
+        #home-banner-text {
+          left: 50% !important;
+          --home-banner-text-x: -50%;
+          width: 100% !important;
+          text-align: center !important;
+        }
+
+        .banner-tint-layer {
+          width: 100% !important;
+        }
+      }
+
+      /* Wave SVG Animation */
+      .wave-container {
+        position: relative;
+        margin-top: -70px;
+        left: 0;
+        width: 100%;
+        height: 80px;
+        overflow: hidden;
+        z-index: 3;
+      }
+
+      .wave-canvas {
+        display: block;
+        bottom: 0 !important;
+        height: 100% !important;
+        transform: translateZ(0);
+        box-shadow: none !important;
+        filter: none !important;
+      }
+
+      .banner-divider-wave {
+        position: absolute;
+        left: 0;
+        right: 0;
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        height: 80px;
+        transform: none;
+        bottom: -24px;
+        overflow: visible;
+        z-index: 4;
+        pointer-events: none;
+      }
+
+      .award-logos-row {
+        display: flex;
+      }
+
+      .home-top-banner {
+        position: relative;
+        overflow: visible;
+      }
+
+      .home-top-banner,
+      .home-top-banner__inner {
+        width: 100%;
+      }
+
+      @media (max-width: 768px) {
+        #home-banner-wrapper {
+          margin-bottom: -2px !important;
+        }
+
+        .home-top-banner {
+          display: block !important;
+        }
+
+        .home-top-banner__inner {
+          display: block !important;
+        }
+
+        .banner-divider-wave {
+          left: 0 !important;
+          right: 0 !important;
+          width: 100% !important;
+          min-width: 0 !important;
+          max-width: 100% !important;
+          transform: none !important;
+          bottom: -12px !important;
+          overflow: visible !important;
+        }
+      }
+
+      .wave {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 200%;
+        height: 100%;
+        animation: wave-move 15s linear infinite;
+      }
+
+      .wave:nth-child(2) {
+        animation-duration: 20s;
+        animation-direction: reverse;
+        animation-delay: -6s;
+        opacity: 0.5;
+        bottom: 10px;
+      }
+
+      .wave:nth-child(3) {
+        animation-duration: 25s;
+        animation-delay: -10s;
+        opacity: 0.3;
+        bottom: 20px;
+      }
+
+      @keyframes wave-move {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+      }
+
+      .no-hover-effects:hover {
+        transform: none !important;
+        box-shadow: none !important;
+        scale: 1 !important;
+        filter: none !important;
+      }
+
+      .award-divider-svg {
+        display: block;
+        flex: 0 0 auto;
+        overflow: visible;
+      }
+
+      .award-divider-line {
+        stroke-dasharray: 20;
+        stroke-dashoffset: 20;
+        animation: award-divider-draw 0.7s cubic-bezier(.77, 0, .18, 1) forwards;
+      }
+
+      .award-divider-line--a {
+        animation-delay: 0.08s;
+      }
+
+      .award-divider-line--b {
+        animation-delay: 0.2s;
+      }
+
+      @keyframes award-divider-draw {
+        to {
+          stroke-dashoffset: 0;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .award-divider-line {
+          animation: none;
+          stroke-dashoffset: 0;
+        }
+      }
+
+      #drawn-line {
+        width: 420px;
+        max-width: 100%;
+        height: auto;
+      }
+
+      @media (max-width: 768px) {
+        #drawn-line {
+          width: min(320px, 82vw);
+        }
+      }
+    </style>
+
+    <!-- Banner -->
+    <div id="home-banner-wrapper">
+      <div id="banner-parallax" class="relative overflow-hidden">
+        <!-- Tint Layer -->
+        <div class="banner-tint-layer"></div>
+        
+        <!-- Text Overlay -->
+        <div class="home-banner-text-overlay" id="home-banner-text">
+          <span class="home-banner-subheading">WELCOME TO</span>
+          <span class="home-banner-heading">COYLE HALL</span>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const root = document.documentElement;
+        const updateBannerParallax = () => {
+          const scrollY = window.scrollY || window.pageYOffset || 0;
+          const backgroundOffset = Math.max(-90, scrollY * -0.12);
+          const textOffset = Math.max(-42, scrollY * -0.08);
+
+          root.style.setProperty('--home-parallax-bg-y', `${backgroundOffset}px`);
+          root.style.setProperty('--home-parallax-text-y', `${textOffset}px`);
+        };
+
+        updateBannerParallax();
+        window.addEventListener("scroll", updateBannerParallax, { passive: true });
+      });
+    </script>
+
+    <!-- Wave Animation Script -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const waveTargets = [
+          { canvas: document.getElementById('wave-canvas'), colorMode: 'gradient' },
+          { canvas: document.getElementById('wave-canvas-divider'), colorMode: 'theme' }
+        ]
+          .filter(target => target.canvas)
+          .map(target => ({
+            ...target,
+            ctx: target.canvas.getContext('2d')
+          }))
+          .filter(target => target.ctx);
+
+        if (!waveTargets.length) return;
+
+        let animationId;
+        
+        function resizeCanvases() {
+          waveTargets.forEach(target => {
+            const rect = target.canvas.getBoundingClientRect();
+            target.canvas.width = rect.width;
+            target.canvas.height = rect.height;
+          });
+        }
+        
+        resizeCanvases();
+        window.addEventListener('resize', resizeCanvases);
+        
+        function isDarkMode() {
+          const savedTheme = localStorage.getItem('theme');
+          if (savedTheme === 'dark') return true;
+          if (savedTheme === 'light') return false;
+
+          const root = document.documentElement;
+          if (root.classList.contains('dark')) return true;
+          if (root.classList.contains('light')) return false;
+          return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        }
+
+        function getCSSColor(variable) {
+          return getComputedStyle(document.documentElement).getPropertyValue(variable).trim();
+        }
+
+        function getWaveColor(target) {
+          if (target.canvas.id === 'wave-canvas-divider') {
+            return isDarkMode() ? '#000000' : '#ffffff';
+          }
+
+          if (target.canvas.id === 'wave-canvas') {
+            const gradient = target.ctx.createLinearGradient(0, 0, target.canvas.width, 0);
+            gradient.addColorStop(0, getCSSColor('--coyle-dark-green') || '#064121');
+            gradient.addColorStop(1, getCSSColor('--coyle-light-green') || '#0A8A3F');
+            return gradient;
+          }
+
+          return '#ffffff';
+        }
+        
+        let time = 0;
+        
+        function drawWave(target, amplitudes, frequencies, speeds, opacity, yOffset, color) {
+          const { ctx, canvas } = target;
+          ctx.globalAlpha = opacity;
+          ctx.shadowBlur = 0;
+          ctx.shadowColor = 'transparent';
+          ctx.fillStyle = color || '#ffffff';
+          
+          ctx.beginPath();
+          ctx.moveTo(0, canvas.height);
+          
+          let points = [];
+          
+          // Calculate wave points with higher resolution
+          for (let x = 0; x <= canvas.width; x += 2) {
+            let y = yOffset;
+            
+            // Stack multiple sine waves for natural randomness
+            for (let i = 0; i < amplitudes.length; i++) {
+              y += amplitudes[i] * Math.sin((x * frequencies[i] + time * speeds[i]) * Math.PI / 180);
+            }
+            
+            points.push({x, y});
+          }
+          
+          // Draw smooth curves using quadratic curves
+          ctx.lineTo(points[0].x, points[0].y);
+          
+          for (let i = 1; i < points.length - 1; i++) {
+            const current = points[i];
+            const next = points[i + 1];
+            const controlX = current.x;
+            const controlY = current.y;
+            const endX = (current.x + next.x) / 2;
+            const endY = (current.y + next.y) / 2;
+            
+            ctx.quadraticCurveTo(controlX, controlY, endX, endY);
+          }
+          
+          // Complete the last segment
+          if (points.length > 1) {
+            const last = points[points.length - 1];
+            ctx.lineTo(last.x, last.y);
+          }
+          
+          ctx.lineTo(canvas.width, canvas.height);
+          ctx.lineTo(0, canvas.height);
+          ctx.closePath();
+          ctx.fill();
+        }
+        
+        function animate() {
+          waveTargets.forEach(target => {
+            const { ctx, canvas } = target;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw top wave (closest) - ocean-like wave with vertical movement and recession
+            const baseAmplitude = 10;
+            const verticalMovement = 6 * Math.sin(time * 0.02);
+            const recessionEffect = 2 * Math.sin(time * 0.015);
+            const dynamicAmplitude = baseAmplitude + recessionEffect;
+            
+            drawWave(
+              target,
+              [dynamicAmplitude, dynamicAmplitude * 0.15], 
+              [0.6, 0.9], 
+              [0.8, 0.6], 
+              1, 
+              canvas.height * 0.38 + verticalMovement,
+              getWaveColor(target)
+            );
+          });
+          
+          time += 0.8;
+          animationId = requestAnimationFrame(animate);
+        }
+        
+        animate();
+        
+        // Clean up on page unload
+        window.addEventListener('beforeunload', () => {
+          if (animationId) {
+            cancelAnimationFrame(animationId);
+          }
+        });
+      });
+    </script>
+
+    <div id="home-content-layer">
+      <!-- Animated Waves at top of scrolling content -->
+      <div class="wave-container">
+        <canvas id="wave-canvas" class="wave-canvas" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;"></canvas>
+      </div>
+      {{ $coyleCrest := resources.Get "images/CoyleCrestMainOutline.svg" }}
+      {{ $hpcLogo := resources.Get "images/HPCLogo.svg" }}
+
+      <section class="home-top-banner fade-in-section" aria-label="Homepage announcement">
+        <div class="home-top-banner__inner">
+          <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; width: 100%; max-width: 920px; margin: 0 auto;">
+            <p
+              class="home-top-banner__eyebrow fade-in-section"
+              style="font-family: 'Rubik', sans-serif; font-weight: 700; letter-spacing: 0.2em; font-size: clamp(1.5rem, 2.2vw, 2rem); text-transform: uppercase; margin: 0;">
+              2025-2026
+            </p>
+            <div style="height: 1rem;"></div>
+            <h2
+              class="home-top-banner__title fade-in-section"
+              style="font-family: 'Alfa Slab One', serif; font-weight: 400; font-size: clamp(2.5rem, 6vw, 4.5rem); text-transform: uppercase; letter-spacing: 0.08em; line-height: 0.95; color: #fff; margin: 0;">
+              Hall of the Year
+            </h2>
+            <div style="height: 1rem;"></div>
+            <div class="home-top-banner__body fade-in-section" style="margin-top: 0.5rem;">
+              <p class="fade-in-section" style="margin-top: 0.9rem; margin-bottom: 0;">
+                From unmatched traditions like The Regatta and Car Smash, to brand new events like Coyleween, Coyle Crushes, and the Coyle Ice Chapel Mass that drew national attention, this past year was momentous. 
+                This award marks the beginning of a new chapter for our dorm, and we couldn't have done it without the hard work of our residents, leadership team, and the support of the entire ND community. Thank you!
+              </p>
+            </div>
+            <div class="award-logos-row" style="align-items: center; justify-content: center; gap: 1.5rem; margin-top: 2rem; margin-bottom: 4rem;">
+              <img
+                src="{{ $coyleCrest.RelPermalink }}"
+                alt="Coyle Hall crest"
+                class="no-hover-effects"
+                style="display: block; width: auto; height: 72px; max-width: none; object-fit: contain; box-shadow: none !important; transform: none !important; transition: none !important;" />
+              <svg
+                aria-hidden="true"
+                class="award-divider-svg"
+                width="18"
+                height="18"
+                viewBox="0 0 18 18"
+                xmlns="http://www.w3.org/2000/svg">
+                <line
+                  class="award-divider-line award-divider-line--a"
+                  x1="2"
+                  y1="2"
+                  x2="16"
+                  y2="16"
+                  stroke="white"
+                  stroke-width="4"
+                  stroke-linecap="round" />
+                <line
+                  class="award-divider-line award-divider-line--b"
+                  x1="16"
+                  y1="2"
+                  x2="2"
+                  y2="16"
+                  stroke="white"
+                  stroke-width="4"
+                  stroke-linecap="round" />
+              </svg>
+              <a href="https://hpc.nd.edu/" target="_blank" rel="noopener">
+                <img
+                  src="{{ $hpcLogo.RelPermalink }}"
+                  alt="Hall Presidents Council logo"
+                  class="no-hover-effects"
+                  style="display: block; width: auto; height: 72px; max-width: none; object-fit: contain; box-shadow: none !important; transform: none !important; transition: none !important;" />
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Divider Wave -->
+        <div class="banner-divider-wave" aria-hidden="true">
+          <canvas id="wave-canvas-divider" class="wave-canvas" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;"></canvas>
+        </div>
+      </section>
+
+    <!-- Fade-in effect -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const faders = document.querySelectorAll('.fade-in-section');
+        const appearOptions = {
+          threshold: 0.2,
+          rootMargin: "0px 0px -40px 0px"
+        };
+
+        const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, appearOptions);
+
+        faders.forEach(fader => {
+          appearOnScroll.observe(fader);
+        });
+      });
+    </script>
+
+    <h1 class="text-7xl text-center font-extrabold mb-6 px-4 fade-in-section" style="color: var(--primary-color); margin-top: 0rem;">
+      Fishers of Men
+    </h1>
+
+    <!-- Animated hand-drawn wave line graphic -->
+    <div class="flex justify-center my-1 fade-in-section" style="position: relative; z-index: 2; margin-bottom: 1rem; margin-top: -1.5rem;">
+      <svg id="drawn-line" width="420" height="40" viewBox="0 0 440 25" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block; overflow: visible;">
+        <path
+          d="M10 18 Q 40 2, 70 18 Q 100 34, 130 18 Q 160 2, 190 18 Q 220 34, 250 18 Q 280 2, 310 18 Q 340 34, 370 18 Q 400 2, 430 18"
+          class="stroke-black dark:stroke-white"
+          stroke-width="7"
+          stroke-linecap="round"
+          fill="none"
+        />
+      </svg>
+    </div>
+
+    <p class="text-2xl text-center font-extrabold mb-6 fade-in-section" style="color: var(--secondary-color);">
+      1952 • 2025
+    </p>
+
+    <div class="flex items-center justify-start my-1 fade-in-section pl-16" style="position: relative; z-index: 3; margin-bottom: 1rem; margin-top: 5rem;">
+      <h2 class="text-2xl md:text-4xl text-left font-extrabold mb-6 fade-in-section flex items-center text-black dark:text-white"
+          style="position: relative; z-index: 4; margin-top: 0;">
+        <span style="position: relative; display: inline-block;">
+          <i class="text-7xl fa fa-quote-left" style="color: var(--light-color); position: absolute; left: -2rem; top: 50%; transform: translateY(-50%); z-index: 1;"></i>
+          <i class="text-7xl fa fa-quote-right" style="color: var(--light-color); position: absolute; right: -2rem; top: 50%; transform: translateY(-50%); z-index: 1;"></i>
+          <span style="position: relative; z-index: 2;">
+            All Are Welcome in This Place
+          </span>
+        </span>
+      </h2>
+    </div>
+    <div class="w-full flex flex-col justify-center fade-in-section px-4 pl-16 text-left">
+      <i class="fa fa-anchor absolute top-5/6 right-1 text-9xl fade-in-section"
+        style="transform: translateY(30%) translateX(2%) scale(1.85) rotate(30deg); color: var(--light-color); z-index: 2;"
+        aria-hidden="true">
+      </i>
+    </div>
+    <!-- Text -->
+    <div class="w-5/6 flex flex-col justify-center fade-in-section px-4 pl-16 text-left;">
+      <p class="mb-4 text-lg" style="position: relative; z-index: 2;">
+        Crew. Fishermen. Green Wave. Brothers. Coyle Hall has been known by many names over the years, but its legacy as one of the most iconic dorms at Notre Dame remains steadfast.
+      </p>
+      <p class="mb-4 text-lg" style="position: relative; z-index: 2;">
+        Home to generations of proud residents, this brotherhood has long been one of the most tight-knit, spirited, and iconic on campus.
+        From legendary events and unmatched camaraderie, to unforgettable haircuts and unwavering support, Coyle Hall isn't just a place for students to reside — it's a community of friendships, traditions, and countless memories that last a lifetime.
+        Students come from every major, from every corner of the world and from every background, united by their shared identity as the Crew, and the bonds forged here are unlike any other.
+      </p>
+      <p class="mb-2 text-lg" style="position: relative; z-index: 2;">
+        The mantra of "All are welcome" has carried through since the community's inception in 1952 as Fisher Hall, and it is even more true now, in the newest (and nicest) dorm on campus.
+        The Cadillac, as the dorm is affectionately known, is a place for students to work, relax, study, grow, pray, but above all live at Notre Dame, and we couldn't be more happy to welcome you to our home!
+      </p>
+    </div>
+
+    {{/*  Fast Facts  */}}
+    <div class="flex items-center justify-center my-1 fade-in-section" style="position: relative; z-index: 3; margin-bottom: 1rem; margin-top: 5rem;">
+      <h2 class="text-5xl md:text-7xl text-left font-extrabold mb-6 fade-in-section flex items-center text-black dark:text-white"
+          style="position: relative; z-index: 4; margin-top: 0;">
+        Fast Facts
+      </h2>
+    </div>
+
+      <!-- Coyle Hall Trace with fun-facts overlay -->
+      <div class="fade-in-section relative flex w-full justify-center mb-8">
+        <div class="relative w-[min(1100px,100%)] max-w-full px-4 max-[900px]:flex max-[900px]:flex-col max-[900px]:gap-3.5" aria-hidden="false">
+          {{ $trace := replaceRE "fill: #0c8442;" "fill: currentColor;" (readFile "static/images/CoyleHallTrace.svg") }}
+          {{ with $trace }}
+            <div class="w-full text-[var(--secondary-color)] [&_svg]:block [&_svg]:h-auto [&_svg]:w-full [&_svg]:opacity-95 [&_svg]:pointer-events-none [&_svg]:transition-none" aria-hidden="true">
+              {{ . | safeHTML }}
+            </div>
+          {{ end }}
+
+          <div class="absolute left-1/2 top-[1%] grid w-[min(320px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-[24px] bg-[var(--primary-color)] px-2 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
+            <i class="fa fa-location-dot flex h-11 w-11 items-center justify-start text-[3rem] text-white/95 max-[540px]:h-[38px] max-[540px]:w-[38px]" aria-hidden="true"></i>
+            <div class="min-w-0 pl-2">
+              <p class="mb-1 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-white/72">Location</p>
+              <h3 class="mb-1.5 text-[1.05rem] font-bold leading-[1.1] text-white max-[540px]:text-[0.98rem]">South Quad</h3>
+              <p class="m-0 text-[0.9rem] leading-[1.35] text-white/82 max-[540px]:text-[0.84rem]">AKA the longest quad in America</p>
+            </div>
+          </div>
+
+          <div class="absolute right-[1.5%] top-[17%] grid w-[min(320px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-[24px] bg-[var(--primary-color)] px-4 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
+            <i class="fa fa-people-roof ml-1.5 flex h-11 w-11 items-center justify-start text-[1.3rem] text-white/95 max-[540px]:h-[38px] max-[540px]:w-[38px] max-[540px]:text-[1.15rem]" aria-hidden="true"></i>
+            <div class="min-w-0">
+              <p class="mb-1 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-white/72">Population</p>
+              <h3 class="mb-1.5 text-[1.05rem] font-bold leading-[1.1] text-white max-[540px]:text-[0.98rem]">262 Residents</h3>
+              <p class="m-0 text-[0.9rem] leading-[1.35] text-white/82 max-[540px]:text-[0.84rem]">From every grade and major</p>
+            </div>
+          </div>
+
+          <div class="absolute right-0 top-[47%] grid w-[min(320px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-[24px] bg-[var(--primary-color)] px-4 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
+            <i class="fa fa-sailboat ml-1.5 flex h-11 w-11 items-center justify-start text-[1.3rem] text-white/95 max-[540px]:h-[38px] max-[540px]:w-[38px] max-[540px]:text-[1.15rem]" aria-hidden="true"></i>
+            <div class="min-w-0">
+              <p class="mb-1 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-white/72">Dorm Mascot</p>
+              <h3 class="mb-1.5 text-[1.05rem] font-bold leading-[1.1] text-white max-[540px]:text-[0.98rem]">The Crew</h3>
+              <p class="m-0 text-[0.9rem] leading-[1.35] text-white/82 max-[540px]:text-[0.84rem]">A legacy built on the water</p>
+            </div>
+          </div>
+
+          <div class="absolute bottom-0 left-1/2 grid w-[min(320px,32vw)] min-h-[108px] -translate-x-1/2 translate-y-[45%] grid-cols-[44px_1fr] items-center gap-3.5 rounded-[24px] bg-[var(--primary-color)] px-4 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
+            <i class="fa fa-church ml-1.5 flex h-11 w-11 items-center justify-start text-[1.3rem] text-white/95 max-[540px]:h-[38px] max-[540px]:w-[38px] max-[540px]:text-[1.15rem]" aria-hidden="true"></i>
+            <div class="min-w-0">
+              <p class="mb-1 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-white/72">Chapel</p>
+              <h3 class="mb-1.5 text-[1.05rem] font-bold leading-[1.1] text-white max-[540px]:text-[0.98rem]">St. Paul</h3>
+              <p class="m-0 text-[0.9rem] leading-[1.35] text-white/82 max-[540px]:text-[0.84rem]">Named for the old Fisher Hall</p>
+            </div>
+          </div>
+
+          <div class="absolute left-0 top-[47%] grid w-[min(320px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-[24px] bg-[var(--primary-color)] px-4 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
+            <i class="fa fa-fan ml-1.5 flex h-11 w-11 items-center justify-start text-[1.3rem] text-white/95 max-[540px]:h-[38px] max-[540px]:w-[38px] max-[540px]:text-[1.15rem]" aria-hidden="true"></i>
+            <div class="min-w-0">
+              <p class="mb-1 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-white/72">Amenities</p>
+              <div class="flex items-center gap-2">
+                <i class="fa fa-check text-white/95 text-[1.05rem] flex-none self-center translate-y-[-3px] leading-none" aria-hidden="true"></i>
+                <h3 class="mb-1.5 text-[1.05rem] font-bold leading-[1] text-white max-[540px]:text-[0.98rem]">Air Conditioned</h3>
+              </div>
+              <p class="m-0 text-[0.9rem] leading-[1.35] text-white/82 max-[540px]:text-[0.84rem]">Cool and comfy</p>
+            </div>
+          </div>
+
+          <div class="absolute left-[1.5%] top-[17%] grid w-[min(320px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-[24px] bg-[var(--primary-color)] px-4 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
+            <i class="fa fa-building ml-1.5 flex h-11 w-11 items-center justify-start text-[1.3rem] text-white/95 max-[540px]:h-[38px] max-[540px]:w-[38px] max-[540px]:text-[1.15rem]" aria-hidden="true"></i>
+            <div class="min-w-0">
+              <p class="mb-1 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-white/72">Building Structure</p>
+              <h3 class="mb-1.5 text-[1.05rem] font-bold leading-[1.1] text-white max-[540px]:text-[0.98rem]">3 Floors</h3>
+              <p class="m-0 text-[0.9rem] leading-[1.35] text-white/82 max-[540px]:text-[0.84rem]">8 sections + a basement</p>
+            </div>
+          </div>
+
+          <div class="absolute left-[19.5%] top-[13%] grid w-[min(320px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-[24px] bg-[var(--primary-color)] px-4 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3">
+            <i class="fa fa-palette ml-1.5 flex h-11 w-11 items-center justify-start text-[1.3rem] text-white/95 max-[540px]:h-[38px] max-[540px]:w-[38px] max-[540px]:text-[1.15rem]" aria-hidden="true"></i>
+            <div class="min-w-0">
+              <p class="mb-1 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-white/72">Dorm Colors</p>
+              <h3 class="mb-1.5 text-[1.05rem] font-bold leading-[1.1] text-white max-[540px]:text-[0.98rem]">Green & White</h3>
+              <p class="m-0 text-[0.9rem] leading-[1.35] text-white/82 max-[540px]:text-[0.84rem]">Traditional, bold, and vibrant</p>
+            </div>
+          </div>
+
+          <a href="https://www.mcglinnhallnd.com/" target="_blank" rel="noopener" aria-label="Link to McGlinn Hall website">
+            <div class="absolute right-[23.5%] top-[15%] grid w-[min(320px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-[24px] bg-[var(--primary-color)] px-4 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3" aria-hidden="true">
+              <i class="fa fa-venus ml-1.5 flex h-11 w-11 items-center justify-start text-[1.3rem] text-white/95 max-[540px]:h-[38px] max-[540px]:w-[38px] max-[540px]:text-[1.15rem]"></i>
+              <div class="min-w-0">
+                <p class="mb-1 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-white/72">Sister Dorm</p>
+                <h3 class="mb-1.5 text-[1.05rem] font-bold leading-[1.1] text-white max-[540px]:text-[0.98rem]">McGlinn Hall</h3>
+                <div class="flex items-center gap-2 text-[0.9rem]">
+                  <i class="fa fa-arrow-up-right-from-square text-white/82 flex-none self-center leading-none"></i>
+                  <p class="m-0 leading-[0.5] text-white/82 max-[540px]:text-[0.84rem]">Home of the Shamrocks</p>
+                </div>
+              </div>
+            </div>
+          </a>
+
+          <a href="https://www.mcglinnhallnd.com/" target="_blank" rel="noopener" aria-label="Link to McGlinn Hall website">
+            <div class="absolute bottom-[16%] right-[12%] grid w-[min(320px,32vw)] min-h-[108px] grid-cols-[44px_1fr] items-center gap-3.5 rounded-[24px] bg-[var(--primary-color)] px-4 py-[14px] text-left font-['Rubik',sans-serif] text-white no-underline max-[900px]:static max-[900px]:w-full max-[900px]:max-w-none max-[900px]:min-h-0 max-[900px]:translate-x-0 max-[900px]:translate-y-0 max-[540px]:grid-cols-[38px_1fr] max-[540px]:px-[14px] max-[540px]:py-3" aria-hidden="true">
+              <i class="fa fa-arrow-up-right-from-square ml-1.5 flex h-11 w-11 items-center justify-start text-[1.3rem] text-white/95 max-[540px]:h-[38px] max-[540px]:w-[38px] max-[540px]:text-[1.15rem]"></i>
+              <div class="min-w-0">
+                <p class="mb-1 text-[0.74rem] font-bold uppercase tracking-[0.12em] text-white/72">Learn More</p>
+                <h3 class="mb-1.5 text-[1.05rem] font-bold leading-[1.1] text-white max-[540px]:text-[0.98rem]">ND ResLife Info</h3>
+                <p class="m-0 text-[0.9rem] leading-[1.35] text-white/82 max-[540px]:text-[0.84rem]">Visit for more info</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <hr class="my-6 fade-in-section border-custom-gray" style="height: 1px; border: none; background: linear-gradient(to right, transparent, var(--color-lightmode-gray) 20%, var(--color-lightmode-gray) 80%, transparent);">
+
+          <!-- Instagram Feed -->
+      <section class="fade-in-section" style="margin: 4rem auto 3rem; max-width: 1320px; padding: 0 1.5rem;">
+        <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 2rem;">
+          <a href="https://www.instagram.com/real_coylehall/" target="_blank" rel="noopener"
+            style="display: inline-flex; align-items: center; gap: 0.6rem; color: var(--secondary-color); font-family: 'Rubik', sans-serif; font-weight: 700; font-size: clamp(2rem, 5vw, 3.5rem); text-transform: none; letter-spacing: normal; text-decoration: none;">
+            @real_coylehall
+            <i class="fa-brands fa-instagram" style="font-size: 1em;"></i>
+          </a>
+        </div>
+
+      {{/* Instagram feed via Behold.so JSON — feed ID: 9XCk73VEQkyAaVvvrrBh */}}
+      {{/* Manage at behold.so — contact Daniel Burke (dburke6) */}}
+      <style>
+        .ig-post {
+          display: block;
+          position: relative;
+          overflow: hidden;
+          border-radius: 24px;
+          text-decoration: none;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          transition: box-shadow 0.25s ease;
+        }
+        .ig-post:hover {
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+        }
+        .ig-post-img-wrap {
+          position: relative;
+          aspect-ratio: 4 / 5;
+          overflow: hidden;
+          background: var(--light-color);
+        }
+        .ig-post-img-wrap img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+          transition: transform 0.3s ease;
+        }
+        .ig-post:hover .ig-post-img-wrap img {
+          transform: scale(1.05);
+        }
+        .ig-post-overlay {
+          position: absolute;
+          inset: 0;
+          background: var(--coyle-banner-tint);
+          color: white;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          padding: 1rem;
+          opacity: 0;
+          transition: opacity 0.25s ease;
+          text-align: center;
+        }
+        .ig-post:hover .ig-post-overlay {
+          opacity: 1;
+        }
+        .ig-post-overlay p {
+          font-size: 0.82rem;
+          line-height: 1.45;
+          margin: 0;
+          overflow-y: auto;
+        }
+        .ig-type-icon {
+          font-size: 1.3rem;
+          margin-bottom: 0.5rem;
+          opacity: 0.9;
+        }
+        #ig-feed-grid {
+          display: grid;
+          grid-template-columns: repeat(6, 1fr);
+          gap: 1.75rem;
+        }
+        #ig-feed-loading {
+          grid-column: 1 / -1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          min-height: 220px;
+          opacity: 0.5;
+          font-size: 0.95rem;
+        }
+        @media (max-width: 900px) {
+          #ig-feed-grid {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+          }
+        }
+        @media (max-width: 540px) {
+          #ig-feed-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+          }
+        }
+      </style>
+
+      <div id="ig-feed-grid">
+        <div id="ig-feed-loading">Loading posts…</div>
+      </div>
+
+      <script>
+        (function () {
+          var grid = document.getElementById('ig-feed-grid');
+          var loading = document.getElementById('ig-feed-loading');
+          var fetched = false;
+
+          function loadFeed() {
+            if (fetched) return;
+            fetched = true;
+
+            var timeout = setTimeout(function () {
+              if (loading && loading.parentNode) {
+                loading.textContent = 'Follow us @real_coylehall on Instagram.';
+              }
+            }, 8000);
+
+            fetch('https://feeds.behold.so/9XCk73VEQkyAaVvvrrBh')
+              .then(function (r) { return r.json(); })
+              .then(function (data) {
+                clearTimeout(timeout);
+                if (loading) loading.remove();
+                var posts = Array.isArray(data) ? data : (data.posts || data.data || []);
+                posts = posts
+                  .slice()
+                  .sort(function (a, b) {
+                    return new Date(b.timestamp || 0) - new Date(a.timestamp || 0);
+                  });
+                if (!posts.length) {
+                  grid.innerHTML = '<p style="opacity:0.5;text-align:center;padding:2rem;">No posts found.</p>';
+                  return;
+                }
+                posts.slice(0, 6).forEach(function (post) {
+                  var imgUrl = post.mediaType === 'VIDEO'
+                    ? (post.thumbnailUrl || '')
+                    : ((post.sizes && post.sizes.medium && post.sizes.medium.url) || post.mediaUrl || post.thumbnailUrl || '');
+                  if (!imgUrl) return;
+
+                  var caption = post.caption || '';
+                  var typeIcon = post.mediaType === 'VIDEO'
+                    ? '<i class="fa-solid fa-video ig-type-icon" aria-hidden="true"></i>'
+                    : post.mediaType === 'CAROUSEL_ALBUM'
+                      ? '<i class="fa-solid fa-images ig-type-icon" aria-hidden="true"></i>'
+                      : '';
+
+                  var a = document.createElement('a');
+                  a.className = 'ig-post';
+                  a.href = post.permalink;
+                  a.target = '_blank';
+                  a.rel = 'noopener';
+                  a.setAttribute('aria-label', caption || 'View on Instagram');
+                  a.innerHTML =
+                    '<div class="ig-post-img-wrap">' +
+                      '<img src="' + imgUrl + '" alt="" loading="lazy">' +
+                      '<div class="ig-post-overlay">' + typeIcon + '<p>' + caption + '</p></div>' +
+                    '</div>';
+                  grid.appendChild(a);
+                });
+              })
+              .catch(function () {
+                clearTimeout(timeout);
+                if (loading) loading.textContent = 'Follow us @real_coylehall on Instagram.';
+              });
+          }
+
+          if ('IntersectionObserver' in window) {
+            var observer = new IntersectionObserver(function (entries, obs) {
+              if (entries[0].isIntersecting) {
+                obs.disconnect();
+                loadFeed();
+              }
+            }, { rootMargin: '200px' });
+            observer.observe(grid);
+          } else {
+            loadFeed();
+          }
+        })();
+      </script>
+
+    </section>
+
+    <!-- Photo Ticker -->
+    {{/* Add images to /static/images/ticker/ to populate this strip */}}
+    <style>
+      .ticker-outer {
+        overflow: hidden;
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+        padding: 5rem 0 1rem;
+      }
+      .ticker-track {
+        display: flex;
+        gap: 1.25rem;
+        width: max-content;
+        align-items: center;
+        will-change: transform;
+      }
+      .ticker-img {
+        height: 210px;
+        width: auto;
+        border-radius: 24px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transform: rotate(var(--rot, 0deg));
+        object-fit: cover;
+        flex-shrink: 0;
+        display: block;
+        pointer-events: none;
+        user-select: none;
+      }
+      @media (max-width: 600px) {
+        .ticker-img {
+          height: 90px;
+          border-radius: 10px;
+        }
+        .ticker-track {
+          gap: 0.6rem;
+        }
+        .ticker-outer {
+          padding: 1.25rem 0 1.5rem;
+        }
+      }
+    </style>
+
+    <hr class="my-6 fade-in-section border-custom-gray" style="height: 1px; border: none; background: linear-gradient(to right, transparent, var(--color-lightmode-gray) 20%, var(--color-lightmode-gray) 80%, transparent);">
+
+    <div class="ticker-outer">
+      <div id="ticker-track" class="ticker-track">
+        {{/* Set 1 */}}
+        <img src="/images/ticker/COYLEgrass.png"    class="ticker-img" style="--rot: -2.5deg" alt="">
+        <img src="/images/ticker/DSC03204.JPG"      class="ticker-img" style="--rot:  1.8deg" alt="">
+        <img src="/images/ticker/DSC03695.JPG"      class="ticker-img" style="--rot: -1.2deg" alt="">
+        <img src="/images/ticker/DSC03867.JPG"      class="ticker-img" style="--rot:  3.0deg" alt="">
+        <img src="/images/ticker/DSC07769.JPG"      class="ticker-img" style="--rot: -3.5deg" alt="">
+        <img src="/images/ticker/IMG_0434.jpeg"     class="ticker-img" style="--rot:  2.2deg" alt="" loading="lazy">
+        <img src="/images/ticker/IMG_0757.jpeg"     class="ticker-img" style="--rot: -1.8deg" alt="" loading="lazy">
+        <img src="/images/ticker/IMG_4680.jpeg"     class="ticker-img" style="--rot:  3.5deg" alt="" loading="lazy">
+        <img src="/images/ticker/dahnke.png"        class="ticker-img" style="--rot: -2.8deg" alt="" loading="lazy">
+        <img src="/images/ticker/formal.png"        class="ticker-img" style="--rot:  1.5deg" alt="" loading="lazy">
+        <img src="/images/ticker/group.png"         class="ticker-img" style="--rot: -1.0deg" alt="" loading="lazy">
+        <img src="/images/ticker/names.png"         class="ticker-img" style="--rot:  2.8deg" alt="" loading="lazy">
+        <img src="/images/ticker/pineapple.png"     class="ticker-img" style="--rot: -1.5deg" alt="" loading="lazy">
+        <img src="/images/ticker/quad1.jpg"         class="ticker-img" style="--rot:  3.2deg" alt="" loading="lazy">
+        <img src="/images/ticker/regatta1.jpg"      class="ticker-img" style="--rot: -2.0deg" alt="" loading="lazy">
+        <img src="/images/ticker/regatta5.jpg"      class="ticker-img" style="--rot:  1.2deg" alt="" loading="lazy">
+        <img src="/images/ticker/stadiumFolks.png"  class="ticker-img" style="--rot: -3.8deg" alt="" loading="lazy">
+        {{/* Set 2 — duplicate for seamless loop */}}
+        <img src="/images/ticker/COYLEgrass.png"    class="ticker-img" style="--rot: -2.5deg" alt="" loading="lazy">
+        <img src="/images/ticker/DSC03204.JPG"      class="ticker-img" style="--rot:  1.8deg" alt="" loading="lazy">
+        <img src="/images/ticker/DSC03695.JPG"      class="ticker-img" style="--rot: -1.2deg" alt="" loading="lazy">
+        <img src="/images/ticker/DSC03867.JPG"      class="ticker-img" style="--rot:  3.0deg" alt="" loading="lazy">
+        <img src="/images/ticker/DSC07769.JPG"      class="ticker-img" style="--rot: -3.5deg" alt="" loading="lazy">
+        <img src="/images/ticker/IMG_0434.jpeg"     class="ticker-img" style="--rot:  2.2deg" alt="" loading="lazy">
+        <img src="/images/ticker/IMG_0757.jpeg"     class="ticker-img" style="--rot: -1.8deg" alt="" loading="lazy">
+        <img src="/images/ticker/IMG_4680.jpeg"     class="ticker-img" style="--rot:  3.5deg" alt="" loading="lazy">
+        <img src="/images/ticker/dahnke.png"        class="ticker-img" style="--rot: -2.8deg" alt="" loading="lazy">
+        <img src="/images/ticker/formal.png"        class="ticker-img" style="--rot:  1.5deg" alt="" loading="lazy">
+        <img src="/images/ticker/group.png"         class="ticker-img" style="--rot: -1.0deg" alt="" loading="lazy">
+        <img src="/images/ticker/names.png"         class="ticker-img" style="--rot:  2.8deg" alt="" loading="lazy">
+        <img src="/images/ticker/pineapple.png"     class="ticker-img" style="--rot: -1.5deg" alt="" loading="lazy">
+        <img src="/images/ticker/quad1.jpg"         class="ticker-img" style="--rot:  3.2deg" alt="" loading="lazy">
+        <img src="/images/ticker/regatta1.jpg"      class="ticker-img" style="--rot: -2.0deg" alt="" loading="lazy">
+        <img src="/images/ticker/regatta5.jpg"      class="ticker-img" style="--rot:  1.2deg" alt="" loading="lazy">
+        <img src="/images/ticker/stadiumFolks.png"  class="ticker-img" style="--rot: -3.8deg" alt="" loading="lazy">
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        var track = document.getElementById('ticker-track');
+        var pos = 0;
+        var speed = 0.55;
+        var targetSpeed = 0.55;
+        var normalSpeed = 0.55;
+        var slowSpeed   = 0.12;
+        var halfWidth   = 0;
+
+        track.parentElement.addEventListener('mouseenter', function () { targetSpeed = slowSpeed; });
+        track.parentElement.addEventListener('mouseleave', function () { targetSpeed = normalSpeed; });
+
+        function tick() {
+          speed += (targetSpeed - speed) * 0.04;
+          pos   += speed;
+          if (pos >= halfWidth) pos -= halfWidth;
+          track.style.transform = 'translateX(-' + pos + 'px)';
+          requestAnimationFrame(tick);
+        }
+
+        function init() {
+          if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            return;
+          }
+          halfWidth = track.scrollWidth / 2;
+          tick();
+        }
+
+        if (document.readyState === 'complete') {
+          init();
+        } else {
+          window.addEventListener('load', init);
+        }
+      })();
+    </script>
+
+    <!-- New Crew Section -->
+    <section class="new-crew-section fade-in-section" aria-label="Information for incoming students">
+      <style>
+        .new-crew-section {
+          width: 100vw;
+          position: relative;
+          left: 50%;
+          margin-left: -50vw;
+          background: var(--primary-color);
+          padding: 5rem 2rem 5.5rem;
+          margin-top: 4rem;
+        }
+        .new-crew-inner {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 3rem;
+          max-width: 960px;
+          margin: 0 auto;
+        }
+        .new-crew-text { flex: 1; min-width: 0; }
+        .new-crew-pill {
+          display: inline-block;
+          background: rgba(255,255,255,0.15);
+          color: rgba(255,255,255,0.85);
+          font-family: Rubik, sans-serif;
+          font-size: 0.78rem;
+          font-weight: 700;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          padding: 4px 14px;
+          border-radius: 100px;
+          margin-bottom: 1rem;
+        }
+        .new-crew-heading {
+          font-family: Rubik, sans-serif;
+          font-size: clamp(1.75rem, 4vw, 2.75rem);
+          font-weight: 800;
+          color: #ffffff;
+          margin: 0 0 1rem;
+          line-height: 1.1;
+          text-wrap: balance;
+        }
+        .new-crew-body {
+          font-family: Rubik, sans-serif;
+          font-size: 1.05rem;
+          line-height: 1.65;
+          color: rgba(255,255,255,0.82);
+          margin: 0 0 2rem;
+          max-width: 55ch;
+        }
+        .new-crew-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.6rem;
+          background: #ffffff;
+          color: #064121;
+          padding: 14px 28px;
+          border-radius: 16px;
+          font-family: Rubik, sans-serif;
+          font-weight: 800;
+          font-size: 1rem;
+          text-decoration: none;
+          transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+        .new-crew-btn:hover {
+          background: var(--coyle-light-green);
+          color: #ffffff;
+          transform: scale(1.05);
+          box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        .new-crew-btn:focus-visible {
+          outline: 3px solid #53f55c;
+          outline-offset: 3px;
+        }
+        .new-crew-hook {
+          flex-shrink: 0;
+          opacity: 0.12;
+          pointer-events: none;
+          user-select: none;
+        }
+        .new-crew-hook img { width: 220px; height: auto; }
+        @media (max-width: 768px) {
+          .new-crew-inner {
+            flex-direction: column;
+            text-align: center;
+          }
+          .new-crew-body { max-width: none; }
+          .new-crew-hook { display: none; }
+        }
+      </style>
+      <div class="new-crew-inner">
+        <div class="new-crew-text">
+          <span class="new-crew-pill">Incoming Students</span>
+          <h2 class="new-crew-heading">Ready to join the Crew?</h2>
+          <p class="new-crew-body">Move-in day is just the beginning. Find everything you need before you arrive — orientation events, hall traditions, and what life at Coyle actually looks like.</p>
+          <a href="/incoming-students" class="new-crew-btn">
+            New Crew Guide
+            <i class="fa fa-arrow-right" aria-hidden="true"></i>
+          </a>
+        </div>
+        <div class="new-crew-hook" aria-hidden="true">
+          <img src="/images/CoyleHookLogo.png" alt="" width="220" height="220" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    </div>
+
+  {{ end }}
+{{ end }}

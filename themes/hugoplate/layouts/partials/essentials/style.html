@@ -1,24 +1,14 @@
-<!-- DNS preconnect -->
+<!-- DNS preconnect — trimmed to origins this site actually requests.
+     (Font Awesome ships from cdnjs, not use.fontawesome.com; the site uses
+     Cloudflare Web Analytics, not Google Analytics/GTM; no Facebook,
+     LinkedIn, or Twitter embeds are used.) -->
 <meta http-equiv="x-dns-prefetch-control" content="on" />
-<link rel="preconnect" href="https://use.fontawesome.com" crossorigin />
-<link rel="preconnect" href="//cdnjs.cloudflare.com" />
-<link rel="preconnect" href="//www.googletagmanager.com" />
-<link rel="preconnect" href="//www.google-analytics.com" />
-<link rel="dns-prefetch" href="https://use.fontawesome.com" />
-<link rel="dns-prefetch" href="//ajax.googleapis.com" />
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
 <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
-<link rel="dns-prefetch" href="//www.googletagmanager.com" />
-<link rel="dns-prefetch" href="//www.google-analytics.com" />
-<link rel="dns-prefetch" href="//fonts.googleapis.com" />
-<link rel="dns-prefetch" href="//connect.facebook.net" />
-<link rel="dns-prefetch" href="//platform.linkedin.com" />
-<link rel="dns-prefetch" href="//platform.twitter.com" />
 
-<!-- google fonts -->
-{{ $pf:= site.Data.theme.fonts.font_family.primary }}
-{{ $sf:= site.Data.theme.fonts.font_family.secondary }}
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<!-- google fonts (preconnect already declared once in layouts/partials/essentials/head.html) -->
+{{ $pf:= hugo.Data.theme.fonts.font_family.primary }}
+{{ $sf:= hugo.Data.theme.fonts.font_family.secondary }}
 <script>
   (function () {
     const googleFont = document.createElement("link");
@@ -70,6 +60,13 @@
   href="{{ $styles.RelPermalink }}"
   integrity="{{ $styles.Data.Integrity }}"
   rel="stylesheet" />
+
+<!-- homepage-only styles (scoped to the home layout) -->
+{{ if .IsHome }}
+  {{ $home := resources.Get "css/home.css" }}
+  {{ if hugo.IsProduction }}{{ $home = $home | minify | fingerprint }}{{ end }}
+  <link href="{{ $home.RelPermalink }}" rel="stylesheet" />
+{{ end }}
 
 <!-- link lazy style -->
 <link

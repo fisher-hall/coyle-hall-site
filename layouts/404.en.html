@@ -1,0 +1,42 @@
+{{ define "main" }}
+  <section class="section-sm">
+    <div class="container">
+      <div class="flex flex-col md:flex-row md:items-center justify-center gap-4">
+        <div class="w-full md:w-1/2 flex justify-center mb-4 md:mb-0 lg:mt-24">
+          {{ with resources.Get "images/404Fisher.png" }}
+          {{ $img := .Resize "800x webp q80" }}
+          <img
+            src="{{ $img.RelPermalink }}"
+            width="{{ $img.Width }}"
+            height="{{ $img.Height }}"
+            alt="A sketch style image of the old Fisher Hall building, with a big green question mark instead of the F"
+            class="w-full h-auto max-w-2xl md:max-w-md lg:max-w-lg xl:max-w-xl no-tilt">
+          {{ end }}
+        </div>
+        <div class="w-full md:w-1/2 text-center md:text-left md:pl-18">
+          <span
+            class="block font-bold text-text-dark dark:text-darkmode-text-dark"
+            style="font-size:clamp(4rem, 18vw, 9.5rem); background: linear-gradient(80deg, var(--button-grad-dark-lm), var(--button-grad-light-dm)); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent;">
+            404
+          </span>
+          <h1 class="h2 mb-4">Gone Fishing</h1>
+          <div class="content">
+            <p>
+              Like our old building, that page doesn't exist.
+              <br>
+              To catch a page, search or use the menus above.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-center mt-8">
+        <a href="{{ site.BaseURL | relLangURL }}">
+          <Button class="default">
+            Go Home
+            <i class="fa fa-house pl-2"></i>
+          </Button>
+        </a>
+      </div>
+    </div>
+  </section>
+{{ end }}

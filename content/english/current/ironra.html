@@ -5,111 +5,6 @@ aliases:
   - "/current/ironra"
 ---
 <style>
-  /* Remove all top spacing for ironra page */
-  body .section:first-of-type,
-  body .section-sm:first-of-type {
-    margin-top: 0 !important;
-    padding-top: 0 !important;
-  }
-  
-  /* Make ironra banner full width at all screen sizes */
-  #ironra-banner-wrapper {
-    width: 100vw !important;
-    position: relative !important;
-    left: 50% !important;
-    right: 50% !important;
-    margin-left: -50vw !important;
-    margin-right: -50vw !important;
-    padding: 0 0px !important;
-    box-sizing: border-box !important;
-    border-radius: 0 !important;
-    overflow: visible !important;
-  }
-  
-  /* Mobile padding for banner */
-  @media (max-width: 768px) {
-    #ironra-banner-wrapper {
-      padding: 0 2px !important;
-    }
-  }
-  
-  #banner-parallax {
-    position: relative;
-    overflow: hidden;
-    height: 50vh;
-    max-height: 600px;
-    min-height: 400px;
-    margin-top: 0 !important;
-    border-radius: 0 !important;
-  }
-
-  .ironra-parallax-layer {
-    position: absolute;
-    inset: -10% 0;
-    background-image: url('/images/BannerImages/IronRABanner.png');
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    transform: translate3d(0, var(--ironra-parallax-y, 0px), 0) scale(1.03);
-    will-change: transform;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-/* Wave Container CSS */
-.wave-container {
-  position: absolute;
-  bottom: -10px;
-  left: 0;
-  width: 100%;
-  height: 80px;
-  overflow: hidden;
-  z-index: 10;
-}
-
-/* Ensure tint layer is below waves */
-.banner-tint-layer {
-  z-index: 1 !important;
-}
-
-  @media (max-width: 768px) {
-    #banner-parallax {
-      display: flex !important;
-      justify-content: center !important;
-      align-items: center !important;
-    }
-
-    .ironra-parallax-layer {
-      inset: -6% 0;
-    }
-
-    .banner-tint-layer {
-      position: absolute !important;
-      top: 0;
-      left: 0;
-      width: 100% !important;
-      height: 100% !important;
-    }
-
-    .home-banner-text-overlay {
-      position: relative !important;
-      z-index: 10 !important;
-      width: 100% !important;
-      text-align: center !important;
-    }
-  }
-
-#ironra-banner-img {
-  position: absolute !important;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60%;
-  height: auto;
-  object-fit: cover;
-  will-change: transform;
-}
-
   /* Points system text that switches with light/dark mode */
   .points-text {
     color: var(--color-lightmode-gray);
@@ -119,170 +14,13 @@ aliases:
   }
 </style>
 
-<!-- Banner -->
-<div id="ironra-banner-wrapper">
-  <div id="banner-parallax" class="relative overflow-hidden">
-    <div class="ironra-parallax-layer" aria-hidden="true"></div>
-    <!-- Animated Waves at bottom of banner -->
-    <div class="wave-container">
-      <canvas id="ironra-wave-canvas" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;"></canvas>
-    </div>
-    
-    <!-- Tint Layer -->
-    <div class="banner-tint-layer"></div>
-    <!-- Text Overlay -->
-    <div class="home-banner-text-overlay" id="ironra-banner-text">
-      <span class="home-banner-heading">IronRA</span>
-    </div>
-  </div>
-</div>
-
-
-<script>
-let ironraParallaxFrame = null;
-
-function updateIronraParallax() {
-  const banner = document.getElementById("banner-parallax");
-  if (!banner) return;
-
-  const root = document.documentElement;
-  const scrollY = window.scrollY || window.pageYOffset;
-  const bannerRect = banner.getBoundingClientRect();
-
-  if (bannerRect.bottom <= 0 || bannerRect.top >= window.innerHeight) return;
-
-  const offset = Math.max(-140, scrollY * -0.18);
-  root.style.setProperty("--ironra-parallax-y", `${offset}px`);
-}
-
-function queueIronraParallax() {
-  if (ironraParallaxFrame !== null) return;
-
-  ironraParallaxFrame = window.requestAnimationFrame(() => {
-    updateIronraParallax();
-    ironraParallaxFrame = null;
-  });
-}
-
-document.addEventListener("DOMContentLoaded", updateIronraParallax);
-window.addEventListener("scroll", queueIronraParallax, { passive: true });
-window.addEventListener("resize", queueIronraParallax, { passive: true });
-</script>
-
-<!-- Wave Animation Script -->
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  const canvas = document.getElementById('ironra-wave-canvas');
-  const ctx = canvas.getContext('2d');
-  let animationId;
-  
-  function resizeCanvas() {
-    const rect = canvas.getBoundingClientRect();
-    canvas.width = rect.width;
-    canvas.height = rect.height;
-  }
-  
-  resizeCanvas();
-  window.addEventListener('resize', resizeCanvas);
-  
-  // Get CSS color variables
-  function getCSSColor(variable) {
-    return getComputedStyle(document.documentElement).getPropertyValue(variable).trim();
-  }
-  
-  let time = 0;
-  
-  function drawWave(amplitudes, frequencies, speeds, opacity, yOffset, color) {
-    ctx.globalAlpha = opacity;
-    ctx.fillStyle = color || getCSSColor('--background-color') || '#f8f9fa';
-    
-    ctx.beginPath();
-    ctx.moveTo(0, canvas.height);
-    
-    let points = [];
-    
-    // Calculate wave points with higher resolution
-    for (let x = 0; x <= canvas.width; x += 0.5) {
-      let y = yOffset;
-      
-      // Stack multiple sine waves for natural randomness
-      for (let i = 0; i < amplitudes.length; i++) {
-        y += amplitudes[i] * Math.sin((x * frequencies[i] + time * speeds[i]) * Math.PI / 180);
-      }
-      
-      points.push({x, y});
-    }
-    
-    // Draw smooth curves using quadratic curves
-    ctx.lineTo(points[0].x, points[0].y);
-    
-    for (let i = 1; i < points.length - 1; i++) {
-      const current = points[i];
-      const next = points[i + 1];
-      const controlX = current.x;
-      const controlY = current.y;
-      const endX = (current.x + next.x) / 2;
-      const endY = (current.y + next.y) / 2;
-      
-      ctx.quadraticCurveTo(controlX, controlY, endX, endY);
-    }
-    
-    // Complete the last segment
-    if (points.length > 1) {
-      const last = points[points.length - 1];
-      ctx.lineTo(last.x, last.y);
-    }
-    
-    ctx.lineTo(canvas.width, canvas.height);
-    ctx.lineTo(0, canvas.height);
-    ctx.closePath();
-    ctx.fill();
-  }
-  
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    // Draw top wave (closest) - ocean-like wave with vertical movement and recession
-    const baseAmplitude = 10;
-    const verticalMovement = 6 * Math.sin(time * 0.02);
-    const recessionEffect = 2 * Math.sin(time * 0.015);
-    const dynamicAmplitude = baseAmplitude + recessionEffect;
-    
-    drawWave(
-      [dynamicAmplitude, dynamicAmplitude * 0.15], 
-      [0.6, 0.9], 
-      [0.8, 0.6], 
-      1, 
-      canvas.height * 0.38 + verticalMovement
-    );
-    
-    time += 0.8;
-    animationId = requestAnimationFrame(animate);
-  }
-  
-  animate();
-  
-  // Clean up on page unload
-  window.addEventListener('beforeunload', () => {
-    if (animationId) {
-      cancelAnimationFrame(animationId);
-    }
-  });
-});
-</script>
+{{< banner image="/images/BannerImages/IronRABanner.png" heading="IronRA" >}}
 
 
 <div class="flex flex-col md:flex-row items-center justify-center w-full my-12 max-w-6xl mx-auto fade-in-section" style="margin-top: 2rem;">
   <!-- Image -->
   <div class="md:w-1/2 w-full flex flex-col justify-center md:justify-end px-4">
-      <a href="/images/current/ironra/ironra_logo.png" target="_blank" rel="noopener">
-        <img
-          src="/images/current/ironra/ironra_logo.png"
-          alt="ironRA logo"
-          class="rounded-2xl w-full max-w-xl shadow-lg"
-          style="object-fit: cover;"
-        />
-      </a>
+      {{< pic src="/images/current/ironra/ironra_logo.png" alt="ironRA logo" >}}
   </div>
   <!-- Text -->
   <div class="md:w-1/2 w-full flex flex-col justify-center px-4 md:pl-12 text-left">
@@ -294,44 +32,40 @@ document.addEventListener("DOMContentLoaded", function() {
 </div>
 
 <!-- Countdown Section -->
-<div class="row text-center my-8" style="margin-top: 2rem;">
-  <h1 class="text-5xl text-center font-extrabold mb-6 fade-in-section" style="color: var(--primary-color);">Training Time Left</h1>
-    <div class="col-6 col-md-3 text-center fade-in-section">
-        <div class="countdown-block">
-        <span id="ironra-countdown-days" class="stats-number">00</span>
-        <div class="stats-description">Days</div>
-        </div>
+<div data-countdown data-countdown-keep data-target-date="2025-12-06T00:00:00">
+  <div class="my-8" style="margin-top: 2rem;">
+    <h2 class="text-5xl text-center font-extrabold mb-6 fade-in-section" style="color: var(--primary-color);">Training Time Left</h2>
+    <div class="CountdownGrid CountdownGrid--display max-w-none fade-in-section" style="font-weight: 700;">
+      <div class="CountdownBlock">
+        <span class="CountdownBlock-number" data-unit="days">00</span>
+        <span class="CountdownBlock-label">Days</span>
+      </div>
+      <div class="CountdownBlock">
+        <span class="CountdownBlock-number" data-unit="hours">00</span>
+        <span class="CountdownBlock-label">Hours</span>
+      </div>
+      <div class="CountdownBlock">
+        <span class="CountdownBlock-number" data-unit="mins">00</span>
+        <span class="CountdownBlock-label">Minutes</span>
+      </div>
+      <div class="CountdownBlock">
+        <span class="CountdownBlock-number" data-unit="secs">00</span>
+        <span class="CountdownBlock-label">Seconds</span>
+      </div>
     </div>
-    <div class="col-6 col-md-3 text-center fade-in-section">
-        <div class="countdown-block">
-        <span id="ironra-countdown-hours" class="stats-number">00</span>
-        <div class="stats-description">Hours</div>
-        </div>
-    </div>
-    <div class="col-6 col-md-3 text-center fade-in-section">
-        <div class="countdown-block">
-        <span id="ironra-countdown-mins" class="stats-number">00</span>
-        <div class="stats-description">Minutes</div>
-        </div>
-    </div>
-    <div class="col-6 col-md-3 text-center fade-in-section">
-        <div class="countdown-block">
-        <span id="ironra-countdown-secs" class="stats-number">00</span>
-        <div class="stats-description">Seconds</div>
-        </div>
-    </div>
+  </div>
 </div>
 
 
 
 <div class="flex items-center justify-center my-1 fade-in-section" style="position: relative; z-index: 3; margin-bottom: 5rem; margin-top: 3rem;">
-  <h1 class="text-5xl text-center font-extrabold mb-8 fade-in-section" style="color: var(--primary-color);">Distances</h1>
+  <h2 class="text-5xl text-center font-extrabold mb-8 fade-in-section" style="color: var(--primary-color);">Distances</h2>
 </div>
 
 <div class="mx-auto relative grid md:grid-cols-3 sm:grid-cols-2 gap-2 gap-y-25 w-full my-8 mt-20 mb-20 fade-in-section" style="z-index: 3">
     
     <div>
-        <h1 class="relative flex flex-col items-center text-center justify-center h-10 mb-3 mt-10">
+        <h3 class="relative flex flex-col items-center text-center justify-center h-10 mb-3 mt-10">
             <i class="fa-solid fa-person-swimming text-9xl text-[var(--primary-color)]"
                 style="transform: translateY(-60%) scale(1);
             "></i>
@@ -341,12 +75,12 @@ document.addEventListener("DOMContentLoaded", function() {
 	    <div class="relative flex items-center justify-center text-2xl mt-6 text-center">
 	      yard swim
             </div>
-        </h1>
+        </h3>
 
     </div>
 
     <div>
-        <h1 class="relative flex flex-col items-center text-center justify-center h-10 mb-3 mt-10">
+        <h3 class="relative flex flex-col items-center text-center justify-center h-10 mb-3 mt-10">
             <i class="fa-solid fa-bicycle text-9xl text-[var(--primary-color)]"
                 style="transform: translateY(-60%) scale(1);
             "></i>
@@ -356,12 +90,12 @@ document.addEventListener("DOMContentLoaded", function() {
 	    <div class="relative flex items-center justify-center text-2xl mt-6 text-center">
 	      mile bike
             </div>
-        </h1>
+        </h3>
 
     </div>
 
     <div>
-        <h1 class="relative flex flex-col items-center text-center justify-center h-10 mb-3 mt-10">
+        <h3 class="relative flex flex-col items-center text-center justify-center h-10 mb-3 mt-10">
             <i class="fa-solid fa-person-running text-9xl text-[var(--primary-color)]"
                 style="transform: translateY(-60%) scale(1);
             "></i>
@@ -371,7 +105,7 @@ document.addEventListener("DOMContentLoaded", function() {
             <div class="relative flex items-center justify-center text-2xl mt-6 text-center">
 	      mile run
             </div>
-        </h1>
+        </h3>
 
     </div>
 </div>
@@ -379,11 +113,11 @@ document.addEventListener("DOMContentLoaded", function() {
 <br>
 <br><br><br>
 
-<h1 class="h-20 text-center text-7xl text-[var(--primary-color)] fade-in-section">Points System</h1>
+<h2 class="h-20 text-center text-7xl text-[var(--primary-color)] fade-in-section">Points System</h2>
 
 <div class="mx-auto relative grid md:grid-cols-2 sm:grid-cols-2 gap-2 gap-y-10 w-full my-4 fade-in-section" style="z-index: 3">
     <div>
-        <h1 class="relative flex items-center text-center justify-center h-10 mb-3">Participation</h1>
+        <h3 class="relative flex items-center text-center justify-center h-10 mb-3">Participation</h3>
         
         <div class="relative flex items-center justify-center text-2xl text-center points-text">Up to 12 points per person</div>
 	      <div class="relative flex items-center justify-center text-2xl text-center points-text">4 points per leg</div>
@@ -391,12 +125,12 @@ document.addEventListener("DOMContentLoaded", function() {
     </div>
 
     <div>
-        <h1 class="relative flex items-center text-center justify-center h-10 mb-3">Volunteering</h1>
+        <h3 class="relative flex items-center text-center justify-center h-10 mb-3">Volunteering</h3>
         <div class="relative flex items-center justify-center text-2xl text-center points-text">1 point per person</div>
     </div>
 
     <div>
-        <h1 class="relative flex items-center text-center justify-center h-2">Top 3 RAs</h1>
+        <h3 class="relative flex items-center text-center justify-center h-2">Top 3 RAs</h3>
         <div class="relative flex items-center justify-center text-l text-center points-text">(by time)</div>
         <div class="relative flex items-center justify-center text-2xl text-center points-text">1st place: 60 points</div>
         <div class="relative flex items-center justify-center text-2xl text-center points-text">2nd place: 40 points</div>
@@ -404,7 +138,7 @@ document.addEventListener("DOMContentLoaded", function() {
     </div>
 
     <div>
-        <h1 class="relative flex items-center text-center justify-center h-2">Top 3 Sections</h1>
+        <h3 class="relative flex items-center text-center justify-center h-2">Top 3 Sections</h3>
         <div class="relative flex items-center justify-center text-l text-center points-text">(by average time)</div>
         <div class="relative flex items-center justify-center text-2xl text-center points-text">1st place: 60 points</div>
         <div class="relative flex items-center justify-center text-2xl text-center points-text">2nd place: 40 points</div>
@@ -414,7 +148,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </div>
 
 <div class="flex flex-col items-center text-center fade-in-section">
-  <h1 class="relative flex items-center text-center justify-center h-10 mb-3" style="color: var(--nd-gold);">The Golden Oar</h1>
+  <h3 class="relative flex items-center text-center justify-center h-10 mb-3" style="color: var(--nd-gold);">The Golden Oar</h3>
   <div class="relative flex items-center justify-center text-2xl text-center" style="color: var(--primary-color);">Beating your RA: 20 points</div>
 </div>
 
@@ -427,49 +161,17 @@ document.addEventListener("DOMContentLoaded", function() {
     <p class="mb-6 text-xl">
       Get to know the leading competitors
     </p>
-      <a href="/hall-staff/" class="btn btn-primary text-center" target="_blank" rel="noopener">
-            Meet the RAs
-            <i class="fa fa-users pl-2"></i>
-        </a>
+      <a href="/hall-staff/" target="_blank" rel="noopener">
+        <Button class="default">
+          Meet the RAs
+          <i class="fa fa-users" aria-hidden="true"></i>
+        </Button>
+      </a>
   </div>
   <!-- Image -->
   <div class="md:w-1/2 w-full flex flex-col justify-center md:justify-end px-4">
-      <a href="/images/current/ironra/ironra_ras_smaller.png" target="_blank" rel="noopener">
-        <img
-          src="/images/current/ironra/ironra_ras_smaller.png"
-          alt="ironRA logo"
-          class="rounded-2xl w-full max-w-xl shadow-lg"
-          style="object-fit: cover;"
-        />
-      </a>
+      {{< pic src="/images/current/ironra/ironra_ras_smaller.png" alt="The ironRA resident assistants posing together" >}}
   </div>
 
 </div>
 
-
-
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const faders = document.querySelectorAll('.fade-in-section');
-  const appearOptions = {
-    threshold: 0.2,
-    rootMargin: "0px 0px -40px 0px"
-  };
-
-  const appearOnScroll = new IntersectionObserver(function(entries, observer) {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, appearOptions);
-
-  faders.forEach(fader => {
-    appearOnScroll.observe(fader);
-  });
-});
-</script>
-
-<script src="/ironRA-Countdown.js"></script>

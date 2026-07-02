@@ -37,14 +37,12 @@ The website is actively maintained by Coyle Hall residents and staff. Content up
 
 For technical issues with the website or suggestions for improvements, please contact Web Commissioners Dan Burke and Will Griffin, or file an issue on Github.
 
-<div style="display: flex; gap: 2rem; margin: 1.5rem 0; flex-wrap: wrap;">
-  <a href="mailto:dburke6@nd.edu,wgriffi3@nd.edu?subject=Coyle%20Hall%20Website%20Feedback" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background-color: var(--primary-color); color: white; text-decoration: none; border-radius: 16px; transition: all 0.3s ease; font-size: 1.25rem; font-weight: 500;" onmouseover="this.style.transform='scale(1.15)'" onmouseout="this.style.transform='scale(1)'">
-    Send an Email
-    <i class="fas fa-envelope"></i>
+<div style="display: flex; gap: 1.5rem; margin: 1.5rem 0; flex-wrap: wrap;">
+  <a href="mailto:dburke6@nd.edu?subject=Coyle%20Hall%20Website%20Feedback">
+    <Button class="default">Send an Email <i class="fas fa-envelope"></i></Button>
   </a>
-  <a href="https://github.com/fisher-hall/coyle-hall-site/issues" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background-color: var(--primary-color); color: white; text-decoration: none; border-radius: 16px; transition: all 0.3s ease; font-size: 1.25rem; font-weight: 500;" onmouseover="this.style.transform='scale(1.15)'" onmouseout="this.style.transform='scale(1)'">
-    File a GitHub Issue
-    <i class="fab fa-github"></i>
+  <a href="https://github.com/fisher-hall/coyle-hall-site/issues" target="_blank" rel="noopener">
+    <Button class="default">File a GitHub Issue <i class="fab fa-github"></i></Button>
   </a>
 </div>
 
@@ -58,7 +56,7 @@ This website is a static site built with Hugo and hosted on GitHub Pages.
 
 We do not directly collect, store, or sell personal information from visitors.
 
-The site does not use user accounts, forms, analytics, cookies for tracking, or advertising services.
+The site does not use user accounts, forms, cookies for tracking, or advertising services. It does use Cloudflare Web Analytics, a cookieless analytics service that reports aggregated visit statistics without tracking individual visitors across sites.
 
 ## Third-Party Services
 
@@ -68,6 +66,13 @@ This website is hosted by GitHub Pages, a service provided by GitHub, Inc. GitHu
 
 For more information, see GitHub’s Privacy Statement:
 https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement
+
+### Cloudflare Web Analytics
+
+This website uses Cloudflare Web Analytics to measure site traffic. This service is cookieless and does not use any persistent identifiers or track visitors across websites.
+
+For more information, see Cloudflare's Privacy Policy:
+https://www.cloudflare.com/privacypolicy/
 
 ### Behold Instagram Integration
 
@@ -95,4 +100,4 @@ If you have questions about this Privacy Policy, you may contact the site owner 
 
 *Last Updated: May 2026*
 
-*Changelog available on [GitHub](https://github.com/fisher-hall/coyle-hall-site?tab=readme-ov-file)*
+*Full changelog available on [GitHub](https://github.com/fisher-hall/coyle-hall-site?tab=readme-ov-file#release-notes)*

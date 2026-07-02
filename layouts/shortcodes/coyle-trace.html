@@ -1,0 +1,9 @@
+{{- /* Inline the Coyle Hall outline trace SVG, recoloured to currentColor
+       so the wrapper's text colour drives it. Used in the homepage Fast
+       Facts section. */ -}}
+{{- $trace := replaceRE "fill: #0c8442;" "fill: currentColor;" (readFile "static/images/CoyleHallTrace.svg") -}}
+{{- with $trace -}}
+<div class="w-full text-[var(--primary-color)] [&_svg]:block [&_svg]:h-auto [&_svg]:w-full [&_svg]:opacity-95 [&_svg]:pointer-events-none [&_svg]:transition-none" aria-hidden="true">
+  {{ . | safeHTML }}
+</div>
+{{- end -}}

@@ -4,19 +4,22 @@
   class="{{- if not site.Params.theme_switcher -}}
     {{- site.Params.theme_default -}}
   {{- end -}}"
-  lang="{{ site.LanguageCode | default `en-US` }}"
+  lang="{{ site.Language.Locale | default `en-US` }}"
   itemtype="http://schema.org/WebPage">
   <head>
     <!-- head (don't cache it) -->
     {{ partial "essentials/head.html" . }}
 
 
-    <!-- style (always cache it) -->
-    {{ partialCached "essentials/style.html" . }}
+    <!-- style (cache per is-home so the homepage-only stylesheet is included) -->
+    {{ partialCached "essentials/style.html" . .IsHome }}
 
   </head>
 
-  <body>
+  <body class="min-h-screen flex flex-col">
+    <!-- skip link: first focusable element, visible only on keyboard focus -->
+    <a href="#main" class="skip-link">Skip to main content</a>
+
     <!-- cache partial only in production -->
     {{ if hugo.IsProduction }}
       {{ partialCached "preloader.html" . }}
@@ -53,7 +56,7 @@
       }
     </style>
 
-    <main>
+    <main id="main" class="flex-1 pt-[100px]">
       {{ block "main" . }}{{ end }}
     </main>
 
@@ -61,8 +64,11 @@
     {{ partial "essentials/footer.html" . }}
 
 
-  <!-- script (always cache it) -->
-  {{ partialCached "essentials/script.html" . }}
-  <script src="/scripts/mobileMenuAnimation.js"></script>
+  <!-- script (cache per is-home so the homepage-only script is included) -->
+  {{ partialCached "essentials/script.html" . .IsHome }}
+
+  <!-- a11y panel overlay: rendered at body level so position:fixed is not
+       clipped by the sticky/transformed floating header -->
+  {{ partial "components/a11y-panel-overlay" . }}
   </body>
 </html>

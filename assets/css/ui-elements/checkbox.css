@@ -1,0 +1,43 @@
+/* ═══════════════════════════════════════════════════════════════
+   CHECKBOX — themed checkbox with site colors
+   Usage: <label class="ui-checkbox"><input type="checkbox"><span>Label</span></label>
+════════════════════════════════════════════════════════════════= */
+.ui-checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: inherit;
+  user-select: none;
+}
+.ui-checkbox input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 1.1rem;
+  height: 1.1rem;
+  border: 2px solid var(--primary-color);
+  border-radius: 4px;
+  background: transparent;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+.ui-checkbox input[type="checkbox"]:checked {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  /* SVG checkmark — works on replaced elements unlike ::after */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpolyline points='2,8 6,13 14,3' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 0.7rem;
+}
+.ui-checkbox input[type="checkbox"]:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+.dark .ui-checkbox input[type="checkbox"] { border-color: var(--primary-color); }
+.dark .ui-checkbox input[type="checkbox"]:checked { background-color: var(--primary-color); border-color: var(--primary-color); }
+html.a11y-contrast-high .ui-checkbox input[type="checkbox"] { border-color: #48bb4e !important; }
+html.a11y-contrast-high .ui-checkbox input[type="checkbox"]:checked { background-color: #48bb4e !important; border-color: #48bb4e !important; }

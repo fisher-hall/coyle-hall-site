@@ -1,0 +1,23 @@
+{{- /* Content image with a click-to-enlarge link, run through Hugo's image
+       pipeline. The displayed <img> is a ~1000px WebP; the link opens a larger
+       ~1800px WebP. Source must live under assets/ (e.g. assets/images/...).
+       Falls back to the raw path if the asset can't be resolved (e.g. an SVG or
+       a still-static image), so it's safe to adopt incrementally.
+       Params: src (required, /images/... path), alt (required),
+               class (optional, defaults to the standard rounded card style). */ -}}
+{{- $src := .Get "src" -}}
+{{- $alt := .Get "alt" -}}
+{{- $class := .Get "class" | default "rounded-2xl w-full max-w-xl shadow-lg" -}}
+{{- $assetPath := strings.TrimPrefix "/" $src -}}
+{{- $res := resources.Get $assetPath -}}
+{{- if and $res (ne (lower (path.Ext $assetPath)) ".svg") -}}
+  {{- $disp := $res.Resize "1000x webp q80" -}}
+  {{- $full := $res.Resize "1800x webp q82" -}}
+<a href="{{ $full.RelPermalink }}" target="_blank" rel="noopener">
+  <img src="{{ $disp.RelPermalink }}" width="{{ $disp.Width }}" height="{{ $disp.Height }}" alt="{{ $alt }}" class="{{ $class }}" style="object-fit: cover;" loading="lazy" decoding="async">
+</a>
+{{- else -}}
+<a href="{{ $src }}" target="_blank" rel="noopener">
+  <img src="{{ $src }}" alt="{{ $alt }}" class="{{ $class }}" style="object-fit: cover;" loading="lazy" decoding="async">
+</a>
+{{- end -}}

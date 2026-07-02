@@ -1,0 +1,33 @@
+{{- /* Inner-page banner: fixed parallax image + wave. Styling in
+       assets/css/ui-elements/banner.css; animation auto-wired by
+       page-animations.js. Params:
+         image      (required) background image URL
+         heading    (required) large banner heading
+         subheading (optional) small kicker above the heading
+         textid     (optional) id on the text overlay, for per-page
+                    banner-font overrides (e.g. car-smash, regatta) */ -}}
+{{- /* Resolve the banner image through Hugo's asset pipeline when possible.
+       The image param is a /images/... path. We strip the leading slash and try
+       resources.Get against assets/. If found, resize to a large WebP and use
+       the processed URL; otherwise fall back to the raw path (e.g. HomeBanner.png,
+       which is intentionally kept under static/). */ -}}
+{{- $raw := .Get "image" -}}
+{{- $src := $raw -}}
+{{- $assetPath := strings.TrimPrefix "/" $raw -}}
+{{- with resources.Get $assetPath -}}
+  {{- $src = (.Resize "1600x webp q82").RelPermalink -}}
+{{- end -}}
+<div class="page-banner-wrapper">
+  <div id="banner-parallax"{{ with $src }} style="background-image: url('{{ . }}');"{{ end }}>
+    <div class="banner-tint-layer"></div>
+    <div class="home-banner-text-overlay"{{ with .Get "textid" }} id="{{ . }}"{{ end }}>
+      {{- with .Get "subheading" }}
+      <span class="home-banner-subheading text-white leading-tight">{{ . }}</span>
+      {{- end }}
+      <h1 class="home-banner-heading text-white">{{ .Get "heading" }}</h1>
+    </div>
+  </div>
+</div>
+<div class="page-content-wave">
+  <canvas id="page-wave-canvas"></canvas>
+</div>

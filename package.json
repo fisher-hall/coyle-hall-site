@@ -1,12 +1,12 @@
 {
-  "name": "hugoplate",
-  "description": "hugo tailwindcss boilerplate",
-  "version": "2.1.4",
+  "name": "coyle-hall-site",
+  "description": "Coyle Hall's website — coylehallnd.com",
+  "version": "2.0.0",
   "license": "MIT",
   "author": "zeon.studio",
   "scripts": {
     "dev": "hugo server",
-    "build": "hugo --gc --minify --templateMetrics --templateMetricsHints --forceSyncStatic",
+    "build": "hugo --gc --minify --templateMetrics --templateMetricsHints --forceSyncStatic && node ./scripts/syncSearchIndex.js",
     "preview": "hugo server --disableFastRender --navigateToChanged --templateMetrics --templateMetricsHints --watch --forceSyncStatic -e production --minify",
     "dev:example": "cd exampleSite && hugo server",
     "build:example": "cd exampleSite && hugo --gc --minify --templateMetrics --templateMetricsHints --forceSyncStatic",

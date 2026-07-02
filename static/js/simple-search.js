@@ -1,78 +1,55 @@
-// Simple search functionali  // Load search data
-  fetch('/searchindex.json')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Dynamic search index not found');
-      }
-      return response.json();
-    })
-    .then(data => {
-      searchData = data;
-      console.log('Dynamic search index loaded:', searchData.length, 'items');
-    })
-    .catch(error => {
-      console.error('Error loading dynamic search index:', error);
-      // Fallback to static search index if dynamic one fails
-      fetch('/static-searchindex.json')
-        .then(response => response.json())
-        .then(data => {
-          searchData = data;
-          console.log('Fallback static search index loaded:', searchData.length, 'items');
-        })
-        .catch(fallbackError => {
-          console.error('Error loading fallback search index:', fallbackError);
-        });
-    });
-
-console.log('Simple search script loaded');
+// Simple in-site search. Loads the Hugo-generated search index (relative,
+// same-origin URL) and filters it client-side. No external requests.
 
 document.addEventListener('DOMContentLoaded', function() {
-  console.log('DOM loaded - setting up search');
-  
   // Find search elements
-  const searchButton = document.querySelector('[data-target="search-modal"]') || 
+  const searchButton = document.querySelector('[data-target="search-modal"]') ||
                       document.querySelector('[aria-label="search"]');
   const searchModal = document.getElementById('search-modal');
   const searchInput = document.getElementById('search-input');
   const searchResults = document.getElementById('search-results');
   const closeButton = document.getElementById('close-search');
-  
-  console.log('Search elements:', {
-    button: !!searchButton,
-    modal: !!searchModal,
-    input: !!searchInput,
-    results: !!searchResults
-  });
-  
+
   if (!searchButton || !searchModal) {
-    console.error('Missing search elements');
     return;
   }
-  
+
   let searchData = [];
-  
-  // Load search data
+
+  function escapeHtml(str) {
+    return String(str).replace(/[&<>"']/g, function(c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function escapeRegExp(str) {
+    return String(str).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  // Load the search index; fall back to the static snapshot if the
+  // dynamically generated one is unavailable.
   fetch('/searchindex.json')
-    .then(response => response.json())
+    .then(response => {
+      if (!response.ok) throw new Error('search index ' + response.status);
+      return response.json();
+    })
+    .catch(() => fetch('/static-searchindex.json').then(r => r.json()))
     .then(data => {
       searchData = data;
-      console.log('Search data loaded:', searchData.length, 'items');
     })
     .catch(error => {
       console.error('Failed to load search data:', error);
     });
-  
+
   // Open search modal
   searchButton.addEventListener('click', function(e) {
-    console.log('Search button clicked');
     e.preventDefault();
     searchModal.classList.remove('hidden');
     if (searchInput) searchInput.focus();
   });
-  
+
   // Close search modal
   function closeModal() {
-    console.log('Closing search modal');
     searchModal.classList.add('hidden');
     if (searchInput) searchInput.value = '';
     if (searchResults) searchResults.innerHTML = '';
@@ -100,8 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
   if (searchInput) {
     searchInput.addEventListener('input', function() {
       const query = this.value.trim().toLowerCase();
-      console.log('Searching for:', query);
-      
+
       if (query.length >= 2) {
         const results = searchData.filter(item => {
           const searchText = (item.title + ' ' + (item.summary || '') + ' ' + (item.content || '')).toLowerCase();
@@ -116,7 +92,6 @@ document.addEventListener('DOMContentLoaded', function() {
           };
         });
         
-        console.log('Search results:', results.length);
         displayResults(results, query);
       } else {
         if (searchResults) searchResults.innerHTML = '';
@@ -136,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (queryIndex === -1) {
       // If query not found in content, return beginning of content
-      return content.substring(0, snippetLength) + (content.length > snippetLength ? '...' : '');
+      return escapeHtml(content.substring(0, snippetLength) + (content.length > snippetLength ? '...' : ''));
     }
     
     // Calculate start position for snippet
@@ -149,10 +124,11 @@ document.addEventListener('DOMContentLoaded', function() {
     if (start > 0) snippet = '...' + snippet;
     if (end < content.length) snippet = snippet + '...';
     
-    // Highlight the matched keyword
-    const regex = new RegExp(`(${query})`, 'gi');
+    // Escape before highlighting so the query/content can't inject markup
+    snippet = escapeHtml(snippet);
+    const regex = new RegExp(`(${escapeRegExp(escapeHtml(query))})`, 'gi');
     snippet = snippet.replace(regex, '<mark>$1</mark>');
-    
+
     return snippet;
   }
   
@@ -160,15 +136,15 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!searchResults) return;
     
     if (results.length === 0) {
-      searchResults.innerHTML = '<p class="p-4 text-gray-500">No results found for "' + query + '"</p>';
+      searchResults.innerHTML = '<p class="p-4 text-gray-500">No results found for "' + escapeHtml(query) + '"</p>';
       return;
     }
-    
+
     const html = results.slice(0, 10).map(item => `
       <div class="border border-gray-200 rounded-2xl p-4 mb-3 hover:bg-gray-50 hover:shadow-md transition-all duration-200">
-        <a href="${item.url}" class="block" onclick="closeSearchModal()">
-          <h4 class="font-semibold text-lg mb-2 text-blue-600">${item.title}</h4>
-          <p class="text-gray-600 text-sm mb-2">${item.description || ''}</p>
+        <a href="${escapeHtml(item.url)}" class="block" onclick="closeSearchModal()">
+          <h4 class="font-semibold text-lg mb-2 text-blue-600">${escapeHtml(item.title)}</h4>
+          <p class="text-gray-600 text-sm mb-2">${escapeHtml(item.description || '')}</p>
           ${item.snippet ? `<p class="text-gray-700 text-sm">${item.snippet}</p>` : ''}
         </a>
       </div>

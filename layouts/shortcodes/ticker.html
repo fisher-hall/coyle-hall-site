@@ -1,0 +1,35 @@
+{{- /* Homepage photo ticker. Uses an explicit manifest so the image order and
+       hand-set decorative rotations stay stable while Hugo still emits compact
+       420px-tall WebP derivatives for the scrolling strip. */ -}}
+{{- $imgs := slice
+  (dict "src" "images/ticker/COYLEgrass.png" "rot" "-1.4deg" "alt" "A group of students standing in the grass spelling out COYLE")
+  (dict "src" "images/ticker/DSC03204.JPG" "rot" "2.7deg" "alt" "Three students pose together on stone pavement outside a grassy area.")
+  (dict "src" "images/ticker/DSC03695.JPG" "rot" "-2.5deg" "alt" "Eight students pose with wooden paddles and burgers in paper trays on the grass at a barbeque.")
+  (dict "src" "images/ticker/DSC03867.JPG" "rot" "2.6deg" "alt" "Freshman students in matching muted green shirts all lift their paddles to form a cone shape above their heads.")
+  (dict "src" "images/ticker/DSC07769.JPG" "rot" "-1.7deg" "alt" "Students pay attention at hall gov in the basement")
+  (dict "src" "images/ticker/IMG_0434.jpeg" "rot" "91.8deg" "portrait" true "alt" "The ice chapel, a small gothic style chapel made of snow and ice with cathedral style windows, stained ice, and a glass steeple with a cross sits illuminated in the snow.")
+  (dict "src" "images/ticker/IMG_0757.jpeg" "rot" "88.3deg" "portrait" true "alt" "6 guys in various shades of green pose with wooden oards in a bright yellow inflatable pool with a duck head wearing headphones at the front.")
+  (dict "src" "images/ticker/IMG_4680.jpeg" "rot" "179deg" "alt" "A selfie of four guys in ski helmets, googles, jackets, and other gear on a snowy slope.")
+  (dict "src" "images/ticker/dahnke.png" "rot" "2.8deg" "alt" "A crowd of male students pose together in front of large, dark windows celebrating one student winning the Mr. Walsh award as he holds a certificate. ")
+  (dict "src" "images/ticker/formal.png" "rot" "-2.1deg" "alt" "A group of students all in suits smile together in a ballroom.")
+  (dict "src" "images/ticker/group.png" "rot" ".5deg" "alt" "The entire dorm community poses with Mr. and Mrs. Coyle outside on the grass. They stand their with their oars.")
+  (dict "src" "images/ticker/names.png" "rot" "-2.2deg" "alt" "Four students in different green shirts pose together outside in the dark.")
+  (dict "src" "images/ticker/pineapple.png" "rot" "2.4deg" "alt" "Three students pose together in various halloween costumes (a pineapple head, cow, and athleticware) while a man in the background stands behind them in a Red Wings jersey, illuminated by glowing orange halloween lights among fake cobwebs.")
+  (dict "src" "images/ticker/regatta1.jpg" "rot" "-2.9deg" "alt" "Four students row an inflatable pool across a lake in front of small metals bleachers with a Fisher Regatta flag.")
+  (dict "src" "images/ticker/regatta5.jpg" "rot" "2.2deg" "alt" "Three students row a combination of inner tubes and an inflatable unicorn across a lake while the lead student wears a pirate cap and waves his oar in the air.")
+  (dict "src" "images/ticker/stadiumFolks.png" "rot" "-0.9deg" "alt" "A group of guys stand on football stadium bleachers wearing navy and green shirts and jerseys cheering at an Irish Football game.")
+-}}
+<div class="ticker-outer">
+  <div id="ticker-track" class="ticker-track">
+    {{- range $set := (seq 2) -}}
+      {{- range $i, $item := $imgs -}}
+        {{- with resources.Get $item.src -}}
+          {{- $t := .Resize "x420 webp q80" -}}
+          <img src="{{ $t.RelPermalink }}" width="{{ $t.Width }}" height="{{ $t.Height }}" class="ticker-img{{ if $item.portrait }} ticker-img--portrait{{ end }}" style="--rot: {{ $item.rot }}" alt="{{ $item.alt }}"{{ if not (and (eq $set 1) (eq $i 0)) }} loading="lazy"{{ end }}>
+        {{- else -}}
+          {{- warnf "ticker shortcode: image %q not found under assets/" $item.src -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  </div>
+</div>

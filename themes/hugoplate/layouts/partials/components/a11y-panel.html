@@ -1,0 +1,13 @@
+{{- /* Accessibility preferences: circular trigger + dialog.
+       Behaviour & persistence in assets/js/a11y-prefs.js; styling in
+       assets/css/site/a11y-prefs.css. "System" options defer to the OS;
+       the panel adds the extras the OS can't express. */ -}}
+<button
+  type="button"
+  class="a11y-trigger"
+  data-a11y-open
+  aria-haspopup="dialog"
+  aria-controls="a11y-panel"
+  aria-label="Accessibility settings">
+  <i class="fa-solid fa-universal-access" aria-hidden="true"></i>
+</button>

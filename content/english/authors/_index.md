@@ -1,4 +1,0 @@
----
-title: "Authors"
-draft: true
----

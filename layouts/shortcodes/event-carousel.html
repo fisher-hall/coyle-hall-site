@@ -1,0 +1,42 @@
+{{- /* Full photo carousel for an event page — but only renders when the
+       image folder actually has images. While assets/images/<dir> is empty
+       (e.g. a freshly-scaffolded event page awaiting photos) this emits
+       nothing, so there is no empty box or dead prev/next controls. As soon as
+       images are dropped into the folder the carousel appears automatically.
+       Slides are Hugo-processed to responsive WebP, mirroring carousel-slides.
+       Params: dir (image subfolder under assets/images), alt (alt-text prefix),
+                label (aria-label for the carousel region). */ -}}
+{{- $dir := .Get "dir" -}}
+{{- $alt := .Get "alt" -}}
+{{- $label := .Get "label" | default (printf "%s photo carousel" $alt) -}}
+{{- $imgs := sort (resources.Match (printf "images/%s/*" $dir)) "Name" -}}
+{{- if gt (len $imgs) 0 -}}
+<section class="event-carousel-section fade-in-section">
+  <div class="Carousel" aria-label="{{ $label }}">
+    <div class="Carousel-track">
+      {{- $index := 0 -}}
+      {{- range $imgs -}}
+        {{- $ext := lower (path.Ext .Name) -}}
+        {{- if in (slice ".jpg" ".jpeg" ".png" ".webp" ".gif" ".avif" ".svg") $ext -}}
+      <figure class="Carousel-slide">
+          {{- if eq $ext ".svg" -}}
+        <img src="{{ .RelPermalink }}" alt="{{ printf "%s %d" $alt (add $index 1) }}" loading="{{ if eq $index 0 }}eager{{ else }}lazy{{ end }}"{{ if eq $index 0 }} fetchpriority="high"{{ end }} decoding="async">
+          {{- else -}}
+            {{- $t := .Resize "1200x webp q80" -}}
+        <img src="{{ $t.RelPermalink }}" width="{{ $t.Width }}" height="{{ $t.Height }}" alt="{{ printf "%s %d" $alt (add $index 1) }}" loading="{{ if eq $index 0 }}eager{{ else }}lazy{{ end }}"{{ if eq $index 0 }} fetchpriority="high"{{ end }} decoding="async">
+          {{- end -}}
+      </figure>
+          {{- $index = add $index 1 -}}
+        {{- end -}}
+      {{- end -}}
+    </div>
+    <button class="Carousel-control Carousel-control--prev" type="button" aria-label="Previous slide">
+      <i class="fa fa-chevron-left" aria-hidden="true"></i>
+    </button>
+    <button class="Carousel-control Carousel-control--next" type="button" aria-label="Next slide">
+      <i class="fa fa-chevron-right" aria-hidden="true"></i>
+    </button>
+  </div>
+  <div class="Carousel-dots" aria-label="Carousel pagination"></div>
+</section>
+{{- end -}}

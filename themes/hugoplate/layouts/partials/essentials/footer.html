@@ -66,7 +66,7 @@
         let points = [];
         
         // Calculate wave points with higher resolution
-        for (let x = 0; x <= canvas.width; x += 0.5) {
+        for (let x = 0; x <= canvas.width; x += 2) {
           let y = yOffset;
           
           // Stack multiple sine waves for natural randomness
@@ -108,28 +108,40 @@
         ctx.fill();
       }
       
-      function animate() {
+      function renderFrame() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
+
         // Single ocean-like footer wave with dynamic effects - more rounded and uniform
         const baseAmplitude = 15;
         const verticalMovement = 4 * Math.sin(time * 0.02);
         const recessionEffect = 1.5 * Math.sin(time * 0.015);
         const dynamicAmplitude = baseAmplitude + recessionEffect;
-        
+
         drawWave(
-          [dynamicAmplitude], 
-          [0.35], 
-          [0.7], 
-          3, 
+          [dynamicAmplitude],
+          [0.35],
+          [0.7],
+          3,
           canvas.height * 0.8 + verticalMovement,
           getCSSColor('--coyle-dark-green')
         );
-        
+      }
+
+      function animate() {
+        renderFrame();
         time += 0.8;
         animationId = requestAnimationFrame(animate);
       }
-      
+
+      // Respect reduced-motion: draw one static wave frame, skip the rAF loop.
+      const reduceMotion = window.matchMedia &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduceMotion) {
+        renderFrame();
+        window.addEventListener('resize', function () { resizeCanvas(); renderFrame(); });
+        return;
+      }
+
       animate();
       
       // Clean up on page unload
@@ -149,16 +161,21 @@
         <a
           class="navbar-brand inline-block py-0"
           href="{{ site.Home.RelPermalink }}">
-          <img src="/images/CoyleHookLogo.png" alt="Coyle Hall Logo" style="max-height: 60px; width: auto;" />
+          {{- $logo := resources.Get "images/CoyleHookLogo.png" -}}
+          {{- with $logo }}{{ $l := .Resize "180x webp q85" }}
+          <img src="{{ $l.RelPermalink }}" alt="Coyle Hall Logo" width="{{ div $l.Width 2 }}" height="{{ div $l.Height 2 }}" style="max-height: 60px; width: auto;" loading="lazy" decoding="async" />
+          {{- else }}
+          <img src="/images/CoyleHookLogo.png" alt="Coyle Hall Logo" style="max-height: 60px; width: auto;" loading="lazy" decoding="async" />
+          {{- end }}
         </a>
       </div>
       {{/*  SOCIAL ICONS  */}}
       <div class="flex items-center justify-center md:col-start-2 md:justify-self-center md:w-full">
         <ul class="social-icons flex items-center justify-center space-x-3 lg:space-x-4">
-          {{ range site.Data.social.main }}
+          {{ range hugo.Data.social.main }}
           <li>
             <a
-              class="flex items-center justify-center gap-2 px-3 py-2 whitespace-nowrap rounded-2xl transition-colors duration-200"
+              class="flex items-center justify-center gap-2 px-3 py-2 whitespace-nowrap rounded-full transition-colors duration-200"
               style="background-color: white; color: var(--coyle-dark-green);"
               href="{{ .link | safeURL }}"
               {{ if hasPrefix .link `http` }}target="_blank" rel="noopener noreferrer nofollow"{{ end }}
@@ -174,8 +191,8 @@
       {{/*  UND WORDMARK  */}}
       <div class="flex items-center justify-center md:justify-self-end">
         <a href="https://nd.edu" target="_blank" rel="noopener" class="footer-image-link">
-          <img src="https://static.nd.edu/images/marks/white/ndmark.svg" alt="University of Notre Dame" style="max-width:180px; width:100%;" class="footer-nd-light" />
-          <img src="https://static.nd.edu/images/marks/white/ndmark.svg" alt="University of Notre Dame" style="max-width:180px; width:100%;" class="footer-nd-dark" />
+          <img src="/images/nd-mark.svg" alt="University of Notre Dame" style="max-width:180px; width:100%;" class="footer-nd-light" />
+          <img src="/images/nd-mark.svg" alt="University of Notre Dame" style="max-width:180px; width:100%;" class="footer-nd-dark" />
         </a>
       </div>  <!-- New row with centered text below the three columns -->
     </div>

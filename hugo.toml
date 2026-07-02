@@ -1,8 +1,10 @@
 ######################## default configuration ####################
 # The base URL of your site (required). This will be prepended to all relative URLs.
-baseURL = "/"
+baseURL = "https://www.coylehallnd.com/"
 # Title of your website (required).
 title = "Coyle Hall"
+# generate robots.txt
+enableRobotsTXT = true
 # Your theme name
 theme = "hugoplate"
 # Default time zone for time stamps; use any valid tz database name: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List
@@ -21,10 +23,10 @@ defaultContentLanguageInSubdir = false
 ########################### Services #############################
 [services]
 [services.googleAnalytics]
-ID = 'G-MEASUREMENT_ID' # see https://gohugo.io/templates/internal/#configure-google-analytics
+ID = '' # see https://gohugo.io/templates/internal/#configure-google-analytics
 
 [services.disqus]
-shortname = 'themefisher-template' # we use disqus to show comments in blog posts . To install disqus please follow this tutorial https://portfolio.peter-baumgartner.net/2017/09/10/how-to-install-disqus-on-hugo/
+shortname = '' # see https://portfolio.peter-baumgartner.net/2017/09/10/how-to-install-disqus-on-hugo/
 
 ########################## Permalinks ############################
 [permalinks.page]
@@ -124,29 +126,15 @@ notAlternative = true
 [[params.plugins.css]]
 link = "css/search.css"
 lazy = false
-[[params.plugins.css]]
-link = "plugins/swiper/swiper-bundle.css"
-lazy = true
+# FontAwesome: all.min.css already bundles brands/solid/regular — one sheet is enough.
 [[params.plugins.css]]
 link = "plugins/glightbox/glightbox.css"
 lazy = true
 [[params.plugins.css]]
 link = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
 lazy = true
-[[params.plugins.css]]
-link = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/brands.min.css"
-lazy = true
-[[params.plugins.css]]
-link = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/solid.min.css"
-lazy = true
-[[params.plugins.css]]
-link = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/regular.min.css"
-lazy = true
 
 # JS Plugins
-[[params.plugins.js]]
-link = "plugins/swiper/swiper-bundle.js"
-lazy = false
 [[params.plugins.js]]
 link = "plugins/cookie.js"
 lazy = false
@@ -162,9 +150,6 @@ lazy = true
 [[params.plugins.js]]
 link = "js/tab.js"
 lazy = true
-[[params.plugins.js]]
-link = "js/main.js"
-lazy = false
 [[params.plugins.js]]
 link = "js/modal.js"
 lazy = true

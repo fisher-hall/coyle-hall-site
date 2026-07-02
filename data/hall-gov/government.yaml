@@ -1,0 +1,39 @@
+# Hall Government members
+# Cards render in the order listed here.
+#
+# Fields:
+#   name, role, image, email  — required
+#   hometown, major, minor, hobbies, favoritepart  — optional; omit to hide
+
+members:
+  - name: "Tanner Postell"
+    role: "Hall President"
+    image: "/images/headshots/hall-gov/26-27/tannerpostell.jpg"
+    email: "tpostell@nd.edu"
+    hometown: "Atlanta, GA"
+    major: 
+      - Chemical Engineering
+    hobbies: "Hiking, Playing guitar, Singing, and Survivor"
+    favoritepart: "Grill outs before gamedays"
+
+  - name: "Peter Belin"
+    role: "Hall VP - Fall"
+    image: "/images/headshots/peterbelin.jpg"
+    email: "pbelin@nd.edu"
+    hometown: "Bentonville, AR"
+    major: 
+      - Pre-Med
+      - Theology
+    hobbies: "Notre Dame Football, Browns Football, Spikeball, Star Wars"
+    favoritepart: "The brotherhood"
+
+  - name: "Aidan Sachs"
+    role: "Hall VP - Spring"
+    image: "/images/headshots/aidansachs.jpg"
+    email: "asachs@nd.edu"
+    hometown: "Bel Air, MD"
+    major: 
+      - Mechanical Engineering
+      - Mathematics
+    hobbies: "Hockey, Traveling, Country Music, and Pickleball"
+    favoritepart: "The Coyle table at NDH and Regatta Week"

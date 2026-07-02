@@ -1,4 +1,4 @@
 ---
 title: "Hall Staff"
-floating_navbar: true
+layout: "hall_staff"
 ---

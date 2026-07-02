@@ -1,0 +1,36 @@
+{{- /* Emits <figure class="Carousel-slide"> for every image in
+       assets/images/<dir>, sorted by name. Used by the .Carousel component.
+       Images are Hugo-processed to responsive WebP (~1200px wide, the carousel's
+       max display width) to avoid shipping multi-MB raw JPGs. SVGs are emitted
+       as-is since they can't be raster-resized.
+       Params: dir (image subfolder under assets/images), alt (alt-text prefix). */ -}}
+{{- $dir := .Get "dir" -}}
+{{- $alt := .Get "alt" -}}
+{{- $imgs := sort (resources.Match (printf "images/%s/*" $dir)) "Name" -}}
+{{- $index := 0 -}}
+{{- range $imgs -}}
+  {{- $ext := lower (path.Ext .Name) -}}
+  {{- if in (slice ".jpg" ".jpeg" ".png" ".webp" ".gif" ".avif" ".svg") $ext -}}
+<figure class="Carousel-slide">
+    {{- if eq $ext ".svg" -}}
+  <img
+    src="{{ .RelPermalink }}"
+    alt="{{ printf "%s %d" $alt (add $index 1) }}"
+    loading="{{ if eq $index 0 }}eager{{ else }}lazy{{ end }}"
+    {{ if eq $index 0 }}fetchpriority="high"{{ end }}
+    decoding="async">
+    {{- else -}}
+      {{- $t := .Resize "1200x webp q80" -}}
+  <img
+    src="{{ $t.RelPermalink }}"
+    width="{{ $t.Width }}"
+    height="{{ $t.Height }}"
+    alt="{{ printf "%s %d" $alt (add $index 1) }}"
+    loading="{{ if eq $index 0 }}eager{{ else }}lazy{{ end }}"
+    {{ if eq $index 0 }}fetchpriority="high"{{ end }}
+    decoding="async">
+    {{- end -}}
+</figure>
+    {{- $index = add $index 1 -}}
+  {{- end -}}
+{{- end -}}

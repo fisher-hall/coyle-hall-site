@@ -1,0 +1,145 @@
+{{- /* Accessibility preferences dialog overlay.
+       Rendered at body level (just before </body>) so that position:fixed
+       works correctly and is not clipped by the sticky/transformed header.
+       Trigger button lives in a11y-panel.html (inside the navbar).
+       Behaviour in assets/js/a11y-prefs.js; styling in assets/css/site/a11y-prefs.css. */ -}}
+
+<div class="a11y-panel-overlay" data-a11y-overlay hidden>
+  <div
+    id="a11y-panel"
+    class="a11y-panel"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="a11y-panel-title">
+
+    {{/* ── Header ── */}}
+    <div class="a11y-panel__head">
+      <h2 class="a11y-panel__title" id="a11y-panel-title">
+        <i class="fa-solid fa-universal-access" aria-hidden="true"></i> Accessibility
+      </h2>
+      <button type="button" class="a11y-close" data-a11y-close aria-label="Close accessibility settings">
+        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    {{/* ── Display section ── */}}
+    <p class="a11y-section-title"><i class="fa-solid fa-sun" aria-hidden="true"></i> Display</p>
+
+    <div class="a11y-field">
+      <div class="a11y-field__row">
+        <span class="a11y-field__label" id="a11y-theme-label"><i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i> Theme</span>
+        <label class="ui-checkbox a11y-sys-check" data-sys-for="theme">
+          <input type="checkbox" data-a11y-sys="theme" aria-label="Follow system theme" checked>
+          <span>System</span>
+        </label>
+      </div>
+      <div class="a11y-seg" role="group" aria-labelledby="a11y-theme-label" data-a11y-seg="theme">
+        <button type="button" data-value="light"><i class="fa-solid fa-sun" aria-hidden="true"></i> Light</button>
+        <button type="button" data-value="dark"><i class="fa-solid fa-moon" aria-hidden="true"></i> Dark</button>
+      </div>
+    </div>
+
+    <div class="a11y-field">
+      <div class="a11y-field__row">
+        <span class="a11y-field__label" id="a11y-contrast-label"><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Contrast</span>
+        <label class="ui-checkbox a11y-sys-check" data-sys-for="contrast">
+          <input type="checkbox" data-a11y-sys="contrast" aria-label="Follow system contrast" checked>
+          <span>System</span>
+        </label>
+      </div>
+      <div class="a11y-seg" role="group" aria-labelledby="a11y-contrast-label" data-a11y-seg="contrast">
+        <button type="button" data-value="normal"><i class="fa-regular fa-circle-dot" aria-hidden="true"></i>Normal</button>
+        <button type="button" data-value="high"><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> High</button>
+      </div>
+    </div>
+
+    <div class="a11y-field">
+      <div class="a11y-field__row">
+        <span class="a11y-field__label" id="a11y-motion-label"><i class="fa-solid fa-spinner" aria-hidden="true"></i> Motion</span>
+        <label class="ui-checkbox a11y-sys-check" data-sys-for="motion">
+          <input type="checkbox" data-a11y-sys="motion" aria-label="Follow system motion" checked>
+          <span>System</span>
+        </label>
+      </div>
+      <div class="a11y-seg" role="group" aria-labelledby="a11y-motion-label" data-a11y-seg="motion">
+        <button type="button" data-value="full"><i class="fa-solid fa-play" aria-hidden="true"></i> Full</button>
+        <button type="button" data-value="reduced"><i class="fa-solid fa-pause" aria-hidden="true"></i> Reduced</button>
+      </div>
+    </div>
+
+    {{/* ── Text section ── */}}
+    <p class="a11y-section-title"><i class="fa-solid fa-text-height" aria-hidden="true"></i> Text</p>
+
+    <div class="a11y-field">
+      <div class="a11y-field__row">
+        <label class="a11y-field__label" for="a11y-size-slider"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i> Size</label>
+        <label class="ui-checkbox a11y-sys-check" data-sys-for="text-size">
+          <input type="checkbox" data-a11y-sys="text-size" aria-label="Follow system text size" checked>
+          <span>System</span>
+        </label>
+      </div>
+      <div class="a11y-slider-row">
+        <span class="a11y-slider-label--sm" aria-hidden="true">A</span>
+        <input
+          type="range"
+          id="a11y-size-slider"
+          class="a11y-slider"
+          min="0" max="6" step="1"
+          value="3"
+          data-a11y-slider="text-size"
+          aria-label="Text size"
+          aria-valuetext="Default">
+        <span class="a11y-slider-label--lg" aria-hidden="true">A</span>
+      </div>
+      <div class="a11y-slider-ticks" aria-hidden="true">
+        <span>XS</span><span>S</span><span>Default</span><span>L</span><span>XL</span><span>2XL</span><span>3XL</span>
+      </div>
+    </div>
+
+    <div class="a11y-field">
+      <div class="a11y-field__row">
+        <label class="a11y-field__label" for="a11y-weight-slider"><i class="fa-solid fa-bold" aria-hidden="true"></i> Weight</label>
+        <label class="ui-checkbox a11y-sys-check" data-sys-for="text-weight">
+          <input type="checkbox" data-a11y-sys="text-weight" aria-label="Follow system font weight" checked>
+          <span>System</span>
+        </label>
+      </div>
+      <div class="a11y-slider-row">
+        <span class="a11y-slider-label--sm" style="font-weight:300" aria-hidden="true">A</span>
+        <input
+          type="range"
+          id="a11y-weight-slider"
+          class="a11y-slider"
+          min="0" max="4" step="1"
+          value="1"
+          data-a11y-slider="text-weight"
+          aria-label="Font weight"
+          aria-valuetext="Default">
+        <span class="a11y-slider-label--lg" style="font-weight:700" aria-hidden="true">A</span>
+      </div>
+      <div class="a11y-slider-ticks" aria-hidden="true">
+        <span>Light</span><span>Default</span><span>Semibold</span><span>Bold</span><span>Extra Bold</span>
+      </div>
+    </div>
+
+    {{/* ── Reading section ── */}}
+    <p class="a11y-section-title"><i class="fa-solid fa-book-open" aria-hidden="true"></i> Reading</p>
+
+    <div class="a11y-toggle">
+      <span class="a11y-toggle__text">Increased line spacing</span>
+      <button type="button" class="ui-switch" role="switch" aria-checked="false" data-a11y-toggle="line" aria-label="Increased line spacing"></button>
+    </div>
+    <div class="a11y-toggle">
+      <span class="a11y-toggle__text">Increased letter spacing</span>
+      <button type="button" class="ui-switch" role="switch" aria-checked="false" data-a11y-toggle="letter" aria-label="Increased letter spacing"></button>
+    </div>
+    <div class="a11y-toggle">
+      <span class="a11y-toggle__text">Dyslexia-friendly font</span>
+      <button type="button" class="ui-switch" role="switch" aria-checked="false" data-a11y-toggle="font" aria-label="Dyslexia-friendly font"></button>
+    </div>
+
+    <button type="button" class="a11y-reset" data-a11y-reset>
+      <i class="fa-solid fa-rotate-left" aria-hidden="true"></i> Reset to defaults
+    </button>
+  </div>
+</div>

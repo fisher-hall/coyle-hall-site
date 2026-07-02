@@ -1,0 +1,27 @@
+# Welcome Weekend Co-Chairs
+# Fields:
+#   name:   (required) Full name
+#   title:  Role — defaults to "Co-Chair" if omitted
+#   grade:  Year (e.g. Junior, Senior)
+#   major:  Single string or list of strings
+#   image:          (optional) Path to headshot
+#   image_position: (optional) CSS object-position, e.g. "center 40%" — default is "center 30%"
+
+cochairs:
+  - name: "Danny Entler"
+    title: "Co-Chair"
+    major:
+      - "Neuroscience & Behavior"
+    image: "/images/headshots/cochairs/26-27/dannyentler.jpg"
+    image_position: "center top"
+  - name: "Max Roccia"
+    title: "Co-Chair"
+    major:
+      - "Mechanical Engineering"
+    image: "/images/headshots/cochairs/26-27/maxroccia.jpg"
+    image_position: "center top"
+  - name: "Saul Zabukovic"
+    title: "Co-Chair"
+    major: "ACMS"
+    image: "/images/headshots/cochairs/26-27/saulzabukovic.jpg"
+    image_position: "center top"

@@ -1,0 +1,51 @@
+{{ with index hugo.Data "welcome-weekend" "cochairs" }}
+  {{ if .cochairs }}
+    <style>
+      /* Shield avatars from .content/prose article-image styles (margins, inline-block, height:auto) */
+      .ww-cochairs img,.ww-cochairs img:hover{transform:none !important;box-shadow:none !important;cursor:default !important;}
+      .ww-cochairs .ww-avatar img{position:absolute !important;inset:0 !important;width:100% !important;height:100% !important;margin:0 !important;display:block !important;object-fit:cover !important;}
+    </style><div class="ww-cochairs mt-12 mb-2 fade-in-section">
+      <h2 class="text-3xl font-bold text-center mb-1" style="color: var(--primary-color);">Welcome Weekend Co-Chairs</h2>
+      <p class="text-lg text-center px-20 sm:px-40 lg:px-80 mb-8" style="color: var(--secondary-text-color);">Meet the juniors who will be leading your Welcome Weekend, along with other student volunteers!</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 max-w-2xl mx-auto gap-6">
+        {{ range .cochairs }}
+          {{- $thumb := "/images/ImagePlaceholder.jpg" -}}
+          {{- with .image -}}
+            {{- $tpath := strings.TrimPrefix "/" . -}}
+            {{- with resources.Get $tpath -}}
+              {{- $thumb = (.Fill "288x288 Smart webp q80").RelPermalink -}}
+            {{- else -}}
+              {{- $thumb = . -}}
+            {{- end -}}
+          {{- end -}}
+
+          {{- $majorVal := "" -}}
+          {{- with .major -}}
+            {{- if reflect.IsSlice . -}}
+              {{- $majorVal = delimit . " & " -}}
+            {{- else -}}
+              {{- $majorVal = . -}}
+            {{- end -}}
+          {{- end -}}
+
+          {{- $position := default "center top" .image_position -}}
+          <div class="flex flex-col items-center text-center gap-2">
+            <div class="ww-avatar relative w-36 h-36 rounded-full overflow-hidden shrink-0" style="background: var(--color-custom-light, #e5e7eb);">
+              <img
+                class="absolute inset-0 w-full h-full object-cover" style="object-position: {{ $position }}; transform: none !important; box-shadow: none !important; cursor: default !important;"
+                src="{{ $thumb }}"
+                alt="{{ .name }}"
+                width="144"
+                height="144"
+              />
+            </div>
+            <p class="font-primary text-2xl font-bold m-0 leading-tight" style="color: var(--primary-color);">{{ .name }}</p>
+            <p class="font-primary text-xl font-semibold m-0 leading-tight" style="color: var(--secondary-text-color);">{{ default "Co-Chair" .title }}</p>
+            {{ with .grade }}<p class="font-primary font-medium text-base m-0 leading-tight">{{ . }}</p>{{ end }}
+            {{ with $majorVal }}<p class="font-primary font-mediumtext-base m-0 leading-tight">{{ . }}</p>{{ end }}
+          </div>
+        {{ end }}
+      </div>
+    </div>
+  {{ end }}
+{{ end }}

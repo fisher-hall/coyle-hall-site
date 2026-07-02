@@ -1,0 +1,293 @@
+{{ define "main" }}
+  {{/* ── Banner ─────────────────────────────────────────────────────── */}}
+  {{- $bannerImg     := "/images/BannerImages/LakeBanner.png" -}}
+  {{- $bannerHeading := "Hall Gov" -}}
+  {{- $bannerSrc     := $bannerImg -}}
+  {{- with resources.Get (strings.TrimPrefix "/" $bannerImg) -}}
+    {{- $bannerSrc = (.Resize "1600x webp q82").RelPermalink -}}
+  {{- end -}}
+  <div class="page-banner-wrapper">
+    <div id="banner-parallax" style="background-image: url('{{ $bannerSrc }}');">
+      <div class="banner-tint-layer"></div>
+      <div class="home-banner-text-overlay">
+        <h1 class="home-banner-heading text-white">{{ $bannerHeading }}</h1>
+      </div>
+    </div>
+  </div>
+  <div class="page-content-wave">
+    <canvas id="page-wave-canvas"></canvas>
+  </div>
+
+  <style>
+    @keyframes cc-shimmer {
+      0%   { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    .cc-shimmer {
+      background: linear-gradient(90deg, rgba(255,255,255,.05) 25%, rgba(255,255,255,.12) 50%, rgba(255,255,255,.05) 75%);
+      background-size: 200% 100%;
+      animation: cc-shimmer 1.5s ease-in-out infinite;
+    }
+    .cc-bio {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 300ms cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .cc-bio[data-open] { grid-template-rows: 1fr; }
+    .cc-bio > div {
+      overflow: hidden;
+      min-height: 0;
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: opacity 220ms ease, transform 220ms ease;
+    }
+    .cc-bio[data-open] > div {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 80ms;
+    }
+    #past-body {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 420ms cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    #past-body[data-open] { grid-template-rows: 1fr; }
+    #past-body > div {
+      overflow: hidden;
+      min-height: 0;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: opacity 300ms ease, transform 300ms ease;
+    }
+    #past-body[data-open] > div {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 130ms;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .cc-shimmer { animation: none; background: rgba(255,255,255,.05); }
+      .cc-bio { transition: none; }
+      .cc-bio:not([data-open]) { display: none; }
+      #past-body { transition: none; }
+      #past-body > div { transition: none; }
+      #past-body:not([data-open]) { display: none; }
+      #past-body[data-open] { display: grid; }
+    }
+    #past-toggle, #past-toggle:hover { transform: none !important; box-shadow: none !important; }
+    .cc-past-chevron { transition: transform 200ms ease; }
+    #past-toggle[aria-expanded="true"] .cc-past-chevron { transform: rotate(90deg); }
+    html.a11y-contrast-high .cc-card { background: #000 !important; outline: 2px solid var(--primary-color); }
+    @media (forced-colors: active) {
+      .cc-card { forced-color-adjust: none; background: #000 !important; outline: 2px solid var(--primary-color); }
+    }
+
+    .page-content-wave { margin-top: -70px; }
+    @media (max-width: 1280px) { .page-content-wave { margin-top: -66px; } }
+    @media (max-width: 1024px) { .page-content-wave { margin-top: -56px; } }
+    @media (max-width: 768px)  { .page-content-wave { margin-top: -46px; } }
+    .cc-card img, .cc-card img:hover,
+    #past-body img, #past-body img:hover { transform: none !important; box-shadow: none !important; cursor: default !important; }
+  </style>
+
+  <div style="height: 4rem;"></div>
+  <section class="section" style="padding-top: 6rem;">
+    <div class="max-w-7xl mx-auto px-4">
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-5 items-start">
+        {{ range (index hugo.Data "hall-gov" "government").members }}
+
+          {{- $img := "/images/ImagePlaceholder.jpg" -}}
+          {{- with .image -}}
+            {{- $path := strings.TrimPrefix "/" . -}}
+            {{- with resources.Get $path -}}
+              {{- $img = (.Resize "400x webp q80").RelPermalink -}}
+            {{- else -}}
+              {{- $img = . -}}
+            {{- end -}}
+          {{- end -}}
+
+          {{- $majorVal   := "" -}}
+          {{- $majorLabel := "" -}}
+          {{- with .major -}}
+            {{- if reflect.IsSlice . -}}
+              {{- if eq (len .) 2 -}}
+                {{- $majorVal = delimit . " & " -}}
+              {{- else -}}
+                {{- $majorVal = delimit . ", " -}}
+              {{- end -}}
+              {{- if gt (len .) 1 -}}{{ $majorLabel = "Majors" }}{{- else -}}{{ $majorLabel = "Major" }}{{- end -}}
+            {{- else -}}
+              {{- $majorVal = . -}}
+              {{- $majorLabel = "Major" -}}
+            {{- end -}}
+          {{- end -}}
+
+          {{- $minorVal   := "" -}}
+          {{- $minorLabel := "" -}}
+          {{- with .minor -}}
+            {{- if reflect.IsSlice . -}}
+              {{- if eq (len .) 2 -}}
+                {{- $minorVal = delimit . " & " -}}
+              {{- else -}}
+                {{- $minorVal = delimit . ", " -}}
+              {{- end -}}
+              {{- if gt (len .) 1 -}}{{ $minorLabel = "Minors" }}{{- else -}}{{ $minorLabel = "Minor" }}{{- end -}}
+            {{- else -}}
+              {{- $minorVal = . -}}
+              {{- $minorLabel = "Minor" -}}
+            {{- end -}}
+          {{- end -}}
+
+          {{- $hasBio := or .hometown $majorVal $minorVal .hobbies .favoritepart .email -}}
+
+          <div class="cc-card rounded-[2rem] overflow-hidden" style="background: linear-gradient(to top right, var(--coyle-grad-dark), var(--coyle-grad-light))">
+
+            <div class="p-4 pb-0">
+              <div class="relative aspect-square rounded-[1.38rem] overflow-hidden bg-black/20">
+                <div class="cc-shimmer absolute inset-0"></div>
+                <img
+                  class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300"
+                  src="{{ $img }}"
+                  alt="{{ .name }}"
+                  loading="lazy"
+                  decoding="async"
+                  onload="this.classList.add('opacity-100'); this.previousElementSibling?.remove()"
+                  onerror="this.src='/images/ImagePlaceholder.jpg'"
+                />
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between gap-2 pl-6 pr-4 py-3">
+              <div class="min-w-0">
+                <p class="font-primary font-bold text-xl text-white m-0 overflow-hidden text-ellipsis whitespace-nowrap">{{ .name }}</p>
+                {{ with .role }}
+                  <p class="font-primary font-medium text-lg text-white/80 m-0 mt-0.5 leading-tight">{{ strings.TrimPrefix "Hall " . }}</p>
+                {{ end }}
+              </div>
+              {{ if $hasBio }}
+                <button
+                  class="cc-bio-btn shrink-0 w-[30px] h-[30px] rounded-full border-2 border-white bg-transparent text-white flex items-center justify-center p-0 mr-2 text-[0.625rem] cursor-pointer transition-all duration-150 hover:bg-white hover:text-[var(--coyle-dark-green)] hover:border-white aria-expanded:rotate-45 aria-expanded:bg-white/20 aria-expanded:border-white aria-expanded:hover:bg-white/30 aria-expanded:hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--coyle-accent-green)]"
+                  aria-expanded="false"
+                  aria-label="Learn more about {{ .name }}"
+                  type="button"
+                ><i class="fa-solid fa-plus text-base leading-none" aria-hidden="true"></i></button>
+              {{ end }}
+            </div>
+
+            {{ if $hasBio }}
+              <div class="cc-bio" aria-hidden="true">
+                <div><div class="px-6 pt-1 pb-[1.125rem]">
+                  <div class="flex flex-col gap-1.5">
+                    {{ with .hometown }}
+                      <div class="flex flex-wrap items-baseline gap-x-[0.45rem] gap-y-0.5 text-base leading-[1.45]">
+                        <span class="font-primary font-semibold text-white/70 whitespace-nowrap after:content-[':']">Hometown</span>
+                        <span class="font-primary font-medium text-white">{{ . }}</span>
+                      </div>
+                    {{ end }}
+                    {{ with $majorVal }}
+                      <div class="flex flex-wrap items-baseline gap-x-[0.45rem] gap-y-0.5 text-base leading-[1.45]">
+                        <span class="font-primary font-semibold text-white/70 whitespace-nowrap after:content-[':']">{{ $majorLabel }}</span>
+                        <span class="font-primary font-medium text-white">{{ . }}</span>
+                      </div>
+                    {{ end }}
+                    {{ with $minorVal }}
+                      <div class="flex flex-wrap items-baseline gap-x-[0.45rem] gap-y-0.5 text-base leading-[1.45]">
+                        <span class="font-primary font-semibold text-white/70 whitespace-nowrap after:content-[':']">{{ $minorLabel }}</span>
+                        <span class="font-primary font-medium text-white">{{ . }}</span>
+                      </div>
+                    {{ end }}
+                    {{ with .hobbies }}
+                      <div class="flex flex-wrap items-baseline gap-x-[0.45rem] gap-y-0.5 text-base leading-[1.45]">
+                        <span class="font-primary font-semibold text-white/70 whitespace-nowrap after:content-[':']">Hobbies</span>
+                        <span class="font-primary font-medium text-white">{{ . }}</span>
+                      </div>
+                    {{ end }}
+                  </div>
+                  {{ with .favoritepart }}
+                    <div class="flex flex-col gap-0.5 mt-2.5 pt-2.5 border-t border-white/15">
+                      <span class="font-primary text-base font-semibold text-white/70">Favorite Part of Coyle</span>
+                      <span class="font-primary text-base italic font-medium text-white leading-[1.55]">"{{ . }}"</span>
+                    </div>
+                  {{ end }}
+                  {{ with .email }}
+                    <div class="mt-3 mb-1.5">
+                      <a href="mailto:{{ . }}" class="block w-full">
+                        <Button class="white" style="width:100%;justify-content:center;">
+                          {{ . }}
+                          <i class="fa-solid fa-envelope leading-none" aria-hidden="true"></i>
+                        </Button>
+                      </a>
+                    </div>
+                  {{ end }}
+                </div></div>
+              </div>
+            {{ end }}
+
+          </div>
+        {{ end }}
+      </div>
+
+      {{/* Past Government — driven by data/hall-gov/past.yaml */}}
+      {{ with index hugo.Data "hall-gov" "past" }}
+        {{ if .years }}
+          <div class="mt-16 pt-10">
+
+            <button
+              class="flex items-center justify-between w-full bg-transparent border-3 border-[var(--primary-color)] rounded-3xl px-5 py-3.5 cursor-pointer font-primary text-xl font-bold text-[var(--primary-color)] transition-[background,color] duration-200 text-left gap-3 hover:scale-100 hover:bg-[var(--primary-color)] hover:text-white aria-expanded:bg-[var(--primary-color)] aria-expanded:text-white focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-[var(--coyle-accent-green)]"
+              id="past-toggle"
+              aria-expanded="false"
+              aria-controls="past-body"
+              type="button"
+            >
+              <span>Past Government</span>
+              <i class="fa-solid fa-chevron-right shrink-0 cc-past-chevron" aria-hidden="true"></i>
+            </button>
+
+            <div id="past-body">
+              <div>
+              {{ range .years }}
+                <div class="mt-7">
+                  <h3 class="font-primary text-2xl font-bold tracking-[0.1em] uppercase text-[var(--primary-color)] m-0 mb-4 pb-2.5 text-center">{{ .year }}</h3>
+                  <div class="grid grid-cols-1 min-[400px]:grid-cols-3 max-w-xl mx-auto gap-6 lg:gap-10">
+                    {{ range .members }}
+                      {{- $thumb := "" -}}
+                      {{- with .image -}}
+                        {{- $tpath := strings.TrimPrefix "/" . -}}
+                        {{- with resources.Get $tpath -}}
+                          {{- $thumb = (.Fill "200x200 Center webp q80").RelPermalink -}}
+                        {{- else -}}
+                          {{- $thumb = . -}}
+                        {{- end -}}
+                      {{- end -}}
+                      <div class="flex flex-col items-center text-center gap-2.5">
+                        <div class="w-24 h-24 rounded-full overflow-hidden bg-[var(--color-custom-light)] shrink-0">
+                          <img
+                            class="w-full h-full object-cover object-center block"
+                            src="/images/ImagePlaceholder.jpg"
+                            {{ with $thumb }}data-src="{{ . }}"{{ end }}
+                            alt="{{ .name }}"
+                            width="96"
+                            height="96"
+                          />
+                        </div>
+                        <p class="font-primary text-xl font-semibold text-[var(--primary-color)] dark:text-[#e0e0e0] m-0 leading-tight line-clamp-2">{{ .name }}</p>
+                        <p class="font-primary text-base font-medium text-[var(--secondary-text-color)] m-0 leading-tight line-clamp-2">{{ .title }}</p>
+                      </div>
+                    {{ end }}
+                  </div>
+                </div>
+              {{ end }}
+              </div>
+            </div>
+
+          </div>
+        {{ end }}
+      {{ end }}
+
+    </div>
+  </section>
+
+  {{ with resources.Get "js/commissioner-card.js" }}
+    <script src="{{ .RelPermalink }}" defer></script>
+  {{ end }}
+{{ end }}

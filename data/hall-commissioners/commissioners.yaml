@@ -1,0 +1,154 @@
+# Current Hall Commissioners
+# Cards render in the order listed here, top-left to bottom-right.
+# To reorder: move entries. To add someone: add an entry. To remove: delete the entry.
+#
+# Fields:
+#   name, role, image, email  — required
+#   hometown, major, minor, hobbies, favoritepart  — optional; omit or leave blank to hide
+#   major / minor support a single string or a YAML list (label pluralizes automatically)
+
+commissioners:
+  - name: "Luke Barinaga"
+    role: "Sports Commissioner"
+    image: "/images/headshots/lukebarinaga.jpg"
+    email: "lbarinag@nd.edu"
+    hometown: "Fruitland, ID"
+    major: "Finance and ACMS"
+    hobbies: "ND Athletics, Intramural Sports, Fishing, Golfing, and the Outdoors"
+    favoritepart: "The tight knit community with all of my Coyle brothers"
+
+  - name: "Trey Zurcher"
+    role: "Sports Commissioner"
+    image: "/images/headshots/treyzurcher.jpg"
+    email: "tzurche2@nd.edu"
+    hometown: "Englewood, CO"
+    major: "Finance"
+    hobbies: "All Sports, the Bible, CFB 26"
+    favoritepart: "Playing interhall sports with the Coyle guys"
+
+  - name: "Peter Belin"
+    role: "Service Commissioner"
+    image: "/images/headshots/peterbelin.jpg"
+    email: "pbelin@nd.edu"
+    hometown: "Bentonville, AR"
+    major:
+      - Pre-Med
+      - Theology
+    hobbies: "Notre Dame Football, Browns Football, Spikeball, Star Wars"
+    favoritepart: "The brotherhood"
+
+  - name: "Josh Urban"
+    role: "Service Commissioner"
+    image: "/images/headshots/joshurban.jpg"
+    email: "jurban2@nd.edu"
+    hometown: "Pewaukee, WI"
+    major: "Mechanical Engineering"
+    hobbies: "Baseball, Volleyball, Pokemon, Quantum Mechanics/Computing, Nuclear Fission"
+    favoritepart: "The Brotherhood - knowing I have an amazing group of guys who support me and who I can always have a good time with! Ice cream Mass is also one of the highlights of every week!"
+
+  - name: "Brendan Bernath"
+    role: "Clubs Commissioner"
+    image: "/images/headshots/brendanbernath.jpg"
+    email: "bbernath@nd.edu"
+
+  - name: "Jonah Blay"
+    role: "Social Commissioner"
+    image: "/images/headshots/jonahblay.jpg"
+    email: "jblay@nd.edu"
+    hometown: "Tallahassee, FL"
+    major: "Physics and Honors Mathematics"
+    hobbies: "Running, Working Out, and Music"
+    favoritepart: "The Fisher/Coyle table and the Regatta"
+
+  - name: "Abel Rupertus"
+    role: "Social Commissioner"
+    image: "/images/headshots/abelrupertus.jpg"
+    email: "arupertu@nd.edu"
+    hometown: "Philadelphia, PA"
+    major: "Computer Science"
+    hobbies: "Sports, Baseball, Movies, Piano"
+    favoritepart: "The tight-knit aspect of the dorm and how easy it is to be close with people from any year, from on-campus freshmen to off-campus seniors."
+
+  - name: "Nick DeMarco"
+    role: "Social Media Commissioner"
+    image: "/images/headshots/nickdemarco.jpg"
+    email: "ndemarc2@nd.edu"
+
+  - name: "Riley Carlin"
+    role: "Trivia Commissioner"
+    image: "/images/headshots/rileycarlin.jpg"
+    email: "rcarlin2@nd.edu"
+
+  - name: "Bobby Munhall"
+    role: "Trivia Commissioner"
+    image: "/images/headshots/bobbymunhall.jpg"
+    email: "rmunhall@nd.edu"
+    hometown: "Scottsdale, AZ"
+    major: "Finance"
+    hobbies: "Lifting, Volleyball, Rocket League, Word Games"
+    favoritepart: "The Coyle community is a place that transcends all boundaries. We don't have section culture, and for better or for worse, we're all in this together and that's what's made Fisher/Coyle such a great brotherhood for me"
+
+  - name: "Will Griffin"
+    role: "Website Commissioner"
+    image: "/images/headshots/willgriffin.jpg"
+    email: "wgriffi3@nd.edu"
+    hometown: "Fishers, IN"
+    major: "Computer Science"
+    hobbies: "Volleyball, Music, Piano, Coding, Hiking, and Cooking"
+    favoritepart: "All the guys in Coyle who've been super welcoming and who I've grown close to this past year"
+
+  - name: "Daniel Burke"
+    role: "Website Commissioner"
+    image: "/images/headshots/danielburke.jpg"
+    email: "dburke6@nd.edu"
+    hometown: "Beverly Hills, MI"
+    major: "Computer Science"
+    minor: "Engineering Corporate Practice"
+    hobbies: "Running, Skiing, Hiking, Pickleball, and Graphic Design"
+    favoritepart: "Fisher/Coyle DH table"
+
+  - name: "Luke Williams"
+    role: "Merch Commissioner"
+    image: "/images/headshots/lukewilliams.jpg"
+    email: "lwilli29@nd.edu"
+    hometown: "Fort Worth, TX"
+    major: "Finance and Theology"
+    hobbies: "Fishing, College Football, Nature, Food"
+    favoritepart: "You can be close with anybody in the dorm, regardless of what year you're in. Our culture is really unique and welcoming to all."
+
+  - name: "Charlie O'Connor"
+    role: "Merch Commissioner"
+    image: "/images/headshots/charlieoconnor.jpg"
+    email: "coconn33@nd.edu"
+    hometown: "Arlington Heights, IL"
+    major: "Honors Finance and ACMS"
+    hobbies: "Soccer, Boxing, Dumpling Making, Christopher Nolan Movies, Poker"
+    favoritepart: "In the wise words of Helen Keller, 'Alone we can do so little; together, we can do so much.' In the same way, the strength of Fisher lies in the people that build a tight bond in our community."
+
+  - name: "Patrick O'Leary"
+    role: "Gains Commissioner"
+    image: "/images/headshots/patrickoleary.jpg"
+    email: "joleary4@nd.edu"
+    hometown: "San Diego, CA"
+    major: "Biochemistry"
+    hobbies: "Basketball, Volleyball, Guitar"
+    favoritepart: "Fisher Intramural Sports (shout out lil guppies!)"
+
+  - name: "Nick Mahoney"
+    role: "Gains Commissioner"
+    image: "/images/headshots/nickmahoney.jpg"
+    email: "nmahone2@nd.edu"
+
+  - name: "Jack Kelleher"
+    role: "Opportunities Commissioner"
+    image: "/images/headshots/jackkelleher.jpg"
+    email: "skelleh2@nd.edu"
+    hometown: "Hingham, MA"
+    major: "Finance and Program of Liberal Studies"
+    hobbies: "Rowing, Jesus, Boston Sports, Having fun with friends"
+    favoritepart: "My favorite part of the Fisher community is being able to spend so much time with such influential and inspirational people."
+
+  - name: "Cash Deibert"
+    role: "Opportunities Commissioner"
+    image: "/images/headshots/cashdeibert.jpg"
+    email: "cdeibert@nd.edu"

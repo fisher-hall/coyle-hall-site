@@ -15,6 +15,8 @@
   const closeAllSubmenus = () => {
     document.querySelectorAll(".nav-dropdown").forEach((dropdown) => {
       dropdown.classList.remove("mobile-submenu-active");
+      const toggle = dropdown.querySelector(":scope > .nav-link");
+      if (toggle) toggle.setAttribute("aria-expanded", "false");
     });
     navMenu?.classList.remove("submenu-open");
   };
@@ -33,6 +35,7 @@
   // --- Simplified Reliable Mobile Submenu Logic ---
   const handleNavToggleChange = (checked) => {
     const root = document.documentElement;
+    if (navLabel) navLabel.setAttribute('aria-expanded', checked ? 'true' : 'false');
     if (checked) {
       document.body.style.overflow = 'hidden';
       root.style.overflow = 'hidden';
@@ -83,22 +86,37 @@
     // Accessibility semantics for mobile
     link.setAttribute('role', 'button');
     link.style.cursor = 'pointer';
-      link.addEventListener('click', (e) => {
-        if (!isMobile()) return; // desktop handled elsewhere
+      const openSubmenu = (link) => {
         if (!navToggle?.checked) return; // menu closed
-        e.preventDefault();
-        e.stopPropagation();
         const parent = link.closest('.nav-dropdown');
         const was = parent.classList.contains('mobile-submenu-active');
         closeAllSubmenus();
         if (!was) {
           parent.classList.add('mobile-submenu-active');
+          link.setAttribute('aria-expanded', 'true');
           navMenu?.classList.add('submenu-open');
       // rotate arrow if present
       const svg = link.querySelector('svg');
       if (svg) svg.style.transform = 'rotate(-90deg)';
         } else {
           navMenu?.classList.remove('submenu-open');
+        }
+      };
+      link.addEventListener('click', (e) => {
+        if (!isMobile()) return; // desktop handled elsewhere
+        if (!navToggle?.checked) return; // menu closed
+        e.preventDefault();
+        e.stopPropagation();
+        openSubmenu(link);
+      });
+      // Keyboard activation on mobile (Enter/Space)
+      link.addEventListener('keydown', (e) => {
+        if (!isMobile()) return;
+        if (!navToggle?.checked) return;
+        if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+          e.preventDefault();
+          e.stopPropagation();
+          openSubmenu(link);
         }
       });
       link.dataset.mobileBound = '1';
@@ -120,6 +138,20 @@
   const initializeMobileMenu = () => {
     navToggle = document.querySelector('#nav-toggle'); // refresh reference in case of re-render
     navToggle?.addEventListener('change', (e) => handleNavToggleChange(e.target.checked));
+
+    // Keyboard activation for the hamburger label (the underlying checkbox is
+    // display:none, so the label needs explicit Enter/Space handling).
+    if (navLabel && navToggle) {
+      navLabel.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+          e.preventDefault();
+          // If search is open, the existing click handler closes it + opens menu.
+          navToggle.checked = !navToggle.checked;
+          handleNavToggleChange(navToggle.checked);
+        }
+      });
+    }
+
     bindMobileTopLevel();
 
     // Outside click (only when open)
@@ -147,14 +179,27 @@
   const desktopSetup = () => {
     const dropdownMenuToggler = document.querySelectorAll('.nav-dropdown > .nav-link');
     const dropdownItems = document.querySelectorAll('.nav-dropdown');
-    const closeAllDropdowns = () => dropdownItems.forEach(i => i.classList.remove('active'));
-    
+    // Keep aria-expanded in sync with the open/closed (.active) state
+    const setExpanded = (dropdown, expanded) => {
+      const toggle = dropdown.querySelector(':scope > .nav-link');
+      if (toggle) toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+    };
+    const closeAllDropdowns = () => dropdownItems.forEach(i => {
+      i.classList.remove('active');
+      setExpanded(i, false);
+    });
+    const openDropdown = (dropdown) => {
+      closeAllDropdowns();
+      dropdown.classList.add('active');
+      setExpanded(dropdown, true);
+    };
+
     dropdownMenuToggler.forEach(toggler => {
       // Remove any existing desktop listener first
       if (toggler.dataset.desktopBound === '1') return;
-      
+
       const dropdown = toggler.closest('.nav-dropdown');
-      
+
       // Click handler for desktop
       const desktopClickHandler = (e) => {
         if (isMobile()) return; // ignore on mobile
@@ -163,27 +208,77 @@
         const current = e.currentTarget.closest('.nav-dropdown');
         const was = current.classList.contains('active');
         closeAllDropdowns();
-        if (!was) current.classList.add('active');
+        if (!was) openDropdown(current);
       };
-      
+
+      // Keyboard: Enter/Space toggles, ArrowDown opens, Escape closes
+      const desktopKeydownHandler = (e) => {
+        if (isMobile()) return; // ignore on mobile
+        if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+          e.preventDefault();
+          e.stopPropagation();
+          const was = dropdown.classList.contains('active');
+          closeAllDropdowns();
+          if (!was) openDropdown(dropdown);
+        } else if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          openDropdown(dropdown);
+          const firstLink = dropdown.querySelector('.nav-dropdown-list a');
+          if (firstLink) firstLink.focus();
+        } else if (e.key === 'Escape') {
+          dropdown.classList.remove('active');
+          setExpanded(dropdown, false);
+          toggler.focus();
+        }
+      };
+
+      // Open on keyboard focus reaching the toggle (helps :focus-within too)
+      const focusHandler = () => {
+        if (isMobile()) return;
+        openDropdown(dropdown);
+      };
+
       // Hover handlers for desktop
       const mouseEnterHandler = () => {
         if (isMobile()) return; // ignore on mobile
-        closeAllDropdowns();
-        dropdown.classList.add('active');
+        openDropdown(dropdown);
       };
-      
+
       const mouseLeaveHandler = () => {
         if (isMobile()) return; // ignore on mobile
         dropdown.classList.remove('active');
+        setExpanded(dropdown, false);
       };
-      
+
       toggler.addEventListener('click', desktopClickHandler);
+      toggler.addEventListener('keydown', desktopKeydownHandler);
+      toggler.addEventListener('focus', focusHandler);
       dropdown.addEventListener('mouseenter', mouseEnterHandler);
       dropdown.addEventListener('mouseleave', mouseLeaveHandler);
+
+      // Close when focus leaves the whole dropdown (toggle + submenu)
+      dropdown.addEventListener('focusout', (e) => {
+        if (isMobile()) return;
+        if (!dropdown.contains(e.relatedTarget)) {
+          dropdown.classList.remove('active');
+          setExpanded(dropdown, false);
+        }
+      });
+
+      // Escape from inside the submenu closes and returns focus to the toggle
+      dropdown.addEventListener('keydown', (e) => {
+        if (isMobile()) return;
+        if (e.key === 'Escape' && dropdown.classList.contains('active')) {
+          e.stopPropagation();
+          dropdown.classList.remove('active');
+          setExpanded(dropdown, false);
+          toggler.focus();
+        }
+      });
+
       toggler.dataset.desktopBound = '1';
     });
-    
+
     document.addEventListener('click', (e) => {
       if (isMobile()) return;
       if (!e.target.closest('.nav-dropdown')) closeAllDropdowns();
@@ -194,25 +289,27 @@
   // Initialize mobile menu functionality
   initializeMobileMenu();
 
-  // Testimonial Slider
+  // Testimonial Slider (only if Swiper is loaded and a slider exists)
   // ----------------------------------------
-  new Swiper(".testimonial-slider", {
-    spaceBetween: 24,
-    loop: true,
-    pagination: {
-      el: ".testimonial-slider-pagination",
-      type: "bullets",
-      clickable: true,
-    },
-    breakpoints: {
-      768: {
-        slidesPerView: 2,
+  if (typeof Swiper !== "undefined" && document.querySelector(".testimonial-slider")) {
+    new Swiper(".testimonial-slider", {
+      spaceBetween: 24,
+      loop: true,
+      pagination: {
+        el: ".testimonial-slider-pagination",
+        type: "bullets",
+        clickable: true,
       },
-      992: {
-        slidesPerView: 3,
+      breakpoints: {
+        768: {
+          slidesPerView: 2,
+        },
+        992: {
+          slidesPerView: 3,
+        },
       },
-    },
-  });
+    });
+  }
 
 
   // Inline Search Bar Toggle
@@ -227,14 +324,17 @@
   const createSearchBar = () => {
     const container = document.createElement('div');
     container.className = 'inline-search-container';
+    container.setAttribute('role', 'search');
     container.innerHTML = `
       <i class="fa-solid fa-search search-icon-inside"></i>
-      <input 
-        type="text" 
+      <input
+        type="text"
         id="inline-search-input"
-        class="inline-search-input" 
+        class="inline-search-input"
         placeholder="Search..."
         autocomplete="off"
+        aria-label="Search"
+        aria-controls="inline-search-results"
       />
     `;
     
@@ -253,6 +353,8 @@
     const resultsDiv = document.createElement('div');
     resultsDiv.id = 'inline-search-results';
     resultsDiv.className = 'inline-search-results';
+    resultsDiv.setAttribute('role', 'region');
+    resultsDiv.setAttribute('aria-label', 'Search results');
     return resultsDiv;
   };
 
@@ -263,21 +365,47 @@
       return;
     }
 
+    // Strip any HTML so result rows never render raw markup / a full page preview.
+    const stripHtml = (text) => {
+      if (!text) return '';
+      const tmp = document.createElement('div');
+      tmp.innerHTML = text;
+      return (tmp.textContent || tmp.innerText || '').replace(/\s+/g, ' ').trim();
+    };
+
+    // Escape text before injecting, then re-apply only our own <mark> highlight.
+    const escapeHtml = (text) =>
+      (text || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
     const highlightText = (text, query) => {
-      if (!text || !query) return text;
+      const safe = escapeHtml(stripHtml(text));
+      if (!safe || !query) return safe;
       const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
-      return text.replace(regex, '<mark class="bg-yellow-300 text-gray-900 px-1 rounded">$1</mark>');
+      return safe.replace(regex, '<mark class="bg-yellow-300 text-gray-900 px-1 rounded">$1</mark>');
+    };
+
+    // Build a short snippet (~150 chars) centred on the match.
+    const makeSnippet = (text, query, len = 150) => {
+      const clean = stripHtml(text);
+      if (!clean) return '';
+      const idx = clean.toLowerCase().indexOf(query.toLowerCase());
+      let start = 0;
+      if (idx > -1) start = Math.max(0, idx - Math.floor(len / 2));
+      let snippet = clean.substring(start, start + len);
+      if (start > 0) snippet = '…' + snippet;
+      if (start + len < clean.length) snippet = snippet + '…';
+      return snippet;
     };
 
     const html = results.slice(0, 10).map(page => {
       if (!page) return '';
       const title = highlightText(page.title, query);
-      const description = highlightText(page.description || '', query);
-      
+      const snippet = highlightText(makeSnippet(page.description || page.content || '', query), query);
+
       return `
         <a href="${page.url}" class="search-result-item">
           <div class="search-result-title">${title}</div>
-          ${description ? `<div class="search-result-description">${description}</div>` : ''}
+          ${snippet ? `<div class="search-result-description">${snippet}</div>` : ''}
         </a>
       `;
     }).join('');
@@ -301,15 +429,15 @@
       searchIcon.style.transform = 'rotate(0deg) scale(1)';
     }, 150);
 
-    // Create and insert search bar
     searchContainer = createSearchBar();
-    
+    const isDesktop = window.innerWidth >= 1024;
+
     // Create results container
     const resultsContainer = createInlineResultsContainer();
     document.body.appendChild(resultsContainer);
-    
-    // Keep search bar in navbar on all breakpoints
-    if (window.innerWidth < 1024) {
+
+    if (!isDesktop) {
+      // Mobile: slide in the search bar below the navbar via CSS (mobile-search-active class)
       document.body.classList.add('mobile-search-active');
       if (mobileSearchSlot) {
         mobileSearchSlot.appendChild(searchContainer);
@@ -317,43 +445,35 @@
         searchNavMenu.parentElement.insertBefore(searchContainer, searchNavMenu);
       }
     } else {
+      // Desktop: hide the element BEFORE inserting so the browser never renders it visible
+      searchContainer.style.opacity = '0';
+
       navbar?.classList.add('desktop-search-active');
       searchNavMenu.parentElement.insertBefore(searchContainer, searchNavMenu);
-    }
-    
-    // On large screens, use fixed width and center with absolute positioning
-    if (window.innerWidth >= 1024) {
-      // Use 60% of screen width with a reasonable max
+
+      // Fix width so left:50% + translateX(-50%) works correctly
       const searchWidth = Math.min(900, window.innerWidth * 0.6);
       searchContainer.style.width = `${searchWidth}px`;
-      searchContainer.style.maxWidth = 'none'; // Allow it to scale freely
+
+      // Force a synchronous reflow so opacity:0 is committed as the "before" state,
+      // then add the transition — only future changes will animate, not the insertion.
+      void searchContainer.offsetWidth;
+      searchContainer.style.transition = 'opacity 0.2s ease';
     }
 
-    // Animate nav menu out
-    searchNavMenu.style.opacity = '0';
-    searchNavMenu.style.transform = 'translateX(-20px)';
-    searchNavMenu.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-    
+    // Animate nav menu out on desktop
+    if (isDesktop) {
+      searchNavMenu.style.opacity = '0';
+      searchNavMenu.style.transform = 'translateX(-20px)';
+      searchNavMenu.style.transition = 'opacity 0.1s ease, transform 0.3s ease';
+    }
+
     setTimeout(() => {
-      searchNavMenu.style.display = 'none';
-      // Animate search bar in - start from scaled down and slightly left
-      searchContainer.style.opacity = '0';
-      // On large screens, maintain the translateX(-50%) for centering, slide in from left
-      if (window.innerWidth >= 1024) {
-        searchContainer.style.transform = 'translateX(calc(-50% - 20px)) scale(0.95)';
-      } else {
-        searchContainer.style.transform = 'translateX(-20px) scale(0.95)';
-      }
-      searchContainer.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-      
-      setTimeout(() => {
-        searchContainer.style.opacity = '1';
-        // Slide to center position
-        if (window.innerWidth >= 1024) {
-          searchContainer.style.transform = 'translateX(-50%) scale(1)';
-        } else {
-          searchContainer.style.transform = 'translateX(0) scale(1)';
-        }
+      if (isDesktop) searchNavMenu.style.display = 'none';
+
+      // Fade in — element is already centered via CSS, just reveal it
+      requestAnimationFrame(() => {
+        if (isDesktop) searchContainer.style.opacity = '1';
         // Focus the input
         const input = document.getElementById('inline-search-input');
         const resultsDiv = document.getElementById('inline-search-results');
@@ -405,7 +525,7 @@
             }, 100);
           });
         }
-      }, 10);
+      }); // end requestAnimationFrame
     }, 300);
   };
 
@@ -432,9 +552,9 @@
       searchIcon.style.transform = 'rotate(0deg) scale(1)';
     }, 150);
 
-    // Animate search bar out
-    searchContainer.style.opacity = '0';
-    searchContainer.style.transform = 'scale(0.95)';
+    // Fade out (transition was set at show-time; no-op on mobile where opacity isn't managed here)
+    if (searchContainer.style.transition) searchContainer.style.opacity = '0';
+    const wasDesktop = window.innerWidth >= 1024;
     document.body.classList.remove('mobile-search-active');
     navbar?.classList.remove('desktop-search-active');
 
@@ -442,15 +562,18 @@
       searchContainer.remove();
       searchContainer = null;
 
-      // Animate nav menu back in
-      searchNavMenu.style.display = '';
-      searchNavMenu.style.opacity = '0';
-      searchNavMenu.style.transform = 'translateX(-20px)';
-
-      setTimeout(() => {
-        searchNavMenu.style.opacity = '1';
-        searchNavMenu.style.transform = 'translateX(0)';
-      }, 10);
+      // Only restore nav menu inline styles on desktop; on mobile the CSS
+      // checkbox-hack controls nav menu visibility — don't override it.
+      if (wasDesktop) {
+        searchNavMenu.style.display = '';
+        searchNavMenu.style.opacity = '0';
+        searchNavMenu.style.transform = 'translateX(-20px)';
+        searchNavMenu.style.transition = 'opacity 0.2s ease, transform 0.3s ease';
+        setTimeout(() => {
+          searchNavMenu.style.opacity = '1';
+          searchNavMenu.style.transform = 'translateX(0)';
+        }, 10);
+      }
     }, 300);
   };
 

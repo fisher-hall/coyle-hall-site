@@ -1,0 +1,154 @@
+/* ═══════════════════════════════════════════════════════════════
+   CAROUSEL — photo slide deck with controls and dots
+   Driven by assets/js/carousel.js (autoplay, prev/next, dots).
+   Usage:
+     <div class="Carousel" aria-label="…">
+       <div class="Carousel-track">
+         {{< carousel-slides dir="regatta" alt="Regatta photo" >}}
+       </div>
+       <button class="Carousel-control Carousel-control--prev" aria-label="Previous slide"><i class="fa fa-chevron-left"></i></button>
+       <button class="Carousel-control Carousel-control--next" aria-label="Next slide"><i class="fa fa-chevron-right"></i></button>
+     </div>
+     <div class="Carousel-dots" aria-label="Carousel pagination"></div>
+═══════════════════════════════════════════════════════════════ */
+
+@layer components {
+
+  /* Section wrapper emitted by the {{< event-carousel >}} shortcode — gives the
+     carousel consistent vertical breathing room on every event page. */
+  .event-carousel-section {
+    margin: 5rem 0 2rem;
+  }
+
+  .Carousel {
+    position: relative;
+    overflow: hidden;
+    border-radius: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    box-shadow: 0 20px 50px rgba(7, 65, 33, 0.12);
+    aspect-ratio: 3 / 2;
+  }
+
+  .Carousel-track {
+    display: flex;
+    height: 100%;
+    transition: transform 450ms ease;
+    will-change: transform;
+  }
+
+  .Carousel-slide {
+    position: relative;
+    min-width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .Carousel-slide img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* opt out of the global image hover tilt */
+    transform: none !important;
+    transition: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Prev / Next controls */
+  .Carousel-control {
+    position: absolute;
+    top: 50%;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 4.5rem;
+    padding: 0;
+    border: 0;
+    border-radius: 1rem;
+    background: var(--coyle-dark-green);
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.16);
+    transform: translateY(-50%);
+    transition: filter 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+  }
+
+  /* Match the site buttons: slight tint on hover, scale-down on press */
+  .Carousel-control:hover,
+  .Carousel-control:focus-visible {
+    filter: brightness(1.2);
+  }
+
+  .Carousel-control:active {
+    transform: translateY(-50%) scale(0.95);
+  }
+
+  .Carousel-control:focus-visible {
+    outline: 3px solid var(--coyle-accent-green);
+    outline-offset: 3px;
+  }
+
+  .Carousel-control i { font-size: 1.3rem; font-weight: 1200; }
+
+  .Carousel-control--prev { left:  1rem; }
+  .Carousel-control--next { right: 1rem; }
+
+  /* Dot navigation */
+  .Carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.65rem;
+    margin-top: 1.25rem;
+  }
+
+  .Carousel-dot {
+    width: 0.8rem;
+    height: 0.8rem;
+    padding: 0;
+    border: 0;
+    border-radius: 9999px;
+    background: rgba(7, 65, 33, 0.42);
+    cursor: pointer;
+    transition: transform 180ms ease, background-color 180ms ease;
+  }
+
+  .Carousel-dot:hover { transform: scale(1.08); }
+
+  .Carousel-dot:focus-visible {
+    outline: 3px solid var(--coyle-dark-green);
+    outline-offset: 3px;
+  }
+
+  :where(.dark) .Carousel-dot:focus-visible {
+    outline-color: var(--coyle-accent-green);
+  }
+
+  .Carousel-dot.active,
+  .Carousel-dot[aria-current="true"] {
+    background: var(--primary-color);
+    transform: scale(1.15);
+  }
+
+  :where(.dark) .Carousel-dot { background: var(--coyle-dark-green); }
+  :where(.dark) .Carousel-dot:hover { background: rgba(255, 255, 255, 0.62); }
+
+  @media (max-width: 767px) {
+    .Carousel { border-radius: 1.5rem; }
+    .Carousel-control { width: 2.75rem; height: 3.25rem; }
+    .Carousel-control--prev { left:  0.75rem; }
+    .Carousel-control--next { right: 0.75rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .Carousel-track,
+    .Carousel-control,
+    .Carousel-dot { transition: none; }
+  }
+
+}

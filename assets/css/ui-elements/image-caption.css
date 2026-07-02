@@ -1,0 +1,64 @@
+/* ═══════════════════════════════════════════════════════════════
+   IMAGE + CAPTION — a captioned, rounded, optionally-linked image.
+   Tuned to match the image/caption pairs already used across the site
+   (rounded-2xl + shadow-lg image, bold green centred caption).
+   Usage:
+     <figure class="ImageCaption">
+       <a href="/images/x.jpg" target="_blank" rel="noopener">
+         <img src="/images/x.jpg" alt="…">
+       </a>
+       <figcaption>Caption text</figcaption>
+     </figure>
+   The <a> lightbox wrapper is optional.
+═══════════════════════════════════════════════════════════════ */
+
+@layer components {
+
+  .ImageCaption {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    max-width: 36rem;          /* matches the old max-w-xl images */
+    margin: 0 auto;
+  }
+
+  .ImageCaption a {
+    display: block;
+    width: 100%;
+  }
+
+  .ImageCaption img {
+    display: block;
+    width: 100%;
+    border-radius: 1rem;       /* rounded-2xl */
+    object-fit: cover;
+    box-shadow:                /* shadow-lg */
+      0 10px 15px -3px rgba(0, 0, 0, 0.1),
+      0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    transition:
+      transform 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+      box-shadow 0.3s ease-out;
+  }
+
+  .ImageCaption img:hover {
+    transform: scale(1.05);
+  }
+
+  .ImageCaption figcaption {
+    margin: 0.5rem 0 0;
+    font-family: 'Rubik', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.4;
+    text-align: center;
+    color: var(--secondary-text-color);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ImageCaption img { transition: none; }
+    .ImageCaption img:hover { transform: none; }
+  }
+
+}
