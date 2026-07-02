@@ -449,6 +449,14 @@ body:has(.page-banner-wrapper) .section-sm {
     font-size: 1.1rem !important;
   }
 
+  /* The wildcard above sets a flat weight directly on .nav-link-text (the
+     dropdown label's inner span), which blocks it from inheriting the
+     bold/active weight its parent .nav-link picks up — so "Leadership",
+     "About", "Events" never got as bold as plain page links like "Faith". */
+  .header .navbar .nav-link .nav-link-text {
+    font-weight: inherit !important;
+  }
+
   .header .navbar.desktop-search-active #nav-menu {
     display: none !important;
     opacity: 0 !important;

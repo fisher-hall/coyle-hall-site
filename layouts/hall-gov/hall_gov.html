@@ -87,6 +87,13 @@
     @media (max-width: 768px)  { .page-content-wave { margin-top: -46px; } }
     .cc-card img, .cc-card img:hover,
     #past-body img, #past-body img:hover { transform: none !important; box-shadow: none !important; cursor: default !important; }
+    .past-highlight {
+      outline: 3px solid var(--coyle-accent-green, var(--primary-color));
+      outline-offset: 6px;
+      border-radius: 1rem;
+      transition: outline-color 300ms ease;
+    }
+    @media (prefers-reduced-motion: reduce) { .past-highlight { transition: none; } }
   </style>
 
   <div style="height: 4rem;"></div>
@@ -259,7 +266,7 @@
                           {{- $thumb = . -}}
                         {{- end -}}
                       {{- end -}}
-                      <div class="flex flex-col items-center text-center gap-2.5">
+                      <div id="past-{{ anchorize .name }}" class="flex flex-col items-center text-center gap-2.5 scroll-mt-28" tabindex="-1">
                         <div class="w-24 h-24 rounded-full overflow-hidden bg-[var(--color-custom-light)] shrink-0">
                           <img
                             class="w-full h-full object-cover object-center block"

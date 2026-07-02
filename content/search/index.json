@@ -1,7 +1,0 @@
----
-title: "Search Index"
-type: "search"
-layout: "searchindex"
-outputs:
-  - SearchIndex
----

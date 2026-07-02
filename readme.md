@@ -24,18 +24,26 @@
 - Vice Presidents
 - Hall Commissioners
 
-### Hall Information
+### About
 
 - History and Transition from Fisher to Coyle
 - Building Information
 - Location Guide
-
-### Traditions
-
 - St. Adalbert's
+
+### Events
+
+- The Regatta
+- Car Smash
+- Coyle Crunk
 - Coyle Formal
-- Coyle Funk
-- Regatta
+- Family Weekend
+
+### Other
+
+- Faith
+- New Crew (incoming students)
+- Welcome Weekend Co-Chairs
 
 <hr>
 
@@ -45,9 +53,9 @@
 
 Before editing, make sure these prerequisites are installed on your machine
 
-- [Hugo Extended v0.144+](https://gohugo.io/installation/)
+- [Hugo Extended v0.147.3](https://gohugo.io/installation/) (pinned in CI — see `.github/workflows/main.yml`)
 - [Node v22+](https://nodejs.org/en/download/)
-- [Go v1.24+](https://go.dev/doc/install)
+- [Go v1.23.3](https://go.dev/doc/install) (pinned in CI)
 - [Git](https://git-scm.com/downloads)
 
 ### To Make an Edit
@@ -122,6 +130,9 @@ For specific page editing, use these guides:
 - [Hall Government](https://github.com/fisher-hall/coyle-hall-site/blob/main/docs/hall_gov.md)
 - [Hall Commissioners](https://github.com/fisher-hall/coyle-hall-site/blob/main/docs/hall_commissioners.md)
 - [Incoming Students](https://github.com/fisher-hall/coyle-hall-site/blob/main/docs/incoming_students.md)
+- [Welcome Weekend Co-Chairs](https://github.com/fisher-hall/coyle-hall-site/blob/main/docs/welcome_weekend_cochairs.md)
+
+For everything else — deployment, hosting, the Instagram feed integration, analytics, site architecture, and the annual year-rollover checklist — see the full index at [`docs/README.md`](https://github.com/fisher-hall/coyle-hall-site/blob/main/docs/README.md).
 
 <hr>
 
