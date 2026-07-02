@@ -148,7 +148,7 @@ members:
     hobbies: "Running, Guitar, Writing, Baking"
     favoritepart: "Any of the hall events in the basement/common spaces"
 
-  - name: "Zax Quirk"
+  - name: "Zachary Quirk"
     role: "Resident Assistant"
     section: "1C"
     image: "/images/headshots/hall-staff/26-27/zaxquirk.jpeg"
@@ -156,3 +156,7 @@ members:
     email: "zquirk@nd.edu"
     major:
       - Civil Engineering
+    minor:
+      - Energy Studies
+    hobbies: "Ultimate Frisbee"
+    favoritepart: "The welcoming atmosphere"

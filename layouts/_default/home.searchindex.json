@@ -25,34 +25,154 @@
     {{- $description := $clean -}}
     {{- $content := $clean -}}
 
-    {{- if or (eq .Section "hall-staff") (eq .Section "hall-gov") (eq .Section "hall-commissioners") -}}
-      {{- $hometown := .Params.params.hometown | default "" -}}
-      {{- $major := .Params.params.major | default .Params.params.studying | default "" -}}
-      {{- $hobbies := .Params.params.hobbies | default "" -}}
-      {{- $favoritepart := .Params.params.favoritepart | default "" -}}
-      {{- $section := .Params.params.section | default "" -}}
-
-      {{- $title = printf "%s - %s" .Title (.Params.description | default "") -}}
-      {{- $description = printf "%s of Coyle Hall" (.Params.description | default "") -}}
-
-      {{- $contentParts := slice .Title -}}
-      {{- if $hometown -}}{{- $contentParts = $contentParts | append (printf "from %s" $hometown) -}}{{- end -}}
-      {{- if $major -}}{{- $contentParts = $contentParts | append (printf "Studies %s" $major) -}}{{- end -}}
-      {{- if .Params.description -}}{{- $contentParts = $contentParts | append .Params.description -}}{{- end -}}
-      {{- if $hobbies -}}{{- $contentParts = $contentParts | append (printf "Hobbies: %s" $hobbies) -}}{{- end -}}
-      {{- if $favoritepart -}}{{- $contentParts = $contentParts | append (printf "Favorite part: %s" $favoritepart) -}}{{- end -}}
-      {{- if $section -}}{{- $contentParts = $contentParts | append (printf "Section: %s" $section) -}}{{- end -}}
-      {{- if $clean -}}{{- $contentParts = $contentParts | append $clean -}}{{- end -}}
-
-      {{- $content = delimit $contentParts ". " -}}
-    {{- end -}}
-
     {
       "title": {{ $title | jsonify }},
       "description": {{ ($description | truncate 200) | jsonify }},
       "url": {{ .RelPermalink | jsonify }},
-      "content": {{ ($content | truncate 500) | jsonify }}
+      "content": {{ $content | jsonify }}
     }
+  {{- end -}}
+{{- end -}}
+
+{{- /* Hall staff, hall gov, and hall commissioners are all managed as data
+       (data/<section>/*.yaml) and rendered as cards on a single list page —
+       they have no individual Hugo Page, so the range over .Site.Pages above
+       can never see them. Emit a synthetic entry per current member, linking
+       to the #member-<slug> anchor their card renders with on the list page
+       (see the hall-staff/hall-gov/hall-commissioners layouts). */ -}}
+
+{{- $staffURL := "" -}}
+{{- with .Site.GetPage "hall-staff" -}}{{- $staffURL = .RelPermalink -}}{{- end -}}
+{{- $staff := index site.Data "hall-staff" "staff" -}}
+{{- range slice $staff.rector $staff.priest -}}
+  {{- if . -}}
+    {{- if not $first -}},{{- end -}}
+    {{- $first = false -}}
+    {{- $contentParts := slice .name -}}
+    {{- with .bio -}}{{- $contentParts = $contentParts | append . -}}{{- end -}}
+    {{- $content := delimit $contentParts ". " -}}
+    {
+      "title": {{ .name | jsonify }},
+      "description": {{ printf "%s of Coyle Hall" .name | jsonify }},
+      "url": {{ printf "%s#member-%s" $staffURL (anchorize .name) | jsonify }},
+      "content": {{ $content | jsonify }}
+    }
+  {{- end -}}
+{{- end -}}
+{{- range $staff.members -}}
+  {{- if not $first -}},{{- end -}}
+  {{- $first = false -}}
+
+  {{- $majorVal := "" -}}
+  {{- with .major -}}
+    {{- if reflect.IsSlice . -}}{{- $majorVal = delimit . ", " -}}{{- else -}}{{- $majorVal = . -}}{{- end -}}
+  {{- end -}}
+
+  {{- $contentParts := slice .name -}}
+  {{- with .role -}}{{- $contentParts = $contentParts | append . -}}{{- end -}}
+  {{- with .hometown -}}{{- $contentParts = $contentParts | append (printf "from %s" .) -}}{{- end -}}
+  {{- if $majorVal -}}{{- $contentParts = $contentParts | append (printf "Studies %s" $majorVal) -}}{{- end -}}
+  {{- with .studying -}}{{- $contentParts = $contentParts | append . -}}{{- end -}}
+  {{- with .hobbies -}}{{- $contentParts = $contentParts | append (printf "Hobbies: %s" .) -}}{{- end -}}
+  {{- with .favoritepart -}}{{- $contentParts = $contentParts | append (printf "Favorite part: %s" .) -}}{{- end -}}
+  {{- with .section -}}{{- $contentParts = $contentParts | append (printf "Section: %s" .) -}}{{- end -}}
+  {{- $content := delimit $contentParts ". " -}}
+
+  {
+    "title": {{ printf "%s - %s" .name (.role | default "Hall Staff") | jsonify }},
+    "description": {{ printf "%s of Coyle Hall" (.role | default "Hall Staff") | jsonify }},
+    "url": {{ printf "%s#member-%s" $staffURL (anchorize .name) | jsonify }},
+    "content": {{ $content | jsonify }}
+  }
+{{- end -}}
+
+{{- $govURL := "" -}}
+{{- with .Site.GetPage "hall-gov" -}}{{- $govURL = .RelPermalink -}}{{- end -}}
+{{- range (index site.Data "hall-gov" "government").members -}}
+  {{- if not $first -}},{{- end -}}
+  {{- $first = false -}}
+
+  {{- $majorVal := "" -}}
+  {{- with .major -}}
+    {{- if reflect.IsSlice . -}}{{- $majorVal = delimit . ", " -}}{{- else -}}{{- $majorVal = . -}}{{- end -}}
+  {{- end -}}
+
+  {{- $contentParts := slice .name -}}
+  {{- with .role -}}{{- $contentParts = $contentParts | append . -}}{{- end -}}
+  {{- with .hometown -}}{{- $contentParts = $contentParts | append (printf "from %s" .) -}}{{- end -}}
+  {{- if $majorVal -}}{{- $contentParts = $contentParts | append (printf "Studies %s" $majorVal) -}}{{- end -}}
+  {{- with .hobbies -}}{{- $contentParts = $contentParts | append (printf "Hobbies: %s" .) -}}{{- end -}}
+  {{- with .favoritepart -}}{{- $contentParts = $contentParts | append (printf "Favorite part: %s" .) -}}{{- end -}}
+  {{- $content := delimit $contentParts ". " -}}
+
+  {
+    "title": {{ printf "%s - %s" .name (.role | default "Hall Government") | jsonify }},
+    "description": {{ printf "%s of Coyle Hall" (.role | default "Hall Government") | jsonify }},
+    "url": {{ printf "%s#member-%s" $govURL (anchorize .name) | jsonify }},
+    "content": {{ $content | jsonify }}
+  }
+{{- end -}}
+
+{{- $commissionersURL := "" -}}
+{{- with .Site.GetPage "hall-commissioners" -}}{{- $commissionersURL = .RelPermalink -}}{{- end -}}
+{{- range (index site.Data "hall-commissioners" "commissioners").commissioners -}}
+  {{- if not $first -}},{{- end -}}
+  {{- $first = false -}}
+
+  {{- $majorVal := "" -}}
+  {{- with .major -}}
+    {{- if reflect.IsSlice . -}}{{- $majorVal = delimit . ", " -}}{{- else -}}{{- $majorVal = . -}}{{- end -}}
+  {{- end -}}
+
+  {{- $contentParts := slice .name -}}
+  {{- with .role -}}{{- $contentParts = $contentParts | append . -}}{{- end -}}
+  {{- with .hometown -}}{{- $contentParts = $contentParts | append (printf "from %s" .) -}}{{- end -}}
+  {{- if $majorVal -}}{{- $contentParts = $contentParts | append (printf "Studies %s" $majorVal) -}}{{- end -}}
+  {{- with .hobbies -}}{{- $contentParts = $contentParts | append (printf "Hobbies: %s" .) -}}{{- end -}}
+  {{- with .favoritepart -}}{{- $contentParts = $contentParts | append (printf "Favorite part: %s" .) -}}{{- end -}}
+  {{- $content := delimit $contentParts ". " -}}
+
+  {
+    "title": {{ printf "%s - %s" .name (.role | default "Commissioner") | jsonify }},
+    "description": {{ printf "%s of Coyle Hall" (.role | default "Commissioner") | jsonify }},
+    "url": {{ printf "%s#member-%s" $commissionersURL (anchorize .name) | jsonify }},
+    "content": {{ $content | jsonify }}
+  }
+{{- end -}}
+
+{{- /* Each of hall-staff/hall-gov/hall-commissioners also renders a "Past ___"
+       accordion straight from data/<section>/past.yaml — that history is
+       visible on the page but, like current commissioners, has no backing
+       Hugo Page. Walk all three past.yaml files the same way. */ -}}
+{{- range $sectionName := slice "hall-staff" "hall-gov" "hall-commissioners" -}}
+  {{- $sectionURL := "" -}}
+  {{- with $.Site.GetPage $sectionName -}}{{- $sectionURL = .RelPermalink -}}{{- end -}}
+  {{- with index site.Data $sectionName "past" -}}
+    {{- range .years -}}
+      {{- $year := .year -}}
+      {{- range .members -}}
+        {{- if not $first -}},{{- end -}}
+        {{- $first = false -}}
+
+        {{- $contentParts := slice .name -}}
+        {{- with .title -}}{{- $contentParts = $contentParts | append . -}}{{- end -}}
+        {{- $contentParts = $contentParts | append (printf "%s" $year) -}}
+        {{- with .bio -}}{{- $contentParts = $contentParts | append . -}}{{- end -}}
+        {{- $content := delimit $contentParts ". " -}}
+        {{- /* Anchor must match the id the "Past ___" accordion row renders
+               with in the hall-staff/hall-gov/hall-commissioners layouts,
+               so search results land on the actual person, not just the
+               top of the section page. */ -}}
+        {{- $anchorURL := printf "%s#past-%s" $sectionURL (anchorize .name) -}}
+
+        {
+          "title": {{ printf "%s - %s (%s)" .name (.title | default "") $year | jsonify }},
+          "description": {{ printf "Past %s of Coyle Hall" (.title | default "") | jsonify }},
+          "url": {{ $anchorURL | jsonify }},
+          "content": {{ $content | jsonify }}
+        }
+      {{- end -}}
+    {{- end -}}
   {{- end -}}
 {{- end -}}
 ]

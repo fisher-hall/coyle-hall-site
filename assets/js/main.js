@@ -321,6 +321,27 @@
   let isSearchActive = false;
   let searchContainer = null;
 
+  // Load the search index once and reuse it across keystrokes. Falls back to
+  // the static snapshot (static-searchindex.json) if the live, Hugo-generated
+  // one is missing or fails to parse — mirrors the fallback the old search
+  // modal already had, which this inline bar didn't.
+  let searchDataPromise = null;
+  const loadSearchData = () => {
+    if (searchDataPromise) return searchDataPromise;
+    searchDataPromise = fetch('/searchindex.json')
+      .then((response) => {
+        if (!response.ok) throw new Error('search index ' + response.status);
+        return response.json();
+      })
+      .catch(() => fetch('/static-searchindex.json').then((r) => r.json()))
+      .catch((error) => {
+        // Let the next keystroke retry instead of permanently caching a failure.
+        searchDataPromise = null;
+        throw error;
+      });
+    return searchDataPromise;
+  };
+
   const createSearchBar = () => {
     const container = document.createElement('div');
     container.className = 'inline-search-container';
@@ -493,9 +514,8 @@
             
             // Load and search
             try {
-              const response = await fetch('/searchindex.json');
-              const searchData = await response.json();
-              
+              const searchData = await loadSearchData();
+
               // Simple search
               const results = searchData.filter(page => {
                 const searchText = (page.title + ' ' + (page.description || '') + ' ' + (page.content || '')).toLowerCase();
