@@ -1,0 +1,42 @@
+{{- /* Full Events → Calendar tab: list/grid toggle, fetching live from the
+       Google Calendar configured under [calendar] in params.toml. */ -}}
+{{- $calendarId := site.Params.calendar.google_calendar_id -}}
+{{- $apiKey := site.Params.calendar.google_api_key -}}
+<section class="coyle-calendar fade-in-section" id="coyle-calendar-root" data-calendar-id="{{ $calendarId }}" data-api-key="{{ $apiKey }}">
+  <div class="cal-view-switch">
+    <button data-view="list" class="is-active" type="button">
+      <svg viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24h48c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM176 56c-13.3 0-24 10.7-24 24s10.7 24 24 24H488c13.3 0 24-10.7 24-24s-10.7-24-24-24H176zm0 160c-13.3 0-24 10.7-24 24s10.7 24 24 24H488c13.3 0 24-10.7 24-24s-10.7-24-24-24H176zm0 160c-13.3 0-24 10.7-24 24s10.7 24 24 24H488c13.3 0 24-10.7 24-24s-10.7-24-24-24H176zM16 232v48c0 13.3 10.7 24 24 24h48c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24h48c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z"/></svg>
+      List
+    </button>
+    <button data-view="grid" type="button">
+      <svg viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H152V24zM48 192H400V448c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V192z"/></svg>
+      Calendar
+    </button>
+  </div>
+
+  <div class="cal-view-panel is-active" id="cal-panel-list">
+    <div class="cal-event-list-wrap"></div>
+  </div>
+
+  <div class="cal-view-panel" id="cal-panel-grid">
+    <div class="cal-toolbar">
+      <h3>&nbsp;</h3>
+      <div class="cal-nav">
+        <button type="button" data-nav="prev" aria-label="Previous month"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12.5 4.5 6 10l6.5 5.5"/></svg></button>
+        <button type="button" data-nav="next" aria-label="Next month"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5 14 10l-6.5 5.5"/></svg></button>
+      </div>
+    </div>
+    <div class="cal-grid">
+      <div class="cal-dow-row">
+        <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+      </div>
+      <div id="cal-grid-body"></div>
+    </div>
+  </div>
+</section>
+
+{{ with resources.Get "js/calendar.js" }}
+  {{ $js := . }}
+  {{ if hugo.IsProduction }}{{ $js = $js | minify | fingerprint }}{{ end }}
+  <script src="{{ $js.RelPermalink }}" defer{{ if hugo.IsProduction }} integrity="{{ $js.Data.Integrity }}"{{ end }}></script>
+{{ end }}

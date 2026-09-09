@@ -1,0 +1,29 @@
+{{- /* Homepage "Up next" calendar widget — compact horizontal strip of
+       upcoming events, fetched live from the same Google Calendar as
+       the full Events → Calendar tab. */ -}}
+{{- $calendarId := site.Params.calendar.google_calendar_id -}}
+{{- $apiKey := site.Params.calendar.google_api_key -}}
+{{- if and $calendarId $apiKey -}}
+<div class="coyle-calendar hc-brand-surface max-w-[1400px] rounded-4xl bg-[linear-gradient(90deg,var(--coyle-grad-dark)_0%,var(--coyle-grad-light)_100%)] px-6 py-8 lg:mt-20 mb-6 2xl:mx-auto mx-4 fade-in-section"
+  id="coyle-calendar-widget" data-calendar-id="{{ $calendarId }}" data-api-key="{{ $apiKey }}">
+  <div class="cal-widget-head">
+    <h3>Upcoming Events</h3>
+    <a href="/events/calendar">Full Calendar <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+  </div>
+  <div class="cal-strip-wrap">
+    <button class="cal-arrow cal-arrow--prev is-hidden" type="button" aria-label="Scroll to earlier events">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12.5 4.5 6 10l6.5 5.5"/></svg>
+    </button>
+    <div class="cal-strip"><p class="cal-loading" style="color:#fff;opacity:.8;">Loading…</p></div>
+    <button class="cal-arrow cal-arrow--next" type="button" aria-label="Scroll to later events">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4.5 14 10l-6.5 5.5"/></svg>
+    </button>
+  </div>
+</div>
+
+{{ with resources.Get "js/calendar.js" }}
+  {{ $js := . }}
+  {{ if hugo.IsProduction }}{{ $js = $js | minify | fingerprint }}{{ end }}
+  <script src="{{ $js.RelPermalink }}" defer{{ if hugo.IsProduction }} integrity="{{ $js.Data.Integrity }}"{{ end }}></script>
+{{ end }}
+{{- end -}}

@@ -88,7 +88,7 @@
     #past-body img, #past-body img:hover { transform: none !important; box-shadow: none !important; cursor: default !important; }
   </style>
 
-  {{- $staff := index site.Data "hall-staff" "staff" -}}
+  {{- $staff := index hugo.Data "hall-staff" "staff" -}}
 
   <div style="height: 4rem;"></div>
   <section class="section" style="padding-top: 6rem;">
@@ -109,7 +109,7 @@
             {{- end -}}
           {{- end -}}
           {{/* Joey: image left, text right */}}
-          <div class="cc-card rounded-[2rem] overflow-hidden" style="background: linear-gradient(to top right, var(--coyle-grad-dark), var(--coyle-grad-light))">
+          <div id="{{ .name | urlize }}" class="cc-card rounded-[2rem] overflow-hidden scroll-mt-28" style="background: linear-gradient(to top right, var(--coyle-grad-dark), var(--coyle-grad-light))">
             <div class="flex flex-col min-[900px]:flex-row">
               <div class="p-4 pb-0 min-[900px]:pb-4 min-[900px]:w-[55%] shrink-0">
                 <div class="relative aspect-square rounded-[1.38rem] overflow-hidden bg-black/20">
@@ -168,7 +168,7 @@
             {{- end -}}
           {{- end -}}
           {{/* Fr. Greg: image right (mirror of Joey), text left */}}
-          <div class="cc-card rounded-[2rem] overflow-hidden" style="background: linear-gradient(to top right, var(--coyle-grad-dark), var(--coyle-grad-light))">
+          <div id="{{ .name | urlize }}" class="cc-card rounded-[2rem] overflow-hidden scroll-mt-28" style="background: linear-gradient(to top right, var(--coyle-grad-dark), var(--coyle-grad-light))">
             <div class="flex flex-col min-[900px]:flex-row-reverse">
               <div class="p-4 pb-0 min-[900px]:pb-4 min-[900px]:w-[55%] shrink-0">
                 <div class="relative aspect-square rounded-[1.38rem] overflow-hidden bg-black/20">
@@ -265,7 +265,7 @@
 
           {{- $hasBio := or .section .hometown $majorVal .studying $minorVal .hobbies .favoritepart .email -}}
 
-          <div class="cc-card rounded-[2rem] overflow-hidden" style="background: linear-gradient(to top right, var(--coyle-grad-dark), var(--coyle-grad-light))">
+          <div id="{{ .name | urlize }}" class="cc-card rounded-[2rem] overflow-hidden scroll-mt-28" style="background: linear-gradient(to top right, var(--coyle-grad-dark), var(--coyle-grad-light))">
 
             <div class="p-4 pb-0">
               <div class="relative aspect-square rounded-[1.38rem] overflow-hidden bg-black/20">
@@ -365,7 +365,7 @@
       </div>
 
       {{/* Past Staff — driven by data/hall-staff/past.yaml */}}
-      {{ with index site.Data "hall-staff" "past" }}
+      {{ with index hugo.Data "hall-staff" "past" }}
         {{ if .years }}
           <div class="mt-16 pt-10">
 

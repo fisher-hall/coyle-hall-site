@@ -31,6 +31,17 @@ custom_script = ""
 # copyright
 copyright = "© 2026 | [Coyle Hall - University of Notre Dame](https://nd.edu) | [Zeon Studio](https://zeon.studio)"
 
+# Coyle Hall Calendar (Events → Calendar tab + homepage "Up next" widget)
+# google_calendar_id: the calendar's ID from Google Calendar settings
+#   ("Integrate calendar" section), usually an @group.calendar.google.com address.
+# google_api_key: a Google Cloud API key restricted to the Calendar API only,
+#   with an HTTP referrer restriction locked to this site's domain(s). Safe to
+#   ship client-side under those restrictions — see Google's docs on
+#   restricting API keys. Leave both blank to hide the calendar UI.
+[calendar]
+google_calendar_id = "c_b936748190c5f143a7f43192dac521818093f97268ca50e90740d78e09c26f7c@group.calendar.google.com"
+google_api_key = "AIzaSyBcFkLABv9Vq16k2kYV0cLm6rB4PqnK9Co"
+
 # Preloader
 # preloader module: https://github.com/gethugothemes/hugo-modules/tree/master/components/preloader
 [preloader]

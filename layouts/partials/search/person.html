@@ -1,0 +1,51 @@
+{{- /* Flattens one person from data/hall-*.yaml into a search-index entry.
+       These people are rendered by the hall-staff / hall-gov / hall-commissioners
+       layouts straight from YAML, so they are not pages and would otherwise never
+       reach the index. Each entry deep-links to the person's card anchor.
+
+       Call with a dict:
+         person — the YAML map (name, role, hometown, major, ... )
+         role   — fallback role label for entries whose YAML has no `role`
+         url    — the section page the card lives on, e.g. "/hall-staff/" */ -}}
+
+{{- $p := .person -}}
+{{- $role := $p.role | default .role | default "" -}}
+
+{{- /* major / minor accept either a single string or a YAML list. */ -}}
+{{- $major := "" -}}
+{{- with $p.major -}}
+  {{- if reflect.IsSlice . -}}{{- $major = delimit . ", " -}}{{- else -}}{{- $major = . -}}{{- end -}}
+{{- end -}}
+{{- $minor := "" -}}
+{{- with $p.minor -}}
+  {{- if reflect.IsSlice . -}}{{- $minor = delimit . ", " -}}{{- else -}}{{- $minor = . -}}{{- end -}}
+{{- end -}}
+{{- $study := $major | default $p.studying -}}
+
+{{- $parts := slice $p.name -}}
+{{- with $role -}}{{- $parts = $parts | append . -}}{{- end -}}
+{{- with $p.grade -}}{{- $parts = $parts | append . -}}{{- end -}}
+{{- with $p.hometown -}}{{- $parts = $parts | append (printf "from %s" .) -}}{{- end -}}
+{{- with $study -}}{{- $parts = $parts | append (printf "Studies %s" .) -}}{{- end -}}
+{{- with $minor -}}{{- $parts = $parts | append (printf "Minor: %s" .) -}}{{- end -}}
+{{- with $p.section -}}{{- $parts = $parts | append (printf "Section: %s" .) -}}{{- end -}}
+{{- with $p.hobbies -}}{{- $parts = $parts | append (printf "Hobbies: %s" .) -}}{{- end -}}
+{{- with $p.favoritepart -}}{{- $parts = $parts | append (printf "Favorite part: %s" .) -}}{{- end -}}
+{{- with $p.bio -}}
+  {{- $bio := replaceRE `\s+` " " (trim (plainify .) " ") -}}
+  {{- $parts = $parts | append $bio -}}
+{{- end -}}
+
+{{- /* Only append the role when there is one — a bare "Name - " reads as broken. */ -}}
+{{- $title := $p.name -}}
+{{- $desc  := "Coyle Hall" -}}
+{{- with $role -}}
+  {{- $title = printf "%s - %s" $p.name . -}}
+  {{- $desc  = printf "%s of Coyle Hall" . -}}
+{{- end -}}
+
+{{- return (dict
+      "title" $title
+      "description" $desc
+      "url" (printf "%s#%s" .url (urlize $p.name))
+      "content" (delimit $parts ". ")) -}}

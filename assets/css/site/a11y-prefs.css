@@ -189,10 +189,17 @@ html.a11y-contrast-high :where(.a11y-close, .a11y-trigger, [aria-label="search"]
 /* Social/icon links don't need the link underline */
 html.a11y-contrast-high .social-icons a { text-decoration: none !important; }
 /* Seg buttons in HC: all get white outline by default */
+/* The seg group is now a bordered track (see .a11y-seg below), so in high
+   contrast the track carries the white outline and the tabs inside stay
+   borderless — nested outlines would read as clutter. */
+html.a11y-contrast-high .a11y-seg {
+  background: #000 !important;
+  border-color: #fff !important;
+}
 html.a11y-contrast-high .a11y-seg button {
   background: transparent !important;
   color: #fff !important;
-  border: 1.5px solid #fff !important;
+  border: none !important;
   box-shadow: none !important;
 }
 /* Selected seg button in HC: white filled */
@@ -504,30 +511,47 @@ html.a11y-contrast-high .new-crew-banner p {
   margin: 0.3rem 0 0;
 }
 
-/* Segmented choice group (radio-style buttons) */
+/* Segmented choice group (radio-style buttons).
+   Mirrors the .cal-view-switch tabbed divider from the Events → Schedule view:
+   one bordered track holding transparent tabs, with the selected tab as a
+   solid primary-filled pill. Kept as a 2-column grid (rather than the
+   calendar's inline-flex) so the pair spans the panel's full width.
+   --cal-text-muted is scoped to .coyle-calendar, so the underlying
+   gray tokens are referenced directly here. */
 .a11y-seg {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.4rem;
+  gap: 4px;
+  background: var(--background-color);
+  border: 2px solid var(--primary-color);
+  border-radius: 1rem;
+  padding: 4px;
 }
 .a11y-seg button {
   width: 100%;
-  padding: 0.45rem 0.6rem;
-  border: 1.5px solid var(--primary-color);
-  border-radius: 0.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  font-family: 'Rubik', sans-serif;
+  padding: 0.55rem 1.15rem;
+  border: none;
+  border-radius: 0.75rem;
   background: transparent;
-  color: inherit;
-  font-size: 0.82rem;
-  font-weight: 500;
+  color: var(--color-lightmode-gray);
+  font-size: 0.85rem;
+  font-weight: 700;
   cursor: pointer;
-  transition: background-color 0.15s ease, color 0.15s ease;
+  transition: filter 0.2s ease, background 0.18s ease, color 0.18s ease;
 }
-.a11y-seg button:hover { background: rgba(10, 132, 61, 0.1); }
+.dark .a11y-seg button { color: var(--color-darkmode-gray); }
 .a11y-seg button[aria-pressed="true"] {
   background: var(--primary-color);
-  color: #fff;
-  border-color: var(--primary-color);
+  color: var(--always-white);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
 }
+.a11y-seg button[aria-pressed="true"]:hover { filter: brightness(1.4); }
+.a11y-seg button[aria-pressed="true"]:active { transform: scale(0.98); }
 
 /* On/off toggle rows */
 .a11y-toggle {

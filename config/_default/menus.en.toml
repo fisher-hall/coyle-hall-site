@@ -104,6 +104,12 @@ name = "Family Weekend"
 url = "/events/family-weekend"
 weight = 3
 
+[[main]]
+parent = "Events"
+name = "Schedule <i class='fa-regular fa-calendar nav-item-icon' aria-hidden='true'></i>"
+url = "/events/calendar"
+weight = -1
+
 
 [[main]]
 name = "New Crew"

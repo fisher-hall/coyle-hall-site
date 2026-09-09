@@ -94,7 +94,7 @@
     <div class="max-w-7xl mx-auto px-4">
 
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-5 items-start">
-        {{ range (index site.Data "hall-gov" "government").members }}
+        {{ range (index hugo.Data "hall-gov" "government").members }}
 
           {{- $img := "/images/ImagePlaceholder.jpg" -}}
           {{- with .image -}}
@@ -140,7 +140,7 @@
 
           {{- $hasBio := or .hometown $majorVal $minorVal .hobbies .favoritepart .email -}}
 
-          <div class="cc-card rounded-[2rem] overflow-hidden" style="background: linear-gradient(to top right, var(--coyle-grad-dark), var(--coyle-grad-light))">
+          <div id="{{ .name | urlize }}" class="cc-card rounded-[2rem] overflow-hidden scroll-mt-28" style="background: linear-gradient(to top right, var(--coyle-grad-dark), var(--coyle-grad-light))">
 
             <div class="p-4 pb-0">
               <div class="relative aspect-square rounded-[1.38rem] overflow-hidden bg-black/20">
@@ -228,7 +228,7 @@
       </div>
 
       {{/* Past Government — driven by data/hall-gov/past.yaml */}}
-      {{ with index site.Data "hall-gov" "past" }}
+      {{ with index hugo.Data "hall-gov" "past" }}
         {{ if .years }}
           <div class="mt-16 pt-10">
 

@@ -29,6 +29,7 @@
 @import "site/footer.css";
 @import "site/interactions.css";
 @import "site/a11y-prefs.css";
+@import "site/calendar.css";
 
 /* Ensure gradient icon rules load last so they can override site chrome styles */
 @import "ui-elements/gradient-icon.css";
