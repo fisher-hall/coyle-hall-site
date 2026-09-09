@@ -2,7 +2,7 @@
 {
   "name": "{{site.Title}}",
   "short_name": "{{site.Title}}",
-  "lang": "{{ site.Language.Locale | default `en-us` }}",
+  "lang": "{{ site.Language.LanguageCode | default `en-us` }}",
   "display": "fullscreen",
   "orientation" : "portrait",
   "start_url": "{{ site.BaseURL | absURL }}?utm_source=web_app_manifest",

@@ -2,5 +2,6 @@
 [en]
 label = "En"
 locale = "en-us"
+languageCode = "en-US"
 contentDir = "content/english"
 weight = 1
