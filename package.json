@@ -4,7 +4,7 @@
   "version": "2.0.0",
   "license": "MIT",
   "author": "zeon.studio",
-  "hugoVersion": "0.147.3",
+  "hugoVersion": "0.169.0",
   "scripts": {
     "setup-hugo": "node ./scripts/setupHugo.js",
     "dev": "PATH=\"$PWD/.tools:$PATH\" hugo server",

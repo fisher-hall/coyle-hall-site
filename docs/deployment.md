@@ -29,7 +29,7 @@ The workflow sets `HUGO_ENV: production`, which is what enables production-only 
 Pinned in the workflow's `env` block:
 
 ```yaml
-HUGO_VERSION: "0.147.3"
+HUGO_VERSION: "0.169.0"
 GO_VERSION: "1.23.3"
 ```
 

@@ -1,0 +1,9 @@
+# Hugo >= 0.16x tightened its default security policy. This site needs:
+#  - HTML content files (content/english/*.html use shortcodes)
+#  - tailwindcss, invoked via css.TailwindCSS in the theme's style partial
+# Everything else stays at Hugo's defaults.
+[security]
+  allowContent = ['^text/(markdown|html)$']
+
+  [security.exec]
+    allow = ['^(dart-)?sass$', '^go$', '^git$', '^node$', '^postcss$', '^tailwindcss$']

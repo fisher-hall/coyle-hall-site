@@ -30,8 +30,20 @@ const platform = os.platform();
 const arch = os.arch();
 
 let assetPlatform;
-if (platform === "darwin") assetPlatform = "darwin-universal";
-else if (platform === "linux" && arch === "arm64") assetPlatform = "linux-arm64";
+if (platform === "darwin") {
+  // Recent Hugo releases ship macOS only as a .pkg (no tar.gz), so we can't
+  // unpack a pinned binary into .tools. Use the system Hugo (Homebrew) instead.
+  let system = "";
+  try {
+    system = execFileSync("hugo", ["version"]).toString();
+  } catch (e) {}
+  if (system.includes(`v${version}`)) {
+    console.log(`System hugo is already v${version}; nothing to download.`);
+    process.exit(0);
+  }
+  console.error(`macOS: install Hugo v${version} yourself (e.g. "brew upgrade hugo"); releases no longer include a macOS tarball.`);
+  process.exit(1);
+} else if (platform === "linux" && arch === "arm64") assetPlatform = "linux-arm64";
 else if (platform === "linux") assetPlatform = "linux-amd64";
 else {
   console.error(`Unsupported platform for auto-setup: ${platform}/${arch}. Install Hugo v${version} manually into .tools/hugo.`);
