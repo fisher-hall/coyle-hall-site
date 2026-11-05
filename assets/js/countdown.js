@@ -16,6 +16,8 @@
    Behaviour:
      • Cells are matched by [data-unit] *within* the container, so multiple
        countdowns can coexist on one page with no id collisions.
+     • Labels beside each number switch to singular at exactly 1 (Day/Hour/
+       Minute/Second) and plural otherwise.
      • When the target passes, all cells read "0" and the [data-countdown]
        element is hidden — unless it carries [data-countdown-keep] (then it
        stays visible showing zeros, matching the old Iron RA behaviour).
@@ -34,11 +36,25 @@
     var keep = root.hasAttribute("data-countdown-keep");
     var timer = null;
 
+    // Each number is followed by its label; swap to the singular at exactly 1
+    // ("1 Day", "1 Hour", ...) and the plural otherwise (including 0).
+    var names = { days: "Day", hours: "Hour", mins: "Minute", secs: "Second" };
+
+    function put(unit, value) {
+      var cell = cells[unit];
+      if (!cell) return;
+      cell.textContent = value;
+      var label = cell.nextElementSibling;
+      if (label && label.classList.contains("CountdownBlock-label")) {
+        label.textContent = names[unit] + (value === 1 ? "" : "s");
+      }
+    }
+
     function set(d, h, m, s) {
-      if (cells.days) cells.days.textContent = d;
-      if (cells.hours) cells.hours.textContent = h;
-      if (cells.mins) cells.mins.textContent = m;
-      if (cells.secs) cells.secs.textContent = s;
+      put("days", d);
+      put("hours", h);
+      put("mins", m);
+      put("secs", s);
     }
 
     function tick() {
